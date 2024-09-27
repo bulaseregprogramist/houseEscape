@@ -1,9 +1,19 @@
 Отрисовка локаций, предметов
 ===================================
-
-.. automodule:: src.draw
+Отрисовка локаций
+-------------------------------------
+.. autoclass:: src.draw.draw.Draw
     :members:
-
-.. py:function:: src.draw.draw.Draw.render_location()
-    Этот метод отрисовывает ту локацию, где находится игрок
+    
+Отрисовка главного меню
+-------------------------------------
+.. autoclass:: src.draw.mainmenu.MainMenu
+    :members:
+    :private-members:
+    
+Отрисовка меню паузы
+-------------------------------------
+.. autoclass:: src.draw.pause.Pause
+    :members:
+    :private-members:
     

@@ -22,7 +22,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
-    <link rel="next" title="Мебель" href="blocks.html" />
+    <link rel="next" title="Мебель, предметы" href="gameobjects.html" />
     <link rel="prev" title="Главное меню" href="mainmenu.html" /> 
 </head>
 
@@ -59,9 +59,11 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blocks.html">Мебель</a></li>
 <li class="toctree-l1"><a class="reference internal" href="item.html">Предметы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
 </ul>
 
         </div>
@@ -88,9 +90,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="houseescape">
-<h1>Движение игрока игры HouseEscape<a class="headerlink" href="#houseescape" title="Link to this heading"></a></h1>
-<p id="module-src.player.move">Движение игрока</p>
+  <section id="module-src.player.move">
+<span id="houseescape"></span><h1>Движение игрока игры HouseEscape<a class="headerlink" href="#module-src.player.move" title="Link to this heading"></a></h1>
+<p>Движение игрока</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.player.move.Move">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.player.move.</span></span><span class="sig-name descname"><span class="pre">Move</span></span><a class="headerlink" href="#src.player.move.Move" title="Link to this definition"></a></dt>
@@ -100,11 +102,11 @@
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">move_in_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.player.move.Move.move_in_location" title="Link to this definition"></a></dt>
 <dd><p>Даёт доступ только в определённые места</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>x (int): позиция игрока по x
-y (int): позиция игрока по y
+<dt>Args:</dt><dd><p>x (int): позиция игрока по x,
+y (int): позиция игрока по y,
 index (list[int, int]): карта дома</p>
 </dd>
-<dt>Returns:</dt><dd><p>bool: Можно ли идти в этой зоне дома</p>
+<dt>Returns:</dt><dd><p>bool: Можно ли идти в этой зоне дома (True или False)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -118,7 +120,7 @@ index (list[int, int]): карта дома</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
         <a href="mainmenu.html" class="btn btn-neutral float-left" title="Главное меню" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
-        <a href="blocks.html" class="btn btn-neutral float-right" title="Мебель" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="gameobjects.html" class="btn btn-neutral float-right" title="Мебель, предметы" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

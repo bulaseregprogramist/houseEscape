@@ -1,9 +1,6 @@
 Основной игровой класс
 ========================
-.. automodule:: src.game
+.. autoclass:: src.game.Game
     :members:
+    :private-members:
     
-.. py:function:: src.game.Game.__start()
-    Этот метод запускает основную часть игры
-.. py:function:: src.game.Game.__check()
-    Этот метод проверяет вышел ли игрок за границы

@@ -8,6 +8,8 @@ pygame.init()
 
 
 class Draw:
+    """Этот класс отвечает за отрисовку локаций"""
+    
     def __init__(self, logger: HELogger) -> None:
         self.__bg1 = pygame.transform.scale(pygame.image.load("textures/1.png").convert(), (770, 770))
         self.__bg2 = pygame.transform.scale(pygame.image.load("textures/2.png").convert(), (770, 770))
@@ -26,27 +28,27 @@ class Draw:
         Рендеринг комнаты дома
 
         Args:
-            index (list[int, int]): Карта дома
+            index (list[int, int]): Карта дома,
             screen (pygame.surface.Surface): Переменная экрана
         """
         if index == [0, 2]:
-            pass
+            screen.blit(self.__bg1, (0, 0))
         elif index == [1, 1]:
-            pass
+            screen.blit(self.__bg2, (0, 0))
         elif index == [1, 2]:
-            pass
+            screen.blit(self.__bg3, (0, 0))
         elif index == [1, 3]:
-            pass
+            screen.blit(self.__bg4, (0, 0))
         elif index == [2, 1]:
-            pass
+            screen.blit(self.__bg5, (0, 0))
         elif index == [2, 2]:
-            pass
+            screen.blit(self.__bg6, (0, 0))
         elif index == [2, 3]:
-            pass
+            screen.blit(self.__bg7, (0, 0))
         elif index == [3, 1]:
-            pass
+            screen.blit(self.__bg8, (0, 0))
         elif index == [3, 2]:
-            pass
+            screen.blit(self.__bg9, (0, 0))
         elif index == [3, 3]:
             screen.blit(self.__bg10, (0, 0))
         

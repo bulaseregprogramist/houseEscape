@@ -11,15 +11,15 @@ pygame.init()
 
 
 class MainMenu:
-    #self.__press = pygame.mixer.Sound("textures/press.mp3")
+    """Главное меню (включает в себя Boosty, DonationAlerts, кнопку запуска)"""
     
     @staticmethod
     def open(site: str, logger: HELogger) -> None:
         """
-        Переправление пользователя на сайт
+        Переправление пользователя на сайт (Boosty, DonationAlerts)
 
         Args:
-            site (str): Ссылка на сайт
+            site (str): Ссылка на сайт,
             logger (HELogger): Переменная для логов
         """
         webbrowser.open(site)
@@ -33,14 +33,16 @@ class MainMenu:
         Рендеринг главного меню
 
         Args:
-            screen (pygame.surface.Surface): Переменная экрана
+            screen (pygame.surface.Surface): Переменная экрана,
             logger (HELogger): Переменная для логов
         """
+        logger.debug("Начало инициализации текстур статического метода render")
         cycle = 1
         bg = pygame.transform.scale(pygame.image.load("textures/bg.png").convert(), (770, 770))
         play = pygame.transform.scale(pygame.image.load("textures/play.png").convert_alpha(), (130, 130))
         boosty = pygame.transform.scale(pygame.image.load("textures/boosty.png").convert(), (80, 80))
         da = pygame.transform.scale(pygame.image.load("textures/da.jpg").convert(), (80, 80))
+        logger.debug("Завершена инициализация текстур статического метода render")
         
         while cycle:
             screen.blit(bg, (0, 0))
@@ -55,13 +57,14 @@ class MainMenu:
             rect2 = boosty.get_rect(topleft=(30, 30))
             rect3 = da.get_rect(topleft=(660, 30))
             
-            if rect1.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
+            if rect1.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:  # Кнопка запуска игры
                 cycle = 0
-            elif rect2.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
+            elif rect2.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:  # Boosty
                 MainMenu.open("https://boosty.to/sergey_pelmen", logger)
-            elif rect3.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
+            elif rect3.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:  # DonationAlerts
                 MainMenu.open("https://www.donationalerts.com/r/sergeyprojects", logger)
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+        

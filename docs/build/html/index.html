@@ -50,12 +50,9 @@
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Логи игры</a></li>
 <li class="toctree-l1"><a class="reference internal" href="player.html">Игрок</a></li>
 <li class="toctree-l1"><a class="reference internal" href="draw.html">Отрисовка локаций, предметов</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mainmenu.html">Главное меню</a></li>
-<li class="toctree-l1"><a class="reference internal" href="move.html">Движение игрока игры HouseEscape</a></li>
-<li class="toctree-l1"><a class="reference internal" href="blocks.html">Мебель</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
-<li class="toctree-l1"><a class="reference internal" href="item.html">Предметы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
 </ul>
 
         </div>
@@ -88,9 +85,11 @@
 <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="game.html">Основной игровой класс</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="game.html#src.game.Game"><code class="docutils literal notranslate"><span class="pre">Game</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="game.html#src.game.src.game.Game.__start"><code class="docutils literal notranslate"><span class="pre">src.game.Game.__start()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="game.html#src.game.src.game.Game.__check"><code class="docutils literal notranslate"><span class="pre">src.game.Game.__check()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="game.html#src.game.Game"><code class="docutils literal notranslate"><span class="pre">Game</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="game.html#src.game.Game.__check"><code class="docutils literal notranslate"><span class="pre">Game.__check()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="game.html#src.game.Game.__start"><code class="docutils literal notranslate"><span class="pre">Game.__start()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Логи игры</a><ul>
@@ -98,47 +97,84 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="player.html">Игрок</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="player.html#src.player.src.player.Player.in_game"><code class="docutils literal notranslate"><span class="pre">src.player.Player.in_game()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="player.html#module-src.player.move">Движение игрока</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="player.html#src.player.move.Move"><code class="docutils literal notranslate"><span class="pre">Move</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="player.html#src.player.move.Move.move_in_location"><code class="docutils literal notranslate"><span class="pre">Move.move_in_location()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="player.html#id3">Основной класс игрока</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="player.html#src.player.player.Player"><code class="docutils literal notranslate"><span class="pre">Player</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="player.html#src.player.player.Player.in_game"><code class="docutils literal notranslate"><span class="pre">Player.in_game()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="draw.html">Отрисовка локаций, предметов</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="draw.html#src.draw.src.draw.draw.Draw.render_location"><code class="docutils literal notranslate"><span class="pre">src.draw.draw.Draw.render_location()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="mainmenu.html">Главное меню</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mainmenu.html#src.draw.mainmenu.src.draw.mainmenu.MainMenu.render"><code class="docutils literal notranslate"><span class="pre">src.draw.mainmenu.MainMenu.render()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="mainmenu.html#src.draw.mainmenu.src.draw.mainmenu.MainMenu.open"><code class="docutils literal notranslate"><span class="pre">src.draw.mainmenu.MainMenu.open()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="move.html">Движение игрока игры HouseEscape</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="move.html#src.player.move.Move"><code class="docutils literal notranslate"><span class="pre">Move</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="move.html#src.player.move.Move.move_in_location"><code class="docutils literal notranslate"><span class="pre">Move.move_in_location()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="draw.html#id2">Отрисовка локаций</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="draw.html#src.draw.draw.Draw"><code class="docutils literal notranslate"><span class="pre">Draw</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.draw.Draw.render_location"><code class="docutils literal notranslate"><span class="pre">Draw.render_location()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="blocks.html">Мебель</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="blocks.html#src.gameobjects.blocks.Block.placing"><code class="docutils literal notranslate"><span class="pre">src.gameobjects.blocks.Block.placing()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="blocks.html#src.gameobjects.blocks.Block.functional"><code class="docutils literal notranslate"><span class="pre">src.gameobjects.blocks.Block.functional()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="draw.html#id3">Отрисовка главного меню</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="draw.html#src.draw.mainmenu.MainMenu"><code class="docutils literal notranslate"><span class="pre">MainMenu</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.mainmenu.MainMenu.open"><code class="docutils literal notranslate"><span class="pre">MainMenu.open()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.mainmenu.MainMenu.render"><code class="docutils literal notranslate"><span class="pre">MainMenu.render()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="draw.html#id4">Отрисовка меню паузы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="draw.html#src.draw.pause.Pause"><code class="docutils literal notranslate"><span class="pre">Pause</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.pause.Pause.__run"><code class="docutils literal notranslate"><span class="pre">Pause.__run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="gameobjects.html#src.gameobjects.gameobjects.GameObjects"><code class="docutils literal notranslate"><span class="pre">GameObjects</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="gameobjects.html#src.gameobjects.gameobjects.GameObjects.functional"><code class="docutils literal notranslate"><span class="pre">GameObjects.functional()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="gameobjects.html#src.gameobjects.gameobjects.GameObjects.placing"><code class="docutils literal notranslate"><span class="pre">GameObjects.placing()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gameobjects.html#module-src.gameobjects.gameobjects">Абстрактный класс</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gameobjects.html#src.gameobjects.gameobjects.GameObjects"><code class="docutils literal notranslate"><span class="pre">GameObjects</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gameobjects.html#src.gameobjects.gameobjects.GameObjects.functional"><code class="docutils literal notranslate"><span class="pre">GameObjects.functional()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gameobjects.html#src.gameobjects.gameobjects.GameObjects.placing"><code class="docutils literal notranslate"><span class="pre">GameObjects.placing()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="item.html">Предметы</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="item.html#src.gameobjects.item.Item.placing"><code class="docutils literal notranslate"><span class="pre">src.gameobjects.item.Item.placing()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="item.html#src.gameobjects.item.Item.functional"><code class="docutils literal notranslate"><span class="pre">src.gameobjects.item.Item.functional()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gameobjects.html#module-src.gameobjects.item">Предметы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gameobjects.html#src.gameobjects.item.Item"><code class="docutils literal notranslate"><span class="pre">Item</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gameobjects.html#src.gameobjects.item.Item.functional"><code class="docutils literal notranslate"><span class="pre">Item.functional()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gameobjects.html#src.gameobjects.item.Item.placing"><code class="docutils literal notranslate"><span class="pre">Item.placing()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gameobjects.html#module-src.gameobjects.blocks">Мебель</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gameobjects.html#src.gameobjects.blocks.Block"><code class="docutils literal notranslate"><span class="pre">Block</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gameobjects.html#src.gameobjects.blocks.Block.functional"><code class="docutils literal notranslate"><span class="pre">Block.functional()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gameobjects.html#src.gameobjects.blocks.Block.placing"><code class="docutils literal notranslate"><span class="pre">Block.placing()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#src.api.api.HEAPI.guide"><code class="docutils literal notranslate"><span class="pre">src.api.api.HEAPI.guide()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#src.api.api.HEAPI"><code class="docutils literal notranslate"><span class="pre">HEAPI</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#src.api.api.HEAPI.__initialize_mods"><code class="docutils literal notranslate"><span class="pre">HEAPI.__initialize_mods()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#src.api.api.HEAPI.guide"><code class="docutils literal notranslate"><span class="pre">HEAPI.guide()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#src.api.api.HEAPI.load"><code class="docutils literal notranslate"><span class="pre">HEAPI.load()</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
 </ul>
 </div>
 </section>

@@ -9,3 +9,4 @@ class HELogger(Logger):
     def __init__(self, name, level):
         super().__init__(name, level)
         print("[INFO] Logger activated!")
+        

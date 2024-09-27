@@ -22,8 +22,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
-    <link rel="next" title="Мебель, предметы" href="gameobjects.html" />
-    <link rel="prev" title="Движение игрока игры HouseEscape" href="move.html" /> 
+    <link rel="next" title="Предметы" href="item.html" />
+    <link rel="prev" title="Мебель, предметы" href="gameobjects.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,12 +53,15 @@
 <li class="toctree-l1"><a class="reference internal" href="draw.html">Отрисовка локаций, предметов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mainmenu.html">Главное меню</a></li>
 <li class="toctree-l1"><a class="reference internal" href="move.html">Движение игрока игры HouseEscape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Мебель</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#src.gameobjects.blocks.Block.placing"><code class="docutils literal notranslate"><span class="pre">src.gameobjects.blocks.Block.placing()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#src.gameobjects.blocks.Block.functional"><code class="docutils literal notranslate"><span class="pre">src.gameobjects.blocks.Block.functional()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.gameobjects.blocks.Block"><code class="docutils literal notranslate"><span class="pre">Block</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.gameobjects.blocks.Block.functional"><code class="docutils literal notranslate"><span class="pre">Block.functional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.gameobjects.blocks.Block.placing"><code class="docutils literal notranslate"><span class="pre">Block.placing()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="item.html">Предметы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a></li>
 </ul>
@@ -87,21 +90,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="id1">
-<h1>Мебель<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="src.gameobjects.blocks.Block.placing">
-<span class="sig-prename descclassname"><span class="pre">src.gameobjects.blocks.Block.</span></span><span class="sig-name descname"><span class="pre">placing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.gameobjects.blocks.Block.placing" title="Link to this definition"></a></dt>
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Этот</span> <span class="pre">метод</span> <span class="pre">размещает</span> <span class="pre">мебель</span> <span class="pre">на</span> <span class="pre">карте</span></span></dt>
-<dd></dd></dl>
-
-<dl class="py function">
+  <section id="module-src.gameobjects.blocks">
+<span id="id1"></span><h1>Мебель<a class="headerlink" href="#module-src.gameobjects.blocks" title="Link to this heading"></a></h1>
+<p>Мебель дома</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.gameobjects.blocks.Block">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gameobjects.blocks.</span></span><span class="sig-name descname"><span class="pre">Block</span></span><a class="headerlink" href="#src.gameobjects.blocks.Block" title="Link to this definition"></a></dt>
+<dd><p>Блоки (мебель) в доме</p>
+<dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.blocks.Block.functional">
-<span class="sig-prename descclassname"><span class="pre">src.gameobjects.blocks.Block.</span></span><span class="sig-name descname"><span class="pre">functional</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.gameobjects.blocks.Block.functional" title="Link to this definition"></a></dt>
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Этот</span> <span class="pre">метод</span> <span class="pre">предоставляет</span> <span class="pre">мебели</span> <span class="pre">функционал</span></span></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">functional</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.blocks.Block.functional" title="Link to this definition"></a></dt>
+<dd><p>Функционал игрового объекта</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.gameobjects.blocks.Block.placing">
+<span class="sig-name descname"><span class="pre">placing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.blocks.Block.placing" title="Link to this definition"></a></dt>
+<dd><p>Размещение предмета на карте</p>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 
@@ -109,8 +117,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
-        <a href="move.html" class="btn btn-neutral float-left" title="Движение игрока игры HouseEscape" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
-        <a href="gameobjects.html" class="btn btn-neutral float-right" title="Мебель, предметы" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="gameobjects.html" class="btn btn-neutral float-left" title="Мебель, предметы" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="item.html" class="btn btn-neutral float-right" title="Предметы" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

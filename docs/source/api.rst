@@ -1,8 +1,6 @@
 API игры, необходимое для модов
 ===================================
 
-.. automodule:: src.api
-    Предоставляет API пользователям
-
-.. py:function:: src.api.api.HEAPI.guide()
-    Этот метод объясняет что да как в API
+.. autoclass:: src.api.api.HEAPI
+    :members:
+    :private-members:

@@ -50,15 +50,28 @@
 <li class="toctree-l1"><a class="reference internal" href="game.html">Основной игровой класс</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Логи игры</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Игрок</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#src.player.src.player.Player.in_game"><code class="docutils literal notranslate"><span class="pre">src.player.Player.in_game()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.player.move">Движение игрока</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.player.move.Move"><code class="docutils literal notranslate"><span class="pre">Move</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.player.move.Move.move_in_location"><code class="docutils literal notranslate"><span class="pre">Move.move_in_location()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">Основной класс игрока</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.player.player.Player"><code class="docutils literal notranslate"><span class="pre">Player</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.player.player.Player.in_game"><code class="docutils literal notranslate"><span class="pre">Player.in_game()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="draw.html">Отрисовка локаций, предметов</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mainmenu.html">Главное меню</a></li>
-<li class="toctree-l1"><a class="reference internal" href="move.html">Движение игрока игры HouseEscape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blocks.html">Мебель</a></li>
 <li class="toctree-l1"><a class="reference internal" href="item.html">Предметы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
 </ul>
 
         </div>
@@ -85,15 +98,53 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-src.player">
-<span id="id1"></span><h1>Игрок<a class="headerlink" href="#module-src.player" title="Link to this heading"></a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="src.player.src.player.Player.in_game">
-<span class="sig-prename descclassname"><span class="pre">src.player.Player.</span></span><span class="sig-name descname"><span class="pre">in_game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.player.src.player.Player.in_game" title="Link to this definition"></a></dt>
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Движение</span> <span class="pre">игрока</span></span></dt>
-<dd></dd></dl>
+  <section id="id1">
+<h1>Игрок<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="module-src.player.move">
+<span id="id2"></span><h2>Движение игрока<a class="headerlink" href="#module-src.player.move" title="Link to this heading"></a></h2>
+<p>Движение игрока</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.player.move.Move">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.player.move.</span></span><span class="sig-name descname"><span class="pre">Move</span></span><a class="headerlink" href="#src.player.move.Move" title="Link to this definition"></a></dt>
+<dd><p>Движение игрока по определённым местам в комнате</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.player.move.Move.move_in_location">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">move_in_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.player.move.Move.move_in_location" title="Link to this definition"></a></dt>
+<dd><p>Даёт доступ только в определённые места</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>x (int): позиция игрока по x,
+y (int): позиция игрока по y,
+index (list[int, int]): карта дома</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: Можно ли идти в этой зоне дома (True или False)</p>
+</dd>
+</dl>
+</dd></dl>
 
+</dd></dl>
+
+</section>
+<section id="id3">
+<h2>Основной класс игрока<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.player.player.Player">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.player.player.</span></span><span class="sig-name descname"><span class="pre">Player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="logging.html#src.logging.HELogger" title="src.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.player.player.Player" title="Link to this definition"></a></dt>
+<dd><p>Игрок и связанное с ним</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.player.player.Player.in_game">
+<span class="sig-name descname"><span class="pre">in_game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="logging.html#src.logging.HELogger" title="src.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.player.player.Player.in_game" title="Link to this definition"></a></dt>
+<dd><p>Движение игрока в игре</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>player (Player): Объект игрока,
+index (list[int, int]): Карта дома,
+logger (HELogger): Переменная для логов</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 
 

@@ -22,6 +22,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Пауза во время игры" href="pause.html" />
     <link rel="prev" title="Предметы" href="item.html" /> 
 </head>
 
@@ -52,12 +53,19 @@
 <li class="toctree-l1"><a class="reference internal" href="draw.html">Отрисовка локаций, предметов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mainmenu.html">Главное меню</a></li>
 <li class="toctree-l1"><a class="reference internal" href="move.html">Движение игрока игры HouseEscape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blocks.html">Мебель</a></li>
 <li class="toctree-l1"><a class="reference internal" href="item.html">Предметы</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API игры, необходимое для модов</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#src.api.api.HEAPI.guide"><code class="docutils literal notranslate"><span class="pre">src.api.api.HEAPI.guide()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.api.api.HEAPI"><code class="docutils literal notranslate"><span class="pre">HEAPI</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.api.api.HEAPI.__initialize_mods"><code class="docutils literal notranslate"><span class="pre">HEAPI.__initialize_mods()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.api.api.HEAPI.guide"><code class="docutils literal notranslate"><span class="pre">HEAPI.guide()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.api.api.HEAPI.load"><code class="docutils literal notranslate"><span class="pre">HEAPI.load()</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
 </ul>
 
         </div>
@@ -86,12 +94,33 @@
              
   <section id="api">
 <h1>API игры, необходимое для модов<a class="headerlink" href="#api" title="Link to this heading"></a></h1>
-<dl class="py function">
+<dl class="py class">
+<dt class="sig sig-object py" id="src.api.api.HEAPI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.api.</span></span><span class="sig-name descname"><span class="pre">HEAPI</span></span><a class="headerlink" href="#src.api.api.HEAPI" title="Link to this definition"></a></dt>
+<dd><p>API игры HouseEscape</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.api.api.HEAPI.__initialize_mods">
+<span class="sig-name descname"><span class="pre">__initialize_mods</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.api.api.HEAPI.__initialize_mods" title="Link to this definition"></a></dt>
+<dd><p>Инициализация модов</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="src.api.api.HEAPI.guide">
-<span class="sig-prename descclassname"><span class="pre">src.api.api.HEAPI.</span></span><span class="sig-name descname"><span class="pre">guide</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.api.api.HEAPI.guide" title="Link to this definition"></a></dt>
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Этот</span> <span class="pre">метод</span> <span class="pre">объясняет</span> <span class="pre">что</span> <span class="pre">да</span> <span class="pre">как</span> <span class="pre">в</span> <span class="pre">API</span></span></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">guide</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.api.api.HEAPI.guide" title="Link to this definition"></a></dt>
+<dd><p>Руководство по примению API</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.api.api.HEAPI.load">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="logging.html#src.logging.HELogger" title="src.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.api.HEAPI.load" title="Link to this definition"></a></dt>
+<dd><p>Загрузка модов в игру</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>logger (HELogger): Переменная для логов</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 
@@ -100,6 +129,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
         <a href="item.html" class="btn btn-neutral float-left" title="Предметы" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="pause.html" class="btn btn-neutral float-right" title="Пауза во время игры" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

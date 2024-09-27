@@ -1,8 +1,11 @@
 Игрок
 ========================
-
-.. automodule:: src.player
+Движение игрока
+------------------------------
+.. automodule:: src.player.move
     :members:
-    
-.. py:function:: src.player.Player.in_game
-    Движение игрока
+
+Основной класс игрока
+------------------------------
+.. autoclass:: src.player.player.Player
+    :members:

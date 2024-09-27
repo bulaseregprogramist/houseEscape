@@ -7,21 +7,16 @@ Welcome to HouseEscape's documentation!
 =======================================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 5
    :caption: Содержание:
 
    game
    logging
    player
    draw
-   mainmenu
-   move
-   blocks
    gameobjects
-   gameobjects/blocks
-   gameobjects/item
-   item
    api
+   pause
 
 
 Indices and tables

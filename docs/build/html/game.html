@@ -48,19 +48,19 @@
               <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Основной игровой класс</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#src.game.Game"><code class="docutils literal notranslate"><span class="pre">Game</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#src.game.src.game.Game.__start"><code class="docutils literal notranslate"><span class="pre">src.game.Game.__start()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#src.game.src.game.Game.__check"><code class="docutils literal notranslate"><span class="pre">src.game.Game.__check()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.game.Game"><code class="docutils literal notranslate"><span class="pre">Game</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.game.Game.__check"><code class="docutils literal notranslate"><span class="pre">Game.__check()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.game.Game.__start"><code class="docutils literal notranslate"><span class="pre">Game.__start()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Логи игры</a></li>
 <li class="toctree-l1"><a class="reference internal" href="player.html">Игрок</a></li>
 <li class="toctree-l1"><a class="reference internal" href="draw.html">Отрисовка локаций, предметов</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mainmenu.html">Главное меню</a></li>
-<li class="toctree-l1"><a class="reference internal" href="move.html">Движение игрока игры HouseEscape</a></li>
-<li class="toctree-l1"><a class="reference internal" href="blocks.html">Мебель</a></li>
-<li class="toctree-l1"><a class="reference internal" href="item.html">Предметы</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
 </ul>
 
         </div>
@@ -87,28 +87,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-src.game">
-<span id="id1"></span><h1>Основной игровой класс<a class="headerlink" href="#module-src.game" title="Link to this heading"></a></h1>
-<p>Этот файл включает в себя основной функционал игры</p>
+  <section id="id1">
+<h1>Основной игровой класс<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.game.Game">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.game.</span></span><span class="sig-name descname"><span class="pre">Game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="logging.html#src.logging.HELogger" title="src.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.game.Game" title="Link to this definition"></a></dt>
 <dd><p>Основной игровой класс</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.game.Game.__check">
+<span class="sig-name descname"><span class="pre">__check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="logging.html#src.logging.HELogger" title="src.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.Game.__check" title="Link to this definition"></a></dt>
+<dd><p>Проверка на выход за границу</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>logger (HELogger): Переменная для логов</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="src.game.src.game.Game.__start">
-<span class="sig-prename descclassname"><span class="pre">src.game.Game.</span></span><span class="sig-name descname"><span class="pre">__start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.game.src.game.Game.__start" title="Link to this definition"></a></dt>
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Этот</span> <span class="pre">метод</span> <span class="pre">запускает</span> <span class="pre">основную</span> <span class="pre">часть</span> <span class="pre">игры</span></span></dt>
-<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.game.Game.__start">
+<span class="sig-name descname"><span class="pre">__start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="logging.html#src.logging.HELogger" title="src.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.Game.__start" title="Link to this definition"></a></dt>
+<dd><p>Запуск игры</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>logger (HELogger): Переменная для логов</p>
+</dd>
+</dl>
+</dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="src.game.src.game.Game.__check">
-<span class="sig-prename descclassname"><span class="pre">src.game.Game.</span></span><span class="sig-name descname"><span class="pre">__check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.game.src.game.Game.__check" title="Link to this definition"></a></dt>
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Этот</span> <span class="pre">метод</span> <span class="pre">проверяет</span> <span class="pre">вышел</span> <span class="pre">ли</span> <span class="pre">игрок</span> <span class="pre">за</span> <span class="pre">границы</span></span></dt>
-<dd></dd></dl>
+</dd></dl>
 
 </section>
 

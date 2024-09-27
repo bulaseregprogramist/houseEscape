@@ -8,6 +8,9 @@ from .logging import HELogger
 import logging
 from src.gameobjects.blocks import Block
 from src.gameobjects.item import Item
+from src.api.api import HEAPI
+from src.draw.pause import Pause
+from keyboard import is_pressed
 
 
 pygame.init()
@@ -23,15 +26,22 @@ class Game:
             "00000"]
     
     def __init__(self, logger: HELogger) -> None:
+        logging.basicConfig(level=logging.DEBUG, format="[%(name)s] - [%(levelname)s] - %(message)s", encoding="utf-8")
         logger.info("Запуск программы")
         self.__screen = pygame.display.set_mode((770, 770))
+        logger.debug("Создание переменной для экрана")
         self.__index = [3, 3]  # Положение игрока на карте. 1 - по y, 2 - по x.
+        logger.debug("Создание переменной карты")
         self.__clock = pygame.time.Clock()
+        logger.debug("Создание объекта класса pygame.time.Clock")
         pygame.display.set_caption("House Escape")
         pygame.display.set_icon(pygame.image.load("textures/exit.png"))
-        self.__player = Player()
+        logger.info("Начата инициализация модов")
+        HEAPI.load(logger)
+        logger.info("Завершена инициализация модов")
+        self.__player = Player(logger)
+        logger.debug("Создание объекта класса Player")
         
-        logging.basicConfig(level=logging.INFO, format="[%(name)s] - [%(levelname)s] - %(message)s", encoding="utf-8")
         logger.info("Главное меню открыто!")
         MainMenu.render(self.__screen, logger)
         logger.info("Главное меню закрыто!")
@@ -46,20 +56,27 @@ class Game:
         """
         logger.info("Начата инициализация перед работой в цикле")
         cycle = 1
+        logger.debug("Переменной cycle присвоен 1")
         draw_location = Draw(logger)
-        blocks = Block()
-        items = Item()
+        logger.debug("Создание объекта класса Draw")
+        blocks = Block()  # Это не блоки, а мебель
+        logger.debug("Создание объекта класса Block")
+        items = Item()  # Предметы игры (их можно подбирать и использовать)
+        logger.debug("Создание объекта класса Item")
         logger.info("Закончена инициализация перед работой в цикле")
         
         while cycle:  # Основной игровой цикл
-            self.__clock.tick(60)
+            self.__clock.tick(60)  # Вертикальная синхронизация
             self.__screen.fill((0, 0, 0))
             draw_location.render_location(self.__index, self.__screen)
             self.__screen.blit(self.__player.player, (self.__player.x, self.__player.y))
             pygame.display.flip()
             
-            self.__player.in_game(self.__player, self.__index, logger)    
+            self.__player.in_game(self.__player, self.__index, logger)  # Движение игрока
             self.__check(logger)
+            
+            if is_pressed("esc"):  # При нажатии на ESCAPE игра поставится на паузу
+                Pause(self.__screen, logger)
             
     def __check(self, logger: HELogger) -> None:
         """

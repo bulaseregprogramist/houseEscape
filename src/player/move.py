@@ -9,11 +9,13 @@ class Move:
         Даёт доступ только в определённые места
 
         Args:
-            x (int): позиция игрока по x
-            y (int): позиция игрока по y
+            x (int): позиция игрока по x,
+            y (int): позиция игрока по y,
             index (list[int, int]): карта дома
 
         Returns:
-            bool: Можно ли идти в этой зоне дома
+            bool: Можно ли идти в этой зоне дома (True или False)
         """
+        if index == [3, 3]:
+            return True
         return False

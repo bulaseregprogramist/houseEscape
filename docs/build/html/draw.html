@@ -22,7 +22,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
-    <link rel="next" title="Главное меню" href="mainmenu.html" />
+    <link rel="next" title="Мебель, предметы" href="gameobjects.html" />
     <link rel="prev" title="Игрок" href="player.html" /> 
 </head>
 
@@ -51,14 +51,33 @@
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Логи игры</a></li>
 <li class="toctree-l1"><a class="reference internal" href="player.html">Игрок</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Отрисовка локаций, предметов</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#src.draw.src.draw.draw.Draw.render_location"><code class="docutils literal notranslate"><span class="pre">src.draw.draw.Draw.render_location()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Отрисовка локаций</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.draw.draw.Draw"><code class="docutils literal notranslate"><span class="pre">Draw</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.draw.Draw.render_location"><code class="docutils literal notranslate"><span class="pre">Draw.render_location()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mainmenu.html">Главное меню</a></li>
-<li class="toctree-l1"><a class="reference internal" href="move.html">Движение игрока игры HouseEscape</a></li>
-<li class="toctree-l1"><a class="reference internal" href="blocks.html">Мебель</a></li>
-<li class="toctree-l1"><a class="reference internal" href="item.html">Предметы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">Отрисовка главного меню</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.draw.mainmenu.MainMenu"><code class="docutils literal notranslate"><span class="pre">MainMenu</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.mainmenu.MainMenu.open"><code class="docutils literal notranslate"><span class="pre">MainMenu.open()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.mainmenu.MainMenu.render"><code class="docutils literal notranslate"><span class="pre">MainMenu.render()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">Отрисовка меню паузы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.draw.pause.Pause"><code class="docutils literal notranslate"><span class="pre">Pause</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.pause.Pause.__run"><code class="docutils literal notranslate"><span class="pre">Pause.__run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
 </ul>
 
         </div>
@@ -85,15 +104,74 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-src.draw">
-<span id="id1"></span><h1>Отрисовка локаций, предметов<a class="headerlink" href="#module-src.draw" title="Link to this heading"></a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="src.draw.src.draw.draw.Draw.render_location">
-<span class="sig-prename descclassname"><span class="pre">src.draw.draw.Draw.</span></span><span class="sig-name descname"><span class="pre">render_location</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.draw.src.draw.draw.Draw.render_location" title="Link to this definition"></a></dt>
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Этот</span> <span class="pre">метод</span> <span class="pre">отрисовывает</span> <span class="pre">ту</span> <span class="pre">локацию,</span> <span class="pre">где</span> <span class="pre">находится</span> <span class="pre">игрок</span></span></dt>
-<dd></dd></dl>
+  <section id="id1">
+<h1>Отрисовка локаций, предметов<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="id2">
+<h2>Отрисовка локаций<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.draw.draw.Draw">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.draw.draw.</span></span><span class="sig-name descname"><span class="pre">Draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="logging.html#src.logging.HELogger" title="src.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.draw.draw.Draw" title="Link to this definition"></a></dt>
+<dd><p>Этот класс отвечает за отрисовку локаций</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.draw.Draw.render_location">
+<span class="sig-name descname"><span class="pre">render_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.draw.Draw.render_location" title="Link to this definition"></a></dt>
+<dd><p>Рендеринг комнаты дома</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>index (list[int, int]): Карта дома,
+screen (pygame.surface.Surface): Переменная экрана</p>
+</dd>
+</dl>
+</dd></dl>
 
+</dd></dl>
+
+</section>
+<section id="id3">
+<h2>Отрисовка главного меню<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.draw.mainmenu.MainMenu">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.draw.mainmenu.</span></span><span class="sig-name descname"><span class="pre">MainMenu</span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu" title="Link to this definition"></a></dt>
+<dd><p>Главное меню (включает в себя Boosty, DonationAlerts, кнопку запуска)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.mainmenu.MainMenu.open">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="logging.html#src.logging.HELogger" title="src.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu.open" title="Link to this definition"></a></dt>
+<dd><p>Переправление пользователя на сайт (Boosty, DonationAlerts)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>site (str): Ссылка на сайт,
+logger (HELogger): Переменная для логов</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.mainmenu.MainMenu.render">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="logging.html#src.logging.HELogger" title="src.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu.render" title="Link to this definition"></a></dt>
+<dd><p>Рендеринг главного меню</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>screen (pygame.surface.Surface): Переменная экрана,
+logger (HELogger): Переменная для логов</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id4">
+<h2>Отрисовка меню паузы<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.draw.pause.Pause">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.draw.pause.</span></span><span class="sig-name descname"><span class="pre">Pause</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="logging.html#src.logging.HELogger" title="src.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.draw.pause.Pause" title="Link to this definition"></a></dt>
+<dd><p>Пауза во время игры</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.pause.Pause.__run">
+<span class="sig-name descname"><span class="pre">__run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.pause.Pause.__run" title="Link to this definition"></a></dt>
+<dd><p>Основной метод класса</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 
 
@@ -101,7 +179,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
         <a href="player.html" class="btn btn-neutral float-left" title="Игрок" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
-        <a href="mainmenu.html" class="btn btn-neutral float-right" title="Главное меню" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="gameobjects.html" class="btn btn-neutral float-right" title="Мебель, предметы" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
