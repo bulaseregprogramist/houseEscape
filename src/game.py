@@ -8,6 +8,7 @@ from .logging import HELogger
 import logging
 from src.gameobjects.blocks import Block
 from src.gameobjects.item import Item
+from src.gameobjects.gameobjects import GameObjects
 from src.api.api import HEAPI
 from src.draw.pause import Pause
 from keyboard import is_pressed
@@ -27,6 +28,7 @@ class Game:
     
     def __init__(self, logger: HELogger) -> None:
         logging.basicConfig(level=logging.DEBUG, format="[%(name)s] - [%(levelname)s] - %(message)s", encoding="utf-8")
+        HELogger.better_info(logger)
         logger.info("Запуск программы")
         self.__screen = pygame.display.set_mode((770, 770))
         logger.debug("Создание переменной для экрана")
@@ -62,6 +64,8 @@ class Game:
         blocks = Block()  # Это не блоки, а мебель
         logger.debug("Создание объекта класса Block")
         items = Item()  # Предметы игры (их можно подбирать и использовать)
+        GameObjects.screen = self.__screen
+        GameObjects.logger = logger
         logger.debug("Создание объекта класса Item")
         logger.info("Закончена инициализация перед работой в цикле")
         
@@ -70,6 +74,8 @@ class Game:
             self.__screen.fill((0, 0, 0))
             draw_location.render_location(self.__index, self.__screen)
             self.__screen.blit(self.__player.player, (self.__player.x, self.__player.y))
+            self.__player.player_interfaces(self.__screen)
+            items.placing(self.__index)
             pygame.display.flip()
             
             self.__player.in_game(self.__player, self.__index, logger)  # Движение игрока

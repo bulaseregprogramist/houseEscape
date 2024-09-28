@@ -1,6 +1,8 @@
 """Этот модуль отвечает за логи игры"""
 
 from logging import Logger
+import coloredlogs
+import sys
 
 
 class HELogger(Logger):
@@ -9,4 +11,13 @@ class HELogger(Logger):
     def __init__(self, name, level):
         super().__init__(name, level)
         print("[INFO] Logger activated!")
-        
+    
+    @staticmethod
+    def better_info(logger: object) -> None:
+        """Цвета для логов"""
+        try:
+            if sys.argv[1] == "BETTER":
+                coloredlogs.install(level='DEBUG', logger=logger)
+        except IndexError:
+            pass
+    

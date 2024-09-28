@@ -19,6 +19,10 @@ class Pause:
         self.__text1 = font.render("ПАУЗА", 1, (255, 255, 255))
         self.__pause_menu = pygame.transform.scale(pygame.image.load("textures/pm.png").convert(), (300, 770))
         self.__run()
+        
+    def __functional(self) -> None:
+        """Функционал главного меню"""
+        pass
     
     def __run(self) -> None:
         """Основной метод класса"""
@@ -27,6 +31,7 @@ class Pause:
         while pause_cycle:
             self.__screen.blit(self.__pause_menu, (240, 0))
             self.__screen.blit(self.__text1, (315, 45))
+            self.__functional()
             pygame.display.flip()
             
             for event in pygame.event.get():
