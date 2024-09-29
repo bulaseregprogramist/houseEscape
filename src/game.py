@@ -41,7 +41,7 @@ class Game:
         logger.info("Начата инициализация модов")
         HEAPI.load(logger)
         logger.info("Завершена инициализация модов")
-        self.__player = Player(logger)
+        self.__player = Player(logger, self.__screen)
         logger.debug("Создание объекта класса Player")
         
         logger.info("Главное меню открыто!")
@@ -65,6 +65,7 @@ class Game:
         logger.debug("Создание объекта класса Block")
         items = Item()  # Предметы игры (их можно подбирать и использовать)
         GameObjects.screen = self.__screen
+        logger.debug("Статичному полю GameObjects screen присвоено значение")
         GameObjects.logger = logger
         logger.debug("Создание объекта класса Item")
         logger.info("Закончена инициализация перед работой в цикле")
@@ -75,7 +76,7 @@ class Game:
             draw_location.render_location(self.__index, self.__screen)
             self.__screen.blit(self.__player.player, (self.__player.x, self.__player.y))
             self.__player.player_interfaces(self.__screen)
-            items.placing(self.__index)
+            items.placing(self.__index, self.__player)
             pygame.display.flip()
             
             self.__player.in_game(self.__player, self.__index, logger)  # Движение игрока
@@ -96,22 +97,26 @@ class Game:
                 logger.info("Игрок вышел налево")
                 self.__player.x = 385
                 self.__player.y = 385
+                logger.debug("Переменным x и y присвоены стандартные значения")
                 self.__index[1] -= 1
         elif self.__player.y < 0:  # При выходе вверх
             if self.__lst[self.__index[0]][self.__index[0] - 1] != "0":  # Проверка на выход за границу дома
                 logger.info("Игрок вышел вверх")
                 self.__player.x = 385
                 self.__player.y = 385
+                logger.debug("Переменным x и y присвоены стандартные значения")
                 self.__index[0] -= 1
         elif self.__player.x > 770:  # При выходе направо
             if self.__lst[self.__index[0]][self.__index[1] + 1] != "0":  # Проверка на выход за границу дома
                 logger.info("Игрок вышел направо")
                 self.__player.x = 385
                 self.__player.y = 385
+                logger.debug("Переменным x и y присвоены стандартные значения")
                 self.__index[1] += 1
         elif self.__player.y > 770:  # При выходе вниз
             if self.__lst[self.__index[0]][self.__index[0] + 1] != "0":  # Проверка на выход за границу дома
                 logger.info("Игрок вышел вниз")
                 self.__player.x = 385
                 self.__player.y = 385
+                logger.debug("Переменным x и y присвоены стандартные значения")
                 self.__index[0] += 1    

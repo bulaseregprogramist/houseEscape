@@ -1,0 +1,10 @@
+*.pyc
+*.html
+*.js
+*.rst
+*.log
+*.exe
+*.bat
+*.txt
+*.cfg
+*.doctree

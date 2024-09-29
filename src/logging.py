@@ -1,7 +1,7 @@
 """Этот модуль отвечает за логи игры"""
 
 from logging import Logger
-import coloredlogs
+import coloredlogs  # Для выделения особым цветом разных логов
 import sys
 
 
@@ -14,7 +14,12 @@ class HELogger(Logger):
     
     @staticmethod
     def better_info(logger: object) -> None:
-        """Цвета для логов"""
+        """
+        Цвета для логов
+        
+        Args:
+            logger (HELogger): Переменная для логов
+        """
         try:
             if sys.argv[1] == "BETTER":
                 coloredlogs.install(level='DEBUG', logger=logger)

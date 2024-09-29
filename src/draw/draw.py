@@ -49,6 +49,6 @@ class Draw:
             screen.blit(self.__bg8, (0, 0))
         elif index == [3, 2]:
             screen.blit(self.__bg9, (0, 0))
-        elif index == [3, 3]:
+        elif index == [3, 3]:  # Окрестности дома
             screen.blit(self.__bg10, (0, 0))
         

@@ -9,12 +9,12 @@ class HEAPI:
     """API игры HouseEscape"""
     
     @staticmethod
-    def guide():
+    def guide() -> None:
         """Руководство по примению API"""
         pass
     
     @staticmethod
-    def load(logger: HELogger):
+    def load(logger: HELogger) -> None:
         """
         Загрузка модов в игру
         

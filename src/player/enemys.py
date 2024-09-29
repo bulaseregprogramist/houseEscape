@@ -11,7 +11,7 @@ class Enemy(Character):
     def __init__(self, x: int, y: int, enemy_type: str) -> None:
         self.__x = x
         self.__y = y
-        self.__enemy_type = enemy_type
+        self.__enemy_type = enemy_type  # В enemy_type может быть watcher, blinder, stalker
     
     def enemy_move() -> None:
         """Движение NPC (AI)"""

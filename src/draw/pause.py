@@ -4,6 +4,7 @@ import pygame
 import sys
 from ..logging import HELogger
 from time import sleep
+from ..other.globals import font
 
 
 pygame.init()
@@ -15,7 +16,6 @@ class Pause:
     def __init__(self, screen, logger: HELogger) -> None:
         self.__logger = logger
         self.__screen = screen
-        font = pygame.font.Font("./textures/font.otf", 43)
         self.__text1 = font.render("ПАУЗА", 1, (255, 255, 255))
         self.__pause_menu = pygame.transform.scale(pygame.image.load("textures/pm.png").convert(), (300, 770))
         self.__run()
