@@ -1,16 +1,21 @@
 """Отрисовка комнат"""
 
 import pygame
-from ..logging import HELogger
+from ..other.globals import font
+from ..game.logging import HELogger
+from keyboard import is_pressed
+import sys
+from time import sleep
 
 
 pygame.init()
 
 
 class Draw:
-    """Этот класс отвечает за отрисовку локаций"""
+    """Этот класс отвечает за отрисовку локаций и другого"""
     
     def __init__(self, logger: HELogger) -> None:
+        logger.info("Работа конструктора класса Draw начата!")
         self.__bg1 = pygame.transform.scale(pygame.image.load("textures/1.png").convert(), (770, 770))
         self.__bg2 = pygame.transform.scale(pygame.image.load("textures/2.png").convert(), (770, 770))
         self.__bg3 = pygame.transform.scale(pygame.image.load("textures/3.png").convert(), (770, 770))
@@ -22,6 +27,19 @@ class Draw:
         self.__bg9 = pygame.transform.scale(pygame.image.load("textures/9.png").convert(), (770, 770))
         self.__bg10 = pygame.transform.scale(pygame.image.load("textures/house.png").convert(), (770, 770))
         logger.info("Работа конструктора класса Draw завершена!")
+        
+    @staticmethod
+    def show_interfaces() -> None:
+        """Интерфейсы для мебели"""
+        text = font.render("123", 1, (255, 255, 255))
+        interface_cycle = 1
+        while interface_cycle:
+            pygame.display.flip()
+            
+            ex: set = {sys.exit() for i in pygame.event.get() if i.type == pygame.QUIT}
+            if is_pressed("esc"):
+                sleep(0.15)
+                interface_cycle = 0
     
     def render_location(self, index: list[int, int], screen: pygame.surface.Surface) -> None:
         """

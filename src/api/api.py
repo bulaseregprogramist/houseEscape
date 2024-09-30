@@ -1,6 +1,6 @@
 """Модуль, отвечающий за API игры"""
 
-from src.logging import HELogger
+from src.game.logging import HELogger
 from os import listdir
 import logging
 

@@ -12,6 +12,7 @@ from src.gameobjects.gameobjects import GameObjects
 from src.api.api import HEAPI
 from src.draw.pause import Pause
 from keyboard import is_pressed
+from ..player.inventory import Inventory
 
 
 pygame.init()
@@ -20,15 +21,17 @@ pygame.init()
 class Game:
     """Основной игровой класс"""
     
-    __lst = ["00100",  # Карта дома
+    __lst = ["00100",  # Карта дома (1 - комнаты, 0 - комнаты, в которые нельзя попасть)
             "01110",
             "01110",
             "01110",
             "00000"]
     
     def __init__(self, logger: HELogger) -> None:
-        logging.basicConfig(level=logging.DEBUG, format="[%(name)s] - [%(levelname)s] - %(message)s", encoding="utf-8")
-        HELogger.better_info(logger)
+        logging.basicConfig(level=logging.DEBUG,
+                            format="[%(name)s] - [%(levelname)s] - %(message)s",
+                            encoding="utf-8")
+        HELogger.better_info(logger)  # Цвета для логов (их можно включить указав BETTER в консоли)
         logger.info("Запуск программы")
         self.__screen = pygame.display.set_mode((770, 770))
         logger.debug("Создание переменной для экрана")
@@ -38,12 +41,12 @@ class Game:
         logger.debug("Создание объекта класса pygame.time.Clock")
         pygame.display.set_caption("House Escape")
         pygame.display.set_icon(pygame.image.load("textures/exit.png"))
+        logger.debug("Установлено название и иконка")
         logger.info("Начата инициализация модов")
         HEAPI.load(logger)
         logger.info("Завершена инициализация модов")
         self.__player = Player(logger, self.__screen)
         logger.debug("Создание объекта класса Player")
-        
         logger.info("Главное меню открыто!")
         MainMenu.render(self.__screen, logger)
         logger.info("Главное меню закрыто!")
@@ -64,18 +67,22 @@ class Game:
         blocks = Block()  # Это не блоки, а мебель
         logger.debug("Создание объекта класса Block")
         items = Item()  # Предметы игры (их можно подбирать и использовать)
+        logger.debug("Создание объекта класса Item")
         GameObjects.screen = self.__screen
         logger.debug("Статичному полю GameObjects screen присвоено значение")
         GameObjects.logger = logger
         logger.debug("Создание объекта класса Item")
+        Inventory.logger = logger
         logger.info("Закончена инициализация перед работой в цикле")
         
         while cycle:  # Основной игровой цикл
             self.__clock.tick(60)  # Вертикальная синхронизация
             self.__screen.fill((0, 0, 0))
             draw_location.render_location(self.__index, self.__screen)
-            self.__screen.blit(self.__player.player, (self.__player.x, self.__player.y))
+            self.__screen.blit(self.__player.player, (self.__player.x, 
+                                                    self.__player.y))
             self.__player.player_interfaces(self.__screen)
+            blocks.placing(self.__index, self.__player)
             items.placing(self.__index, self.__player)
             pygame.display.flip()
             
@@ -119,4 +126,4 @@ class Game:
                 self.__player.x = 385
                 self.__player.y = 385
                 logger.debug("Переменным x и y присвоены стандартные значения")
-                self.__index[0] += 1    
+                self.__index[0] += 1

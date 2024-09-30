@@ -4,6 +4,6 @@
 class Endings:
     """Основной функционал концовок"""
     
-    def identify_ending() -> None:
+    def identify_ending(self) -> None:
         """Определение на какую концовку прошёл игрок"""
         pass

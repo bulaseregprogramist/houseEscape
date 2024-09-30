@@ -8,3 +8,6 @@
 *.txt
 *.cfg
 *.doctree
+.venv/
+.docs/
+.__pycache__/

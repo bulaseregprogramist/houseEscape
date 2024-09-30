@@ -1,12 +1,12 @@
 """Запуск игры."""
 
-from src.game import Game
-from src.logging import HELogger
+from src.game.game import Game
+from src.game.logging import HELogger
 import logging
 
 
 def main() -> None:
-    logger = HELogger("HouseEscape", logging.INFO)
+    logger = HELogger("HouseEscape", logging.DEBUG)
     Game(logger.getChild("Logger"))
 
 
