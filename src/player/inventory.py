@@ -48,12 +48,11 @@ class Inventory:
             screen.blit(cls.inventory_list[i], (x, y))
             x += 60
             
-    
     def open(self) -> None:
         """Открытие инвентаря"""
         inv_cycle = 1
         while inv_cycle:
-            self.__screen.fill((30, 30, 30))
+            self.__screen.fill((70, 70, 70))
             self.__screen.blit(self.__inventory, (10, 10))
             Inventory.draw_inventory(self.__screen)
             pygame.display.flip()

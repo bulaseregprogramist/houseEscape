@@ -2,12 +2,20 @@
 
 from .character import Character
 from ..game.logging import HELogger
+import pygame
+
+
+pygame.init()
 
 
 class Enemy(Character):
     __x: int
     __y: int
     __enemy_type: str
+    enemy_dict = {
+        1: [450, 150, 3, 3, pygame.transform.scale(pygame.image.load("textures/boosty.png"), (50, 50))],
+        2: [20, 320, 3, 3, pygame.transform.scale(pygame.image.load("textures/boosty.png"), (50, 50))]
+        }
     field_of_view = 30  # FOV
     
     def __init__(self, x: int, y: int, enemy_type: str) -> None:
@@ -29,9 +37,17 @@ class Enemy(Character):
         cls.field_of_view = fov
         logger.debug("Поля класса изменены!")
         
-    def get_stats(self) -> None:
-        """Получение информации о враге"""
-        pass
+    def get_stats(self, logger: HELogger) -> None:
+        """
+        Получение информации о враге
+        
+        Args:
+            logger (HELogger): Переменная для логов.
+        """
+        logger.info("Получение информации об враге")
+        result = Character.filter_data()
+        super().get_stats(self.__screen, [self.x, self.y], result)
+        logger.info("Информация о враге получена!")
     
     def die(self) -> None:
         """Смерть врага"""
