@@ -4,6 +4,7 @@ import pygame
 import sys
 from ..other.globals import font3
 from ..game.logging import HELogger
+from ..game.saving import Saving
 
 
 pygame.init()
@@ -48,7 +49,7 @@ class Inventory:
             screen.blit(cls.inventory_list[i], (x, y))
             x += 60
             
-    def open(self) -> None:
+    def open(self, index: list[int, int], player: object) -> None:
         """Открытие инвентаря"""
         inv_cycle = 1
         while inv_cycle:
@@ -59,6 +60,8 @@ class Inventory:
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    save = Saving()
+                    save.saving(index, player.x, player.y)
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:

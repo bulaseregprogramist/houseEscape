@@ -47,15 +47,15 @@ class GameObjects(ABC):
         menu = pygame.transform.scale(pygame.image.load("textures/menu.png").convert(),
                                     (200, 50))
         menu.set_alpha(64)
-        text2 = font2.render("block", 1, (255, 255, 255))
         
         self.screen.blit(menu, (30, 710))
         self.screen.blit(self.__text1, (40, 720))
-        self.screen.blit(text2, (40, 740))
         if go_type == "item":
-            pass
+            text2 = font2.render("item", 1, (255, 255, 255))
+            self.screen.blit(text2, (40, 740))
         elif go_type == "block":
-            pass
+            text2 = font2.render("block", 1, (255, 255, 255))
+            self.screen.blit(text2, (40, 740))
     
     @abstractmethod
     def functional(self, x: int, y: int, texture, go_type: str) -> int:

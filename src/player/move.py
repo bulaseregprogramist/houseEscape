@@ -23,5 +23,23 @@ class Move:
         """
         if index == [3, 3]:
             return True
+        elif index == [3, 2]:
+            return True
+        elif index == [3, 1]:
+            return True
+        elif index == [2, 3]:
+            return True
+        elif index == [2, 2]:
+            return True
+        elif index == [2, 1]:
+            return True
+        elif index == [1, 3]:
+            return True
+        elif index == [1, 2]:
+            return True
+        elif index == [1, 1]:
+            return True
+        elif index == [0, 2]:
+            return True
         return False
     

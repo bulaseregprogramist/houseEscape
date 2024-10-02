@@ -32,7 +32,7 @@ class Item(GameObjects):
                             player)
             delete, key = self.functional(self.__items[i][0], self.__items[i][1],
                             self.__items[i][4], i)
-        if delete == 1:
+        if delete == 1:  # Помещение предмета в инвентарь
             self.__items.pop(key)
     
     def functional(self, x: int, y: int, 
@@ -49,7 +49,7 @@ class Item(GameObjects):
                             второе за удаляемый ключ
         """
         result: int = super().functional(x, y, texture, "item")
-        if result == 1:
+        if result == 1:  # Помещение предмета в инвентарь
             pygame.mixer.Sound("textures/press.mp3").play()
             return 1, i
         return 0, i

@@ -95,7 +95,8 @@ class Game:
             self.__screen.fill((0, 0, 0))
             self.__draw_location.render_location(self.__index, self.__screen)
             result: pygame.surface.Surface = self.__player.blit()
-            rect: pygame.surface.Surface = self.__player.player_interfaces(self.__screen)
+            rect: pygame.surface.Surface = self.__player.player_interfaces(
+                self.__screen, self.__player)
             self.__blocks.placing(self.__index, self.__player)
             self.__items.placing(self.__index, self.__player)
             pygame.display.flip()
@@ -107,7 +108,7 @@ class Game:
             if result.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
                 self.__player.get_stats(logger)
             if is_pressed("esc"):  # При нажатии на ESCAPE игра поставится на паузу
-                Pause(self.__screen, logger)
+                Pause(self.__screen, logger, self.__index, self.__player)
             
     def __check(self, logger: HELogger) -> None:
         """

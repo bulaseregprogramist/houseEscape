@@ -40,7 +40,7 @@ class Block(GameObjects):
             texture (object): Текстура мебели
         """
         result: int = super().functional(x, y, texture, "block")
-        if result == 2:
+        if result == 2:  # Открытие меню мебели
             Draw.show_interfaces()
             pygame.mixer.Sound("textures/press2.mp3").play()
     

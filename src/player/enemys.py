@@ -30,7 +30,8 @@ class Enemy(Character):
         
         Args:
             logger (HELogger): Переменная для логов,
-            speed (int): Изменение статичного поля speed
+            speed (int): Изменение статичного поля speed,
+            fov (int): Поле зрения врага.
         """
         logger.debug("Идёт смена полей класса...")
         super().change_fields(speed)
@@ -45,7 +46,7 @@ class Enemy(Character):
             logger (HELogger): Переменная для логов.
         """
         logger.info("Получение информации об враге")
-        result = Character.filter_data()
+        result: dict = Character.filter_data()
         super().get_stats(self.__screen, [self.x, self.y], result)
         logger.info("Информация о враге получена!")
     

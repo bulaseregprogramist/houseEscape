@@ -41,6 +41,7 @@ class Character(ABC):
         texts_list = [font4.render(str(i), 1, (255, 255, 255)) for i in args[0].values()]
         while data_menu_cycle:
             screen.blit(menu, (ch[0] - 30, ch[1] - 30))
+            #print(texts_list)
             
             for j in texts_list:
                 screen.blit(j, (ch[0] - 30, y))
@@ -56,9 +57,16 @@ class Character(ABC):
                     data_menu_cycle = 0
     
     @staticmethod
-    def filter_data(*args) -> None:
+    def filter_data(dct: dict) -> dict:
         """Для получения статичных полей"""
-        return {key: value for key, value in args[0].items() if not callable(value) and not key.startswith("__")}
+        class_attributes = {key: value for key, value in dct.__dict__.items() 
+                    if not callable(value) and not key.startswith('__') and not isinstance(value, classmethod)
+                    and not key.startswith('_') or key.isupper()}
+
+        # Вывод атрибутов класса
+        for attr, value in class_attributes.items():
+            print(f"{attr}: {value}")
+        return class_attributes
     
     @abstractmethod
     def die(self) -> None:
