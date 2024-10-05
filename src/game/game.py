@@ -9,6 +9,7 @@ import logging
 from src.gameobjects.blocks import Block
 from src.gameobjects.item import Item
 from src.gameobjects.gameobjects import GameObjects
+from src.other.globals import traps_dict
 from src.game.saving import Saving
 from src.traps.traps import Traps
 from src.api.api import HEAPI
@@ -33,7 +34,9 @@ class Game:
         logging.basicConfig(level=logging.DEBUG,
                             format="[%(name)s] - [%(levelname)s] - %(message)s",
                             encoding="utf-8")
-        HELogger.better_info(logger)  # Цвета для логов (их можно включить указав BETTER в консоли)
+        # Цвета для логов (их можно включить указав BETTER в консоли)
+        # Или изменение уровня логов.
+        HELogger.better_info(logger)
         logger.info("Запуск программы")
         self.__screen = pygame.display.set_mode((770, 770))
         logger.debug("Создание переменной для экрана")
@@ -46,11 +49,11 @@ class Game:
         logger.info("Начата инициализация модов")
         HEAPI.load(logger)
         logger.info("Завершена инициализация модов")
-        self.__player = Player(logger, self.__screen)
-        logger.debug("Создание объекта класса Player")
         logger.info("Главное меню открыто!")
-        MainMenu.render(self.__screen, logger)
+        self.__numb: int = MainMenu.render(self.__screen, logger)
         logger.info("Главное меню закрыто!")
+        self.__player = Player(logger, self.__screen, self.__numb)
+        logger.debug("Создание объекта класса Player")
         self.__start(logger)
         
     def __load(self, logger: HELogger) -> None:
@@ -65,7 +68,8 @@ class Game:
         logger.debug("Создание объекта класса Draw")
         save = Saving()
         logger.debug("Создание объекта класса Saving")
-        self.__index = save.load_save()["index"]  # Положение игрока на карте. 1 - по y, 2 - по x.
+        # Положение игрока на карте. 1 - по y, 2 - по x.
+        self.__index = save.load_save(self.__numb, logger)["index"]
         logger.debug("Получен список index")
         self.__blocks = Block()  # Это не блоки, а мебель
         logger.debug("Создание объекта класса Block")
@@ -74,7 +78,7 @@ class Game:
         GameObjects.screen = self.__screen
         logger.debug("Статичному полю GameObjects screen присвоено значение")
         GameObjects.logger = logger
-        traps = Traps(self.__screen)
+        self.__traps = Traps(self.__screen)
         logger.debug("Создание объекта класса Traps")
         Inventory.logger = logger
         logger.info("Закончена инициализация перед работой в цикле")
@@ -84,7 +88,7 @@ class Game:
         Запуск игры
         
         Args:
-            logger (HELogger): Переменная для логов
+            logger (HELogger): Переменная для логов.
         """
         self.__load(logger)
         cycle = 1
@@ -95,20 +99,29 @@ class Game:
             self.__screen.fill((0, 0, 0))
             self.__draw_location.render_location(self.__index, self.__screen)
             result: pygame.surface.Surface = self.__player.blit()
-            rect: pygame.surface.Surface = self.__player.player_interfaces(
+            rect, rect2 = self.__player.player_interfaces(
                 self.__screen, self.__player)
-            self.__blocks.placing(self.__index, self.__player)
-            self.__items.placing(self.__index, self.__player)
+            self.__blocks.placing(self.__index, self.__player, self.__numb)
+            self.__items.placing(self.__index, self.__player, self.__numb)
+            
+            for j in traps_dict:
+                if (traps_dict[j][2] == self.__index[0] 
+                        and traps_dict[j][3] == self.__index[1]):
+                    trap_rect = self.__traps.draw_trap(traps_dict[j][0],
+                                    traps_dict[j][1], traps_dict[j][4])
+                    self.__traps.after(trap_rect, traps_dict[j][4], rect2)
             pygame.display.flip()
             mp: tuple[int, int] = pygame.mouse.get_pos()
             
-            self.__player.in_game(self.__player, self.__index, logger, rect)  # Движение игрока
+            self.__player.in_game(self.__player,
+                    self.__index, logger, rect, self.__numb)  # Движение игрока
             self.__check(logger)
             
             if result.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
                 self.__player.get_stats(logger)
             if is_pressed("esc"):  # При нажатии на ESCAPE игра поставится на паузу
-                Pause(self.__screen, logger, self.__index, self.__player)
+                Pause(self.__screen, logger, self.__index, self.__player,
+                    self.__numb)
             
     def __check(self, logger: HELogger) -> None:
         """
@@ -131,7 +144,7 @@ class Game:
                 self.__player.y = 385
                 logger.debug("Переменным x и y присвоены стандартные значения")
                 self.__index[0] -= 1
-        elif self.__player.x > 770:  # При выходе направо
+        elif self.__player.x > 751:  # При выходе направо
             if self.__lst[self.__index[0]][self.__index[1] + 1] != "0":  # Проверка на выход за границу дома
                 logger.info("Игрок вышел направо")
                 self.__player.x = 385

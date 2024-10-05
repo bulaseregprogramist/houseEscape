@@ -50,9 +50,10 @@ class Enemy(Character):
         super().get_stats(self.__screen, [self.x, self.y], result)
         logger.info("Информация о враге получена!")
     
-    def die(self) -> None:
+    @staticmethod
+    def die() -> None:
         """Смерть врага"""
-        pass
+        super().die()
     
     def enemy_move(self) -> None:
         """Движение NPC (AI)"""

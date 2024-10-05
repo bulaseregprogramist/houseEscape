@@ -2,6 +2,7 @@
 
 from .gameobjects import GameObjects
 from ..draw.draw import Draw
+from ..game.saving import Saving
 import pygame
 
 
@@ -10,12 +11,9 @@ pygame.init()
 
 class Block(GameObjects):
     """Блоки (мебель) в доме"""
-    __blocks = {  # Позиции мебели и их текстуры
-        1: [450, 150, 3, 3, pygame.transform.scale(pygame.image.load("textures/boosty.png"), (50, 50))],
-        2: [20, 320, 3, 3, pygame.transform.scale(pygame.image.load("textures/boosty.png"), (50, 50))]
-        }
+    save = Saving()
     
-    def placing(self, he_map: list[int, int], player: object) -> None:
+    def placing(self, he_map: list[int, int], player: object, n: int) -> None:
         """
         Размещение мебели
         
@@ -23,12 +21,14 @@ class Block(GameObjects):
             he_map (list[int, int]): Карта дома
             player (Player): Игрок
         """
+        self.__blocks = self.save.load_save(n)["blocks"]  # Позиции мебели и их текстуры
         for i in self.__blocks:
-            super().placing(self.__blocks[i][0], self.__blocks[i][1],
+            texture = pygame.transform.scale(eval(self.__blocks[i][4]), (50, 50))
+            super().placing(int(self.__blocks[i][0]), int(self.__blocks[i][1]),
                             [self.__blocks[i][2], self.__blocks[i][3]],
                             he_map,
-                            self.__blocks[i][4], player)
-            self.functional(self.__blocks[i][0], self.__blocks[i][1], self.__blocks[i][4])
+                            texture, player)
+            self.functional(self.__blocks[i][0], self.__blocks[i][1], texture)
     
     def functional(self, x: int, y: int, texture) -> None:
         """

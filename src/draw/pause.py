@@ -15,11 +15,12 @@ class Pause:
     """Пауза во время игры (в главном меню не работает)"""
     
     def __init__(self, screen: pygame.surface.Surface, logger: HELogger,
-                index: list[int, int], player: object) -> None:
+                index: list[int, int], player: object, n: int) -> None:
         self.__logger = logger
         self.__screen = screen
-        self.__index = index
+        self.__index: list[int, int] = index
         self.__player = player
+        self.__n: int = n
         self.__text1 = font.render("ПАУЗА", 1, (255, 255, 255))
         self.__pause_menu = pygame.transform.scale(pygame.image.load("textures/pm.png").convert(), (300, 770))
         self.__crest = pygame.transform.scale(pygame.image.load("textures/crest.png").convert(), (90, 90))
@@ -47,14 +48,15 @@ class Pause:
         while pause_cycle:
             self.__screen.blit(self.__pause_menu, (240, 0))
             self.__screen.blit(self.__text1, (315, 45))
-            pause_cycle = self.__functional()
+            pause_cycle: int = self.__functional()
             pygame.display.flip()
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.__logger.info("Выход из программы")
                     save = Saving()
-                    save.saving(self.__index, self.__player.x, self.__player.y)
+                    save.saving(self.__index, self.__player.x,
+                                self.__player.y, self.__n)
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:

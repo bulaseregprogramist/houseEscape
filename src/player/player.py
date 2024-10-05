@@ -8,7 +8,6 @@ from ..game.logging import HELogger
 from ..game.saving import Saving
 from .character import Character
 from .inventory import Inventory
-#from ..player.player import Player
 
 
 pygame.init()
@@ -18,11 +17,12 @@ class Player(Character):
     """Игрок и связанное с ним"""
     MAX_CAPACITY = 8  # Максимум предметов в инвентаре
     
-    def __init__(self, logger: HELogger, screen: pygame.surface.Surface) -> None:
+    def __init__(self, logger: HELogger,
+                screen: pygame.surface.Surface, n: int) -> None:
         logger.info("Начата работа конструктора Player")
         self.__save = Saving()
-        self.x = self.__save.load_save()["x"]  # Изначальное положение игрока по x
-        self.y = self.__save.load_save()["y"]  # Изначальное положение игрока по y
+        self.x = self.__save.load_save(n)["x"]  # Изначальное положение игрока по x
+        self.y = self.__save.load_save(n)["y"]  # Изначальное положение игрока по y
         self.player = pygame.transform.scale(
             pygame.image.load("textures/player.png").convert_alpha(), (60, 60))
         self.__inventory = pygame.transform.scale(
@@ -31,19 +31,19 @@ class Player(Character):
         logger.info("Завершена работа конструктора Player")
         
     def __to_inventory(self, logger: HELogger, 
-                    index: list[int, int], player: object) -> None:
+                    index: list[int, int], player: object, n: int) -> None:
         """
         Инвентарь игрока (открывается на E)
         
         Args:
             logger (HELogger): Переменная для логов,
             index (list[int, int]): Позиция игрока на карте,
-            player (Player): Объект игрока
+            player (Player): Объект игрока.
         """
         logger.info("Открытие инвентаря")
         Inventory.Player = self
         inventory = Inventory(self.__inventory, self.__screen)
-        inventory.open(index, player)
+        inventory.open(index, player, n)
         logger.info("Закрытие инвентаря")
         
     def player_interfaces(self, screen: pygame.surface.Surface,
@@ -52,22 +52,28 @@ class Player(Character):
         Интерфейсы игрока (инвентарь)
         
         Args:
-            screen (pygame.surface.Surface): Переменная экрана
-            player (Player): Объект класса Player
+            screen (pygame.surface.Surface): Переменная экрана,
+            player (Player): Объект класса Player.
         Returns:
             pygame.surface.Surface: 'Квадрат' текстуры рюкзака (инвентаря)
+                                    и игрока.
         """
         screen.blit(self.__inventory, (10, 10))
         rect = self.__inventory.get_rect(topleft=(10, 10))
         rect2 = self.player.get_rect(topleft=(player.x, player.y))
-        if rect.colliderect(rect2):
+        if rect.colliderect(rect2):  # Рюкзак прозрачен, если в нём игрок.
             self.__inventory.set_alpha(95)
         else:
             self.__inventory.set_alpha(300)
-        return rect
+        return rect, rect2
         
     def blit(self) -> pygame.surface.Surface:
-        """Вывод игрока на экран"""
+        """
+        Вывод игрока на экран
+        
+        Returns:
+            pygame.surface.Surface: 'Квадрат' игрока.
+        """
         self.__screen.blit(self.player, (self.x, self.y))
         return self.player.get_rect(topleft=(self.x, self.y))
         
@@ -83,9 +89,10 @@ class Player(Character):
         super().get_stats(self.__screen, [self.x, self.y], result)
         logger.info("Информация об игроке получена!")
     
-    def die(self) -> None:
+    @staticmethod
+    def die() -> None:
         """Смерть игрока"""
-        super().die()
+        super(Player, Player).die()
         
     @classmethod
     def change_fields(cls, logger: HELogger, mc: int, speed: int) -> None:
@@ -102,37 +109,43 @@ class Player(Character):
         cls.MAX_CAPACITY = mc
         logger.debug("Поля класса изменены!")
         
-    def open_inventory(self, logger: HELogger, rect: pygame.surface.Surface) -> None:
+    def open_inventory(self, logger: HELogger, index: list[int, int],
+                    player: object, rect: pygame.surface.Surface,
+                    n: int) -> None:
         """
         Открытие инвентаря
         
         Args:
             logger (HELogger): Переменная для логов,
+            index (list[int, int]): Позиция игрока на карте,
+            player (Player): Переменная игрока,
             rect (pygame.surface.Surface): 'Квадрат' рюкзака.
         """
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            self.__to_inventory(logger)
+            self.__to_inventory(logger, index, player, n)
         
     def in_game(self, player: object, index: list[int, int], logger: HELogger,
-                rect: pygame.surface.Surface) -> None:
+                rect: pygame.surface.Surface, n: int) -> None:
         """
         Поведение игрока в игре
 
         Args:
             player (Player): Объект игрока,
             index (list[int, int]): Карта дома,
-            logger (HELogger): Переменная для логов
+            logger (HELogger): Переменная для логов,
+            rect (pygame.surface.Surface): 'Квадрат' рюкзака,
+            n (int): Номер выбранного игроком сохранения.
         """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 logger.info("Закрытие программы")
-                self.__save.saving(index, player.x, player.y)
+                self.__save.saving(index, player.x, player.y, n)
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 logger.info(f"Нажата клавиша - {pygame.KEYDOWN}")
                 if event.key == pygame.K_e:
-                    self.__to_inventory(logger, index, player)
+                    self.__to_inventory(logger, index, player, n)
         if is_pressed("w") and Move.move_in_location(player.x, player.y, index) and self.x < 753:
             self.y -= 3 * self.speed
         elif is_pressed("a") and Move.move_in_location(player.x, player.y, index) and self.x > -23:
@@ -141,5 +154,5 @@ class Player(Character):
             self.y += 3 * self.speed
         elif is_pressed("d") and Move.move_in_location(player.x, player.y, index) and self.x < 753:
             self.x += 3  * self.speed
-        self.open_inventory(logger, rect)
+        self.open_inventory(logger, index, player, rect, n)
         

@@ -1,0 +1,40 @@
+{
+  "index": [
+    3,
+    3
+  ],
+  "x": 97,
+  "y": 244,
+  "blocks": {
+    "1": [
+      450,
+      150,
+      3,
+      3,
+      "pygame.image.load(\"textures/boosty.png\")"
+    ],
+    "2": [
+      20,
+      320,
+      3,
+      3,
+      "pygame.image.load(\"textures/boosty.png\")"
+    ]
+  },
+  "items": {
+    "1": [
+      150,
+      150,
+      3,
+      3,
+      "pygame.image.load(\"textures/boosty.png\")"
+    ],
+    "2": [
+      320,
+      320,
+      3,
+      3,
+      "pygame.image.load(\"textures/boosty.png\")"
+    ]
+  }
+}

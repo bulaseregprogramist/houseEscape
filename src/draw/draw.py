@@ -38,12 +38,13 @@ class Draw:
         while interface_cycle:
             pygame.display.flip()
             
-            ex: set = {sys.exit() for i in pygame.event.get() if i.type == pygame.QUIT}
+            {sys.exit() for i in pygame.event.get() if i.type == pygame.QUIT}
             if is_pressed("esc"):
                 sleep(0.15)
                 interface_cycle = 0
     
-    def render_location(self, index: list[int, int], screen: pygame.surface.Surface) -> None:
+    def render_location(self, index: list[int, int],
+                        screen: pygame.surface.Surface) -> None:
         """
         Рендеринг комнаты дома
 
@@ -70,6 +71,7 @@ class Draw:
         elif index == [3, 2]:
             screen.blit(self.__bg9, (0, 0))
         elif index == [3, 3]:  # Окрестности дома
-            self.__enemys = Enemy(Enemy.enemy_dict[1][0], Enemy.enemy_dict[1][1], "watcher")
+            self.__enemys = Enemy(Enemy.enemy_dict[1][0],
+                                Enemy.enemy_dict[1][1], "watcher")
             screen.blit(self.__bg10, (0, 0))
         

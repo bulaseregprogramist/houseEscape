@@ -15,13 +15,19 @@ class Inventory:
     logger: HELogger
     Player = None
     
-    def __init__(self, inventory: pygame.surface.Surface, screen: pygame.surface.Surface) -> None:
+    def __init__(self, inventory: pygame.surface.Surface, 
+                screen: pygame.surface.Surface) -> None:
         self.__inventory = inventory
         self.__screen = screen
         
     @classmethod
     def append(cls, texture: pygame.surface.Surface) -> None:
-        """Добавление в инвентарь предметов"""
+        """
+        Добавление в инвентарь предметов
+        
+        Args:
+            texture (pygame.surface.Surface): Текстура предмета.
+        """
         try:
             if cls.Player.MAX_CAPACITY > len(cls.inventory_list):
                 cls.inventory_list.append(texture)
@@ -42,15 +48,22 @@ class Inventory:
         text = font3.render("Enter для выхода из инвентаря", 1, (255, 255, 255))
         x, y = 100, 100
         screen.blit(text, (150, 30))
-        for i in range(len(cls.inventory_list)):
+        for i in range(len(cls.inventory_list)):  # Отрисовка предметов
             if i % 4 == 0:
                 x = 100
                 y += 60
             screen.blit(cls.inventory_list[i], (x, y))
             x += 60
             
-    def open(self, index: list[int, int], player: object) -> None:
-        """Открытие инвентаря"""
+    def open(self, index: list[int, int], player: object, n: int) -> None:
+        """
+        Открытие инвентаря
+        
+        Args:
+            index (list[int, int]): Позиция игрока на карте дома,
+            player (Player): Переменная игрока,
+            n (int): Номер выбранного сохранения.
+        """
         inv_cycle = 1
         while inv_cycle:
             self.__screen.fill((70, 70, 70))
@@ -61,7 +74,7 @@ class Inventory:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     save = Saving()
-                    save.saving(index, player.x, player.y)
+                    save.saving(index, player.x, player.y, n)
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:

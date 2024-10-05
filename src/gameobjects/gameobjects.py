@@ -22,7 +22,7 @@ class GameObjects(ABC):
     
     @abstractmethod
     def placing(self, x: int, y: int, index: list[int, int], he_map: list[int, int],
-                texture, player: Player) -> None:
+                stexture, player: Player) -> None:
         """
         Размещение предмета на карте
         
@@ -31,21 +31,27 @@ class GameObjects(ABC):
             y (int): Позиция объекта по y,
             index (list[int, int]): Позиция игрока,
             he_map (list[int, int]): Карта дома,
-            texture (object): Текстура объекта,
-            player (Player): Объект игрока
+            texture (pygame.surface.Surface): Текстура объекта,
+            player (Player): Объект игрока.
         """
         if index == he_map:  # Если игрок находится в одной комнате с объектом
-            self.screen.blit(texture, (x, y))
-        if ((player.x <= x <= player.x + texture.get_width() * 0.5)  # Прозрачность
-                and (player.y <= y <= player.y + texture.get_height() * 1.1)):
-            texture.set_alpha(64)
-        else:
-            texture.set_alpha(500)
+            self.screen.blit(stexture, (x, y))
+        if ((player.x <= x <= player.x + stexture.get_width() * 0.5) 
+                and (player.y <= y <= player.y + stexture.get_height() * 1.1)):
+            print(1)
+            stexture.set_alpha(64)  # Прозрачность
+        else:  # Не прозрачность
+            stexture.set_alpha(500)
             
     def __show_menu(self, go_type: str) -> None:
-        """Показывает меню взаимодействия"""
-        menu = pygame.transform.scale(pygame.image.load("textures/menu.png").convert(),
-                                    (200, 50))
+        """
+        Показывает меню взаимодействия
+        
+        Args:
+            go_type (str): Тип игрового объекта.
+        """
+        menu = pygame.transform.scale(pygame.image.load(
+            "textures/menu.png").convert(), (200, 50))
         menu.set_alpha(64)
         
         self.screen.blit(menu, (30, 710))
@@ -65,12 +71,15 @@ class GameObjects(ABC):
         Args:
             x (int): Позиция объекта по x
             y (int): Позиция объекта по y
-            texture (object): Текстура объекта
+            texture (pygame.surface.Surface): Текстура объекта
             go_type (str): GameObject_type. (либо item, либо block)
         Returns:
-            int: 0 - ничего не произошло, 1 - воспроизведение звука #1, 2 - звук #2.
+            int: 0 - ничего не произошло, 1 - воспроизведение звука #1,
+                2 - звук #2.
         """
         
+        if isinstance(texture, str):
+            return 0
         rect = texture.get_rect(topleft=(x, y))
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         

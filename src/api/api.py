@@ -21,7 +21,9 @@ class HEAPI:
         Args:
             logger (HELogger): Переменная для логов
         """
-        logging.basicConfig(level=logging.INFO, format="[%(name)s] - [%(levelname)s] - %(message)s", encoding="utf-8")
+        logging.basicConfig(level=logging.INFO, 
+                        format="[%(name)s] - [%(levelname)s] - %(message)s",
+                        encoding="utf-8")
         logger.info("Загрузка модов...")
         if len(listdir("mods/")) > 0:
             logger.info("Моды обнаружены!")
@@ -34,5 +36,8 @@ class HEAPI:
     @staticmethod
     def __initialize_mods() -> None:
         """Инициализация модов"""
-        pass
+        list_of_mods: list[str, ...] = listdir("mods/")
+        for i in list_of_mods:
+            with open(f"mods/{i}") as file:
+                pass
     

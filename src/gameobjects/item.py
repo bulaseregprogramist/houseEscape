@@ -2,7 +2,7 @@ from src.gameobjects.gameobjects import GameObjects
 import pygame
 from ..game.logging import HELogger
 from ..player.player import Player
-from ..other.globals import load
+from ..game.saving import Saving
 
 
 pygame.init()
@@ -10,12 +10,10 @@ pygame.init()
 
 class Item(GameObjects):
     """Предметы в доме"""
-    __items =  {  # Позиции предметов и их текстуры
-        1: [150, 150, 3, 3, load("textures/boosty.png", (50, 50), "convert")],
-        2: [320, 320, 3, 3, load("textures/boosty.png", (50, 50), "convert")]
-        }
+    save = Saving()
+    some_num = 1
     
-    def placing(self, he_map: list[int, int], player: Player) -> None:
+    def placing(self, he_map: list[int, int], player: Player, n: int) -> None:
         """
         Размещение предмета
         
@@ -23,17 +21,22 @@ class Item(GameObjects):
             he_map (list[int, int]): Карта дома,
             player (Player): игрок
         """
+        if self.some_num:
+            self.__items = self.save.load_save(n)["items"]  # Позиции предметов и их текстуры
         delete = 0
         for i in self.__items:
+            texture = pygame.transform.scale(eval(self.__items[i][4]), (50, 50))
             super().placing(self.__items[i][0], self.__items[i][1],
                             [self.__items[i][2], self.__items[i][3]],
                             he_map,
-                            self.__items[i][4],
+                            texture,
                             player)
             delete, key = self.functional(self.__items[i][0], self.__items[i][1],
-                            self.__items[i][4], i)
+                            texture, i)
+            print(delete, key)
         if delete == 1:  # Помещение предмета в инвентарь
             self.__items.pop(key)
+            self.some_num = 0
     
     def functional(self, x: int, y: int, 
                 texture: pygame.surface.Surface, i: int) -> int:

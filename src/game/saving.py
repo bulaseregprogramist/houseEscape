@@ -1,48 +1,66 @@
 """Сохранения в игре"""
 
 import json
+import pygame
+from ..other.globals import some_dict
+from .logging import HELogger
+
+
+pygame.init()
 
 
 class Saving:
     
-    def load_save(self) -> dict:
+    def load_save(self, numb: int, logger: HELogger = None) -> dict:
         """
         Загрузка сохранений
         
+        Args:
+            numb (int): Номер выбранного игроком сохранения,
+            logger (HELogger): Параметр по умолчанию. Переменная для логов.
         Returns:
-            Сохранённые ранее данные игры.
+            dict: Сохранённые ранее данные игры.
         """
         try:
-            with open("data/data.json") as file:
-                some_dict = json.load(file)
+            if logger is not None:
+                logger.debug("Идёт загрузка данных")
+            with open(f"data/data{numb}.json") as file:
+                some_dict: dict = json.load(file)
+            some_dict: dict = self.load_textures(numb)
         except FileNotFoundError:
-            self.__not_found()
-            some_dict = {"index": [3, 3], "x": 385, "y": 385}
+            if logger is not None:
+                logger.error("Ошибка. Файл data.json не найден")
+            self.__not_found(numb, logger)
+            some_dict: dict = self.load_textures(numb)
         return some_dict
     
-    def __not_found(self) -> None:
+    def __not_found(self, numb: int, logger: HELogger = None) -> None:
         """Если файл data.json не найден"""
-        with open("data/data.json", "w") as file:
-            some_dict = {
-                "index": [3, 3],
-                "x": 385,
-                "y": 385
-            }
-            json.dump(some_dict, file, indent=2)
+        if logger is not None:
+            logger.debug("Устранение ошибки.")
+        with open(f"data/data{numb}.json", "w") as file:
+            json.dump(some_dict, file, indent=3)
+            
+    def load_textures(self, numb: int) -> dict:
+        """Загрузка текстур в словари"""
+        with open(f"data/data{numb}.json") as file:
+            result: dict = json.load(file)
+        return result
     
-    def saving(self, index: list[int, int], x: int, y: int) -> None:
+    def saving(self, index: list[int, int], x: int, y: int, n: int) -> None:
         """
         Сохранение игры
         
         Args:
             index (list[int, int]): Позиция игрока на карте,
             x (int): Позиция игрока по x,
-            y (int): Позиция игрока по y.
+            y (int): Позиция игрока по y,
+            n (int): Выбранное игроком сохранение.
         """
-        result: dict = self.load_save()  # Получение словаря из data.json
+        result: dict = self.load_save(n)  # Получение словаря из data.json
         result["index"] = index
         result["x"] = x
         result["y"] = y
-        with open("data/data.json", "w") as file:
+        with open(f"data/data{n}.json", "w") as file:
             json.dump(result, file, indent=2)
         
