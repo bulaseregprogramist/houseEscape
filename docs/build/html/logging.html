@@ -22,7 +22,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
-    <link rel="next" title="Игрок" href="player.html" />
+    <link rel="next" title="Отрисовка локаций, предметов" href="draw.html" />
     <link rel="prev" title="Основной игровой класс" href="game.html" /> 
 </head>
 
@@ -49,18 +49,17 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="game.html">Основной игровой класс</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Логи игры</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#src.logging.HELogger"><code class="docutils literal notranslate"><span class="pre">HELogger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.logging.HELogger"><code class="docutils literal notranslate"><span class="pre">HELogger</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.logging.HELogger.better_info"><code class="docutils literal notranslate"><span class="pre">HELogger.better_info()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="player.html">Игрок</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="draw.html">Отрисовка локаций, предметов</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mainmenu.html">Главное меню</a></li>
-<li class="toctree-l1"><a class="reference internal" href="move.html">Движение игрока игры HouseEscape</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
-<li class="toctree-l1"><a class="reference internal" href="blocks.html">Мебель</a></li>
-<li class="toctree-l1"><a class="reference internal" href="item.html">Предметы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
+<li class="toctree-l1"><a class="reference internal" href="character.html">Персонажи и всё, что с ними связано</a></li>
 </ul>
 
         </div>
@@ -94,6 +93,16 @@
 <dt class="sig sig-object py" id="src.logging.HELogger">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.logging.</span></span><span class="sig-name descname"><span class="pre">HELogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.logging.HELogger" title="Link to this definition"></a></dt>
 <dd><p>Этот класс дополняет класс из стандартной библиотеки Python</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.logging.HELogger.better_info">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">better_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.logging.HELogger.better_info" title="Link to this definition"></a></dt>
+<dd><p>Цвета для логов</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>logger (HELogger): Переменная для логов</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -103,7 +112,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
         <a href="game.html" class="btn btn-neutral float-left" title="Основной игровой класс" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
-        <a href="player.html" class="btn btn-neutral float-right" title="Игрок" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="draw.html" class="btn btn-neutral float-right" title="Отрисовка локаций, предметов" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

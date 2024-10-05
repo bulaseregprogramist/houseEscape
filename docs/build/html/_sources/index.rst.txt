@@ -11,12 +11,12 @@ Welcome to HouseEscape's documentation!
    :caption: Содержание:
 
    game
-   logging
-   player
    draw
    gameobjects
    api
    pause
+   character
+   traps
 
 
 Indices and tables

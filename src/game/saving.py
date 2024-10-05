@@ -17,7 +17,7 @@ class Saving:
         
         Args:
             numb (int): Номер выбранного игроком сохранения,
-            logger (HELogger): Параметр по умолчанию. Переменная для логов.
+            logger (HELogger | None): Параметр по умолчанию, для логов.
         Returns:
             dict: Сохранённые ранее данные игры.
         """
@@ -35,14 +35,27 @@ class Saving:
         return some_dict
     
     def __not_found(self, numb: int, logger: HELogger = None) -> None:
-        """Если файл data.json не найден"""
+        """
+        Если файл data.json не найден
+        
+        Args:
+            numb (int): Номер выбранного сохранения
+            logger (HELogger | None): Переменная по умолчанию, для логов.
+        """
         if logger is not None:
             logger.debug("Устранение ошибки.")
         with open(f"data/data{numb}.json", "w") as file:
             json.dump(some_dict, file, indent=3)
             
     def load_textures(self, numb: int) -> dict:
-        """Загрузка текстур в словари"""
+        """
+        Загрузка текстур в словари
+        
+        Args:
+            numb (int): Номер выбранного сохранения.
+        Returns:
+            dict: Словарь с данными игры
+        """
         with open(f"data/data{numb}.json") as file:
             result: dict = json.load(file)
         return result

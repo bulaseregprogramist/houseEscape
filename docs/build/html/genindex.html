@@ -44,13 +44,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
               <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="game.html">Основной игровой класс</a></li>
-<li class="toctree-l1"><a class="reference internal" href="logging.html">Логи игры</a></li>
-<li class="toctree-l1"><a class="reference internal" href="player.html">Игрок</a></li>
+<li class="toctree-l1"><a class="reference internal" href="game.html">Основной модуль игры</a></li>
 <li class="toctree-l1"><a class="reference internal" href="draw.html">Отрисовка локаций, предметов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
+<li class="toctree-l1"><a class="reference internal" href="character.html">Персонажи и всё, что с ними связано</a></li>
+<li class="toctree-l1"><a class="reference internal" href="traps.html">Ловушки в игре</a></li>
 </ul>
 
         </div>
@@ -81,8 +81,11 @@
 
 <div class="genindex-jumpbox">
  <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
  | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
@@ -93,20 +96,35 @@
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
  
 </div>
 <h2 id="_">_</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="game.html#src.game.Game.__check">__check() (метод src.game.Game)</a>
+      <li><a href="game.html#src.game.game.Game.__check">__check() (метод src.game.game.Game)</a>
 </li>
-      <li><a href="api.html#src.api.api.HEAPI.__initialize_mods">__initialize_mods() (метод src.api.api.HEAPI)</a>
+      <li><a href="draw.html#src.draw.pause.Pause.__functional">__functional() (метод src.draw.pause.Pause)</a>
+</li>
+      <li><a href="draw.html#src.draw.mainmenu.MainMenu.__init_textures">__init_textures() (метод src.draw.mainmenu.MainMenu)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#src.api.api.HEAPI.__initialize_mods">__initialize_mods() (метод src.api.api.HEAPI)</a>
+</li>
+      <li><a href="game.html#src.game.game.Game.__load">__load() (метод src.game.game.Game)</a>
+</li>
       <li><a href="draw.html#src.draw.pause.Pause.__run">__run() (метод src.draw.pause.Pause)</a>
 </li>
-      <li><a href="game.html#src.game.Game.__start">__start() (метод src.game.Game)</a>
+      <li><a href="game.html#src.game.game.Game.__start">__start() (метод src.game.game.Game)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="traps.html#src.traps.traps.Traps.after">after() (метод src.traps.traps.Traps)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -114,7 +132,33 @@
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="game.html#src.game.logging.HELogger.better_info">better_info() (статический метод src.game.logging.HELogger)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="character.html#src.player.player.Player.blit">blit() (метод src.player.player.Player)</a>
+</li>
       <li><a href="gameobjects.html#src.gameobjects.blocks.Block">Block (класс в src.gameobjects.blocks)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="character.html#src.player.character.Character.change_fields">change_fields() (метод класса src.player.character.Character)</a>
+
+      <ul>
+        <li><a href="character.html#src.player.enemys.Enemy.change_fields">(метод класса src.player.enemys.Enemy)</a>
+</li>
+        <li><a href="character.html#src.player.player.Player.change_fields">(метод класса src.player.player.Player)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="character.html#src.player.character.Character">Character (класс в src.player.character)</a>
+</li>
+      <li><a href="game.html#src.game.savemenu.SaveMenu.create_save">create_save() (метод src.game.savemenu.SaveMenu)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -122,7 +166,33 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="character.html#src.player.character.Character.die">die() (статический метод src.player.character.Character)</a>
+
+      <ul>
+        <li><a href="character.html#src.player.enemys.Enemy.die">(статический метод src.player.enemys.Enemy)</a>
+</li>
+        <li><a href="character.html#src.player.player.Player.die">(статический метод src.player.player.Player)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="draw.html#src.draw.draw.Draw">Draw (класс в src.draw.draw)</a>
+</li>
+      <li><a href="traps.html#src.traps.traps.Traps.draw_trap">draw_trap() (метод src.traps.traps.Traps)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="character.html#src.player.endings.Endings">Endings (класс в src.player.endings)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="character.html#src.player.enemys.Enemy">Enemy (класс в src.player.enemys)</a>
+</li>
+      <li><a href="character.html#src.player.enemys.Enemy.enemy_move">enemy_move() (метод src.player.enemys.Enemy)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -130,6 +200,8 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="character.html#src.player.character.Character.filter_data">filter_data() (статический метод src.player.character.Character)</a>
+</li>
       <li><a href="gameobjects.html#src.gameobjects.blocks.Block.functional">functional() (метод src.gameobjects.blocks.Block)</a>
 
       <ul>
@@ -144,12 +216,20 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="game.html#src.game.Game">Game (класс в src.game)</a>
+      <li><a href="game.html#src.game.game.Game">Game (класс в src.game.game)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gameobjects.html#src.gameobjects.gameobjects.GameObjects">GameObjects (класс в src.gameobjects.gameobjects)</a>
 </li>
+      <li><a href="character.html#src.player.character.Character.get_stats">get_stats() (метод src.player.character.Character)</a>
+
+      <ul>
+        <li><a href="character.html#src.player.enemys.Enemy.get_stats">(метод src.player.enemys.Enemy)</a>
+</li>
+        <li><a href="character.html#src.player.player.Player.get_stats">(метод src.player.player.Player)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#src.api.api.HEAPI.guide">guide() (статический метод src.api.api.HEAPI)</a>
 </li>
   </ul></td>
@@ -162,7 +242,7 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="logging.html#src.logging.HELogger">HELogger (класс в src.logging)</a>
+      <li><a href="game.html#src.game.logging.HELogger">HELogger (класс в src.game.logging)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -170,10 +250,12 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="player.html#src.player.player.Player.in_game">in_game() (метод src.player.player.Player)</a>
+      <li><a href="character.html#src.player.endings.Endings.identify_ending">identify_ending() (метод src.player.endings.Endings)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="character.html#src.player.player.Player.in_game">in_game() (метод src.player.player.Player)</a>
+</li>
       <li><a href="gameobjects.html#src.gameobjects.item.Item">Item (класс в src.gameobjects.item)</a>
 </li>
   </ul></td>
@@ -183,6 +265,12 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#src.api.api.HEAPI.load">load() (статический метод src.api.api.HEAPI)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="game.html#src.game.saving.Saving.load_save">load_save() (метод src.game.saving.Saving)</a>
+</li>
+      <li><a href="game.html#src.game.saving.Saving.load_textures">load_textures() (метод src.game.saving.Saving)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -196,22 +284,24 @@
     module
 
       <ul>
+        <li><a href="game.html#module-src.game.logging">src.game.logging</a>
+</li>
         <li><a href="gameobjects.html#module-src.gameobjects.blocks">src.gameobjects.blocks</a>
 </li>
         <li><a href="gameobjects.html#module-src.gameobjects.gameobjects">src.gameobjects.gameobjects</a>
 </li>
         <li><a href="gameobjects.html#module-src.gameobjects.item">src.gameobjects.item</a>
 </li>
-        <li><a href="logging.html#module-src.logging">src.logging</a>
+        <li><a href="character.html#module-src.player.move">src.player.move</a>
 </li>
-        <li><a href="player.html#module-src.player.move">src.player.move</a>
+        <li><a href="character.html#module-src.player.player">src.player.player</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="player.html#src.player.move.Move">Move (класс в src.player.move)</a>
+      <li><a href="character.html#src.player.move.Move">Move (класс в src.player.move)</a>
 </li>
-      <li><a href="player.html#src.player.move.Move.move_in_location">move_in_location() (статический метод src.player.move.Move)</a>
+      <li><a href="character.html#src.player.move.Move.move_in_location">move_in_location() (статический метод src.player.move.Move)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -220,6 +310,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="draw.html#src.draw.mainmenu.MainMenu.open">open() (статический метод src.draw.mainmenu.MainMenu)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="character.html#src.player.player.Player.open_inventory">open_inventory() (метод src.player.player.Player)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -239,7 +333,9 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="player.html#src.player.player.Player">Player (класс в src.player.player)</a>
+      <li><a href="character.html#src.player.player.Player">Player (класс в src.player.player)</a>
+</li>
+      <li><a href="character.html#src.player.player.Player.player_interfaces">player_interfaces() (метод src.player.player.Player)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -259,6 +355,21 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="game.html#src.game.savemenu.SaveMenu">SaveMenu (класс в src.game.savemenu)</a>
+</li>
+      <li><a href="game.html#src.game.saving.Saving">Saving (класс в src.game.saving)</a>
+</li>
+      <li><a href="game.html#src.game.saving.Saving.saving">saving() (метод src.game.saving.Saving)</a>
+</li>
+      <li><a href="draw.html#src.draw.draw.Draw.show_interfaces">show_interfaces() (статический метод src.draw.draw.Draw)</a>
+</li>
+      <li>
+    src.game.logging
+
+      <ul>
+        <li><a href="game.html#module-src.game.logging">module</a>
+</li>
+      </ul></li>
       <li>
     src.gameobjects.blocks
 
@@ -266,6 +377,8 @@
         <li><a href="gameobjects.html#module-src.gameobjects.blocks">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     src.gameobjects.gameobjects
 
@@ -280,22 +393,28 @@
         <li><a href="gameobjects.html#module-src.gameobjects.item">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    src.logging
-
-      <ul>
-        <li><a href="logging.html#module-src.logging">module</a>
-</li>
-      </ul></li>
       <li>
     src.player.move
 
       <ul>
-        <li><a href="player.html#module-src.player.move">module</a>
+        <li><a href="character.html#module-src.player.move">module</a>
 </li>
       </ul></li>
+      <li>
+    src.player.player
+
+      <ul>
+        <li><a href="character.html#module-src.player.player">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="traps.html#src.traps.traps.Traps">Traps (класс в src.traps.traps)</a>
+</li>
   </ul></td>
 </tr></table>
 
