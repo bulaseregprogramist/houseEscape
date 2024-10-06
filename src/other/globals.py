@@ -17,16 +17,17 @@ some_dict = {
     "y": 385, 
     "blocks": { 
         1: [450, 150, 3, 3,
-            "pygame.image.load(\"textures/boosty.png\")"],
+            "pygame.image.load(\"textures/table.png\")"],
         2: [20, 320, 3, 3,
             "pygame.image.load(\"textures/boosty.png\")"]
     },
     "items": {  
         1: [150, 150, 3, 3,
-            "pygame.image.load(\"textures/boosty.png\")"],
+            "pygame.image.load(\"textures/stick.png\")"],
         2: [320, 320, 3, 3,
-            "pygame.image.load(\"textures/boosty.png\")"]
-    }}
+            "pygame.image.load(\"textures/stone.png\")"]
+    },
+    "items_keys": []}
 traps_dict = {
     1: [100, 100, 3, 3, "poison"]
 }

@@ -37,9 +37,16 @@ class Traps:
             
     def after(self, rect: pygame.rect.Rect, trap_type: str,
             player_rect: pygame.rect.Rect) -> None:
-        """Последствия попадания в ловушку"""
+        """
+        Последствия попадания в ловушку
+        
+        Args:
+            rect (pygame.rect.Rect): 'Квадрат' ловушки,
+            trap_type (str): Тип ловушки,
+            player_rect (pygame.rect.Rect): 'Квадрат' игрока.
+        """
         if rect.colliderect(player_rect):
             if trap_type == "poison":
-                Player.die()
+                Player.die(self.__screen)
             elif trap_type == "trap":
                 pass

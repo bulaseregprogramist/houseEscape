@@ -34,7 +34,7 @@ class Character(ABC):
         Args:
             screen (pygame.surface.Surface): Переменная экрана,
             ch (list[int, int]): Координаты игрока,
-            *args (Any): Статичные поля класса
+            *args (Any): Статичные поля класса.
         """
         data_menu_cycle, y = 1, ch[1] - 30
         y2 = copy(y)

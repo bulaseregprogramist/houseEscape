@@ -10,6 +10,7 @@ pygame.init()
 
 
 class Saving:
+    inventory: object
     
     def load_save(self, numb: int, logger: HELogger = None) -> dict:
         """
@@ -60,7 +61,8 @@ class Saving:
             result: dict = json.load(file)
         return result
     
-    def saving(self, index: list[int, int], x: int, y: int, n: int) -> None:
+    def saving(self, index: list[int, int], x: int, y: int, n: int, 
+            in_inventory: bool = False) -> None:
         """
         Сохранение игры
         
@@ -68,12 +70,19 @@ class Saving:
             index (list[int, int]): Позиция игрока на карте,
             x (int): Позиция игрока по x,
             y (int): Позиция игрока по y,
-            n (int): Выбранное игроком сохранение.
+            n (int): Выбранное игроком сохранение,
+            in_inventory (bool): Проверка на то, в инвентаре ли игрок.
         """
         result: dict = self.load_save(n)  # Получение словаря из data.json
         result["index"] = index
         result["x"] = x
         result["y"] = y
+        if in_inventory:
+            items_keys = []
+            for b in self.inventory.inventory_list:
+                print(b)
+                items_keys.append(b[1])
+            result["items_keys"] = items_keys
         with open(f"data/data{n}.json", "w") as file:
             json.dump(result, file, indent=2)
         

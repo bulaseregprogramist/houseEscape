@@ -64,7 +64,7 @@ class GameObjects(ABC):
             self.screen.blit(text2, (40, 740))
     
     @abstractmethod
-    def functional(self, x: int, y: int, texture, go_type: str) -> int:
+    def functional(self, x: int, y: int, texture, go_type: str, key: str = None) -> int:
         """
         Функционал игрового объекта
         
@@ -88,7 +88,7 @@ class GameObjects(ABC):
             if pygame.mouse.get_pressed()[0]:
                 sleep(0.2)
                 if go_type == "item":
-                    Inventory.append(texture)
+                    Inventory.append(texture, key)
                     return 1
                 elif go_type == "block":
                     Draw.show_interfaces()

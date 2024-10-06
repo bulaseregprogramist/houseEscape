@@ -18,19 +18,21 @@ class Inventory:
     def __init__(self, inventory: pygame.surface.Surface, 
                 screen: pygame.surface.Surface) -> None:
         self.__inventory = inventory
+        Saving.inventory = self
         self.__screen = screen
         
     @classmethod
-    def append(cls, texture: pygame.surface.Surface) -> None:
+    def append(cls, texture: pygame.surface.Surface, key: str) -> None:
         """
         Добавление в инвентарь предметов
         
         Args:
-            texture (pygame.surface.Surface): Текстура предмета.
+            texture (pygame.surface.Surface): Текстура предмета,
+            key (str): Ключ словаря предмета.
         """
         try:
             if cls.Player.MAX_CAPACITY > len(cls.inventory_list):
-                cls.inventory_list.append(texture)
+                cls.inventory_list.append([texture, key])
                 cls.logger.debug("Предмет успешно добавлен!")
             else:
                 cls.logger.error("В инвентаре нет места!")
@@ -52,7 +54,7 @@ class Inventory:
             if i % 4 == 0:
                 x = 100
                 y += 60
-            screen.blit(cls.inventory_list[i], (x, y))
+            screen.blit(cls.inventory_list[i][0], (x, y))
             x += 60
             
     def open(self, index: list[int, int], player: object, n: int) -> None:
@@ -74,7 +76,7 @@ class Inventory:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     save = Saving()
-                    save.saving(index, player.x, player.y, n)
+                    save.saving(index, player.x, player.y, n, True)
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:

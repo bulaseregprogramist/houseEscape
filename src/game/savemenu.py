@@ -63,7 +63,7 @@ class SaveMenu:
             for j in range(len(rects_list)):  # Запуск сохранения
                 if (rects_list[j].collidepoint(mouse_pos)
                         and pygame.mouse.get_pressed()[0]):
-                    return j  # Номер сохранения
+                    return j + 1  # Номер сохранения
             pygame.display.flip()
             if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
                 self.__logger.info("Идёт создание сохранения")

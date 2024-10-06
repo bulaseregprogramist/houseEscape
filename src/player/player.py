@@ -6,6 +6,7 @@ from keyboard import is_pressed
 from src.player.move import Move
 from ..game.logging import HELogger
 from ..game.saving import Saving
+from ..other.globals import font
 from .character import Character
 from .inventory import Inventory
 
@@ -90,9 +91,19 @@ class Player(Character):
         logger.info("Информация об игроке получена!")
     
     @staticmethod
-    def die() -> None:
+    def die(screen: pygame.surface.SurfaceType) -> None:
         """Смерть игрока"""
         super(Player, Player).die()
+        cycle = 1
+        text = font.render("ВЫ УМЕРЛИ!", 1, (255, 0, 0))
+        while cycle:
+            screen.fill((0, 0, 0))
+            screen.blit(text, (245, 300))
+            pygame.display.flip()
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
         
     @classmethod
     def change_fields(cls, logger: HELogger, mc: int, speed: int) -> None:
