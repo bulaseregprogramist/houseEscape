@@ -2,7 +2,7 @@
 
 import pygame
 from ..other.globals import load
-from ..player.player import Player
+from ..entity.player import Player
 
 
 pygame.init()

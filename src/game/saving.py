@@ -23,6 +23,7 @@ class Saving:
             dict: Сохранённые ранее данные игры.
         """
         try:
+            # logger может быть None, в файлах blocks.py и items.py
             if logger is not None:
                 logger.debug("Идёт загрузка данных")
             with open(f"data/data{numb}.json") as file:
@@ -32,7 +33,7 @@ class Saving:
             if logger is not None:
                 logger.error("Ошибка. Файл data.json не найден")
             self.__not_found(numb, logger)
-            some_dict: dict = self.load_textures(numb)
+            some_dict: dict = self.load_textures(numb, logger)
         return some_dict
     
     def __not_found(self, numb: int, logger: HELogger = None) -> None:
@@ -48,17 +49,20 @@ class Saving:
         with open(f"data/data{numb}.json", "w") as file:
             json.dump(some_dict, file, indent=3)
             
-    def load_textures(self, numb: int) -> dict:
+    def load_textures(self, numb: int, logger: HELogger = None) -> dict:
         """
         Загрузка текстур в словари
         
         Args:
-            numb (int): Номер выбранного сохранения.
+            numb (int): Номер выбранного сохранения,
+            logger (HELogger): Переменная для логов, по умолчанию.
         Returns:
             dict: Словарь с данными игры
         """
         with open(f"data/data{numb}.json") as file:
             result: dict = json.load(file)
+        if not isinstance(logger, None):
+            logger.debug("Текстуры получены!")
         return result
     
     def saving(self, index: list[int, int], x: int, y: int, n: int, 
@@ -79,7 +83,7 @@ class Saving:
         result["y"] = y
         if in_inventory:
             items_keys = []
-            for b in self.inventory.inventory_list:
+            for b in self.inventory.inventory_list:  # Сохранение предметов
                 items_keys.append(b[1])
             result["items_keys"] = items_keys
         with open(f"data/data{n}.json", "w") as file:

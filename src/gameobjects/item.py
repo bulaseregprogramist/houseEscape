@@ -3,7 +3,7 @@
 from src.gameobjects.gameobjects import GameObjects
 import pygame
 from ..game.logging import HELogger
-from ..player.player import Player
+from ..entity.player import Player
 from ..game.saving import Saving
 import json
 
@@ -22,10 +22,10 @@ class Item(GameObjects):
         
         Args:
             he_map (list[int, int]): Карта дома,
-            player (Player): игрок
+            player (Player): Игрок.
         """
-        if self.some_num:
-            self.__items = self.save.load_save(n)["items"]  # Позиции предметов и их текстуры
+        if self.some_num:  # Позиции предметов и их текстуры
+            self.__items: dict = self.save.load_save(n)["items"]
         delete = 0
         for i in self.__items:
             texture = pygame.transform.scale(eval(self.__items[i][4]), (50, 50))
@@ -35,14 +35,14 @@ class Item(GameObjects):
                             texture,
                             player)
             delete, key = self.functional(self.__items[i][0], self.__items[i][1],
-                            texture, i, self.__items)
+                            texture, i)
         if delete == 1:  # Помещение предмета в инвентарь
             self.__items.pop(key)
             self.__save_item(n)
             self.some_num = 0
     
     def functional(self, x: int, y: int, 
-                texture: pygame.surface.Surface, i: int, key: str) -> int:
+                texture: pygame.surface.Surface, i: int) -> int:
         """
         Функционал предметов
         
@@ -67,7 +67,7 @@ class Item(GameObjects):
         Args:
             n (int): Номер выбранного сохранения.
         """
-        some_dict = self.save.load_save(n)
+        some_dict: dict = self.save.load_save(n)
         some_dict["items"] = self.__items
         with open(f"data/data{n}.json", "w") as file:
             json.dump(some_dict, file)

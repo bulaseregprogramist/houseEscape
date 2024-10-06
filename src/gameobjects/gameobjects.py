@@ -1,10 +1,10 @@
 """Размещение и функционал предметов/мебели"""
 
 from abc import ABC, abstractmethod
-from ..player.inventory import Inventory
+from ..entity.inventory import Inventory
 from ..game.logging import HELogger
 from ..draw.draw import Draw
-from ..player.player import Player
+from ..entity.player import Player
 from ..other.globals import font2
 from time import sleep
 import pygame

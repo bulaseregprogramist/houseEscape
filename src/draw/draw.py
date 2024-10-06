@@ -1,10 +1,9 @@
 """Отрисовка комнат"""
 
 import pygame
-from ..other.globals import font
+from ..other.globals import font, load
 from ..game.logging import HELogger
-from ..player.enemys import Enemy
-from ..player.enemys import Enemy
+from ..entity.enemys import Enemy
 from keyboard import is_pressed
 import sys
 from time import sleep
@@ -18,16 +17,16 @@ class Draw:
     
     def __init__(self, logger: HELogger) -> None:
         logger.info("Работа конструктора класса Draw начата!")
-        self.__bg1 = pygame.transform.scale(pygame.image.load("textures/1.png").convert(), (770, 770))
-        self.__bg2 = pygame.transform.scale(pygame.image.load("textures/2.png").convert(), (770, 770))
-        self.__bg3 = pygame.transform.scale(pygame.image.load("textures/3.png").convert(), (770, 770))
-        self.__bg4 = pygame.transform.scale(pygame.image.load("textures/4.png").convert(), (770, 770))
-        self.__bg5 = pygame.transform.scale(pygame.image.load("textures/5.png").convert(), (770, 770))
-        self.__bg6 = pygame.transform.scale(pygame.image.load("textures/6.png").convert(), (770, 770))
-        self.__bg7 = pygame.transform.scale(pygame.image.load("textures/7.png").convert(), (770, 770))
-        self.__bg8 = pygame.transform.scale(pygame.image.load("textures/8.png").convert(), (770, 770))
-        self.__bg9 = pygame.transform.scale(pygame.image.load("textures/9.png").convert(), (770, 770))
-        self.__bg10 = pygame.transform.scale(pygame.image.load("textures/house.png").convert(), (770, 770))
+        self.__bg1 = load("textures/1.png", (770, 770), "convert")
+        self.__bg2 = load("textures/2.png", (770, 770), "convert")
+        self.__bg3 = load("textures/3.png", (770, 770), "convert")
+        self.__bg4 = load("textures/4.png", (770, 770), "convert")
+        self.__bg5 = load("textures/5.png", (770, 770), "convert")
+        self.__bg6 = load("textures/6.png", (770, 770), "convert")
+        self.__bg7 = load("textures/7.png", (770, 770), "convert")
+        self.__bg8 = load("textures/8.png", (770, 770), "convert")
+        self.__bg9 = load("textures/9.png", (770, 770), "convert")
+        self.__bg10 = load("textures/house.png", (770, 770), "convert")
         logger.info("Работа конструктора класса Draw завершена!")
         
     @staticmethod
@@ -53,7 +52,7 @@ class Draw:
             screen (pygame.surface.Surface): Переменная экрана
         """
         if index == [0, 2]:
-            screen.blit(self.__bg1, (0, 0))
+            screen.blit(self.__bg10, (0, 0))
         elif index == [1, 1]:
             screen.blit(self.__bg2, (0, 0))
         elif index == [1, 2]:
@@ -73,5 +72,5 @@ class Draw:
         elif index == [3, 3]:  # Окрестности дома
             self.__enemys = Enemy(Enemy.enemy_dict[1][0],
                                 Enemy.enemy_dict[1][1], "watcher")
-            screen.blit(self.__bg10, (0, 0))
+            screen.blit(self.__bg1, (0, 0))
         

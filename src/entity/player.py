@@ -3,7 +3,7 @@
 import pygame
 import sys
 from keyboard import is_pressed
-from src.player.move import Move
+from src.entity.move import Move
 from ..game.logging import HELogger
 from ..game.saving import Saving
 from ..other.globals import font, load
@@ -27,6 +27,8 @@ class Player(Character):
         self.player = load("textures/player.png", (60, 60), "convert_alpha")
         self.__inventory = load("textures/backpack.png", 
                                 (90, 90), "convert_alpha")
+        Inventory.Player = self
+        logger.debug("Статичному полю Player класса Inventory присвоен self")
         self.__screen = screen
         logger.info("Завершена работа конструктора Player")
         
@@ -42,7 +44,9 @@ class Player(Character):
             n (int): Номер выбранного сохранения.
         """
         logger.info("Открытие инвентаря")
-        Inventory.Player = self
+        sound = pygame.mixer.Sound("textures/open.mp3")
+        sound.set_volume(0.4)
+        sound.play()
         inventory = Inventory(self.__inventory, self.__screen)
         inventory.open(index, player, n)
         logger.info("Закрытие инвентаря")

@@ -52,7 +52,12 @@ class Enemy(Character):
     
     @staticmethod
     def die(logger: HELogger) -> None:
-        """Смерть врага"""
+        """
+        Смерть врага
+        
+        Args:
+            logger (HELogger): Переменная для логов.
+        """
         super().die()
         logger.info("Враг побеждён!")
     

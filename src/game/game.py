@@ -1,7 +1,7 @@
 """Этот файл включает в себя основной функционал игры"""
 
 import pygame
-from src.player.player import Player
+from src.entity.player import Player
 from src.draw.draw import Draw
 from src.draw.mainmenu import MainMenu
 from .logging import HELogger
@@ -15,7 +15,7 @@ from src.traps.traps import Traps
 from src.api.api import HEAPI
 from src.draw.pause import Pause
 from keyboard import is_pressed
-from ..player.inventory import Inventory
+from ..entity.inventory import Inventory
 
 
 pygame.init()
@@ -25,10 +25,10 @@ class Game:
     """Основной игровой класс"""
     
     __lst = ["00100",  # Карта дома (1 - комнаты, 0 - комнаты, в которые нельзя попасть)
-            "01110",
-            "01110",
-            "01110",
-            "00000"]
+             "01110",
+             "01110",
+             "01110",
+             "00000"]
     
     def __init__(self, logger: HELogger) -> None:
         logging.basicConfig(level=logging.DEBUG,
@@ -138,7 +138,7 @@ class Game:
                 logger.debug("Переменным x и y присвоены стандартные значения")
                 self.__index[1] -= 1
         elif self.__player.y < 0:  # При выходе вверх
-            if self.__lst[self.__index[0]][self.__index[0] - 1] != "0":  # Проверка на выход за границу дома
+            if self.__lst[self.__index[0]][self.__index[1] - 1] != "0":  # Проверка на выход за границу дома
                 logger.info("Игрок вышел вверх")
                 self.__player.x = 385
                 self.__player.y = 385
@@ -152,7 +152,7 @@ class Game:
                 logger.debug("Переменным x и y присвоены стандартные значения")
                 self.__index[1] += 1
         elif self.__player.y > 770:  # При выходе вниз
-            if self.__lst[self.__index[0]][self.__index[0] + 1] != "0":  # Проверка на выход за границу дома
+            if self.__lst[self.__index[0] + 1][self.__index[1]] != "0":  # Проверка на выход за границу дома
                 logger.info("Игрок вышел вниз")
                 self.__player.x = 385
                 self.__player.y = 385

@@ -31,14 +31,15 @@ class Block(GameObjects):
                             texture, player)
             self.functional(self.__blocks[i][0], self.__blocks[i][1], texture)
     
-    def functional(self, x: int, y: int, texture) -> None:
+    def functional(self, x: int, y: int, 
+                texture: pygame.surface.Surface) -> None:
         """
         Функционал мебели
         
         Args:
             x (int): Позиция мебели по x,
             y (int): Позиция мебели по y,
-            texture (object): Текстура мебели.
+            texture (pygame.surface.Surface): Текстура мебели.
         """
         result: int = super().functional(x, y, texture, "block")
         if result == 2:  # Открытие меню мебели
