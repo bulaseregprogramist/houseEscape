@@ -6,7 +6,7 @@ from keyboard import is_pressed
 from src.player.move import Move
 from ..game.logging import HELogger
 from ..game.saving import Saving
-from ..other.globals import font
+from ..other.globals import font, load
 from .character import Character
 from .inventory import Inventory
 
@@ -24,10 +24,9 @@ class Player(Character):
         self.__save = Saving()
         self.x = self.__save.load_save(n)["x"]  # Изначальное положение игрока по x
         self.y = self.__save.load_save(n)["y"]  # Изначальное положение игрока по y
-        self.player = pygame.transform.scale(
-            pygame.image.load("textures/player.png").convert_alpha(), (60, 60))
-        self.__inventory = pygame.transform.scale(
-            pygame.image.load("textures/backpack.png").convert_alpha(), (90, 90))
+        self.player = load("textures/player.png", (60, 60), "convert_alpha")
+        self.__inventory = load("textures/backpack.png", 
+                                (90, 90), "convert_alpha")
         self.__screen = screen
         logger.info("Завершена работа конструктора Player")
         
@@ -40,6 +39,7 @@ class Player(Character):
             logger (HELogger): Переменная для логов,
             index (list[int, int]): Позиция игрока на карте,
             player (Player): Объект игрока.
+            n (int): Номер выбранного сохранения.
         """
         logger.info("Открытие инвентаря")
         Inventory.Player = self
@@ -91,8 +91,13 @@ class Player(Character):
         logger.info("Информация об игроке получена!")
     
     @staticmethod
-    def die(screen: pygame.surface.SurfaceType) -> None:
-        """Смерть игрока"""
+    def die(screen: pygame.surface.Surface) -> None:
+        """
+        Смерть игрока
+        
+        Args:
+            screen (pygame.surface.Surface): Переменная экрана.
+        """
         super(Player, Player).die()
         cycle = 1
         text = font.render("ВЫ УМЕРЛИ!", 1, (255, 0, 0))
@@ -101,9 +106,7 @@ class Player(Character):
             screen.blit(text, (245, 300))
             pygame.display.flip()
             
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+            {sys.exit() for i in pygame.event.get() if i.type == pygame.QUIT}
         
     @classmethod
     def change_fields(cls, logger: HELogger, mc: int, speed: int) -> None:
@@ -113,7 +116,7 @@ class Player(Character):
         Args:
             logger (HELogger): Переменная для логов,
             mc (int): Изменение статичного поля MAX_CAPACITY,
-            speed (int): Изменение статичного поля speed
+            speed (int): Изменение статичного поля speed.
         """
         logger.debug("Идёт смена полей класса...")
         super().change_fields(speed)
@@ -121,8 +124,7 @@ class Player(Character):
         logger.debug("Поля класса изменены!")
         
     def open_inventory(self, logger: HELogger, index: list[int, int],
-                    player: object, rect: pygame.surface.Surface,
-                    n: int) -> None:
+                    player: object, rect: pygame.rect.Rect, n: int) -> None:
         """
         Открытие инвентаря
         
@@ -130,7 +132,7 @@ class Player(Character):
             logger (HELogger): Переменная для логов,
             index (list[int, int]): Позиция игрока на карте,
             player (Player): Переменная игрока,
-            rect (pygame.surface.Surface): 'Квадрат' рюкзака.
+            rect (pygame.rect.Rect): 'Квадрат' рюкзака.
         """
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:

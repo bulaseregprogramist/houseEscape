@@ -104,8 +104,8 @@ class Game:
             self.__blocks.placing(self.__index, self.__player, self.__numb)
             self.__items.placing(self.__index, self.__player, self.__numb)
             
-            for j in traps_dict:
-                if (traps_dict[j][2] == self.__index[0] 
+            for j in traps_dict:  # Отрисовка ловушек
+                if (traps_dict[j][2] == self.__index[0]
                         and traps_dict[j][3] == self.__index[1]):
                     trap_rect = self.__traps.draw_trap(traps_dict[j][0],
                                     traps_dict[j][1], traps_dict[j][4])
@@ -113,12 +113,12 @@ class Game:
             pygame.display.flip()
             mp: tuple[int, int] = pygame.mouse.get_pos()
             
-            self.__player.in_game(self.__player,
-                    self.__index, logger, rect, self.__numb)  # Движение игрока
+            self.__player.in_game(self.__player,  # Движение игрока
+                    self.__index, logger, rect, self.__numb)
             self.__check(logger)
             
             if result.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
-                self.__player.get_stats(logger)
+                self.__player.get_stats(logger)  # Информация об игроке
             if is_pressed("esc"):  # При нажатии на ESCAPE игра поставится на паузу
                 Pause(self.__screen, logger, self.__index, self.__player,
                     self.__numb)

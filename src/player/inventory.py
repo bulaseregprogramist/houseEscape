@@ -78,6 +78,5 @@ class Inventory:
                     save = Saving()
                     save.saving(index, player.x, player.y, n, True)
                     sys.exit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RETURN:
-                        inv_cycle = 0
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+                    inv_cycle = 0

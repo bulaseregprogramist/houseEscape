@@ -18,8 +18,9 @@ class Block(GameObjects):
         Размещение мебели
         
         Args:
-            he_map (list[int, int]): Карта дома
-            player (Player): Игрок
+            he_map (list[int, int]): Карта дома,
+            player (Player): Игрок,
+            n (int): Номер выбранного сохранения.
         """
         self.__blocks = self.save.load_save(n)["blocks"]  # Позиции мебели и их текстуры
         for i in self.__blocks:
@@ -37,7 +38,7 @@ class Block(GameObjects):
         Args:
             x (int): Позиция мебели по x,
             y (int): Позиция мебели по y,
-            texture (object): Текстура мебели
+            texture (object): Текстура мебели.
         """
         result: int = super().functional(x, y, texture, "block")
         if result == 2:  # Открытие меню мебели

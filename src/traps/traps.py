@@ -49,4 +49,4 @@ class Traps:
             if trap_type == "poison":
                 Player.die(self.__screen)
             elif trap_type == "trap":
-                pass
+                Player.die(self.__screen)

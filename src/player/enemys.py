@@ -51,11 +51,22 @@ class Enemy(Character):
         logger.info("Информация о враге получена!")
     
     @staticmethod
-    def die() -> None:
+    def die(logger: HELogger) -> None:
         """Смерть врага"""
         super().die()
+        logger.info("Враг побеждён!")
     
-    def enemy_move(self) -> None:
-        """Движение NPC (AI)"""
-        pass
+    def enemy_move(self, enemy_type: str) -> None:
+        """
+        Движение NPC (AI)
+        
+        Args:
+            enemy_type (str): Тип монстра (бывает watcher, blinder, stalker).
+        """
+        if enemy_type == "watcher":
+            pass
+        elif enemy_type == "blinder":
+            pass
+        elif enemy_type == "stalker":
+            pass
     

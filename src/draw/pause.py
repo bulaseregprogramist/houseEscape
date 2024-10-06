@@ -53,7 +53,7 @@ class Pause:
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.__logger.info("Выход из программы")
+                    self.__logger.info("Выход из программы...")
                     save = Saving()
                     save.saving(self.__index, self.__player.x,
                                 self.__player.y, self.__n)

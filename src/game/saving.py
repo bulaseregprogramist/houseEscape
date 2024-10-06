@@ -10,7 +10,7 @@ pygame.init()
 
 
 class Saving:
-    inventory: object
+    inventory: object  # Хранит класс Inventory
     
     def load_save(self, numb: int, logger: HELogger = None) -> dict:
         """
@@ -41,7 +41,7 @@ class Saving:
         
         Args:
             numb (int): Номер выбранного сохранения
-            logger (HELogger | None): Переменная по умолчанию, для логов.
+            logger (HELogger | None): Параметр по умолчанию, для логов.
         """
         if logger is not None:
             logger.debug("Устранение ошибки.")
@@ -80,7 +80,6 @@ class Saving:
         if in_inventory:
             items_keys = []
             for b in self.inventory.inventory_list:
-                print(b)
                 items_keys.append(b[1])
             result["items_keys"] = items_keys
         with open(f"data/data{n}.json", "w") as file:

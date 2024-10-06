@@ -5,6 +5,7 @@ from ..other.globals import load, font4, some_dict
 from ..game.logging import HELogger
 from os import listdir
 from time import sleep
+from typing import Any
 import json
 import sys
 
@@ -22,18 +23,43 @@ class SaveMenu:
         self.__st = font4.render("СОХРАНЕНИЕ", 1, (255, 255, 255))
         self.__screen = screen
         self.__plus = load("textures/plus.png", (40, 40), "convert_alpha")
-        self.number = self.__start()
+        self.number = self.__start()  # Количество сохранений в папке data
         
     def create_save(self) -> None:
         """Создание сохранения"""
         sleep(0.5)
-        sl: list = listdir("data/")
+        sl: list = listdir("data/")  # Получение кол-ва сохранений
         if len(sl) < 5:  # Если кол-во сохранений меньше 5.
             with open(f"data/data{len(sl) + 1}.json", "w") as file:
                 json.dump(some_dict, file, indent=3)
             self.__logger.debug("Сохранение успешно создано!")
         else:
             self.__logger.error("Превышено максимальное кол-во сохранений")
+            
+    def draw(self, rects_list: list, saves_list: list[str, ...]) -> Any:
+        """
+        Отрисовка меню сохранений
+        
+        Args:
+            rects_list (list): Список с 'квадратами',
+            saves_list (list[str, ...]): Список с сохранениями.
+        Returns:
+            pygame.rect.Rect: 'Квадрат' плюса,
+            tuple[int, int]: Позиция мыши.
+        """
+        self.__screen.fill((50, 50, 50))
+        self.__screen.blit(self.__bg, (270, 0))
+        self.__screen.blit(self.__plus, (550, 1))
+        rects_list.clear()
+        mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
+        rect = self.__plus.get_rect(topleft=(550, 1))
+            
+        y = 60
+        for _ in saves_list:  # Отрисовка сохранений
+            self.__screen.blit(self.__st, (310, y))
+            rects_list.append(self.__st.get_rect(topleft=(310, y)))
+            y += 40
+        return rect, mouse_pos
     
     def __start(self) -> int:
         """
@@ -46,20 +72,7 @@ class SaveMenu:
         rects_list = []
         while save_menu_cycle:
             saves_list = listdir("data/")
-            
-            self.__screen.fill((50, 50, 50))
-            self.__screen.blit(self.__bg, (270, 0))
-            self.__screen.blit(self.__plus, (550, 1))
-            rects_list.clear()
-            mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
-            rect = self.__plus.get_rect(topleft=(550, 1))
-            
-            y = 60
-            for _ in saves_list:  # Отрисовка сохранений
-                self.__screen.blit(self.__st, (310, y))
-                rects_list.append(self.__st.get_rect(topleft=(310, y)))
-                y += 40
-                
+            rect, mouse_pos = self.draw(rects_list, saves_list)
             for j in range(len(rects_list)):  # Запуск сохранения
                 if (rects_list[j].collidepoint(mouse_pos)
                         and pygame.mouse.get_pressed()[0]):

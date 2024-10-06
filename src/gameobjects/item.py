@@ -26,7 +26,6 @@ class Item(GameObjects):
         """
         if self.some_num:
             self.__items = self.save.load_save(n)["items"]  # Позиции предметов и их текстуры
-        print(self.__items)
         delete = 0
         for i in self.__items:
             texture = pygame.transform.scale(eval(self.__items[i][4]), (50, 50))
@@ -37,10 +36,9 @@ class Item(GameObjects):
                             player)
             delete, key = self.functional(self.__items[i][0], self.__items[i][1],
                             texture, i, self.__items)
-            print(i)
         if delete == 1:  # Помещение предмета в инвентарь
             self.__items.pop(key)
-            self.save_item(n)
+            self.__save_item(n)
             self.some_num = 0
     
     def functional(self, x: int, y: int, 
@@ -62,8 +60,13 @@ class Item(GameObjects):
             return 1, i
         return 0, i
     
-    def save_item(self, n: int) -> None:
-        """Сохранение предметов."""
+    def __save_item(self, n: int) -> None:
+        """
+        Сохранение предметов.
+        
+        Args:
+            n (int): Номер выбранного сохранения.
+        """
         some_dict = self.save.load_save(n)
         some_dict["items"] = self.__items
         with open(f"data/data{n}.json", "w") as file:

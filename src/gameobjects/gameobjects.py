@@ -38,7 +38,6 @@ class GameObjects(ABC):
             self.screen.blit(stexture, (x, y))
         if ((player.x <= x <= player.x + stexture.get_width() * 0.5) 
                 and (player.y <= y <= player.y + stexture.get_height() * 1.1)):
-            print(1)
             stexture.set_alpha(64)  # Прозрачность
         else:  # Не прозрачность
             stexture.set_alpha(500)

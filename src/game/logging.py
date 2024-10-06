@@ -23,7 +23,7 @@ class HELogger(Logger):
     @staticmethod
     def better_info(logger: object) -> None:
         """
-        Цвета для логов или изменение их
+        Цвета для логов или изменение их уровня.
         
         Args:
             logger (HELogger): Переменная для логов
