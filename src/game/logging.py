@@ -1,7 +1,8 @@
 """Этот модуль отвечает за логи игры"""
 
 from logging import Logger, basicConfig, INFO, ERROR, CRITICAL, getLogger
-from logging import WARNING
+from logging import WARNING, DEBUG
+from typing import Any
 import coloredlogs  # Для выделения особым цветом разных логов
 import sys
 
@@ -9,9 +10,23 @@ import sys
 class HELogger(Logger):
     """Этот класс дополняет класс из стандартной библиотеки Python"""
     
-    def __init__(self, name, level):
-        super().__init__(name, level)
+    def __init__(self, name='', level=''):
+        if name != '' and level != '':  # Для второго запуска конструктора.
+            super().__init__(name, level)
         print("[INFO] Logger activated!")
+        
+    def change_name(self, logger) -> Any:
+        """Смена названия логгера"""
+        name = "HouseEscape"
+        logger_name = "Logger"
+        try:
+            if sys.argv[1] == "CHANGE_NAME":
+                name = input("Введите первое имя: ")
+                logger_name = input("Введите имя логгера: ")
+        except IndexError:  # Если пользователь не указал argv.
+            pass
+        logger = HELogger(name, DEBUG)
+        return logger.getChild(logger_name)
         
     @staticmethod
     def set_level(level) -> None:

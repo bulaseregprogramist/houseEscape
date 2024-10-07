@@ -63,15 +63,19 @@ class GameObjects(ABC):
             self.screen.blit(text2, (40, 740))
     
     @abstractmethod
-    def functional(self, x: int, y: int, texture, go_type: str, key: str = None) -> int:
+    def functional(self, x: int, y: int, texture, go_type: str,
+                he_map: list[int, int], pos: list, key: str = None) -> int:
         """
         Функционал игрового объекта
         
         Args:
-            x (int): Позиция объекта по x
-            y (int): Позиция объекта по y
-            texture (pygame.surface.Surface): Текстура объекта
-            go_type (str): GameObject_type. (либо item, либо block)
+            x (int): Позиция объекта по x,
+            y (int): Позиция объекта по y,
+            texture (pygame.surface.Surface): Текстура объекта,
+            go_type (str): GameObject_type. (либо item, либо block),
+            he_map (list[int, int]): Позиция игрока,
+            pos (list[int, int]): Позиция объекта на карте.
+            key (str | None): Ключи для сохранения.
         Returns:
             int: 0 - ничего не произошло, 1 - воспроизведение звука #1,
                 2 - звук #2.
@@ -82,7 +86,7 @@ class GameObjects(ABC):
         rect = texture.get_rect(topleft=(x, y))
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         
-        if rect.collidepoint(mouse_pos):
+        if rect.collidepoint(mouse_pos) and he_map == pos:
             self.__show_menu(go_type)
             if pygame.mouse.get_pressed()[0]:
                 sleep(0.2)
@@ -90,7 +94,6 @@ class GameObjects(ABC):
                     Inventory.append(texture, key)
                     return 1
                 elif go_type == "block":
-                    Draw.show_interfaces()
                     return 2
         return 0
     

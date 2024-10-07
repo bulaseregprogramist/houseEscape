@@ -2,12 +2,12 @@
 
 from src.game.game import Game
 from src.game.logging import HELogger
-import logging
 
 
 def main() -> None:
-    logger = HELogger("HouseEscape", logging.DEBUG)
-    Game(logger.getChild("Logger"))
+    """Функция запуска игры."""
+    logger =  HELogger()
+    Game(logger.change_name(logger))
 
 
 if __name__ == "__main__":

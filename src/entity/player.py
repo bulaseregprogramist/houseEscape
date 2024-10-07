@@ -40,7 +40,7 @@ class Player(Character):
         Args:
             logger (HELogger): Переменная для логов,
             index (list[int, int]): Позиция игрока на карте,
-            player (Player): Объект игрока.
+            player (Player): Объект игрока,
             n (int): Номер выбранного сохранения.
         """
         logger.info("Открытие инвентаря")
@@ -163,7 +163,7 @@ class Player(Character):
                 logger.info(f"Нажата клавиша - {pygame.KEYDOWN}")
                 if event.key == pygame.K_e:
                     self.__to_inventory(logger, index, player, n)
-        if is_pressed("w") and Move.move_in_location(player.x, player.y, index) and self.x < 753:
+        if is_pressed("w") and Move.move_in_location(player.x, player.y, index) and self.y < 753:
             self.y -= 3 * self.speed
         elif is_pressed("a") and Move.move_in_location(player.x, player.y, index) and self.x > -23:
             self.x -= 3 * self.speed

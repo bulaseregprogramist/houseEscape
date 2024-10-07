@@ -5,6 +5,6 @@
 и техникой дома.
 В игре 10 комнат (улица считается за комнату) + подвал.
 Игра с частично открытым миром.
-Версия игры - 1.0.0
-Поддержать меня - https://boosty.to/sergey_pelmen\
+Версия игры - 1.0.0.
+Поддержать меня - https://boosty.to/sergey_pelmen
 Или так: https://www.donationalerts.com/r/sergeyprojects                     

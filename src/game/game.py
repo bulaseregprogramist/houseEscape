@@ -71,6 +71,8 @@ class Game:
         # Положение игрока на карте. 1 - по y, 2 - по x.
         self.__index = save.load_save(self.__numb, logger)["index"]
         logger.debug("Получен список index")
+        Block.screen = self.__screen
+        logger.debug("Переменной screen класса Block присвоено значение")
         self.__blocks = Block()  # Это не блоки, а мебель
         logger.debug("Создание объекта класса Block")
         self.__items = Item()  # Предметы игры (их можно подбирать и использовать)
@@ -138,7 +140,7 @@ class Game:
                 logger.debug("Переменным x и y присвоены стандартные значения")
                 self.__index[1] -= 1
         elif self.__player.y < 0:  # При выходе вверх
-            if self.__lst[self.__index[0]][self.__index[1] - 1] != "0":  # Проверка на выход за границу дома
+            if self.__lst[self.__index[0] - 1][self.__index[1]] != "0":  # Проверка на выход за границу дома
                 logger.info("Игрок вышел вверх")
                 self.__player.x = 385
                 self.__player.y = 385

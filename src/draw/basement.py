@@ -1,0 +1,4 @@
+"""Подвал"""
+
+class Basement:
+    pass

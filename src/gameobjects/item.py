@@ -22,7 +22,8 @@ class Item(GameObjects):
         
         Args:
             he_map (list[int, int]): Карта дома,
-            player (Player): Игрок.
+            player (Player): Игрок,
+            n (int): Номер выбранного сохранения.
         """
         if self.some_num:  # Позиции предметов и их текстуры
             self.__items: dict = self.save.load_save(n)["items"]
@@ -35,26 +36,30 @@ class Item(GameObjects):
                             texture,
                             player)
             delete, key = self.functional(self.__items[i][0], self.__items[i][1],
-                            texture, i)
+                            texture, i, he_map,
+                            [self.__items[i][2], self.__items[i][3]])
         if delete == 1:  # Помещение предмета в инвентарь
             self.__items.pop(key)
             self.__save_item(n)
             self.some_num = 0
     
     def functional(self, x: int, y: int, 
-                texture: pygame.surface.Surface, i: int) -> int:
+                texture: pygame.surface.Surface, i: int,
+                he_map: list[int, int], index: list[int, int]) -> int:
         """
         Функционал предметов
         
         Args:
             x (int): Позиция предмета по x,
             y (int): Позиция предмета по y,
-            texture (object): Текстура предмета
+            texture (pygame.surface.Surface): Текстура предмета,
+            he_map (list[int, int]): Позиция игрока.
         Returns:
             int: Два числа. Первое число отвечает за удаление из словаря,
                             второе за удаляемый ключ
         """
-        result: int = super().functional(x, y, texture, "item", i)
+        result: int = super().functional(x, y, texture, "item", he_map, index,
+                                        i)
         if result == 1:  # Помещение предмета в инвентарь
             pygame.mixer.Sound("textures/press.mp3").play()
             return 1, i

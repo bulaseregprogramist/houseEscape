@@ -55,13 +55,13 @@ class Saving:
         
         Args:
             numb (int): Номер выбранного сохранения,
-            logger (HELogger): Переменная для логов, по умолчанию.
+            logger (HELogger): Переменная для логов, по умолчанию None.
         Returns:
             dict: Словарь с данными игры
         """
         with open(f"data/data{numb}.json") as file:
             result: dict = json.load(file)
-        if not isinstance(logger, None):
+        if logger is not None:
             logger.debug("Текстуры получены!")
         return result
     

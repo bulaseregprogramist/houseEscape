@@ -4,6 +4,8 @@ import pygame
 from ..other.globals import font, load
 from ..game.logging import HELogger
 from ..entity.enemys import Enemy
+from ..draw.basement import Basement
+from ..draw.crafting_table import CraftingTable
 from keyboard import is_pressed
 import sys
 from time import sleep
@@ -30,11 +32,27 @@ class Draw:
         logger.info("Работа конструктора класса Draw завершена!")
         
     @staticmethod
-    def show_interfaces() -> None:
-        """Интерфейсы для мебели"""
-        text = font.render("123", 1, (255, 255, 255))
+    def show_interfaces(key: int, screen: pygame.surface.Surface) -> None:
+        """
+        Интерфейсы для мебели
+        
+        Args:
+            key (int): id мебели,
+            screen (pygame.surface.Surface): Переменная для экрана.
+        """
+        text = font.render("СОЗДАНИЕ ПРЕДМЕТА", 1, (255, 255, 255))
         interface_cycle = 1
         while interface_cycle:
+            pygame.draw.rect(screen, (255, 255, 255), (100, 100, 570, 570))
+            
+            if key == 1:  # Верстак
+                CraftingTable()
+            elif key == 2:  # Лампа
+                pass
+            elif key == 3:  # Люк в подвал
+                Basement()
+            elif key == 4:  # Кровать
+                pass
             pygame.display.flip()
             
             {sys.exit() for i in pygame.event.get() if i.type == pygame.QUIT}
