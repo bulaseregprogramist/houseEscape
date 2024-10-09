@@ -18,9 +18,9 @@ some_dict = {
     "blocks": { 
         1: [450, 150, 3, 3,
             "pygame.image.load(\"textures/table.png\")"],
-        2: [20, 320, 3, 3,
+        2: [120, 320, 3, 3,
             "pygame.image.load(\"textures/lamp.png\")"],
-        3: [20, 320, 3, 2,
+        3: [320, 470, 3, 2,
             "pygame.image.load(\"textures/trapdoor.png\")"]
     },
     "items": {  
@@ -29,7 +29,8 @@ some_dict = {
         2: [320, 320, 3, 3,
             "pygame.image.load(\"textures/stone.png\")"]
     },
-    "items_keys": []}
+    "items_id": []}
+
 traps_dict = {
     1: [100, 100, 3, 3, "poison"]
 }

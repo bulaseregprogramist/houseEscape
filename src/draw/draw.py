@@ -32,33 +32,27 @@ class Draw:
         logger.info("Работа конструктора класса Draw завершена!")
         
     @staticmethod
-    def show_interfaces(key: int, screen: pygame.surface.Surface) -> None:
+    def show_interfaces(key: int, screen: pygame.surface.Surface, 
+                        n: int) -> None:
         """
         Интерфейсы для мебели
         
         Args:
             key (int): id мебели,
-            screen (pygame.surface.Surface): Переменная для экрана.
+            screen (pygame.surface.Surface): Переменная для экрана,
+            n (int): Номер выбранного сохранения.
         """
-        text = font.render("СОЗДАНИЕ ПРЕДМЕТА", 1, (255, 255, 255))
-        interface_cycle = 1
-        while interface_cycle:
-            pygame.draw.rect(screen, (255, 255, 255), (100, 100, 570, 570))
-            
-            if key == 1:  # Верстак
-                CraftingTable()
-            elif key == 2:  # Лампа
-                pass
-            elif key == 3:  # Люк в подвал
-                Basement()
-            elif key == 4:  # Кровать
-                pass
-            pygame.display.flip()
-            
-            {sys.exit() for i in pygame.event.get() if i.type == pygame.QUIT}
-            if is_pressed("esc"):
-                sleep(0.15)
-                interface_cycle = 0
+        text = font.render("СОЗДАНИЕ ПРЕДМЕТА", 1, (0, 0, 0))
+        pygame.mixer.Sound("textures/collect.mp3").play()
+        key = int(key)
+        if key == 1:  # Верстак
+            CraftingTable(screen, text, n)
+        elif key == 2:  # Лампа
+            pass
+        elif key == 3:  # Люк в подвал
+            Basement()
+        elif key == 4:  # Кровать
+            pass
     
     def render_location(self, index: list[int, int],
                         screen: pygame.surface.Surface) -> None:

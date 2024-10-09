@@ -32,7 +32,7 @@ class Player(Character):
         self.__screen = screen
         logger.info("Завершена работа конструктора Player")
         
-    def __to_inventory(self, logger: HELogger, 
+    def to_inventory(self, logger: HELogger, 
                     index: list[int, int], player: object, n: int) -> None:
         """
         Инвентарь игрока (открывается на E)
@@ -91,7 +91,7 @@ class Player(Character):
         """
         logger.info("Получение информации об игроке")
         result: dict = Character.filter_data(self)
-        super().get_stats(self.__screen, [self.x, self.y], result)
+        super().get_stats(self.__screen, [self.x, self.y], logger, result)
         logger.info("Информация об игроке получена!")
     
     @staticmethod
@@ -160,9 +160,7 @@ class Player(Character):
                 self.__save.saving(index, player.x, player.y, n)
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                logger.info(f"Нажата клавиша - {pygame.KEYDOWN}")
-                if event.key == pygame.K_e:
-                    self.__to_inventory(logger, index, player, n)
+                Move.press_keydown(logger, event, self, index, player, n)
         if is_pressed("w") and Move.move_in_location(player.x, player.y, index) and self.y < 753:
             self.y -= 3 * self.speed
         elif is_pressed("a") and Move.move_in_location(player.x, player.y, index) and self.x > -23:

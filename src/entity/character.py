@@ -4,6 +4,7 @@ from abc import abstractmethod, ABC
 import sys
 import pygame
 from ..other.globals import load, font4
+from ..game.logging import HELogger
 from time import sleep
 from copy import copy
 
@@ -27,13 +28,14 @@ class Character(ABC):
         
     @abstractmethod
     def get_stats(self, screen: pygame.surface.Surface,
-                  ch: list[int, int], *args) -> None:
+                  ch: list[int, int], logger: HELogger, *args) -> None:
         """
         Получение информации об персонаже
         
         Args:
             screen (pygame.surface.Surface): Переменная экрана,
             ch (list[int, int]): Координаты игрока,
+            logger (HELogger): Переменная для логов.
             *args (Any): Статичные поля класса.
         """
         data_menu_cycle, y = 1, ch[1] - 30
@@ -52,8 +54,10 @@ class Character(ABC):
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    logger.info("Выход из игры...")
                     sys.exit()
-                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                elif (event.type == pygame.KEYDOWN
+                        and event.key == pygame.K_ESCAPE):
                     sleep(0.15)
                     data_menu_cycle = 0
     

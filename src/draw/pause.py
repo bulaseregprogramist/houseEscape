@@ -4,7 +4,7 @@ import pygame
 import sys
 from ..game.logging import HELogger
 from time import sleep
-from ..other.globals import font
+from ..other.globals import font, load
 from ..game.saving import Saving
 
 
@@ -22,8 +22,8 @@ class Pause:
         self.__player = player
         self.__n: int = n
         self.__text1 = font.render("ПАУЗА", 1, (255, 255, 255))
-        self.__pause_menu = pygame.transform.scale(pygame.image.load("textures/pm.png").convert(), (300, 770))
-        self.__crest = pygame.transform.scale(pygame.image.load("textures/crest.png").convert(), (90, 90))
+        self.__pause_menu = load("textures/pm.png", (300, 770), "convert")
+        self.__crest = load("textures/crest.png", (90, 90), "convert")
         self.__run()
         
     def __functional(self) -> int:

@@ -57,7 +57,7 @@ class Saving:
             numb (int): Номер выбранного сохранения,
             logger (HELogger): Переменная для логов, по умолчанию None.
         Returns:
-            dict: Словарь с данными игры
+            dict: Словарь с данными игры.
         """
         with open(f"data/data{numb}.json") as file:
             result: dict = json.load(file)
@@ -82,10 +82,13 @@ class Saving:
         result["x"] = x
         result["y"] = y
         if in_inventory:
-            items_keys = []
+            if result["items_id"] == []:
+                items_id = []
+            else:
+                items_id = result["items_id"]
             for b in self.inventory.inventory_list:  # Сохранение предметов
-                items_keys.append(b[1])
-            result["items_keys"] = items_keys
+                items_id.append(b[1])
+            result["items_id"] = items_id
         with open(f"data/data{n}.json", "w") as file:
-            json.dump(result, file, indent=2)
+            json.dump(result, file, indent=3)
         

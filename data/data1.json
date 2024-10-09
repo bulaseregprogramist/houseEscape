@@ -1,33 +1,35 @@
 {
-  "index": [
-    3,
-    3
-  ],
-  "x": 385,
-  "y": 385,
-  "blocks": {
-    "1": [
-      450,
-      150,
+   "index": [
       3,
-      3,
-      "pygame.image.load(\"textures/table.png\")"
-    ],
-    "2": [
-      20,
-      320,
-      3,
-      3,
-      "pygame.image.load(\"textures/lamp.png\")"
-    ],
-    "3": [
-      20,
-      320,
-      3,
-      2,
-      "pygame.image.load(\"textures/trapdoor.png\")"
-    ]
-  },
-  "items": {},
-  "items_keys": []
+      3
+   ],
+   "x": 385,
+   "y": 385,
+   "blocks": {
+      "1": [
+         450,
+         150,
+         3,
+         3,
+         "pygame.image.load(\"textures/table.png\")"
+      ],
+      "2": [
+         120,
+         320,
+         3,
+         3,
+         "pygame.image.load(\"textures/lamp.png\")"
+      ],
+      "3": [
+         320,
+         470,
+         3,
+         2,
+         "pygame.image.load(\"textures/trapdoor.png\")"
+      ]
+   },
+   "items": {},
+   "items_id": [
+      "2"
+   ]
 }

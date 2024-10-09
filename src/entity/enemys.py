@@ -1,6 +1,6 @@
 """Враги в игре"""
 
-from .character import Character
+from ..entity.character import Character
 from ..game.logging import HELogger
 import pygame
 
@@ -21,7 +21,8 @@ class Enemy(Character):
     def __init__(self, x: int, y: int, enemy_type: str) -> None:
         self.__x = x
         self.__y = y
-        self.__enemy_type = enemy_type  # В enemy_type может быть watcher, blinder, stalker
+        # В enemy_type может быть watcher, blinder, stalker
+        self.__enemy_type = enemy_type
         
     @classmethod
     def change_fields(cls, logger: HELogger, speed: int, fov: int) -> None:

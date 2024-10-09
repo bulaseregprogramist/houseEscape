@@ -26,7 +26,8 @@ class MainMenu:
             logger (HELogger): Переменная для логов
         """
         webbrowser.open(site)
-        # Если игрок нажимает, срабатывает несколько раз, это для того, чтобы это предотвратить.
+        # Если игрок нажимает, срабатывает несколько раз, 
+        # sleep для того, чтобы это предотвратить.
         sleep(0.176)
         logger.info(f"Открытие сайта - {site}")
         pygame.mixer.Sound("textures/press.mp3").play()

@@ -25,7 +25,7 @@ class Traps:
             y (int): Позиция ловушки по y,
             trap_type (str): Тип ловушки.
         Returns:
-            pygame.rect.Rect: 'Квдрат' ловушки.
+            pygame.rect.Rect: 'Квадрат' ловушки.
         """
         if trap_type == "poison":
             self.__screen.blit(self.__poison_trap, (x, y))
@@ -46,7 +46,5 @@ class Traps:
             player_rect (pygame.rect.Rect): 'Квадрат' игрока.
         """
         if rect.colliderect(player_rect):
-            if trap_type == "poison":
-                Player.die(self.__screen)
-            elif trap_type == "trap":
+            if trap_type == "poison" or trap_type == "trap":
                 Player.die(self.__screen)

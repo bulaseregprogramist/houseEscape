@@ -6,6 +6,7 @@ from src.draw.draw import Draw
 from src.draw.mainmenu import MainMenu
 from .logging import HELogger
 import logging
+from src.draw.crafting_table import CraftingTable
 from src.gameobjects.blocks import Block
 from src.gameobjects.item import Item
 from src.gameobjects.gameobjects import GameObjects
@@ -32,8 +33,8 @@ class Game:
     
     def __init__(self, logger: HELogger) -> None:
         logging.basicConfig(level=logging.DEBUG,
-                            format="[%(name)s] - [%(levelname)s] - %(message)s",
-                            encoding="utf-8")
+                        format="[%(name)s] - [%(levelname)s] - %(message)s",
+                        encoding="utf-8")
         # Цвета для логов (их можно включить указав BETTER в консоли)
         # Или изменение уровня логов.
         HELogger.better_info(logger)
@@ -80,6 +81,9 @@ class Game:
         GameObjects.screen = self.__screen
         logger.debug("Статичному полю GameObjects screen присвоено значение")
         GameObjects.logger = logger
+        logger.debug("Статичному полю GameObjects logger присвоено значение")
+        CraftingTable.logger = logger
+        logger.debug("Статичному полю CraftingTable logger присвоено значение")
         self.__traps = Traps(self.__screen)
         logger.debug("Создание объекта класса Traps")
         Inventory.logger = logger

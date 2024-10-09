@@ -21,8 +21,8 @@ class GameObjects(ABC):
     __text1 = font2.render("ЛКМ для взаимодействия", 1, (255, 255, 255))
     
     @abstractmethod
-    def placing(self, x: int, y: int, index: list[int, int], he_map: list[int, int],
-                stexture, player: Player) -> None:
+    def placing(self, x: int, y: int, index: list[int, int],
+                he_map: list[int, int], stexture, player: Player) -> None:
         """
         Размещение предмета на карте
         
@@ -64,7 +64,8 @@ class GameObjects(ABC):
     
     @abstractmethod
     def functional(self, x: int, y: int, texture, go_type: str,
-                he_map: list[int, int], pos: list, key: str = None) -> int:
+                he_map: list[int, int], pos: list[int, int],
+                key: str = None) -> int:
         """
         Функционал игрового объекта
         
@@ -86,6 +87,7 @@ class GameObjects(ABC):
         rect = texture.get_rect(topleft=(x, y))
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         
+        # Небольшое чёрное окошко
         if rect.collidepoint(mouse_pos) and he_map == pos:
             self.__show_menu(go_type)
             if pygame.mouse.get_pressed()[0]:

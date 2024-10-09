@@ -30,11 +30,11 @@ class Block(GameObjects):
             super().placing(int(self.__blocks[i][0]), int(self.__blocks[i][1]),
                             some_list, he_map, texture, player)
             self.functional(self.__blocks[i][0], self.__blocks[i][1], texture,
-                            he_map, some_list, i)
+                            he_map, some_list, i, n)
     
     def functional(self, x: int, y: int, texture: pygame.surface.Surface,
                 he_map: list[int, int], some_list: list[int, int],
-                i: int) -> None:
+                i: int, n: int) -> None:
         """
         Функционал мебели
         
@@ -44,11 +44,12 @@ class Block(GameObjects):
             texture (pygame.surface.Surface): Текстура мебели,
             he_map (list[int, int]): Позиция игрока на карте,
             some_list (list[int, int]): Позиция мебели на карте,
-            i (int): Ключи мебели.
+            i (int): Ключи мебели,
+            n (int): Номер выбранного сохранения.
         """
         result: int = super().functional(x, y, texture, "block", he_map, 
                                         some_list)
         if result == 2:  # Открытие меню мебели
-            Draw.show_interfaces(i, self.screen)
+            Draw.show_interfaces(i, self.screen, n)
             pygame.mixer.Sound("textures/press2.mp3").play()
     

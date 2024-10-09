@@ -4,9 +4,26 @@
 # Но они видимы. 
 # Например: кровать в спальне.
 
+from ..game.logging import HELogger
+import pygame
+
+
+pygame.init()
+
 
 class Move:
-    """Движение игрока по определённым местам в комнате"""
+    """Движение игрока"""
+    
+    @staticmethod
+    def press_keydown(logger: HELogger, event, cls, index, player, n) -> None:
+        """Нажатие на клавишу"""
+        try:
+            logger.info(f"Нажата клавиша - {chr(event.key)}")
+        except ValueError:
+            logger.error(
+                "Нажата клавиша, которая не может быть обработана через chr")
+        if event.key == pygame.K_e:
+            cls.to_inventory(logger, index, player, n)
     
     @staticmethod
     def move_in_location(x: int, y: int, index: list[int, int]) -> bool:
