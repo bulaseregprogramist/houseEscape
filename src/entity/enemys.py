@@ -2,27 +2,28 @@
 
 from ..entity.character import Character
 from ..game.logging import HELogger
+from ..game.saving import Saving
+from ..other.globals import n, load
 import pygame
+import re
 
 
 pygame.init()
 
 
 class Enemy(Character):
-    __x: int
-    __y: int
-    __enemy_type: str
-    enemy_dict = {
-        1: [450, 150, 3, 3, pygame.transform.scale(pygame.image.load("textures/boosty.png"), (50, 50))],
-        2: [20, 320, 3, 3, pygame.transform.scale(pygame.image.load("textures/boosty.png"), (50, 50))]
-        }
-    field_of_view = 30  # FOV
+    """Враги игрока"""
+    save = Saving()
+    enemy_dict = save.load_save(n)["enemys"]
+    field_of_view = save.load_save(n)["FOV"]  # FOV
     
-    def __init__(self, x: int, y: int, enemy_type: str) -> None:
-        self.__x = x
-        self.__y = y
+    def __init__(self, x: int, y: int, enemy_type: str, screen) -> None:
+        self.__screen = screen
+        self.__x: int = x
+        self.__y: int = y
         # В enemy_type может быть watcher, blinder, stalker
-        self.__enemy_type = enemy_type
+        self.__enemy_type: str = enemy_type
+        self.enemy_draw_and_move()
         
     @classmethod
     def change_fields(cls, logger: HELogger, speed: int, fov: int) -> None:
@@ -50,6 +51,20 @@ class Enemy(Character):
         result: dict = Character.filter_data()
         super().get_stats(self.__screen, [self.x, self.y], result)
         logger.info("Информация о враге получена!")
+        
+    def __to_texture(self, command: str) -> pygame.surface.Surface:
+        """
+        От команды к текстуре в игре.
+        
+        Args:
+            command (str): Команда для загрузки текстуры монстра.
+        Returns:
+            pygame.surface.Surface: Текстура монстра.
+        """
+        pattern = r"pygame\.image\.load\(['\"](.*?)['\"]\)"
+
+        match = re.search(pattern, command)
+        return load(match.group(1), (60, 60), "convert_alpha")
     
     @staticmethod
     def die(logger: HELogger) -> None:
@@ -62,17 +77,17 @@ class Enemy(Character):
         super().die()
         logger.info("Враг побеждён!")
     
-    def enemy_move(self, enemy_type: str) -> None:
+    def enemy_draw_and_move(self) -> None:
         """
-        Движение NPC (AI)
-        
-        Args:
-            enemy_type (str): Тип монстра (бывает watcher, blinder, stalker).
+        Движение и отрисовка NPC (AI)
         """
-        if enemy_type == "watcher":
-            pass
-        elif enemy_type == "blinder":
-            pass
-        elif enemy_type == "stalker":
-            pass
+        if self.__enemy_type == "watcher":
+            self.__screen.blit(self.__to_texture(self.enemy_dict['1'][4]),
+                            (self.enemy_dict['1'][0], self.enemy_dict['1'][1]))
+        elif self.__enemy_type == "blinder":
+            self.__screen.blit(self.__to_texture(self.enemy_dict['3'][4]),
+                            (self.enemy_dict['3'][0], self.enemy_dict['3'][1]))
+        elif self.__enemy_type == "stalker":
+            self.__screen.blit(self.__to_texture(self.enemy_dict['2'][4]),
+                            (self.enemy_dict['2'][0], self.enemy_dict['2'][1]))
     

@@ -2,7 +2,7 @@
 
 from logging import Logger, basicConfig, INFO, ERROR, CRITICAL, getLogger
 from logging import WARNING, DEBUG
-from typing import Any
+from typing import Any, Self
 import coloredlogs  # Для выделения особым цветом разных логов
 import sys
 
@@ -15,8 +15,15 @@ class HELogger(Logger):
             super().__init__(name, level)
         print("[INFO] Logger activated!")
         
-    def change_name(self, logger) -> Any:
-        """Смена названия логгера"""
+    def change_name(self, logger: Self) -> Any:
+        """
+        Смена названия логгера
+        
+        Args:
+            logger (HELogger): Переменная для логов
+        Returns:
+            Запуск логгера.
+        """
         name = "HouseEscape"
         logger_name = "Logger"
         try:
@@ -29,14 +36,20 @@ class HELogger(Logger):
         return logger.getChild(logger_name)
         
     @staticmethod
-    def set_level(level) -> None:
+    def set_level(level: int) -> None:
+        """
+        Установка уровня логирования
+        
+        Args:
+            level (int): Уровень логирования.
+        """
         getLogger().handlers = []  # Очистка предыдущего уровня логирования.
         basicConfig(level=level,
                     format="[%(name)s] - [%(levelname)s] - %(message)s",
                     encoding="utf-8")
                 
     @staticmethod
-    def better_info(logger: object) -> None:
+    def better_info(logger: Self) -> None:
         """
         Цвета для логов или изменение их уровня.
         

@@ -16,6 +16,10 @@ pygame.init()
 class MainMenu:
     """Главное меню (включает в себя Boosty, DonationAlerts, кнопку запуска)"""
     
+    def to_menu(self) -> None:
+        """Возвращение в главное меню"""
+        pass
+    
     @staticmethod
     def open(site: str, logger: HELogger) -> None:
         """
@@ -83,7 +87,8 @@ class MainMenu:
             rect3 = da.get_rect(topleft=(660, 30))  # 'Квадрат' DonationAlerts
             rect4 = notepad.get_rect(topleft=(660, 660))
             
-            if rect1.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:  # Кнопка запуска игры
+            # Кнопка запуска игры
+            if rect1.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
                 logger.info("Выход из главного меню")
                 mainmenu_cycle = 0
                 save = SaveMenu(screen, logger)

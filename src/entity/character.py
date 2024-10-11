@@ -3,8 +3,9 @@
 from abc import abstractmethod, ABC
 import sys
 import pygame
-from ..other.globals import load, font4
+from ..other.globals import load, font4, n
 from ..game.logging import HELogger
+from ..game.saving import Saving
 from time import sleep
 from copy import copy
 
@@ -13,7 +14,9 @@ pygame.init()
 
 
 class Character(ABC):
-    speed = 1
+    """Персонаж (игрок, монстр, нпс)"""
+    save = Saving()
+    speed = save.load_save(n)["SPEED"]
     
     @classmethod
     @abstractmethod

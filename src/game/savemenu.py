@@ -28,7 +28,7 @@ class SaveMenu:
     def create_save(self) -> None:
         """Создание сохранения"""
         sleep(0.5)
-        sl: list = listdir("data/")  # Получение кол-ва сохранений
+        sl: list[str, ...] = listdir("data/")  # Получение кол-ва сохранений
         if len(sl) < 5:  # Если кол-во сохранений меньше 5.
             with open(f"data/data{len(sl) + 1}.json", "w") as file:
                 json.dump(some_dict, file, indent=3)
@@ -71,7 +71,7 @@ class SaveMenu:
         save_menu_cycle = 1
         rects_list = []
         while save_menu_cycle:
-            saves_list = listdir("data/")
+            saves_list: list[str, ...] = listdir("data/")
             rect, mouse_pos = self.draw(rects_list, saves_list)
             for j in range(len(rects_list)):  # Запуск сохранения
                 if (rects_list[j].collidepoint(mouse_pos)

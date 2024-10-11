@@ -6,7 +6,7 @@ from keyboard import is_pressed
 from src.entity.move import Move
 from ..game.logging import HELogger
 from ..game.saving import Saving
-from ..other.globals import font, load
+from ..other.globals import font, load, n
 from .character import Character
 from .inventory import Inventory
 
@@ -16,7 +16,9 @@ pygame.init()
 
 class Player(Character):
     """Игрок и связанное с ним"""
-    MAX_CAPACITY = 8  # Максимум предметов в инвентаре
+    save = Saving()
+    # Максимум предметов в инвентаре
+    MAX_CAPACITY = save.load_save(n)["MAX_CAPACITY"]
     
     def __init__(self, logger: HELogger,
                 screen: pygame.surface.Surface, n: int) -> None:
@@ -136,11 +138,12 @@ class Player(Character):
             logger (HELogger): Переменная для логов,
             index (list[int, int]): Позиция игрока на карте,
             player (Player): Переменная игрока,
-            rect (pygame.rect.Rect): 'Квадрат' рюкзака.
+            rect (pygame.rect.Rect): 'Квадрат' рюкзака,
+            n (int): Номер выбранного сохранения.
         """
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            self.__to_inventory(logger, index, player, n)
+            self.to_inventory(logger, index, player, n)
         
     def in_game(self, player: object, index: list[int, int], logger: HELogger,
                 rect: pygame.surface.Surface, n: int) -> None:
@@ -157,7 +160,7 @@ class Player(Character):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 logger.info("Закрытие программы")
-                self.__save.saving(index, player.x, player.y, n)
+                self.__save.saving(index, player.x, player.y, n, True)
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 Move.press_keydown(logger, event, self, index, player, n)

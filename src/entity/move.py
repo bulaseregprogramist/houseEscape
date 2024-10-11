@@ -15,8 +15,19 @@ class Move:
     """Движение игрока"""
     
     @staticmethod
-    def press_keydown(logger: HELogger, event, cls, index, player, n) -> None:
-        """Нажатие на клавишу"""
+    def press_keydown(logger: HELogger, event, cls,
+                    index: list[int, int], player, n: int) -> None:
+        """
+        Нажатие на клавишу
+        
+        Args:
+            logger (HELogger): Переменная для логов,
+            event (Any): Событие в pygame,
+            cls (object): Класс инвентаря,
+            index (list[int, int]): Позиция игрока на карте дома,
+            player (Player): Класс Player,
+            n (int): Номер выбранного сохранения.
+        """
         try:
             logger.info(f"Нажата клавиша - {chr(event.key)}")
         except ValueError:
@@ -33,8 +44,7 @@ class Move:
         Args:
             x (int): позиция игрока по x,
             y (int): позиция игрока по y,
-            index (list[int, int]): карта дома
-
+            index (list[int, int]): карта дома.
         Returns:
             bool: Можно ли идти в этой зоне дома (True или False)
         """

@@ -4,6 +4,7 @@ import pygame
 import sys
 from ..game.logging import HELogger
 from time import sleep
+from ..entity.player import Player
 from ..other.globals import font, load
 from ..game.saving import Saving
 
@@ -15,7 +16,7 @@ class Pause:
     """Пауза во время игры (в главном меню не работает)"""
     
     def __init__(self, screen: pygame.surface.Surface, logger: HELogger,
-                index: list[int, int], player: object, n: int) -> None:
+                index: list[int, int], player: Player, n: int) -> None:
         self.__logger = logger
         self.__screen = screen
         self.__index: list[int, int] = index
@@ -24,6 +25,7 @@ class Pause:
         self.__text1 = font.render("ПАУЗА", 1, (255, 255, 255))
         self.__pause_menu = load("textures/pm.png", (300, 770), "convert")
         self.__crest = load("textures/crest.png", (90, 90), "convert")
+        self.__mm = load("textures/mm.png", (100, 100), "convert")
         self.__run()
         
     def __functional(self) -> int:
@@ -31,7 +33,7 @@ class Pause:
         Функционал главного меню
         
         Returns:
-            int: Выключает цикл или оставляет его включённым
+            int: Выключает цикл или оставляет его включённым. (второй случай)
         """
         self.__screen.blit(self.__crest, (340, 600))
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
@@ -48,6 +50,8 @@ class Pause:
         while pause_cycle:
             self.__screen.blit(self.__pause_menu, (240, 0))
             self.__screen.blit(self.__text1, (315, 45))
+            self.__screen.blit(self.__mm, (320, 540))
+            
             pause_cycle: int = self.__functional()
             pygame.display.flip()
             

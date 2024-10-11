@@ -75,10 +75,10 @@ class Saving:
             x (int): Позиция игрока по x,
             y (int): Позиция игрока по y,
             n (int): Выбранное игроком сохранение,
-            in_inventory (bool): Проверка на то, в инвентаре ли игрок.
+            in_inventory (bool): По умолчанию, в инвентаре ли игрок.
         """
         result: dict = self.load_save(n)  # Получение словаря из data.json
-        result["index"] = index
+        result["index"] = index  # Позиция игрока на карте.
         result["x"] = x
         result["y"] = y
         if in_inventory:

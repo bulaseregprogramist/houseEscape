@@ -5,6 +5,7 @@ from ..game.saving import Saving
 from ..entity.inventory import Inventory
 from time import sleep
 from ..game.logging import HELogger
+from copy import copy
 import sys
 
 
@@ -19,13 +20,16 @@ class CraftingTable:
         self.__screen = screen
         self.__text = text
         self.__keys: list[str, ...] = self.save.load_save(n)["items_id"]
-        self.__some_list = Inventory.inventory_list
+        self.__some_list = copy(Inventory.inventory_list)
         self.__some_list.extend(Inventory.inventory_list2)
         self.__run()
         
     def __recipes(self) -> None:
         """Рецепты в верстаке"""
-        pass
+        if "1" in self.__keys:
+            pass
+        elif "2" in self.__keys:
+            pass
         
     def __run(self) -> None:
         """Основной метод класса."""
@@ -38,13 +42,14 @@ class CraftingTable:
             
             # Отрисовка предметов в инвентаре
             for i in range(len(self.__some_list)):
-                try:
+                try:  # УО нужен для отрисовки хранимых в инвентаре предметов.
                     self.__screen.blit(self.__some_list[i], (x, y))
                 except TypeError:
                     self.__screen.blit(self.__some_list[i][0], (x, y))
                     
                 x += 70
-                if (i + 1) % 4 == 0:  # Перенос предметов вниз.
+                if (i + 1) % 6 == 0:  # Перенос предметов вниз.
+                    x = 170
                     y += 70
             pygame.display.flip()
                 

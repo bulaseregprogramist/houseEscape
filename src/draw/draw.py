@@ -6,9 +6,6 @@ from ..game.logging import HELogger
 from ..entity.enemys import Enemy
 from ..draw.basement import Basement
 from ..draw.crafting_table import CraftingTable
-from keyboard import is_pressed
-import sys
-from time import sleep
 
 
 pygame.init()
@@ -82,7 +79,7 @@ class Draw:
         elif index == [3, 2]:
             screen.blit(self.__bg9, (0, 0))
         elif index == [3, 3]:  # Окрестности дома
-            self.__enemys = Enemy(Enemy.enemy_dict[1][0],
-                                Enemy.enemy_dict[1][1], "watcher")
             screen.blit(self.__bg1, (0, 0))
+            Enemy(Enemy.enemy_dict['1'][0],
+                    Enemy.enemy_dict['1'][1], "watcher", screen)
         

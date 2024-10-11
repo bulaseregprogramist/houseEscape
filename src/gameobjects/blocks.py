@@ -3,6 +3,7 @@
 from .gameobjects import GameObjects
 from ..draw.draw import Draw
 from ..game.saving import Saving
+from ..entity.player import Player
 import pygame
 
 
@@ -14,7 +15,7 @@ class Block(GameObjects):
     save = Saving()
     screen: pygame.surface.Surface
     
-    def placing(self, he_map: list[int, int], player: object, n: int) -> None:
+    def placing(self, he_map: list[int, int], player: Player, n: int) -> None:
         """
         Размещение мебели
         
@@ -25,7 +26,8 @@ class Block(GameObjects):
         """
         self.__blocks = self.save.load_save(n)["blocks"]  # Позиции мебели и их текстуры
         for i in self.__blocks:
-            texture = pygame.transform.scale(eval(self.__blocks[i][4]), (50, 50))
+            texture = pygame.transform.scale(self._num_to_texture(self.__blocks[i][4]),
+                                            (50, 50))
             some_list = [self.__blocks[i][2], self.__blocks[i][3]]
             super().placing(int(self.__blocks[i][0]), int(self.__blocks[i][1]),
                             some_list, he_map, texture, player)

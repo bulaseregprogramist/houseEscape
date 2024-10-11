@@ -1,6 +1,7 @@
 """Методы и поля, использующиеся в других файлах"""
 
 import pygame
+from os import listdir
 
 
 pygame.init()
@@ -11,6 +12,10 @@ font = pygame.font.Font("textures/font.otf", 43)
 font2 = pygame.font.Font("textures/font.otf", 10)
 font3 = pygame.font.Font("textures/font.otf", 25)
 font4 = pygame.font.Font("textures/font.otf", 20)
+
+n = len(listdir("data/"))
+if n == 0:
+    n += 1
 some_dict = {
     "index": [3, 3], 
     "x": 385, 
@@ -29,6 +34,14 @@ some_dict = {
         2: [320, 320, 3, 3,
             "pygame.image.load(\"textures/stone.png\")"]
     },
+    "enemys": {
+        1: [550, 150, 3, 3, 'pygame.image.load(\"textures/watcher.png\")'],
+        2: [20, 320, 3, 2, 'pygame.image.load(\"textures/stalker.png\")'],
+        3: [20, 320, 2, 2, 'pygame.image.load(\"textures/blinder.png\")']
+        },
+    "MAX_CAPACITY": 8,
+    "SPEED": 1,
+    "FOV": 30,
     "items_id": []}
 
 traps_dict = {

@@ -67,10 +67,13 @@ class Game:
         logger.info("Начата инициализация перед работой в цикле")
         self.__draw_location = Draw(logger)
         logger.debug("Создание объекта класса Draw")
+        Saving.inventory = Inventory
+        logger.debug("Статичному полю Saving inventory присвоено значение")
         save = Saving()
         logger.debug("Создание объекта класса Saving")
         # Положение игрока на карте. 1 - по y, 2 - по x.
-        self.__index = save.load_save(self.__numb, logger)["index"]
+        self.__index: list[int, int] = save.load_save(
+            self.__numb, logger)["index"]
         logger.debug("Получен список index")
         Block.screen = self.__screen
         logger.debug("Переменной screen класса Block присвоено значение")
@@ -121,7 +124,7 @@ class Game:
             
             self.__player.in_game(self.__player,  # Движение игрока
                     self.__index, logger, rect, self.__numb)
-            self.__check(logger)
+            self.__check(logger)  # Проверка на выход за границу
             
             if result.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
                 self.__player.get_stats(logger)  # Информация об игроке
@@ -131,34 +134,34 @@ class Game:
             
     def __check(self, logger: HELogger) -> None:
         """
-        Проверка на выход за границу
+        Проверка на выход за границу карты дома.
         
         Args:
-            logger (HELogger): Переменная для логов
+            logger (HELogger): Переменная для логов.
         """
         if self.__player.x < 0:  # При выходе налево
-            if self.__lst[self.__index[0]][self.__index[1] - 1] != "0":  # Проверка на выход за границу дома
+            if self.__lst[self.__index[0]][self.__index[1] - 1] != "0":
                 logger.info("Игрок вышел налево")
                 self.__player.x = 385
                 self.__player.y = 385
                 logger.debug("Переменным x и y присвоены стандартные значения")
                 self.__index[1] -= 1
         elif self.__player.y < 0:  # При выходе вверх
-            if self.__lst[self.__index[0] - 1][self.__index[1]] != "0":  # Проверка на выход за границу дома
+            if self.__lst[self.__index[0] - 1][self.__index[1]] != "0":
                 logger.info("Игрок вышел вверх")
                 self.__player.x = 385
                 self.__player.y = 385
                 logger.debug("Переменным x и y присвоены стандартные значения")
                 self.__index[0] -= 1
         elif self.__player.x > 751:  # При выходе направо
-            if self.__lst[self.__index[0]][self.__index[1] + 1] != "0":  # Проверка на выход за границу дома
+            if self.__lst[self.__index[0]][self.__index[1] + 1] != "0":
                 logger.info("Игрок вышел направо")
                 self.__player.x = 385
                 self.__player.y = 385
                 logger.debug("Переменным x и y присвоены стандартные значения")
                 self.__index[1] += 1
         elif self.__player.y > 770:  # При выходе вниз
-            if self.__lst[self.__index[0] + 1][self.__index[1]] != "0":  # Проверка на выход за границу дома
+            if self.__lst[self.__index[0] + 1][self.__index[1]] != "0":
                 logger.info("Игрок вышел вниз")
                 self.__player.x = 385
                 self.__player.y = 385

@@ -7,6 +7,7 @@ pygame.init()
 
 
 class Basement:
+    """Подвал дома"""
     
     def __init__(self) -> None:
         self.__run()

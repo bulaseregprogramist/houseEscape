@@ -3,12 +3,11 @@
 from abc import ABC, abstractmethod
 from ..entity.inventory import Inventory
 from ..game.logging import HELogger
-from ..draw.draw import Draw
 from ..entity.player import Player
-from ..other.globals import font2
+from ..other.globals import font2, load, some_dict
 from time import sleep
 import pygame
-import pygame.gfxdraw
+import re
 
 
 pygame.init()
@@ -41,6 +40,21 @@ class GameObjects(ABC):
             stexture.set_alpha(64)  # Прозрачность
         else:  # Не прозрачность
             stexture.set_alpha(500)
+            
+    @staticmethod
+    def _num_to_texture(command: str) -> pygame.surface.Surface:
+        """
+        От команды к текстуре в игре
+        
+        Args:
+            command (str): Команда для загрузки изображения
+        Returns:
+            pygame.surface.Surface: Текстура игрового объекта.
+        """
+        pattern = r"pygame\.image\.load\(['\"](.*?)['\"]\)"
+
+        match = re.search(pattern, command)
+        return load(match.group(1), (60, 60), "convert_alpha")
             
     def __show_menu(self, go_type: str) -> None:
         """

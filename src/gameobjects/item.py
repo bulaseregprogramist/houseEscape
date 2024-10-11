@@ -29,7 +29,8 @@ class Item(GameObjects):
             self.__items: dict = self.save.load_save(n)["items"]
         delete = 0
         for i in self.__items:
-            texture = pygame.transform.scale(eval(self.__items[i][4]), (50, 50))
+            texture = pygame.transform.scale(self._num_to_texture(self.__items[i][4]),
+                                            (50, 50))
             super().placing(self.__items[i][0], self.__items[i][1],
                             [self.__items[i][2], self.__items[i][3]],
                             he_map,
