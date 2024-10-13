@@ -15,6 +15,7 @@ class Traps:
         self.__screen = screen
         self.__poison_trap = load("textures/pt.png", (60, 60), "convert_alpha")
         self.__trap = load("textures/trap.png", (60, 60), "convert_alpha")
+        self.__ice = load("textures/ice.png", (60, 60), "convert_alpha")
         
     def draw_trap(self, x: int, y: int, trap_type: str) -> pygame.rect.Rect:
         """
@@ -33,6 +34,9 @@ class Traps:
         elif trap_type == "trap":
             self.__screen.blit(self.__trap, (x, y))
             rect = self.__trap.get_rect(topleft=(x, y))
+        elif trap_type == "ice":
+            self.__screen.blit(self.__ice, (x, y))
+            rect = self.__ice.get_rect(topleft=(x, y))
         return rect
             
     def after(self, rect: pygame.rect.Rect, trap_type: str,
@@ -47,4 +51,6 @@ class Traps:
         """
         if rect.colliderect(player_rect):
             if trap_type == "poison" or trap_type == "trap":
+                Player.die(self.__screen)
+            elif trap_type == "ice":
                 Player.die(self.__screen)

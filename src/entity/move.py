@@ -67,6 +67,7 @@ class Move:
         elif index == [1, 1]:
             return True
         elif index == [0, 2]:
-            return True
+            if y > 120:
+                return True
         return False
     

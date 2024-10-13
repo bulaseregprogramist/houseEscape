@@ -90,14 +90,16 @@ class Inventory:
             inv_list2.append(load(match.group(1), (60, 60), "convert_alpha"))
         cls.inventory_list2 = inv_list2
             
-    def open(self, index: list[int, int], player: Self, n: int) -> None:
+    def open(self, index: list[int, int], player: Self, n: int,
+            logger: HELogger) -> None:
         """
         Открытие инвентаря
         
         Args:
             index (list[int, int]): Позиция игрока на карте дома,
             player (Player): Переменная игрока,
-            n (int): Номер выбранного сохранения.
+            n (int): Номер выбранного сохранения,
+            logger (HELogger): Переменная для логов.
         """
         inv_cycle = 1
         save = Saving()
@@ -116,6 +118,7 @@ class Inventory:
                 if event.type == pygame.QUIT:
                     save = Saving()
                     save.saving(index, player.x, player.y, n, True)
+                    logger.info("Выход из игры...")
                     sys.exit()
                 elif (event.type == pygame.KEYDOWN
                         and event.key == pygame.K_RETURN):

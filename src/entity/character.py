@@ -37,7 +37,7 @@ class Character(ABC):
         
         Args:
             screen (pygame.surface.Surface): Переменная экрана,
-            ch (list[int, int]): Координаты игрока,
+            ch (list[int, int]): Координаты персонажа,
             logger (HELogger): Переменная для логов.
             *args (Any): Статичные поля класса.
         """
@@ -75,7 +75,8 @@ class Character(ABC):
             dict: Отфильтрованные поля класса.
         """
         class_attributes = {key: value for key, value in dct.__dict__.items() 
-                    if not callable(value) and not key.startswith('__') and not isinstance(value, classmethod)
+                    if not callable(value) and not key.startswith('__') and not isinstance(
+                        value, classmethod)
                     and not key.startswith('_') or key.isupper()}
         # Возвращение атрибутов класса
         return class_attributes

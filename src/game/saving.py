@@ -60,7 +60,7 @@ class Saving:
             dict: Словарь с данными игры.
         """
         with open(f"data/data{numb}.json") as file:
-            result: dict = json.load(file)
+            result: dict[str: list | int | dict] = json.load(file)
         if logger is not None:
             logger.debug("Текстуры получены!")
         return result
@@ -77,7 +77,8 @@ class Saving:
             n (int): Выбранное игроком сохранение,
             in_inventory (bool): По умолчанию, в инвентаре ли игрок.
         """
-        result: dict = self.load_save(n)  # Получение словаря из data.json
+        # Получение словаря из data.json
+        result: dict[str: list | int | dict] = self.load_save(n)
         result["index"] = index  # Позиция игрока на карте.
         result["x"] = x
         result["y"] = y

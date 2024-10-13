@@ -24,13 +24,15 @@ class Block(GameObjects):
             player (Player): Игрок,
             n (int): Номер выбранного сохранения.
         """
-        self.__blocks = self.save.load_save(n)["blocks"]  # Позиции мебели и их текстуры
+        # Позиции мебели и их текстуры
+        self.__blocks = self.save.load_save(n)["blocks"]
         for i in self.__blocks:
-            texture = pygame.transform.scale(self._num_to_texture(self.__blocks[i][4]),
-                                            (50, 50))
-            some_list = [self.__blocks[i][2], self.__blocks[i][3]]
-            super().placing(int(self.__blocks[i][0]), int(self.__blocks[i][1]),
-                            some_list, he_map, texture, player)
+            texture = pygame.transform.scale(
+                self._num_to_texture(self.__blocks[i][4]), (50, 50))
+            some_list: list[int, int] = [self.__blocks[i][2],
+                                        self.__blocks[i][3]]
+            super().placing(int(self.__blocks[i][0]),
+                int(self.__blocks[i][1]), some_list, he_map, texture, player)
             self.functional(self.__blocks[i][0], self.__blocks[i][1], texture,
                             he_map, some_list, i, n)
     

@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from ..entity.inventory import Inventory
 from ..game.logging import HELogger
 from ..entity.player import Player
-from ..other.globals import font2, load, some_dict
+from ..other.globals import font2, load
 from time import sleep
 import pygame
 import re
@@ -30,7 +30,7 @@ class GameObjects(ABC):
             y (int): Позиция объекта по y,
             index (list[int, int]): Позиция игрока,
             he_map (list[int, int]): Карта дома,
-            texture (pygame.surface.Surface): Текстура объекта,
+            stexture (pygame.surface.Surface): Текстура объекта,
             player (Player): Объект игрока.
         """
         if index == he_map:  # Если игрок находится в одной комнате с объектом

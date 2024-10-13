@@ -3,6 +3,7 @@
 import pygame
 import sys
 from keyboard import is_pressed
+from typing import Self
 from src.entity.move import Move
 from ..game.logging import HELogger
 from ..game.saving import Saving
@@ -24,8 +25,9 @@ class Player(Character):
                 screen: pygame.surface.Surface, n: int) -> None:
         logger.info("Начата работа конструктора Player")
         self.__save = Saving()
-        self.x = self.__save.load_save(n)["x"]  # Изначальное положение игрока по x
-        self.y = self.__save.load_save(n)["y"]  # Изначальное положение игрока по y
+        # Изначальное положение игрока по x и y
+        self.x = self.__save.load_save(n)["x"]
+        self.y = self.__save.load_save(n)["y"]
         self.player = load("textures/player.png", (60, 60), "convert_alpha")
         self.__inventory = load("textures/backpack.png", 
                                 (90, 90), "convert_alpha")
@@ -35,7 +37,7 @@ class Player(Character):
         logger.info("Завершена работа конструктора Player")
         
     def to_inventory(self, logger: HELogger, 
-                    index: list[int, int], player: object, n: int) -> None:
+                    index: list[int, int], player: Self, n: int) -> None:
         """
         Инвентарь игрока (открывается на E)
         
@@ -50,11 +52,11 @@ class Player(Character):
         sound.set_volume(0.4)
         sound.play()
         inventory = Inventory(self.__inventory, self.__screen)
-        inventory.open(index, player, n)
+        inventory.open(index, player, n, logger)
         logger.info("Закрытие инвентаря")
         
     def player_interfaces(self, screen: pygame.surface.Surface,
-                        player: object) -> pygame.surface.Surface:
+                        player: Self) -> pygame.surface.Surface:
         """
         Интерфейсы игрока (инвентарь)
         
@@ -130,7 +132,7 @@ class Player(Character):
         logger.debug("Поля класса изменены!")
         
     def open_inventory(self, logger: HELogger, index: list[int, int],
-                    player: object, rect: pygame.rect.Rect, n: int) -> None:
+                    player: Self, rect: pygame.rect.Rect, n: int) -> None:
         """
         Открытие инвентаря
         
@@ -145,7 +147,7 @@ class Player(Character):
         if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
             self.to_inventory(logger, index, player, n)
         
-    def in_game(self, player: object, index: list[int, int], logger: HELogger,
+    def in_game(self, player: Self, index: list[int, int], logger: HELogger,
                 rect: pygame.surface.Surface, n: int) -> None:
         """
         Поведение игрока в игре
@@ -162,15 +164,19 @@ class Player(Character):
                 logger.info("Закрытие программы")
                 self.__save.saving(index, player.x, player.y, n, True)
                 sys.exit()
-            elif event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:  # Открытие инвентаря
                 Move.press_keydown(logger, event, self, index, player, n)
-        if is_pressed("w") and Move.move_in_location(player.x, player.y, index) and self.y < 753:
+        if (is_pressed("w") and Move.move_in_location(player.x, 
+                player.y, index) and self.y < 753):
             self.y -= 3 * self.speed
-        elif is_pressed("a") and Move.move_in_location(player.x, player.y, index) and self.x > -23:
+        elif (is_pressed("a") and Move.move_in_location(player.x,
+                player.y, index) and self.x > -23):
             self.x -= 3 * self.speed
-        elif is_pressed("s") and Move.move_in_location(player.x, player.y, index) and self.y > -23:
+        elif (is_pressed("s") and Move.move_in_location(player.x,
+                player.y, index) and self.y > -23):
             self.y += 3 * self.speed
-        elif is_pressed("d") and Move.move_in_location(player.x, player.y, index) and self.x < 753:
+        elif (is_pressed("d") and Move.move_in_location(player.x, 
+                player.y, index) and self.x < 753):
             self.x += 3  * self.speed
         self.open_inventory(logger, index, player, rect, n)
         

@@ -32,7 +32,9 @@ some_dict = {
         1: [150, 150, 3, 3,
             "pygame.image.load(\"textures/stick.png\")"],
         2: [320, 320, 3, 3,
-            "pygame.image.load(\"textures/stone.png\")"]
+            "pygame.image.load(\"textures/stone.png\")"],
+        3: [220, 220, 3, 1,
+            "pygame.image.load(\"textures/poroh.png\")"]
     },
     "enemys": {
         1: [550, 150, 3, 3, 'pygame.image.load(\"textures/watcher.png\")'],
@@ -41,14 +43,17 @@ some_dict = {
         },
     "MAX_CAPACITY": 8,
     "SPEED": 1,
-    "FOV": 30,
+    "FOV": 32,
     "items_id": []}
 
 traps_dict = {
-    1: [100, 100, 3, 3, "poison"]
+    1: [100, 100, 3, 3, "poison"],
+    2: [190, 190, 0, 2, "trap"],
+    3: [110, 110, 2, 1, "ice"]
 }
 
-def load(path: str, size: tuple[int, int], convert_type: str) -> pygame.surface.Surface:
+def load(path: str, size: tuple[int, int],
+        convert_type: str) -> pygame.surface.Surface:
     """
     Загрузка текстур
     

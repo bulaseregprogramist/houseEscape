@@ -24,8 +24,8 @@ pygame.init()
 
 class Game:
     """Основной игровой класс"""
-    
-    __lst = ["00100",  # Карта дома (1 - комнаты, 0 - комнаты, в которые нельзя попасть)
+    # Карта дома (1 - комнаты, 0 - комнаты, в которые нельзя попасть)
+    __lst = ["00100",
              "01110",
              "01110",
              "01110",
@@ -79,7 +79,7 @@ class Game:
         logger.debug("Переменной screen класса Block присвоено значение")
         self.__blocks = Block()  # Это не блоки, а мебель
         logger.debug("Создание объекта класса Block")
-        self.__items = Item()  # Предметы игры (их можно подбирать и использовать)
+        self.__items = Item()  # Предметы (их можно подбирать и использовать)
         logger.debug("Создание объекта класса Item")
         GameObjects.screen = self.__screen
         logger.debug("Статичному полю GameObjects screen присвоено значение")
@@ -106,7 +106,9 @@ class Game:
         while cycle:  # Основной игровой цикл
             self.__clock.tick(60)  # Вертикальная синхронизация
             self.__screen.fill((0, 0, 0))
-            self.__draw_location.render_location(self.__index, self.__screen)
+            mp: tuple[int, int] = pygame.mouse.get_pos()
+            self.__draw_location.render_location(self.__index, mp,
+                                    self.__screen, self.__player)
             result: pygame.surface.Surface = self.__player.blit()
             rect, rect2 = self.__player.player_interfaces(
                 self.__screen, self.__player)
@@ -120,7 +122,6 @@ class Game:
                                     traps_dict[j][1], traps_dict[j][4])
                     self.__traps.after(trap_rect, traps_dict[j][4], rect2)
             pygame.display.flip()
-            mp: tuple[int, int] = pygame.mouse.get_pos()
             
             self.__player.in_game(self.__player,  # Движение игрока
                     self.__index, logger, rect, self.__numb)
@@ -128,7 +129,8 @@ class Game:
             
             if result.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
                 self.__player.get_stats(logger)  # Информация об игроке
-            if is_pressed("esc"):  # При нажатии на ESCAPE игра поставится на паузу
+            if is_pressed("esc"):
+                # При нажатии на ESCAPE игра поставится на паузу
                 Pause(self.__screen, logger, self.__index, self.__player,
                     self.__numb)
             

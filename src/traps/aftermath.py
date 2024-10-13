@@ -11,3 +11,7 @@ class AfterMath:
     def common_aftermath(self) -> None:
         """Последствия обычной ловушки."""
         pass
+    
+    def ice_aftermath(self) -> None:
+        """Последствия ледяной ловушки"""
+        pass

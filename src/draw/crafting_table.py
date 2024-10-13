@@ -30,6 +30,8 @@ class CraftingTable:
             pass
         elif "2" in self.__keys:
             pass
+        elif "3" in self.__keys:
+            pass
         
     def __run(self) -> None:
         """Основной метод класса."""

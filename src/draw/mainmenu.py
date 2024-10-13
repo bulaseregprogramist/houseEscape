@@ -46,14 +46,16 @@ class MainMenu:
         Returns:
             pygame.surface.Surface: Загруженные текстуры
         """
-        logger.debug("Начало инициализации текстур для статического метода render")
+        logger.debug(
+            "Начало инициализации текстур для статического метода render")
         bg = load("textures/bg.png", (770, 770), "convert")
         play = load("textures/play.png", (130, 130), "convert_alpha")
         boosty = load("textures/boosty.png", (80, 80), "convert")
         da = load("textures/da.jpg", (80, 80), "convert")
         logo = load("textures/logo.png", (210, 210), "convert")
         notepad = load("textures/notepad.png", (105, 105), "convert_alpha")
-        logger.debug("Завершена инициализация текстур для статического метода render")
+        logger.debug(
+            "Завершена инициализация текстур для статического метода render")
         return bg, play, boosty, da, logo, notepad
     
     @staticmethod

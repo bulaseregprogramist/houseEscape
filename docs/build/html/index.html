@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="ru" data-content_root="./">
 <head>
@@ -6,19 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to HouseEscape’s documentation! &mdash; документация HouseEscape 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=e35015f7"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/translations.js?v=29b1f277"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e35015f7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=5b699b7f"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
@@ -53,6 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
 <li class="toctree-l1"><a class="reference internal" href="character.html">Персонажи и всё, что с ними связано</a></li>
 <li class="toctree-l1"><a class="reference internal" href="traps.html">Ловушки в игре</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trade.html">Торговля</a></li>
 </ul>
 
         </div>
@@ -80,7 +79,7 @@
            <div itemprop="articleBody">
              
   <section id="welcome-to-houseescape-s-documentation">
-<h1>Welcome to HouseEscape’s documentation!<a class="headerlink" href="#welcome-to-houseescape-s-documentation" title="Link to this heading"></a></h1>
+<h1>Welcome to HouseEscape’s documentation!<a class="headerlink" href="#welcome-to-houseescape-s-documentation" title="Ссылка на этот заголовок"></a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
 <ul>
@@ -97,6 +96,8 @@
 <li class="toctree-l2"><a class="reference internal" href="game.html#module-src.game.logging">Логи игры</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="game.html#src.game.logging.HELogger"><code class="docutils literal notranslate"><span class="pre">HELogger</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="game.html#src.game.logging.HELogger.better_info"><code class="docutils literal notranslate"><span class="pre">HELogger.better_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="game.html#src.game.logging.HELogger.change_name"><code class="docutils literal notranslate"><span class="pre">HELogger.change_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="game.html#src.game.logging.HELogger.set_level"><code class="docutils literal notranslate"><span class="pre">HELogger.set_level()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -113,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="game.html#id5">Меню сохранений</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="game.html#src.game.savemenu.SaveMenu"><code class="docutils literal notranslate"><span class="pre">SaveMenu</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="game.html#src.game.savemenu.SaveMenu.create_save"><code class="docutils literal notranslate"><span class="pre">SaveMenu.create_save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="game.html#src.game.savemenu.SaveMenu.draw"><code class="docutils literal notranslate"><span class="pre">SaveMenu.draw()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -133,6 +135,7 @@
 <li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.mainmenu.MainMenu.__init_textures"><code class="docutils literal notranslate"><span class="pre">MainMenu.__init_textures()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.mainmenu.MainMenu.open"><code class="docutils literal notranslate"><span class="pre">MainMenu.open()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.mainmenu.MainMenu.render"><code class="docutils literal notranslate"><span class="pre">MainMenu.render()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.mainmenu.MainMenu.to_menu"><code class="docutils literal notranslate"><span class="pre">MainMenu.to_menu()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -141,6 +144,30 @@
 <li class="toctree-l3"><a class="reference internal" href="draw.html#src.draw.pause.Pause"><code class="docutils literal notranslate"><span class="pre">Pause</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.pause.Pause.__functional"><code class="docutils literal notranslate"><span class="pre">Pause.__functional()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.pause.Pause.__run"><code class="docutils literal notranslate"><span class="pre">Pause.__run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="draw.html#id5">Отрисовка подвала</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="draw.html#src.draw.basement.Basement"><code class="docutils literal notranslate"><span class="pre">Basement</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.basement.Basement.__run"><code class="docutils literal notranslate"><span class="pre">Basement.__run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="draw.html#id6">Отрисовка и функционал верстака</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="draw.html#src.draw.crafting_table.CraftingTable"><code class="docutils literal notranslate"><span class="pre">CraftingTable</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.crafting_table.CraftingTable.__recipes"><code class="docutils literal notranslate"><span class="pre">CraftingTable.__recipes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.crafting_table.CraftingTable.__run"><code class="docutils literal notranslate"><span class="pre">CraftingTable.__run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="draw.html#id7">Функционал остальной мебели и техники</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="draw.html#src.draw.other_functional.OtherFunctional"><code class="docutils literal notranslate"><span class="pre">OtherFunctional</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.other_functional.OtherFunctional.bed"><code class="docutils literal notranslate"><span class="pre">OtherFunctional.bed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.other_functional.OtherFunctional.identity"><code class="docutils literal notranslate"><span class="pre">OtherFunctional.identity()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="draw.html#src.draw.other_functional.OtherFunctional.lamp"><code class="docutils literal notranslate"><span class="pre">OtherFunctional.lamp()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -172,6 +199,14 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="gameobjects.html#module-src.gameobjects.vehicles">Транспорт</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gameobjects.html#src.gameobjects.vehicles.Vehicles"><code class="docutils literal notranslate"><span class="pre">Vehicles</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gameobjects.html#src.gameobjects.vehicles.Vehicles.functional"><code class="docutils literal notranslate"><span class="pre">Vehicles.functional()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gameobjects.html#src.gameobjects.vehicles.Vehicles.placing"><code class="docutils literal notranslate"><span class="pre">Vehicles.placing()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a><ul>
@@ -186,48 +221,62 @@
 <li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
 <li class="toctree-l1"><a class="reference internal" href="character.html">Персонажи и всё, что с ними связано</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="character.html#id2">Персонаж</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="character.html#src.player.character.Character"><code class="docutils literal notranslate"><span class="pre">Character</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.character.Character.change_fields"><code class="docutils literal notranslate"><span class="pre">Character.change_fields()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.character.Character.die"><code class="docutils literal notranslate"><span class="pre">Character.die()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.character.Character.filter_data"><code class="docutils literal notranslate"><span class="pre">Character.filter_data()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.character.Character.get_stats"><code class="docutils literal notranslate"><span class="pre">Character.get_stats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="character.html#src.entity.character.Character"><code class="docutils literal notranslate"><span class="pre">Character</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.character.Character.change_fields"><code class="docutils literal notranslate"><span class="pre">Character.change_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.character.Character.die"><code class="docutils literal notranslate"><span class="pre">Character.die()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.character.Character.filter_data"><code class="docutils literal notranslate"><span class="pre">Character.filter_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.character.Character.get_stats"><code class="docutils literal notranslate"><span class="pre">Character.get_stats()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="character.html#module-src.player.move">Движение</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="character.html#src.player.move.Move"><code class="docutils literal notranslate"><span class="pre">Move</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.move.Move.move_in_location"><code class="docutils literal notranslate"><span class="pre">Move.move_in_location()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="character.html#module-src.entity.move">Движение</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="character.html#src.entity.move.Move"><code class="docutils literal notranslate"><span class="pre">Move</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.move.Move.move_in_location"><code class="docutils literal notranslate"><span class="pre">Move.move_in_location()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.move.Move.press_keydown"><code class="docutils literal notranslate"><span class="pre">Move.press_keydown()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="character.html#module-src.player.player">Игрок</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="character.html#src.player.player.Player"><code class="docutils literal notranslate"><span class="pre">Player</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.player.Player.blit"><code class="docutils literal notranslate"><span class="pre">Player.blit()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.player.Player.change_fields"><code class="docutils literal notranslate"><span class="pre">Player.change_fields()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.player.Player.die"><code class="docutils literal notranslate"><span class="pre">Player.die()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.player.Player.get_stats"><code class="docutils literal notranslate"><span class="pre">Player.get_stats()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.player.Player.in_game"><code class="docutils literal notranslate"><span class="pre">Player.in_game()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.player.Player.open_inventory"><code class="docutils literal notranslate"><span class="pre">Player.open_inventory()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.player.Player.player_interfaces"><code class="docutils literal notranslate"><span class="pre">Player.player_interfaces()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="character.html#id4">Движение монстра</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="character.html#src.entity.monster_move.MonsterMove"><code class="docutils literal notranslate"><span class="pre">MonsterMove</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.monster_move.MonsterMove.move1"><code class="docutils literal notranslate"><span class="pre">MonsterMove.move1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.monster_move.MonsterMove.move2"><code class="docutils literal notranslate"><span class="pre">MonsterMove.move2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.monster_move.MonsterMove.move3"><code class="docutils literal notranslate"><span class="pre">MonsterMove.move3()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="character.html#id7">Враги</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="character.html#src.player.enemys.Enemy"><code class="docutils literal notranslate"><span class="pre">Enemy</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.enemys.Enemy.change_fields"><code class="docutils literal notranslate"><span class="pre">Enemy.change_fields()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.enemys.Enemy.die"><code class="docutils literal notranslate"><span class="pre">Enemy.die()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.enemys.Enemy.enemy_move"><code class="docutils literal notranslate"><span class="pre">Enemy.enemy_move()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.enemys.Enemy.get_stats"><code class="docutils literal notranslate"><span class="pre">Enemy.get_stats()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="character.html#module-src.entity.player">Игрок</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="character.html#src.entity.player.Player"><code class="docutils literal notranslate"><span class="pre">Player</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.player.Player.blit"><code class="docutils literal notranslate"><span class="pre">Player.blit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.player.Player.change_fields"><code class="docutils literal notranslate"><span class="pre">Player.change_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.player.Player.die"><code class="docutils literal notranslate"><span class="pre">Player.die()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.player.Player.get_stats"><code class="docutils literal notranslate"><span class="pre">Player.get_stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.player.Player.in_game"><code class="docutils literal notranslate"><span class="pre">Player.in_game()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.player.Player.open_inventory"><code class="docutils literal notranslate"><span class="pre">Player.open_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.player.Player.player_interfaces"><code class="docutils literal notranslate"><span class="pre">Player.player_interfaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.player.Player.to_inventory"><code class="docutils literal notranslate"><span class="pre">Player.to_inventory()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="character.html#id8">Концовки</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="character.html#src.player.endings.Endings"><code class="docutils literal notranslate"><span class="pre">Endings</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="character.html#src.player.endings.Endings.identify_ending"><code class="docutils literal notranslate"><span class="pre">Endings.identify_ending()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="character.html#id6">Враги</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="character.html#src.entity.enemys.Enemy"><code class="docutils literal notranslate"><span class="pre">Enemy</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.enemys.Enemy.change_fields"><code class="docutils literal notranslate"><span class="pre">Enemy.change_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.enemys.Enemy.check_collision"><code class="docutils literal notranslate"><span class="pre">Enemy.check_collision()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.enemys.Enemy.die"><code class="docutils literal notranslate"><span class="pre">Enemy.die()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.enemys.Enemy.draw_fov"><code class="docutils literal notranslate"><span class="pre">Enemy.draw_fov()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.enemys.Enemy.enemy_draw_and_move"><code class="docutils literal notranslate"><span class="pre">Enemy.enemy_draw_and_move()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.enemys.Enemy.get_stats"><code class="docutils literal notranslate"><span class="pre">Enemy.get_stats()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="character.html#id7">Концовки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="character.html#src.entity.endings.Endings"><code class="docutils literal notranslate"><span class="pre">Endings</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.endings.Endings.draw_ending"><code class="docutils literal notranslate"><span class="pre">Endings.draw_ending()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="character.html#src.entity.endings.Endings.identify_ending"><code class="docutils literal notranslate"><span class="pre">Endings.identify_ending()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -235,9 +284,39 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="traps.html">Ловушки в игре</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="traps.html#src.traps.traps.Traps"><code class="docutils literal notranslate"><span class="pre">Traps</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="traps.html#src.traps.traps.Traps.after"><code class="docutils literal notranslate"><span class="pre">Traps.after()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="traps.html#src.traps.traps.Traps.draw_trap"><code class="docutils literal notranslate"><span class="pre">Traps.draw_trap()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="traps.html#id2">Ловушки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="traps.html#src.traps.traps.Traps"><code class="docutils literal notranslate"><span class="pre">Traps</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="traps.html#src.traps.traps.Traps.after"><code class="docutils literal notranslate"><span class="pre">Traps.after()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="traps.html#src.traps.traps.Traps.draw_trap"><code class="docutils literal notranslate"><span class="pre">Traps.draw_trap()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="traps.html#id3">Последствия ловушек</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="traps.html#src.traps.aftermath.AfterMath"><code class="docutils literal notranslate"><span class="pre">AfterMath</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="traps.html#src.traps.aftermath.AfterMath.common_aftermath"><code class="docutils literal notranslate"><span class="pre">AfterMath.common_aftermath()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="traps.html#src.traps.aftermath.AfterMath.ice_aftermath"><code class="docutils literal notranslate"><span class="pre">AfterMath.ice_aftermath()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="traps.html#src.traps.aftermath.AfterMath.poison_aftermath"><code class="docutils literal notranslate"><span class="pre">AfterMath.poison_aftermath()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trade.html">Торговля</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trade.html#id2">Торговая система</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trade.html#src.trade.trade_system.TradeSystem"><code class="docutils literal notranslate"><span class="pre">TradeSystem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trade.html#src.trade.trade_system.TradeSystem.buy_items"><code class="docutils literal notranslate"><span class="pre">TradeSystem.buy_items()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trade.html#src.trade.trade_system.TradeSystem.draw_items"><code class="docutils literal notranslate"><span class="pre">TradeSystem.draw_items()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trade.html#id3">Денежная система</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trade.html#src.trade.money_system.MoneySystem"><code class="docutils literal notranslate"><span class="pre">MoneySystem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trade.html#src.trade.money_system.MoneySystem.change_money"><code class="docutils literal notranslate"><span class="pre">MoneySystem.change_money()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -246,7 +325,7 @@
 </div>
 </section>
 <section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Ссылка на этот заголовок"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Алфавитный указатель</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Состав модуля</span></a></p></li>

@@ -17,6 +17,7 @@ Welcome to HouseEscape's documentation!
    pause
    character
    traps
+   trade
 
 
 Indices and tables

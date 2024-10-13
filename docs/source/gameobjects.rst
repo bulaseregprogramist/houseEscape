@@ -12,4 +12,8 @@
 ------------------------------------------------
 .. automodule:: src.gameobjects.blocks
     :members:
+Транспорт
+------------------------------------------------
+.. automodule:: src.gameobjects.vehicles
+    :members:
     

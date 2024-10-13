@@ -2,7 +2,6 @@
 
 from src.gameobjects.gameobjects import GameObjects
 import pygame
-from ..game.logging import HELogger
 from ..entity.player import Player
 from ..game.saving import Saving
 import json
@@ -26,17 +25,18 @@ class Item(GameObjects):
             n (int): Номер выбранного сохранения.
         """
         if self.some_num:  # Позиции предметов и их текстуры
-            self.__items: dict = self.save.load_save(n)["items"]
+            self.__items: dict[int: list,
+                            ...] = self.save.load_save(n)["items"]
         delete = 0
         for i in self.__items:
-            texture = pygame.transform.scale(self._num_to_texture(self.__items[i][4]),
-                                            (50, 50))
+            texture = pygame.transform.scale(self._num_to_texture(
+                self.__items[i][4]), (50, 50))
             super().placing(self.__items[i][0], self.__items[i][1],
                             [self.__items[i][2], self.__items[i][3]],
                             he_map,
                             texture, player)
-            delete, key = self.functional(self.__items[i][0], self.__items[i][1],
-                            texture, i, he_map,
+            delete, key = self.functional(self.__items[i][0],
+                            self.__items[i][1], texture, i, he_map,
                             [self.__items[i][2], self.__items[i][3]])
         if delete == 1:  # Помещение предмета в инвентарь
             self.__items.pop(key)
