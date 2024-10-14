@@ -5,6 +5,7 @@ from ..game.saving import Saving
 from ..entity.inventory import Inventory
 from time import sleep
 from ..game.logging import HELogger
+from ..entity.player import Player
 from copy import copy
 import sys
 
@@ -16,12 +17,16 @@ class CraftingTable:
     save = Saving()
     logger: HELogger
     
-    def __init__(self, screen, text, n: int) -> None:
+    def __init__(self, screen, text, n: int, index: list[int, int],
+                player: Player) -> None:
+        self.__index: list[int, int] = index
+        self.__player = player
         self.__screen = screen
         self.__text = text
         self.__keys: list[str, ...] = self.save.load_save(n)["items_id"]
         self.__some_list = copy(Inventory.inventory_list)
         self.__some_list.extend(Inventory.inventory_list2)
+        self.__n = n
         self.__run()
         
     def __recipes(self) -> None:
@@ -58,6 +63,8 @@ class CraftingTable:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.logger.info("Выход из игры...")
+                    self.save.saving(self.__index, self.__player.x,
+                                    self.__player.y, self.__n)
                     sys.exit()
                 elif (event.type == pygame.KEYDOWN
                         and event.key == pygame.K_ESCAPE):

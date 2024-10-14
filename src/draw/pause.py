@@ -50,7 +50,7 @@ class Pause:
         while pause_cycle:
             self.__screen.blit(self.__pause_menu, (240, 0))
             self.__screen.blit(self.__text1, (315, 45))
-            self.__screen.blit(self.__mm, (320, 540))
+            self.__screen.blit(self.__mm, (340, 440))
             
             pause_cycle: int = self.__functional()
             pygame.display.flip()

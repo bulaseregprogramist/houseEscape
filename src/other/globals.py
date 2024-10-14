@@ -36,6 +36,9 @@ some_dict = {
         3: [220, 220, 3, 1,
             "pygame.image.load(\"textures/poroh.png\")"]
     },
+    "pictures": {
+        1: [250, 200, 3, 2]
+    },
     "enemys": {
         1: [550, 150, 3, 3, 'pygame.image.load(\"textures/watcher.png\")'],
         2: [20, 320, 3, 2, 'pygame.image.load(\"textures/stalker.png\")'],
@@ -44,7 +47,12 @@ some_dict = {
     "MAX_CAPACITY": 8,
     "SPEED": 1,
     "FOV": 32,
-    "items_id": []}
+    "items_id": [],
+    "npc_products": {
+        1: [150, "textures/poroh.png"],
+        2: [350, "textures/stick.png"]
+    }
+    }
 
 traps_dict = {
     1: [100, 100, 3, 3, "poison"],

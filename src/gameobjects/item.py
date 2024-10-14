@@ -20,7 +20,7 @@ class Item(GameObjects):
         Размещение предмета
         
         Args:
-            he_map (list[int, int]): Карта дома,
+            he_map (list[int, int]): Позиция игрока,
             player (Player): Игрок,
             n (int): Номер выбранного сохранения.
         """
@@ -38,7 +38,9 @@ class Item(GameObjects):
             delete, key = self.functional(self.__items[i][0],
                             self.__items[i][1], texture, i, he_map,
                             [self.__items[i][2], self.__items[i][3]])
-        if delete == 1:  # Помещение предмета в инвентарь
+            if delete:  # Чтобы не было бага
+                break
+        if delete:  # Помещение предмета в инвентарь
             self.__items.pop(key)
             self.__save_item(n)
             self.some_num = 0  # Для предотвращения повторного срабатывания УО

@@ -10,6 +10,7 @@ from src.draw.crafting_table import CraftingTable
 from src.gameobjects.blocks import Block
 from src.gameobjects.item import Item
 from src.gameobjects.gameobjects import GameObjects
+from src.gameobjects.pictures import Pictures
 from src.other.globals import traps_dict
 from src.game.saving import Saving
 from src.traps.traps import Traps
@@ -89,6 +90,8 @@ class Game:
         logger.debug("Статичному полю CraftingTable logger присвоено значение")
         self.__traps = Traps(self.__screen)
         logger.debug("Создание объекта класса Traps")
+        self.__pictures = Pictures()
+        logger.debug("Создание объекта класса Pictures")
         Inventory.logger = logger
         logger.info("Закончена инициализация перед работой в цикле")
         
@@ -114,6 +117,8 @@ class Game:
                 self.__screen, self.__player)
             self.__blocks.placing(self.__index, self.__player, self.__numb)
             self.__items.placing(self.__index, self.__player, self.__numb)
+            self.__pictures.placing(self.__index, self.__player, self.__numb,
+                                    self.__screen)
             
             for j in traps_dict:  # Отрисовка ловушек
                 if (traps_dict[j][2] == self.__index[0]

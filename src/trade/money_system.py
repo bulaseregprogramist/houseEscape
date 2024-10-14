@@ -12,4 +12,5 @@ class MoneySystem:
         Args:
             money (int): Потраченные деньги
         """
-        cls.MONEY -= money
+        if cls.MONEY - money > 0:
+            cls.MONEY -= money

@@ -21,8 +21,8 @@ class Enemy(Character):
     
     def __init__(self, x: int, y: int, enemy_type: str, screen) -> None:
         self.__screen = screen
-        self.__x = x
-        self.__y = y
+        self.x = x
+        self.y = y
         # В enemy_type может быть watcher, blinder, stalker
         self.__enemy_type: str = enemy_type
         self.__mm = MonsterMove()
@@ -79,17 +79,18 @@ class Enemy(Character):
         super().die()
         logger.info("Враг побеждён!")
         
-    def draw_fov(self, player: Player) -> None:
+    def draw_fov(self, player: Player, mp: tuple[int, int]) -> None:
         """
         Отрисовка поля зрения врага и вычисление
         соприкосновения с игроком
         
         Args:
-            player (Player): Объект игрока.
+            player (Player): Объект игрока,
+            mp (tuple[int, int]): Позиция курсора мыши
         """
         pygame.draw.circle(self.__screen, (255, 0, 0),
-                        (self.__x + 25, self.__y + 35), self.field_of_view, 4)
-        if self.check_collision(player):
+                        (self.x + 25, self.y + 35), self.field_of_view, 4)
+        if self.check_collision(player) or self.check_collision2(mp):
             Player.die(self.__screen)
         
     def check_collision(self, player: Player) -> bool:
@@ -97,36 +98,52 @@ class Enemy(Character):
         Проверка на столкновение с игроком
         
         Args:
-            player (Player): Объект игрока
+            player (Player | tuple[int, int]): Объект игрока.
         Returns:
             bool: Проверка на соприкосновение
         """
         distance_squared = (
-            player.x - (self.__x + 25)) ** 2 + (
-                player.y - (self.__y + 35)) ** 2
+            player.x - (self.x + 25)) ** 2 + (
+                player.y - (self.y + 35)) ** 2
         return distance_squared <= (self.field_of_view + 30) ** 2
+                
+    def check_collision2(self, mp: tuple[int, int]) -> bool:
+        """
+        Проверка на столкновение с нажатым курсором мыши игрока.
+        
+        Args:
+            mp (tuple[int, int]): Позиция мыши
+        Returns:
+            bool: Проверка на соприкосновение
+        """
+        distance_squared = (
+            mp[0] - (self.x + 25)) ** 2 + (
+                mp[1] - (self.y + 35)) ** 2
+        return (distance_squared <= (self.field_of_view + 30) ** 2
+                and pygame.mouse.get_pressed()[0])
     
-    def enemy_draw_and_move(self, player: Player) -> int:
+    def enemy_draw_and_move(self, player: Player, mp: tuple[int, int]) -> int:
         """
         Движение и отрисовка врага (AI)
         
         Args:
-            player (Player): Объект игрока.
+            player (Player): Объект игрока,
+            mp (tuple[int, int]): Позиция мыши.
         Returns:
             int: x и y врага.
         """
-        self.draw_fov(player)
+        self.draw_fov(player, mp)
         if self.__enemy_type == "watcher":
             self.__screen.blit(self.__to_texture(self.enemy_dict['1'][4]),
-                            (self.__x, self.__y))
-            self.__x, self.__y = self.__mm.move1(self.__x, self.__y)
+                            (self.x, self.y))
+            self.x, self.y = self.__mm.move1(self.x, self.y)
         elif self.__enemy_type == "blinder":
             self.__screen.blit(self.__to_texture(self.enemy_dict['3'][4]),
-                            (self.__x, self.__y))
-            self.__x, self.__y =  self.__mm.move2(self.__x, self.__y)
+                            (self.x, self.y))
+            self.x, self.y =  self.__mm.move2(self.x, self.y)
         elif self.__enemy_type == "stalker":
             self.__screen.blit(self.__to_texture(self.enemy_dict['2'][4]),
-                            (self.__x, self.__y))
-            self.__x, self.__y = self.__mm.move3(self.__x, self.__y)
-        return self.__x, self.__y
+                            (self.x, self.y))
+            self.x, self.y = self.__mm.move3(self.x, self.y)
+        return self.x, self.y
     

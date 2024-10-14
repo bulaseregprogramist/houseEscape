@@ -1,8 +1,11 @@
 """Движение монстра (врага)"""
 
+from random import randint
+
 
 class MonsterMove:
     __direction = 0
+    __rand_direction = randint(1, 2)
     
     def __init__(self) -> None:
         pass
@@ -18,13 +21,23 @@ class MonsterMove:
         Returns:
             int: Изменённые координаты watcher'a
         """
-        if x > 100 and not cls.__direction:
-            x -= 4.3
-            if 101 <= x <= 107:
-                cls.__direction = 1
-        if x < 680 and cls.__direction:
-            x += 4.3
+        if cls.__rand_direction == 1:
+            if x > 100 and not cls.__direction:
+                x -= 4.3
+                if 101 <= x <= 107:
+                    cls.__direction = 1
+            if x < 680 and cls.__direction:
+                x += 4.3
             if x > 680:
+                cls.__direction = 0
+        else:
+            if y > 100 and not cls.__direction:
+                y -= 4.3
+                if 101 <= y <= 107:
+                    cls.__direction = 1
+            if y < 680 and cls.__direction:
+                y += 4.3
+            if y > 680:
                 cls.__direction = 0
         return x, y
     

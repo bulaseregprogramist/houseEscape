@@ -51,13 +51,14 @@ class NPC(Character):
             index (list[int, int]): Позиция игрока на карте.
         """
         cycle = 1
-        text = font3.render(f"ВАШИ ДЕНЬГИ - {MoneySystem.MONEY}",
-                            1, (0, 0, 0))
-        trade_system = TradeSystem()
+        trade_system = TradeSystem(self.__screen)
         while cycle:
+            text = font3.render(f"ВАШИ ДЕНЬГИ - {MoneySystem.MONEY}",
+                            1, (0, 0, 0))
             pygame.draw.rect(self.__screen, 
                             (255, 255, 255), (100, 100, 570, 570))
             self.__screen.blit(text, (240, 150))
+            trade_system.draw_items()
             pygame.display.flip()
             
             for i in pygame.event.get():

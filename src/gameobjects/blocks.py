@@ -20,12 +20,12 @@ class Block(GameObjects):
         Размещение мебели
         
         Args:
-            he_map (list[int, int]): Карта дома,
-            player (Player): Игрок,
+            he_map (list[int, int]): Позиция игрока,
+            player (Player): Объект игрока,
             n (int): Номер выбранного сохранения.
         """
         # Позиции мебели и их текстуры
-        self.__blocks = self.save.load_save(n)["blocks"]
+        self.__blocks: dict[int: list, ...] = self.save.load_save(n)["blocks"]
         for i in self.__blocks:
             texture = pygame.transform.scale(
                 self._num_to_texture(self.__blocks[i][4]), (50, 50))
@@ -34,11 +34,11 @@ class Block(GameObjects):
             super().placing(int(self.__blocks[i][0]),
                 int(self.__blocks[i][1]), some_list, he_map, texture, player)
             self.functional(self.__blocks[i][0], self.__blocks[i][1], texture,
-                            he_map, some_list, i, n)
+                            he_map, some_list, i, n, player)
     
     def functional(self, x: int, y: int, texture: pygame.surface.Surface,
                 he_map: list[int, int], some_list: list[int, int],
-                i: int, n: int) -> None:
+                i: int, n: int, player: Player) -> None:
         """
         Функционал мебели
         
@@ -49,11 +49,12 @@ class Block(GameObjects):
             he_map (list[int, int]): Позиция игрока на карте,
             some_list (list[int, int]): Позиция мебели на карте,
             i (int): Ключи мебели,
-            n (int): Номер выбранного сохранения.
+            n (int): Номер выбранного сохранения,
+            player (Player): Объект игрока
         """
         result: int = super().functional(x, y, texture, "block", he_map, 
                                         some_list)
         if result == 2:  # Открытие меню мебели
-            Draw.show_interfaces(i, self.screen, n)
+            Draw.show_interfaces(i, self.screen, n, he_map, player)
             pygame.mixer.Sound("textures/press2.mp3").play()
     

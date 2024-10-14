@@ -36,21 +36,24 @@ class Draw:
         
     @staticmethod
     def show_interfaces(key: int, screen: pygame.surface.Surface, 
-                        n: int) -> None:
+                        n: int, index: list[int, int],
+                        player: Player) -> None:
         """
         Интерфейсы для мебели
         
         Args:
             key (int): id мебели,
             screen (pygame.surface.Surface): Переменная для экрана,
-            n (int): Номер выбранного сохранения.
+            n (int): Номер выбранного сохранения,
+            index (list[int, int]): Позиция игрока на карте,
+            player (Player): Объект игрока.
         """
         text = font.render("СОЗДАНИЕ ПРЕДМЕТА", 1, (0, 0, 0))
         pygame.mixer.Sound("textures/collect.mp3").play()
         of = OtherFunctional()
         key = int(key)
         if key == 1:  # Верстак
-            CraftingTable(screen, text, n)
+            CraftingTable(screen, text, n, index, player)
         elif key == 2:  # Лампа
             of.lamp()
         elif key == 3:  # Люк в подвал
@@ -91,5 +94,5 @@ class Draw:
         elif index == [3, 3]:  # Окрестности дома
             screen.blit(self.__bg1, (0, 0))
             enemy = Enemy(self.__x, self.__y, "watcher", screen)
-            self.__x, self.__y = enemy.enemy_draw_and_move(player)
+            self.__x, self.__y = enemy.enemy_draw_and_move(player, mp)
         

@@ -16,4 +16,8 @@
 ------------------------------------------------
 .. automodule:: src.gameobjects.vehicles
     :members:
+Картины
+------------------------------------------------
+.. automodule:: src.gameobjects.pictures
+    :members:
     

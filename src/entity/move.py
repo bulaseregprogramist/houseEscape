@@ -23,7 +23,7 @@ class Move:
         Args:
             logger (HELogger): Переменная для логов,
             event (Any): Событие в pygame,
-            cls (object): Класс инвентаря,
+            cls (Inventory): Класс инвентаря,
             index (list[int, int]): Позиция игрока на карте дома,
             player (Player): Класс Player,
             n (int): Номер выбранного сохранения.

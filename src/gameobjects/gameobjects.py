@@ -21,7 +21,8 @@ class GameObjects(ABC):
     
     @abstractmethod
     def placing(self, x: int, y: int, index: list[int, int],
-                he_map: list[int, int], stexture, player: Player) -> None:
+                he_map: list[int, int], stexture: pygame.surface.Surface,
+                player: Player) -> None:
         """
         Размещение предмета на карте
         
@@ -35,10 +36,12 @@ class GameObjects(ABC):
         """
         if index == he_map:  # Если игрок находится в одной комнате с объектом
             self.screen.blit(stexture, (x, y))
-        if ((player.x <= x <= player.x + stexture.get_width() * 0.5) 
-                and (player.y <= y <= player.y + stexture.get_height() * 1.1)):
-            stexture.set_alpha(64)  # Прозрачность
-        else:  # Не прозрачность
+        if ((x + stexture.get_width()) - stexture.get_width() <= player.x
+                <= (x + stexture.get_width())
+                and (y + stexture.get_height()) - stexture.get_height() 
+                <= player.y <= (y + stexture.get_height())):
+            stexture.set_alpha(64)
+        else:
             stexture.set_alpha(500)
             
     @staticmethod
@@ -102,7 +105,8 @@ class GameObjects(ABC):
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         
         # Небольшое чёрное окошко
-        if rect.collidepoint(mouse_pos) and he_map == pos:
+        if (rect.collidepoint(mouse_pos)
+                and he_map == pos):
             self.__show_menu(go_type)
             if pygame.mouse.get_pressed()[0]:
                 sleep(0.2)
@@ -111,5 +115,7 @@ class GameObjects(ABC):
                     return 1
                 elif go_type == "block":
                     return 2
+                elif go_type == "vehicle":
+                    return 3
         return 0
     

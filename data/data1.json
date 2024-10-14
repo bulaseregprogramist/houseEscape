@@ -1,10 +1,10 @@
 {
    "index": [
-      2,
-      1
+      3,
+      3
    ],
-   "x": 385,
-   "y": 442,
+   "x": 70,
+   "y": 646,
    "blocks": {
       "1": [
          450,
@@ -29,26 +29,20 @@
       ]
    },
    "items": {
-      "1": [
-         150,
-         150,
-         3,
-         3,
-         "pygame.image.load(\"textures/stick.png\")"
-      ],
-      "2": [
-         320,
-         320,
-         3,
-         3,
-         "pygame.image.load(\"textures/stone.png\")"
-      ],
       "3": [
          220,
          220,
          3,
          1,
          "pygame.image.load(\"textures/poroh.png\")"
+      ]
+   },
+   "pictures": {
+      "1": [
+         250,
+         200,
+         3,
+         2
       ]
    },
    "enemys": {
@@ -77,5 +71,18 @@
    "MAX_CAPACITY": 8,
    "SPEED": 1,
    "FOV": 32,
-   "items_id": []
+   "items_id": [
+      "2",
+      "1"
+   ],
+   "npc_products": {
+      "1": [
+         150,
+         "textures/poroh.png"
+      ],
+      "2": [
+         350,
+         "textures/stick.png"
+      ]
+   }
 }
