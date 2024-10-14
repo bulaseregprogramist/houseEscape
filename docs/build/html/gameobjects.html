@@ -80,6 +80,14 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.gameobjects.pictures">Картины</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.gameobjects.pictures.Pictures"><code class="docutils literal notranslate"><span class="pre">Pictures</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.gameobjects.pictures.Pictures.functional"><code class="docutils literal notranslate"><span class="pre">Pictures.functional()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.gameobjects.pictures.Pictures.placing"><code class="docutils literal notranslate"><span class="pre">Pictures.placing()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a></li>
@@ -153,7 +161,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.gameobjects.GameObjects.placing">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">placing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">he_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stexture</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.gameobjects.GameObjects.placing" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">placing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">he_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stexture</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.gameobjects.GameObjects.placing" title="Ссылка на это определение"></a></dt>
 <dd><p>Размещение предмета на карте</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
@@ -214,7 +222,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>he_map</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Карта дома,</p></li>
+<li><p><strong>he_map</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция игрока,</p></li>
 <li><p><strong>player</strong> (<a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Игрок,</p></li>
 <li><p><strong>n</strong> (<em>int</em>) – Номер выбранного сохранения.</p></li>
 </ul>
@@ -234,7 +242,7 @@
 <dd><p>Блоки (мебель) в доме</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.blocks.Block.functional">
-<span class="sig-name descname"><span class="pre">functional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texture</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">he_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">some_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.blocks.Block.functional" title="Ссылка на это определение"></a></dt>
+<span class="sig-name descname"><span class="pre">functional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texture</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">he_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">some_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.blocks.Block.functional" title="Ссылка на это определение"></a></dt>
 <dd><p>Функционал мебели</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
@@ -245,7 +253,8 @@
 <li><p><strong>he_map</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция игрока на карте,</p></li>
 <li><p><strong>some_list</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция мебели на карте,</p></li>
 <li><p><strong>i</strong> (<em>int</em>) – Ключи мебели,</p></li>
-<li><p><strong>n</strong> (<em>int</em>) – Номер выбранного сохранения.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Номер выбранного сохранения,</p></li>
+<li><p><strong>player</strong> (<a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Объект игрока</p></li>
 </ul>
 </dd>
 </dl>
@@ -258,8 +267,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>he_map</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Карта дома,</p></li>
-<li><p><strong>player</strong> (<a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Игрок,</p></li>
+<li><p><strong>he_map</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция игрока,</p></li>
+<li><p><strong>player</strong> (<a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Объект игрока,</p></li>
 <li><p><strong>n</strong> (<em>int</em>) – Номер выбранного сохранения.</p></li>
 </ul>
 </dd>
@@ -286,6 +295,38 @@
 <dt class="sig sig-object py" id="src.gameobjects.vehicles.Vehicles.placing">
 <span class="sig-name descname"><span class="pre">placing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.vehicles.Vehicles.placing" title="Ссылка на это определение"></a></dt>
 <dd><p>Размещение транспорта на карте</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.gameobjects.pictures">
+<span id="id6"></span><h2>Картины<a class="headerlink" href="#module-src.gameobjects.pictures" title="Ссылка на этот заголовок"></a></h2>
+<p>Картины</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.gameobjects.pictures.Pictures">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gameobjects.pictures.</span></span><span class="sig-name descname"><span class="pre">Pictures</span></span><a class="headerlink" href="#src.gameobjects.pictures.Pictures" title="Ссылка на это определение"></a></dt>
+<dd><p>Картины с котиками</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.gameobjects.pictures.Pictures.functional">
+<span class="sig-name descname"><span class="pre">functional</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.pictures.Pictures.functional" title="Ссылка на это определение"></a></dt>
+<dd><p>Функционал картины</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.gameobjects.pictures.Pictures.placing">
+<span class="sig-name descname"><span class="pre">placing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">he_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.pictures.Pictures.placing" title="Ссылка на это определение"></a></dt>
+<dd><p>Размещение картин.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>he_map</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция игрока,</p></li>
+<li><p><strong>player</strong> (<a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Объект игрока,</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Номер выбранного сохранения,</p></li>
+<li><p><strong>screen</strong> (<em>pygame.surface.Surface</em>) – Переменная дисплея.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
