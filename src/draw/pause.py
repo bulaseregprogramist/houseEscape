@@ -6,6 +6,7 @@ from ..game.logging import HELogger
 from time import sleep
 from ..entity.player import Player
 from ..other.globals import font, load
+from ..draw.mainmenu import MainMenu
 from ..game.saving import Saving
 
 
@@ -26,7 +27,6 @@ class Pause:
         self.__pause_menu = load("textures/pm.png", (300, 770), "convert")
         self.__crest = load("textures/crest.png", (90, 90), "convert")
         self.__mm = load("textures/mm.png", (100, 100), "convert")
-        self.__run()
         
     def __functional(self) -> int:
         """
@@ -38,13 +38,21 @@ class Pause:
         self.__screen.blit(self.__crest, (340, 600))
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         rect = self.__crest.get_rect(topleft=(340, 600))
+        rect2 = self.__mm.get_rect(topleft=(340, 440))
         # Остановка цикла меню паузы
         if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            return 0
-        return 1
+            return 0, 0
+        elif rect.collidepoint(mouse_pos) and pygame.mouse.get_pos()[0]:
+            return 0, 1
+        return 1, 0
     
-    def __run(self) -> None:
-        """Основной метод класса"""
+    def run(self) -> int:
+        """
+        Основной метод класса
+        
+        Returns:
+            int: Выключение цикла или он останется неизменным.
+        """
         self.__logger.info("Игра поставлена на паузу")
         pause_cycle = 1
         while pause_cycle:
@@ -52,7 +60,11 @@ class Pause:
             self.__screen.blit(self.__text1, (315, 45))
             self.__screen.blit(self.__mm, (340, 440))
             
-            pause_cycle: int = self.__functional()
+            pause_cycle, button = self.__functional()
+            if button:
+                mm = MainMenu()
+                return mm.to_menu()
+                
             pygame.display.flip()
             
             for event in pygame.event.get():
@@ -67,4 +79,5 @@ class Pause:
                         self.__logger.info("Выход из меню паузы")
                         pause_cycle = 0
                         sleep(0.412)
+        return 1
     

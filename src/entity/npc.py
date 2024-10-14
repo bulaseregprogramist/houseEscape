@@ -8,6 +8,7 @@ from ..game.saving import Saving
 from ..trade.money_system import MoneySystem
 from ..entity.player import Player
 from os import listdir
+from time import sleep
 import pygame
 import sys
 
@@ -68,6 +69,7 @@ class NPC(Character):
                                     len(listdir("data/")))
                     sys.exit()
                 elif i.type == pygame.KEYDOWN and i.key == pygame.K_ESCAPE:
+                    sleep(0.3)
                     cycle = 0
     
     @classmethod

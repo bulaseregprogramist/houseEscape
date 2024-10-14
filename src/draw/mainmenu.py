@@ -8,6 +8,7 @@ from ..other.globals import load
 from ..game.savemenu import SaveMenu
 from ..api.api import HEAPI
 from time import sleep
+import logging
 
 
 pygame.init()
@@ -17,8 +18,14 @@ class MainMenu:
     """Главное меню (включает в себя Boosty, DonationAlerts, кнопку запуска)"""
     
     def to_menu(self) -> None:
-        """Возвращение в главное меню"""
-        pass
+        """
+        Возвращение в главное меню
+        
+        Returns:
+            int: Переменным, с которыми работает цикл, присвоено 0.
+        """
+        logging.info("Игрок возвращён в главное меню")
+        return 0
     
     @staticmethod
     def open(site: str, logger: HELogger) -> None:

@@ -1,10 +1,10 @@
 {
    "index": [
-      3,
-      3
+      2,
+      2
    ],
-   "x": 70,
-   "y": 646,
+   "x": 430,
+   "y": 385,
    "blocks": {
       "1": [
          450,
@@ -28,7 +28,15 @@
          "pygame.image.load(\"textures/trapdoor.png\")"
       ]
    },
-   "items": {},
+   "items": {
+      "3": [
+         220,
+         220,
+         3,
+         1,
+         "pygame.image.load(\"textures/poroh.png\")"
+      ]
+   },
    "pictures": {
       "1": [
          250,
@@ -63,10 +71,7 @@
    "MAX_CAPACITY": 8,
    "SPEED": 1,
    "FOV": 32,
-   "items_id": [
-      "2",
-      "1"
-   ],
+   "items_id": [],
    "npc_products": {
       "1": [
          150,
