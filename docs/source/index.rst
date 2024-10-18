@@ -18,6 +18,7 @@ Welcome to HouseEscape's documentation!
    character
    traps
    trade
+   other
 
 
 Indices and tables

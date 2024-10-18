@@ -14,10 +14,10 @@ pygame.init()
 
 
 class Inventory:
-    inventory_list = []
+    inventory_list = []  # Не сохранённые предметы
     logger: HELogger
     Player = None
-    inventory_list2 = []
+    inventory_list2 = []  # Сохранённые предметы
     
     def __init__(self, inventory: pygame.surface.Surface, 
                 screen: pygame.surface.Surface) -> None:
@@ -43,13 +43,12 @@ class Inventory:
             cls.logger.critical("Инвентарь не инициализирован!!")
 
     @classmethod   
-    def draw_inventory(cls, screen: pygame.surface.Surface, il: list) -> None:
+    def draw_inventory(cls, screen: pygame.surface.Surface) -> None:
         """
         Отрисовка инвентаря
         
         Args:
-            screen (pygame.surface.Surface): Переменная экрана,
-            il (list): Сохранённые предметы.
+            screen (pygame.surface.Surface): Переменная экрана
         """
         text = font3.render("Enter для выхода из инвентаря", 1, 
                             (255, 255, 255))
@@ -66,12 +65,12 @@ class Inventory:
                 except TypeError:
                     screen.blit(cls.inventory_list[i][0], (x, y))
                 x += 60
-        if len(il) > 0:  # Отрисовка не сохранённых предметов
-            for j in range(len(il)):  # Отрисовка предметов
+        if len(cls.inventory_list2) > 0:  # Отрисовка не сохранённых предметов
+            for j in range(len(cls.inventory_list2)):  # Отрисовка предметов
                 if j % 8 == 0 and j != 0:
                     x = 100
                     y += 60
-                screen.blit(il[j], (x, y))
+                screen.blit(cls.inventory_list2[j], (x, y))
                 x += 60
 
     @classmethod  
@@ -111,7 +110,7 @@ class Inventory:
             self.__screen.fill((70, 70, 70))
             self.__screen.blit(self.__inventory, (10, 10))
             self.__screen.blit(text, (110, 7))
-            Inventory.draw_inventory(self.__screen, self.inventory_list2)
+            Inventory.draw_inventory(self.__screen)
             pygame.display.flip()
             
             for event in pygame.event.get():

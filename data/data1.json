@@ -3,8 +3,8 @@
       3,
       3
    ],
-   "x": 70,
-   "y": 646,
+   "x": 385,
+   "y": 385,
    "blocks": {
       "1": [
          450,
@@ -28,7 +28,38 @@
          "pygame.image.load(\"textures/trapdoor.png\")"
       ]
    },
-   "items": {},
+   "items": {
+      "3": [
+         220,
+         220,
+         3,
+         1,
+         "pygame.image.load(\"textures/poroh.png\")"
+      ],
+      "4": [
+         0,
+         0,
+         9,
+         9,
+         "pygame.image.load(\"textures/pickaxe.png\")",
+         "textures/pickaxe.png"
+      ],
+      "5": [
+         300,
+         300,
+         1,
+         1,
+         "pygame.image.load('textures/paper.png')"
+      ],
+      "6": [
+         0,
+         0,
+         9,
+         9,
+         "pygame.image.load('textures/tnt.png')",
+         "textures/tnt.png"
+      ]
+   },
    "pictures": {
       "1": [
          250,

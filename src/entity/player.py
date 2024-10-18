@@ -8,6 +8,7 @@ from src.entity.move import Move
 from ..game.logging import HELogger
 from ..game.saving import Saving
 from ..other.globals import font, load, n
+from ..other.use import Use
 from .character import Character
 from .inventory import Inventory
 
@@ -19,17 +20,21 @@ class Player(Character):
     """Игрок и связанное с ним"""
     save = Saving()
     # Максимум предметов в инвентаре
-    MAX_CAPACITY = save.load_save(n)["MAX_CAPACITY"]
+    MAX_CAPACITY: int = save.load_save(n)["MAX_CAPACITY"]
     
     def __init__(self, logger: HELogger,
                 screen: pygame.surface.Surface, n: int) -> None:
         logger.info("Начата работа конструктора Player")
         self.__save = Saving()
+        self.__use = Use(screen, n, self)
         # Изначальное положение игрока по x и y
         self.x = self.__save.load_save(n)["x"]
         self.y = self.__save.load_save(n)["y"]
         self.player = load("textures/player.png", (60, 60), "convert_alpha")
+        self.player2 = load("textures/player2.png", (60, 60), "convert_alpha")
         self.__inventory = load("textures/backpack.png", 
+                                (90, 90), "convert_alpha")
+        self.__inventory2 = load("textures/backpack2.png",
                                 (90, 90), "convert_alpha")
         Inventory.Player = self
         logger.debug("Статичному полю Player класса Inventory присвоен self")
@@ -55,19 +60,21 @@ class Player(Character):
         inventory.open(index, player, n, logger)
         logger.info("Закрытие инвентаря")
         
-    def player_interfaces(self, screen: pygame.surface.Surface,
-                        player: Self) -> pygame.surface.Surface:
+    def player_interfaces(self, screen: pygame.surface.Surface, player: Self,
+                        mp: tuple[int, int]) -> pygame.surface.Surface:
         """
-        Интерфейсы игрока (инвентарь)
+        Интерфейсы игрока (инвентарь, кнопка использования)
         
         Args:
             screen (pygame.surface.Surface): Переменная экрана,
-            player (Player): Объект класса Player.
+            player (Player): Объект класса Player,
+            mp (tuple[int, int]): Позиция мыши.
         Returns:
             pygame.surface.Surface: 'Квадрат' текстуры рюкзака (инвентаря)
                                     и игрока.
         """
         screen.blit(self.__inventory, (10, 10))
+        self.__use.draw(mp)
         rect = self.__inventory.get_rect(topleft=(10, 10))
         rect2 = self.player.get_rect(topleft=(player.x, player.y))
         if rect.colliderect(rect2):  # Рюкзак прозрачен, если в нём игрок.
@@ -76,15 +83,20 @@ class Player(Character):
             self.__inventory.set_alpha(300)
         return rect, rect2
         
-    def blit(self) -> pygame.surface.Surface:
+    def blit(self, mp: tuple[int, int]) -> pygame.surface.Surface:
         """
         Вывод игрока на экран
         
+        Args:
+            mp (tuple[int, int]): Позиция мыши.
         Returns:
             pygame.surface.Surface: 'Квадрат' игрока.
         """
         self.__screen.blit(self.player, (self.x, self.y))
-        return self.player.get_rect(topleft=(self.x, self.y))
+        rect = self.player.get_rect(topleft=(self.x, self.y))
+        if rect.collidepoint(mp):
+            self.__screen.blit(self.player2, (self.x, self.y))
+        return rect
         
     def get_stats(self, logger: HELogger) -> None:
         """
@@ -144,8 +156,10 @@ class Player(Character):
             n (int): Номер выбранного сохранения.
         """
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
-        if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            self.to_inventory(logger, index, player, n)
+        if rect.collidepoint(mouse_pos):
+            self.__screen.blit(self.__inventory2, (10, 10))
+            if pygame.mouse.get_pressed()[0]:
+                self.to_inventory(logger, index, player, n)
         
     def in_game(self, player: Self, index: list[int, int], logger: HELogger,
                 rect: pygame.surface.Surface, n: int) -> None:

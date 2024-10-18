@@ -21,8 +21,10 @@ class SaveMenu:
         self.__logger = logger
         self.__bg = load("textures/sm.png", (220, 770), "convert")
         self.__st = font4.render("СОХРАНЕНИЕ", 1, (255, 255, 255))
+        self.__st2 = font4.render("СОХРАНЕНИЕ", 1, (229, 255, 0))
         self.__screen = screen
         self.__plus = load("textures/plus.png", (40, 40), "convert_alpha")
+        self.__plus2 = load("textures/plus2.png", (40, 40), "convert_alpha")
         self.number = self.__start()  # Количество сохранений в папке data
         
     def create_save(self) -> None:
@@ -74,16 +76,19 @@ class SaveMenu:
             saves_list: list[str, ...] = listdir("data/")
             rect, mouse_pos = self.draw(rects_list, saves_list)
             for j in range(len(rects_list)):  # Запуск сохранения
-                if (rects_list[j].collidepoint(mouse_pos)
-                        and pygame.mouse.get_pressed()[0]):
-                    return j + 1  # Номер сохранения
-            pygame.display.flip()
-            if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-                self.__logger.info("Идёт создание сохранения")
-                self.create_save()
+                if rects_list[j].collidepoint(mouse_pos):
+                    self.__screen.blit(self.__st2, (310, rects_list[j][1]))
+                    if pygame.mouse.get_pressed()[0]:
+                        return j + 1  # Номер сохранения
+            if rect.collidepoint(mouse_pos):
+                self.__screen.blit(self.__plus2, (550, 1))
+                if  pygame.mouse.get_pressed()[0]:
+                    self.__logger.info("Идёт создание сохранения")
+                    self.create_save()
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.__logger.info("Выход из игры...")
                     sys.exit()
+            pygame.display.flip()
     

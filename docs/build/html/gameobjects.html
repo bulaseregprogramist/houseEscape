@@ -95,6 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="character.html">Персонажи и всё, что с ними связано</a></li>
 <li class="toctree-l1"><a class="reference internal" href="traps.html">Ловушки в игре</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trade.html">Торговля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Остальное</a></li>
 </ul>
 
         </div>
@@ -140,7 +141,7 @@
 <li><p><strong>x</strong> (<em>int</em>) – Позиция объекта по x,</p></li>
 <li><p><strong>y</strong> (<em>int</em>) – Позиция объекта по y,</p></li>
 <li><p><strong>texture</strong> (<em>pygame.surface.Surface</em>) – Текстура объекта,</p></li>
-<li><p><strong>go_type</strong> (<em>str</em>) – GameObject_type. (либо item, либо block),</p></li>
+<li><p><strong>go_type</strong> (<em>str</em>) – GameObject_type. (содержит имена наследников),</p></li>
 <li><p><strong>he_map</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция игрока,</p></li>
 <li><p><strong>pos</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция объекта на карте.</p></li>
 <li><p><strong>key</strong> (<em>str</em><em> | </em><em>None</em>) – Ключи для сохранения.</p></li>
@@ -148,7 +149,7 @@
 </dd>
 <dt class="field-even">Результат<span class="colon">:</span></dt>
 <dd class="field-even"><p><dl class="simple">
-<dt>0 - ничего не произошло, 1 - воспроизведение звука #1,</dt><dd><p>2 - звук #2.</p>
+<dt>0 - ничего не произошло, 1 - воспроизведение звука #1,</dt><dd><p>2 - звук #2, 3 - звук #3.</p>
 </dd>
 </dl>
 </p>
@@ -287,8 +288,23 @@
 <dd><p>Транспортные средства. Наследник абстрактного класса GameObjects.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.vehicles.Vehicles.functional">
-<span class="sig-name descname"><span class="pre">functional</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.vehicles.Vehicles.functional" title="Ссылка на это определение"></a></dt>
+<span class="sig-name descname"><span class="pre">functional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texture</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">he_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#src.gameobjects.vehicles.Vehicles.functional" title="Ссылка на это определение"></a></dt>
 <dd><p>Функционал транспорта</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Позиция машины по x,</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Позиция машины по y,</p></li>
+<li><p><strong>texture</strong> (<em>pygame.surface.Surface</em>) – Текстура машины,</p></li>
+<li><p><strong>i</strong> (<em>int</em>)</p></li>
+<li><p><strong>he_map</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>)</p></li>
+<li><p><strong>index</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

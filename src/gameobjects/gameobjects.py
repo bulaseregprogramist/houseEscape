@@ -34,15 +34,13 @@ class GameObjects(ABC):
             stexture (pygame.surface.Surface): Текстура объекта,
             player (Player): Объект игрока.
         """
-        if index == he_map:  # Если игрок находится в одной комнате с объектом
-            self.screen.blit(stexture, (x, y))
-        if ((x + stexture.get_width()) - stexture.get_width() <= player.x
-                <= (x + stexture.get_width())
-                and (y + stexture.get_height()) - stexture.get_height() 
-                <= player.y <= (y + stexture.get_height())):
+        rect = stexture.get_rect(topleft=(x, y))
+        if rect.colliderect(player.player.get_rect(topleft=(player.x, player.y))):
             stexture.set_alpha(64)
         else:
             stexture.set_alpha(500)
+        if index == he_map:  # Если игрок находится в одной комнате с объектом
+            self.screen.blit(stexture, (x, y))
             
     @staticmethod
     def _num_to_texture(command: str) -> pygame.surface.Surface:
@@ -73,10 +71,13 @@ class GameObjects(ABC):
         self.screen.blit(menu, (30, 710))
         self.screen.blit(self.__text1, (40, 720))
         if go_type == "item":
-            text2 = font2.render("item", 1, (255, 255, 255))
+            text2 = font2.render("предмет", 1, (255, 255, 255))
             self.screen.blit(text2, (40, 740))
         elif go_type == "block":
-            text2 = font2.render("block", 1, (255, 255, 255))
+            text2 = font2.render("мебель/техника", 1, (255, 255, 255))
+            self.screen.blit(text2, (40, 740))
+        elif go_type == "vehicle":
+            text2 = font2.render("транспорт", 1, (255, 255, 255))
             self.screen.blit(text2, (40, 740))
     
     @abstractmethod
@@ -90,13 +91,13 @@ class GameObjects(ABC):
             x (int): Позиция объекта по x,
             y (int): Позиция объекта по y,
             texture (pygame.surface.Surface): Текстура объекта,
-            go_type (str): GameObject_type. (либо item, либо block),
+            go_type (str): GameObject_type. (содержит имена наследников),
             he_map (list[int, int]): Позиция игрока,
             pos (list[int, int]): Позиция объекта на карте.
             key (str | None): Ключи для сохранения.
         Returns:
             int: 0 - ничего не произошло, 1 - воспроизведение звука #1,
-                2 - звук #2.
+                2 - звук #2, 3 - звук #3.
         """
         
         if isinstance(texture, str):

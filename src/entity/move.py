@@ -16,7 +16,7 @@ class Move:
     
     @staticmethod
     def press_keydown(logger: HELogger, event, cls,
-                    index: list[int, int], player, n: int) -> None:
+                    index: list[int, int], player: object, n: int) -> None:
         """
         Нажатие на клавишу
         

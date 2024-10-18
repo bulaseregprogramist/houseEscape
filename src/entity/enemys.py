@@ -102,7 +102,7 @@ class Enemy(Character):
         Returns:
             bool: Проверка на соприкосновение
         """
-        distance_squared = (
+        distance_squared: float = (
             player.x - (self.x + 25)) ** 2 + (
                 player.y - (self.y + 35)) ** 2
         return distance_squared <= (self.field_of_view + 30) ** 2
@@ -116,7 +116,7 @@ class Enemy(Character):
         Returns:
             bool: Проверка на соприкосновение
         """
-        distance_squared = (
+        distance_squared: float = (
             mp[0] - (self.x + 25)) ** 2 + (
                 mp[1] - (self.y + 35)) ** 2
         return (distance_squared <= (self.field_of_view + 30) ** 2

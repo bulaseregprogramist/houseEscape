@@ -62,7 +62,7 @@ class Draw:
             of.bed()
     
     def render_location(self, index: list[int, int], mp: tuple[int, int],
-                        screen: pygame.surface.Surface, player: Player) -> None:
+                    screen: pygame.surface.Surface, player: Player) -> None:
         """
         Рендеринг комнаты дома
 

@@ -82,6 +82,10 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id6">Отрисовка и функционал верстака</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#src.draw.crafting_table.CraftingTable"><code class="docutils literal notranslate"><span class="pre">CraftingTable</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.crafting_table.CraftingTable.__after_craft"><code class="docutils literal notranslate"><span class="pre">CraftingTable.__after_craft()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.crafting_table.CraftingTable.__crafting"><code class="docutils literal notranslate"><span class="pre">CraftingTable.__crafting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.crafting_table.CraftingTable.__get_free_space"><code class="docutils literal notranslate"><span class="pre">CraftingTable.__get_free_space()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.crafting_table.CraftingTable.__ntt"><code class="docutils literal notranslate"><span class="pre">CraftingTable.__ntt()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#src.draw.crafting_table.CraftingTable.__recipes"><code class="docutils literal notranslate"><span class="pre">CraftingTable.__recipes()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#src.draw.crafting_table.CraftingTable.__run"><code class="docutils literal notranslate"><span class="pre">CraftingTable.__run()</span></code></a></li>
 </ul>
@@ -105,6 +109,7 @@
 <li class="toctree-l1"><a class="reference internal" href="character.html">Персонажи и всё, что с ними связано</a></li>
 <li class="toctree-l1"><a class="reference internal" href="traps.html">Ловушки в игре</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trade.html">Торговля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Остальное</a></li>
 </ul>
 
         </div>
@@ -179,7 +184,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="src.draw.mainmenu.MainMenu">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.draw.mainmenu.</span></span><span class="sig-name descname"><span class="pre">MainMenu</span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu" title="Ссылка на это определение"></a></dt>
-<dd><p>Главное меню (включает в себя Boosty, DonationAlerts, кнопку запуска)</p>
+<dd><p>Главное меню (в нём Boosty, DonationAlerts, кнопку запуска)</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.draw.mainmenu.MainMenu.__init_textures">
 <span class="sig-name descname"><span class="pre">__init_textures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Surface</span></span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu.__init_textures" title="Ссылка на это определение"></a></dt>
@@ -233,7 +238,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.draw.mainmenu.MainMenu.to_menu">
-<span class="sig-name descname"><span class="pre">to_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu.to_menu" title="Ссылка на это определение"></a></dt>
+<span class="sig-name descname"><span class="pre">to_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu.to_menu" title="Ссылка на это определение"></a></dt>
 <dd><p>Возвращение в главное меню</p>
 <dl class="field-list simple">
 <dt class="field-odd">Результат<span class="colon">:</span></dt>
@@ -306,6 +311,43 @@
 <dt class="sig sig-object py" id="src.draw.crafting_table.CraftingTable">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.draw.crafting_table.</span></span><span class="sig-name descname"><span class="pre">CraftingTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.draw.crafting_table.CraftingTable" title="Ссылка на это определение"></a></dt>
 <dd><dl class="py method">
+<dt class="sig sig-object py" id="src.draw.crafting_table.CraftingTable.__after_craft">
+<span class="sig-name descname"><span class="pre">__after_craft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_item</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.crafting_table.CraftingTable.__after_craft" title="Ссылка на это определение"></a></dt>
+<dd><p>После создания предмета</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>new_item</strong> (<em>str</em>) – Предмет, который создали.</p></li>
+<li><p><strong>*args</strong> (<em>str</em>) – Предметы, необходимые для создания</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.crafting_table.CraftingTable.__crafting">
+<span class="sig-name descname"><span class="pre">__crafting</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.crafting_table.CraftingTable.__crafting" title="Ссылка на это определение"></a></dt>
+<dd><p>Крафты в верстаке</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.crafting_table.CraftingTable.__get_free_space">
+<span class="sig-name descname"><span class="pre">__get_free_space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texture</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.crafting_table.CraftingTable.__get_free_space" title="Ссылка на это определение"></a></dt>
+<dd><p>Сокращение кода</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.crafting_table.CraftingTable.__ntt">
+<span class="sig-name descname"><span class="pre">__ntt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inv_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.crafting_table.CraftingTable.__ntt" title="Ссылка на это определение"></a></dt>
+<dd><p>От id к текстуре</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>inv_list</strong> (<em>list</em><em>[</em><em>str</em><em>, </em><em>...</em><em>]</em>) – Список с id.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="src.draw.crafting_table.CraftingTable.__recipes">
 <span class="sig-name descname"><span class="pre">__recipes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.crafting_table.CraftingTable.__recipes" title="Ссылка на это определение"></a></dt>
 <dd><p>Рецепты в верстаке</p>

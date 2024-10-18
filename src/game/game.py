@@ -30,7 +30,7 @@ class Game:
     
     def __init__(self, logger: HELogger) -> None:
         logging.basicConfig(level=logging.DEBUG,
-            format="[%(name)s] - [%(levelname)s] - [%(asctime)s] - %(message)s",
+            format="[%(name)s] - [%(levelname)s] [%(asctime)s] - %(message)s",
             encoding="utf-8")
         # Цвета для логов (их можно включить указав BETTER в консоли)
         # Или изменение уровня логов.
@@ -109,9 +109,9 @@ class Game:
                 mp: tuple[int, int] = pygame.mouse.get_pos()
                 self.__draw_location.render_location(self.__index, mp,
                                     self.__screen, self.__player)
-                result: pygame.surface.Surface = self.__player.blit()
+                result: pygame.surface.Surface = self.__player.blit(mp)
                 rect, rect2 = self.__player.player_interfaces(
-                    self.__screen, self.__player)
+                    self.__screen, self.__player, mp)
                 self.__blocks.placing(self.__index, self.__player,
                                     self.__numb)
                 self.__items.placing(self.__index, self.__player,
@@ -125,11 +125,11 @@ class Game:
                         trap_rect = self.__traps.draw_trap(traps_dict[j][0],
                                     traps_dict[j][1], traps_dict[j][4])
                         self.__traps.after(trap_rect, traps_dict[j][4], rect2)
-                pygame.display.flip()
             
                 self.__player.in_game(self.__player,  # Движение игрока
                         self.__index, logger, rect, self.__numb)
                 self.__check(logger)  # Проверка на выход за границу
+                pygame.display.flip()
             
                 if result.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
                     self.__player.get_stats(logger)  # Информация об игроке
@@ -158,10 +158,10 @@ class Game:
             self.__check2(logger, self.__index[0] + 1, self.__index[1], 0, -1)
                 
     def __check2(self, logger: HELogger, n1: int, n2: int,
-                i: int, n: int) -> None:
+                index: int, n: int) -> None:
         """Проверка на выход за границу карты дома (вторая часть)"""
         if self.__lst[n1][n2] != "0":
             logger.info("Игрок вышел налево")
             self.__player.x, self.__player.y = 385, 385
             logger.debug("Переменным x и y присвоены стандартные значения")
-            self.__index[i] -= n
+            self.__index[index] -= n

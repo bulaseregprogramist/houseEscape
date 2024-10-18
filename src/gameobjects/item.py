@@ -76,7 +76,7 @@ class Item(GameObjects):
         Args:
             n (int): Номер выбранного сохранения.
         """
-        some_dict: dict = self.save.load_save(n)
+        some_dict: dict[str: int | dict | list] = self.save.load_save(n)
         some_dict["items"] = self.__items
         with open(f"data/data{n}.json", "w") as file:
             json.dump(some_dict, file, indent=3)

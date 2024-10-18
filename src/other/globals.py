@@ -34,7 +34,15 @@ some_dict = {
         2: [320, 320, 3, 3,
             "pygame.image.load(\"textures/stone.png\")"],
         3: [220, 220, 3, 1,
-            "pygame.image.load(\"textures/poroh.png\")"]
+            "pygame.image.load(\"textures/poroh.png\")"],
+        4: [0, 0, 9, 9,
+            'pygame.image.load(\"textures/pickaxe.png\")',
+            'textures/pickaxe.png'],
+        5: [300, 300, 1, 1,
+            'pygame.image.load(\'textures/paper.png\')'],
+        6: [0, 0, 9, 9,
+            'pygame.image.load(\'textures/tnt.png\')',
+            'textures/tnt.png']
     },
     "pictures": {
         1: [250, 200, 3, 2]

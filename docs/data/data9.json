@@ -1,9 +1,9 @@
 {
    "index": [
-      2,
-      2
+      3,
+      3
    ],
-   "x": 430,
+   "x": 385,
    "y": 385,
    "blocks": {
       "1": [
@@ -29,12 +29,49 @@
       ]
    },
    "items": {
+      "1": [
+         150,
+         150,
+         3,
+         3,
+         "pygame.image.load(\"textures/stick.png\")"
+      ],
+      "2": [
+         320,
+         320,
+         3,
+         3,
+         "pygame.image.load(\"textures/stone.png\")"
+      ],
       "3": [
          220,
          220,
          3,
          1,
          "pygame.image.load(\"textures/poroh.png\")"
+      ],
+      "4": [
+         0,
+         0,
+         9,
+         9,
+         "pygame.image.load(\"textures/pickaxe.png\")",
+         "textures/pickaxe.png"
+      ],
+      "5": [
+         300,
+         300,
+         1,
+         1,
+         "pygame.image.load('textures/paper.png')"
+      ],
+      "6": [
+         0,
+         0,
+         9,
+         9,
+         "pygame.image.load('textures/tnt.png')",
+         "textures/tnt.png"
       ]
    },
    "pictures": {

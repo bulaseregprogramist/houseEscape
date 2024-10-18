@@ -4,10 +4,14 @@ import pygame
 from ..game.saving import Saving
 from ..entity.inventory import Inventory
 from time import sleep
+from ..other.globals import load, some_dict
 from ..game.logging import HELogger
 from ..entity.player import Player
 from copy import copy
 import sys
+import json
+import re
+import logging
 
 
 pygame.init()
@@ -23,20 +27,109 @@ class CraftingTable:
         self.__player = player
         self.__screen = screen
         self.__text = text
+        self.__n: int = n
+        self.__pickaxe = load("textures/pickaxe.png", (60, 60),
+                            "convert_alpha")
         self.__keys: list[str, ...] = self.save.load_save(n)["items_id"]
         self.__some_list = copy(Inventory.inventory_list)
-        self.__some_list.extend(Inventory.inventory_list2)
-        self.__n = n
+        self.__tnt = load("textures/tnt.png", (60, 60), "convert_alpha")
+        self.__ntt(self.__keys)
+        self.__rects_list = []
         self.__run()
+
+    def __ntt(self, inv_list: list[str, ...]) -> None:
+        """
+        От id к текстуре
+        
+        Args:
+            inv_list (list[str, ...]): Список с id.
+        """
+        logging.debug("Начало работы метода ntt")
+        inv_list2 = []
+        for i in inv_list:
+            pattern = r"pygame\.image\.load\(['\"](.*?)['\"]\)"
+
+            match = re.search(pattern, some_dict["items"][int(i)][4])
+            inv_list2.append(
+                [load(match.group(1), (60, 60), "convert_alpha"), i])
+        self.__some_list.extend(inv_list2)
+        logging.debug("Конец работы метода ntt")
+        
+    def __get_free_space(self, texture, y: int) -> None:
+        """Сокращение кода"""
+        counter = 0
+        for i in self.__some_list:
+            try:
+                if i[1] == '1':
+                    counter += 1
+                elif i[1] == '2':
+                    counter += 1
+            except TypeError:
+                pass
+        if counter == 2:
+            self.__screen.blit(texture, (120, y))
+            self.__rects_list.append(
+                [texture.get_rect(topleft=(120, y)), 1])
         
     def __recipes(self) -> None:
         """Рецепты в верстаке"""
-        if "1" in self.__keys:
-            pass
-        elif "2" in self.__keys:
-            pass
-        elif "3" in self.__keys:
-            pass
+        self.__rects_list.clear()
+        y = 180
+        if "1" in self.__keys and "2" in self.__keys:
+            self.__screen.blit(self.__pickaxe, (120, y))
+            self.__rects_list.append(
+                [self.__pickaxe.get_rect(topleft=(120, y)), 1])
+        else:
+            self.__get_free_space(self.__pickaxe, y)
+        y += 50
+        if "3" in self.__keys and "5" in self.__keys:
+            self.__screen.blit(self.__tnt, (120, y))
+            self.__rects_list.append(
+                [self.__pickaxe.get_rect(topleft=(120, y)), 1])
+        else:
+            self.__get_free_space(self.__tnt, y)
+        y += 50
+        self.__crafting()
+        
+    def __after_craft(self, new_item: str, *args: str) -> None:
+        """
+        После создания предмета
+        
+        Args:
+            new_item (str): Предмет, который создали.
+            *args (str): Предметы, необходимые для создания
+        """
+        with open(f"data/data{self.__n}.json") as file:
+            result: dict = json.load(file)
+        items_id: list[str, ...] = result["items_id"]
+        for i in args:  # Удаление из списка
+            try:
+                items_id.remove(i)
+                logging.debug(f"Потрачена вещь - {i}")
+            except ValueError:
+                pass
+        items_id.append(new_item)
+        self.__some_list.append(load(some_dict["items"][int(new_item)][5],
+                                    (60, 60), "convert_alpha"))
+        result["items_id"] = items_id
+        with open(f"data/data{self.__n}.json", "w")  as file:
+            json.dump(result, file, indent=3)
+        logging.debug("Данные обновлены!")
+        
+    def __crafting(self) -> None:
+        """Крафты в верстаке"""
+        mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
+        for i in self.__rects_list:
+            if type(i[0]) is pygame.rect.Rect:
+                if (i[0].collidepoint(mouse_pos)
+                        and pygame.mouse.get_pressed()[0]):
+                    pygame.mixer.Sound("textures/open.mp3").play()
+                    if i[1] == 1:  # Кирка
+                        logging.info("Создана кирка!")
+                        sleep(0.41)
+                        self.__after_craft("4", "1", "2")
+                    self.__some_list = copy(Inventory.inventory_list)
+                    self.__some_list.extend(Inventory.inventory_list2)
         
     def __run(self) -> None:
         """Основной метод класса."""
@@ -45,6 +138,7 @@ class CraftingTable:
             pygame.draw.rect(self.__screen, 
                             (255, 255, 255), (100, 100, 570, 570))
             self.__screen.blit(self.__text, (139, 130))
+            self.__recipes()
             x, y = 170, 490
             
             # Отрисовка предметов в инвентаре
@@ -64,7 +158,7 @@ class CraftingTable:
                 if event.type == pygame.QUIT:
                     self.logger.info("Выход из игры...")
                     self.save.saving(self.__index, self.__player.x,
-                                    self.__player.y, self.__n)
+                                    self.__player.y, self.__n, True)
                     sys.exit()
                 elif (event.type == pygame.KEYDOWN
                         and event.key == pygame.K_ESCAPE):

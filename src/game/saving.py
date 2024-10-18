@@ -66,7 +66,7 @@ class Saving:
         return result
     
     def saving(self, index: list[int, int], x: int, y: int, n: int, 
-            in_inventory: bool = False) -> None:
+            inventory_saving: bool = False) -> None:
         """
         Сохранение игры
         
@@ -75,14 +75,14 @@ class Saving:
             x (int): Позиция игрока по x,
             y (int): Позиция игрока по y,
             n (int): Выбранное игроком сохранение,
-            in_inventory (bool): По умолчанию, в инвентаре ли игрок.
+            inventory_saving (bool): По умолчанию, сохранять ли инвентарь.
         """
         # Получение словаря из data.json
         result: dict[str: list | int | dict] = self.load_save(n)
         result["index"] = index  # Позиция игрока на карте.
         result["x"] = x
         result["y"] = y
-        if in_inventory:
+        if inventory_saving:
             if result["items_id"] == []:
                 items_id = []
             else:

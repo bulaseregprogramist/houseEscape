@@ -42,7 +42,7 @@ class Pause:
         # Остановка цикла меню паузы
         if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
             return 0, 0
-        elif rect.collidepoint(mouse_pos) and pygame.mouse.get_pos()[0]:
+        elif rect2.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
             return 0, 1
         return 1, 0
     
