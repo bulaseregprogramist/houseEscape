@@ -30,13 +30,15 @@ class Character(ABC):
         cls.speed = speed
         
     @abstractmethod
-    def get_stats(self, screen: pygame.surface.Surface,
+    def get_stats(self, screen: pygame.surface.Surface, index: list, n: int,
                   ch: list[int, int], logger: HELogger, *args) -> None:
         """
         Получение информации об персонаже
         
         Args:
             screen (pygame.surface.Surface): Переменная экрана,
+            index (list[int, int]): Позиция игрока на карте,
+            n (int): Номер выбранного сохранения,
             ch (list[int, int]): Координаты персонажа,
             logger (HELogger): Переменная для логов.
             *args (Any): Статичные поля класса.
@@ -58,6 +60,8 @@ class Character(ABC):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     logger.info("Выход из игры...")
+                    self.save.saving(index, ch[0],
+                                    ch[1], n, True)
                     sys.exit()
                 elif (event.type == pygame.KEYDOWN
                         and event.key == pygame.K_ESCAPE):

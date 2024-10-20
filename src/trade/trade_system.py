@@ -43,7 +43,7 @@ class TradeSystem:
             j (int): Ключ из словаря npc_products.
         """
         mp: tuple[int, int] = pygame.mouse.get_pos()
-        for i in self.__rects_list:
+        for i in self.__rects_list:  # 'Квадраты' предметов
             if i.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
                 sleep(0.3)
                 pygame.mixer.Sound("textures/collect.mp3").play()

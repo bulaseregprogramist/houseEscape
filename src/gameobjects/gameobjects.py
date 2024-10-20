@@ -35,7 +35,8 @@ class GameObjects(ABC):
             player (Player): Объект игрока.
         """
         rect = stexture.get_rect(topleft=(x, y))
-        if rect.colliderect(player.player.get_rect(topleft=(player.x, player.y))):
+        rect2 = player.player.get_rect(topleft=(player.x, player.y))
+        if rect.colliderect(rect2):
             stexture.set_alpha(64)
         else:
             stexture.set_alpha(500)

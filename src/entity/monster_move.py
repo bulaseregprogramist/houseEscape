@@ -30,7 +30,7 @@ class MonsterMove:
                 x += 4.3
             if x > 680:
                 cls.__direction = 0
-        else:
+        else:  # Сверху вниз и снизу вверх
             if y > 100 and not cls.__direction:
                 y -= 4.3
                 if 101 <= y <= 107:

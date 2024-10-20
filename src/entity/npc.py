@@ -66,7 +66,7 @@ class NPC(Character):
                 if i.type == pygame.QUIT:
                     self.__logger.info("Выход из игры...")
                     self.save.saving(index, player.x, player.y,
-                                    len(listdir("data/")))
+                                    len(listdir("data/")), True)
                     sys.exit()
                 elif i.type == pygame.KEYDOWN and i.key == pygame.K_ESCAPE:
                     sleep(0.3)

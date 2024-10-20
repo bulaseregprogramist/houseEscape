@@ -19,9 +19,10 @@ class Inventory:
     Player = None
     inventory_list2 = []  # Сохранённые предметы
     
-    def __init__(self, inventory: pygame.surface.Surface, 
+    def __init__(self, inventory: pygame.surface.Surface, inventory2,
                 screen: pygame.surface.Surface) -> None:
         self.__inventory = inventory  # Текстура рюкзака.
+        self.__inventory2 = inventory2
         self.__screen = screen
         
     @classmethod
@@ -56,7 +57,7 @@ class Inventory:
         screen.blit(text, (150, 30))
         if len(cls.inventory_list) > 0:  # Сохранённые предметы
             for i in range(len(cls.inventory_list)):  # Отрисовка предметов
-                if i % 8 == 0 and i != 0:
+                if i % 8 == 0 and i != 0:  # Перенос на новую строку
                     x = 100
                     y += 60
                     
@@ -67,7 +68,7 @@ class Inventory:
                 x += 60
         if len(cls.inventory_list2) > 0:  # Отрисовка не сохранённых предметов
             for j in range(len(cls.inventory_list2)):  # Отрисовка предметов
-                if j % 8 == 0 and j != 0:
+                if j % 8 == 0 and j != 0:  # Перенос на новую строку
                     x = 100
                     y += 60
                 screen.blit(cls.inventory_list2[j], (x, y))
@@ -90,7 +91,7 @@ class Inventory:
         cls.inventory_list2 = inv_list2
             
     def open(self, index: list[int, int], player: Self, n: int,
-            logger: HELogger) -> None:
+            logger: HELogger, mouse_pos: tuple[int, int]) -> None:
         """
         Открытие инвентаря
         
@@ -98,7 +99,8 @@ class Inventory:
             index (list[int, int]): Позиция игрока на карте дома,
             player (Player): Переменная игрока,
             n (int): Номер выбранного сохранения,
-            logger (HELogger): Переменная для логов.
+            logger (HELogger): Переменная для логов,
+            mouse_pos (tuple[int, int]): Позиция курсора мыши.
         """
         inv_cycle = 1
         save = Saving()
@@ -111,6 +113,10 @@ class Inventory:
             self.__screen.blit(self.__inventory, (10, 10))
             self.__screen.blit(text, (110, 7))
             Inventory.draw_inventory(self.__screen)
+            rect = self.__inventory.get_rect(topleft=(10, 10))
+            
+            if rect.collidepoint(mouse_pos):  # Свечение при наводке
+                self.__screen.blit(self.__inventory2, (10, 10))
             pygame.display.flip()
             
             for event in pygame.event.get():

@@ -127,12 +127,12 @@ class Game:
                         self.__traps.after(trap_rect, traps_dict[j][4], rect2)
             
                 self.__player.in_game(self.__player,  # Движение игрока
-                        self.__index, logger, rect, self.__numb)
+                        self.__index, logger, rect, self.__numb, mp)
                 self.__check(logger)  # Проверка на выход за границу
                 pygame.display.flip()
-            
+                # Информация об игроке
                 if result.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
-                    self.__player.get_stats(logger)  # Информация об игроке
+                    self.__player.get_stats(logger, self.__index, self.__numb)
                 if is_pressed("esc"):
                     # При нажатии на ESCAPE игра поставится на паузу
                     pause = Pause(self.__screen, logger, self.__index,

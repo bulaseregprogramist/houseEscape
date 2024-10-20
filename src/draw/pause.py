@@ -15,6 +15,7 @@ pygame.init()
 
 class Pause:
     """Пауза во время игры (в главном меню не работает)"""
+    save = Saving()
     
     def __init__(self, screen: pygame.surface.Surface, logger: HELogger,
                 index: list[int, int], player: Player, n: int) -> None:
@@ -63,6 +64,8 @@ class Pause:
             pause_cycle, button = self.__functional()
             if button:
                 mm = MainMenu()
+                self.save.saving(self.__index, self.__player.x, 
+                                self.__player.y, self.__n)
                 return mm.to_menu()
                 
             pygame.display.flip()
@@ -70,8 +73,7 @@ class Pause:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.__logger.info("Выход из программы...")
-                    save = Saving()
-                    save.saving(self.__index, self.__player.x,
+                    self.save.saving(self.__index, self.__player.x,
                                 self.__player.y, self.__n)
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:

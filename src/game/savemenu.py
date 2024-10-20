@@ -32,7 +32,8 @@ class SaveMenu:
         sleep(0.5)
         sl: list[str, ...] = listdir("data/")  # Получение кол-ва сохранений
         if len(sl) < 5:  # Если кол-во сохранений меньше 5.
-            with open(f"data/data{len(sl) + 1}.json", "w") as file:
+            with open(f"data/data{len(sl) + 1}.json", "w",
+                    encoding="utf-8") as file:
                 json.dump(some_dict, file, indent=3)
             self.__logger.debug("Сохранение успешно создано!")
         else:

@@ -1,9 +1,9 @@
 {
    "index": [
       3,
-      2
+      3
    ],
-   "x": 217,
+   "x": 385,
    "y": 385,
    "blocks": {
       "1": [
@@ -29,6 +29,20 @@
       ]
    },
    "items": {
+      "1": [
+         150,
+         150,
+         3,
+         3,
+         "pygame.image.load(\"textures/stick.png\")"
+      ],
+      "2": [
+         320,
+         320,
+         3,
+         3,
+         "pygame.image.load(\"textures/stone.png\")"
+      ],
       "3": [
          220,
          220,
@@ -94,10 +108,7 @@
    "MAX_CAPACITY": 8,
    "SPEED": 1,
    "FOV": 32,
-   "items_id": [
-      "2",
-      "1"
-   ],
+   "items_id": [],
    "npc_products": {
       "1": [
          150,

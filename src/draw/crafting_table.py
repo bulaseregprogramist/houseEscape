@@ -85,7 +85,7 @@ class CraftingTable:
         if "3" in self.__keys and "5" in self.__keys:
             self.__screen.blit(self.__tnt, (120, y))
             self.__rects_list.append(
-                [self.__pickaxe.get_rect(topleft=(120, y)), 1])
+                [self.__tnt.get_rect(topleft=(120, y)), 2])
         else:
             self.__get_free_space(self.__tnt, y)
         y += 50
@@ -128,6 +128,10 @@ class CraftingTable:
                         logging.info("Создана кирка!")
                         sleep(0.41)
                         self.__after_craft("4", "1", "2")
+                    elif i[1] == 2:
+                        logging.info("Создана взрывчатка!")
+                        sleep(0.41)
+                        self.__after_craft("6", "3", "5")
                     self.__some_list = copy(Inventory.inventory_list)
                     self.__some_list.extend(Inventory.inventory_list2)
         

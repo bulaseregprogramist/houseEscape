@@ -6,6 +6,7 @@
 
 from ..game.logging import HELogger
 import pygame
+from keyboard import is_pressed
 
 
 pygame.init()
@@ -15,8 +16,37 @@ class Move:
     """Движение игрока"""
     
     @staticmethod
-    def press_keydown(logger: HELogger, event, cls,
-                    index: list[int, int], player: object, n: int) -> None:
+    def player_move(player: object, index: list[int, int], x: int, y: int,
+                    speed: int) -> None:
+        """
+        Движение игрока
+        
+        Args:
+            player (Player): Объект игрока,
+            index (list[int, int]): Карта дома,
+            x (int):
+            y (int):
+            speed (int):
+        Returns:
+            int: Позиция игрока по x и y.
+        """
+        if (is_pressed("w") and Move.move_in_location(player.x, 
+                player.y, index) and y < 753):
+            y -= 3 * speed
+        elif (is_pressed("a") and Move.move_in_location(player.x,
+                player.y, index) and x > -23):
+            x -= 3 * speed
+        elif (is_pressed("s") and Move.move_in_location(player.x,
+                player.y, index) and y > -23):
+            y += 3 * speed
+        elif (is_pressed("d") and Move.move_in_location(player.x, 
+                player.y, index) and x < 753):
+            x += 3  * speed
+        return x, y
+    
+    @staticmethod
+    def press_keydown(logger: HELogger, event, cls, index: list[int, int],
+                player: object, n: int, mouse_pos: tuple[int, int]) -> None:
         """
         Нажатие на клавишу
         
@@ -26,7 +56,8 @@ class Move:
             cls (Inventory): Класс инвентаря,
             index (list[int, int]): Позиция игрока на карте дома,
             player (Player): Класс Player,
-            n (int): Номер выбранного сохранения.
+            n (int): Номер выбранного сохранения,
+            mouse_pos (tuple[int, int]): Позиция мыши.
         """
         try:
             logger.info(f"Нажата клавиша - {chr(event.key)}")
@@ -34,7 +65,7 @@ class Move:
             logger.error(
                 "Нажата клавиша, которая не может быть обработана через chr")
         if event.key == pygame.K_e:
-            cls.to_inventory(logger, index, player, n)
+            cls.to_inventory(logger, index, player, n, mouse_pos)
     
     @staticmethod
     def move_in_location(x: int, y: int, index: list[int, int]) -> bool:
@@ -42,9 +73,9 @@ class Move:
         Даёт доступ только в определённые места
 
         Args:
-            x (int): позиция игрока по x,
-            y (int): позиция игрока по y,
-            index (list[int, int]): карта дома.
+            x (int): Позиция игрока по x,
+            y (int): Позиция игрока по y,
+            index (list[int, int]): Карта дома.
         Returns:
             bool: Можно ли идти в этой зоне дома (True или False)
         """

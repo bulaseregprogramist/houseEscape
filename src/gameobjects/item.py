@@ -2,7 +2,7 @@
 
 from src.gameobjects.gameobjects import GameObjects
 import pygame
-from ..entity.player import Player
+from ..entity.player import Player, change
 from ..game.saving import Saving
 import json
 
@@ -65,6 +65,7 @@ class Item(GameObjects):
         result: int = super().functional(x, y, texture, "item", he_map, index,
                                         i)
         if result == 1:  # Помещение предмета в инвентарь
+            change()
             pygame.mixer.Sound("textures/press.mp3").play()
             return 1, i
         return 0, i

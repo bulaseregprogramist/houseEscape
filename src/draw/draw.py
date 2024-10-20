@@ -57,7 +57,9 @@ class Draw:
         elif key == 2:  # Лампа
             of.lamp()
         elif key == 3:  # Люк в подвал
-            Basement()
+            logger = HELogger("BASEMENT", "INFO")
+            logger.getChild("HE")
+            Basement(logger, screen, n)
         elif key == 4:  # Кровать
             of.bed()
     
