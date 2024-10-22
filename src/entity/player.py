@@ -79,7 +79,7 @@ class Player(Character):
                                     и игрока.
         """
         screen.blit(self.__inventory, (10, 10))
-        self._use.draw(mp)
+        self._use.draw(mp, player)
         rect = self.__inventory.get_rect(topleft=(10, 10))
         rect2 = self.player.get_rect(topleft=(player.x, player.y))
         if rect.colliderect(rect2):  # Рюкзак прозрачен, если в нём игрок.

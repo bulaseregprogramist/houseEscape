@@ -80,15 +80,18 @@ class Use:
             x += 21
         self.__after_click()
     
-    def draw(self, pos: tuple[int, int]) -> None:
+    def draw(self, pos: tuple[int, int], player: object) -> None:
         """
         Отрисовка
         
         Args:
-            pos (tuple[int, int]): Позиция мыши
+            pos (tuple[int, int]): Позиция мыши,
+            player (Player): Объект игрока.
         """
         self.__screen.blit(self.__button, (700, 0))
         rect = self.__button.get_rect(topleft=(700, 0))
+        rect2 = self.__player.player.get_rect(topleft=(self.__player.x,
+                                            self.__player.y))
         
         if rect.collidepoint(pos):  # Кнопка действия
             self.__screen.blit(self.__button2, (700, 0))
@@ -98,12 +101,23 @@ class Use:
                     self.__visible = 1
                 else:
                     self.__visible = 0
+        if rect.colliderect(rect2):
+            self.__button.set_alpha(70)
+        else:
+            self.__button.set_alpha(800)
+            
         if self.__visible:  # Для открытия/сворачивания
             self.__draw_inventory_slots()
             
     def item(self, mp: tuple[int, int],
             texture: pygame.surface.Surface) -> None:
-        """Отрисовка применяемого предмета"""
+        """
+        Отрисовка применяемого предмета
+        
+        Args:
+            mp (tuple[int, int]): Позиция курсора мыши,
+            texture (pygame.surface.Surface): Текстура выбранного предмета.
+        """
         texture = pygame.transform.scale(texture, (55, 55))
         self.__screen.blit(texture, (mp[0] - 15, mp[1] - 15))
     

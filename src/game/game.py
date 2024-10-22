@@ -14,6 +14,7 @@ from src.gameobjects.pictures import Pictures
 from src.other.globals import traps_dict
 from src.game.saving import Saving
 from src.traps.traps import Traps
+from src.trade.money_system import MoneySystem
 from src.api.api import HEAPI
 from src.draw.pause import Pause
 from keyboard import is_pressed
@@ -47,7 +48,6 @@ class Game:
         logger.info("Начата инициализация модов")
         HEAPI.load(logger)
         logger.info("Завершена инициализация модов")
-        logger.info("Главное меню открыто!")
         self.__numb: int = MainMenu.render(self.__screen, logger)
         logger.info("Главное меню закрыто!")
         self.__player = Player(logger, self.__screen, self.__numb)
@@ -88,6 +88,8 @@ class Game:
         logger.debug("Создание объекта класса Traps")
         self.__pictures = Pictures()  # Картины с котами
         logger.debug("Создание объекта класса Pictures")
+        self.__money = MoneySystem(self.__numb, self.__screen)
+        logger.debug("Создание объекта класса MoneySystem")
         Inventory.logger = logger
         logger.info("Закончена инициализация перед работой в цикле")
         
@@ -108,16 +110,15 @@ class Game:
                 self.__screen.fill((0, 0, 0))
                 mp: tuple[int, int] = pygame.mouse.get_pos()
                 self.__draw_location.render_location(self.__index, mp,
-                                    self.__screen, self.__player)
+                                    self.__screen, self.__player, self.__numb)
                 result: pygame.surface.Surface = self.__player.blit(mp)
                 rect, rect2 = self.__player.player_interfaces(
                     self.__screen, self.__player, mp)
-                self.__blocks.placing(self.__index, self.__player,
-                                    self.__numb)
-                self.__items.placing(self.__index, self.__player,
-                                    self.__numb)
+                self.__blocks.placing(self.__index, self.__player,self.__numb)
+                self.__items.placing(self.__index, self.__player, self.__numb)
                 self.__pictures.placing(self.__index, self.__player,
                                         self.__numb, self.__screen)
+                self.__money.placing_money(self.__index, mp)
             
                 for j in traps_dict:  # Отрисовка ловушек
                     if (traps_dict[j][2] == self.__index[0]
@@ -125,7 +126,6 @@ class Game:
                         trap_rect = self.__traps.draw_trap(traps_dict[j][0],
                                     traps_dict[j][1], traps_dict[j][4])
                         self.__traps.after(trap_rect, traps_dict[j][4], rect2)
-            
                 self.__player.in_game(self.__player,  # Движение игрока
                         self.__index, logger, rect, self.__numb, mp)
                 self.__check(logger)  # Проверка на выход за границу
@@ -161,7 +161,7 @@ class Game:
                 index: int, n: int) -> None:
         """Проверка на выход за границу карты дома (вторая часть)"""
         if self.__lst[n1][n2] != "0":
-            logger.info("Игрок вышел налево")
+            logger.info("Игрок вышел в другую комнату")
             self.__player.x, self.__player.y = 385, 385
             logger.debug("Переменным x и y присвоены стандартные значения")
             self.__index[index] -= n

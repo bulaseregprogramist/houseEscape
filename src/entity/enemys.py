@@ -39,7 +39,7 @@ class Enemy(Character):
         """
         logger.debug("Идёт смена полей класса...")
         super().change_fields(speed)
-        cls.field_of_view = fov
+        cls.field_of_view: int = fov
         logger.debug("Поля класса изменены!")
         
     def get_stats(self, logger: HELogger) -> None:

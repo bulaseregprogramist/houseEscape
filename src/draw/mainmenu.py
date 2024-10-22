@@ -117,6 +117,7 @@ class MainMenu:
         Returns:
             int: Номер выбранного сохранения.
         """
+        logger.info("Главное меню открыто!")
         mainmenu_cycle = 1
         logger.debug("Переменной cycle присвоен 1")
         bg, play, boosty, da, logo, notepad, play2 = MainMenu.__init_textures(

@@ -1,10 +1,10 @@
 {
    "index": [
       3,
-      2
+      3
    ],
-   "x": 679,
-   "y": 37,
+   "x": 385,
+   "y": 385,
    "blocks": {
       "1": [
          450,
@@ -72,30 +72,6 @@
          9,
          "pygame.image.load('textures/tnt.png')",
          "textures/tnt.png"
-      ],
-      "7": [
-         0,
-         0,
-         9,
-         8,
-         "pygame.image.load(\"textures/key.png\")",
-         "textures/key.png"
-      ],
-      "8": [
-         0,
-         0,
-         9,
-         7,
-         "pygame.image.load(\"textures/kusachki.png\")",
-         "textures/kusachki.png"
-      ],
-      "9": [
-         0,
-         0,
-         9,
-         6,
-         "pygame.image.load('textures/pila.png')",
-         "textures/pila.png"
       ]
    },
    "pictures": {
@@ -153,15 +129,11 @@
    "npc_products": {
       "1": [
          150,
-         "textures/key.png"
+         "textures/poroh.png"
       ],
       "2": [
          350,
-         "textures/kusachki.png"
-      ],
-      "3": [
-         1000,
-         "textures/pila.png"
+         "textures/stick.png"
       ]
    }
 }

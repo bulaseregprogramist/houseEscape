@@ -46,7 +46,7 @@ class CraftingTable:
         """
         logging.debug("Начало работы метода ntt")
         inv_list2 = []
-        for i in inv_list:
+        for i in inv_list:  # Загрузка текстур
             pattern = r"pygame\.image\.load\(['\"](.*?)['\"]\)"
 
             match = re.search(pattern, some_dict["items"][int(i)][4])
@@ -100,7 +100,7 @@ class CraftingTable:
             *args (str): Предметы, необходимые для создания
         """
         with open(f"data/data{self.__n}.json") as file:
-            result: dict = json.load(file)
+            result: dict[str: list | int | dict] = json.load(file)
         items_id: list[str, ...] = result["items_id"]
         for i in args:  # Удаление из списка
             try:

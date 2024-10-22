@@ -12,7 +12,7 @@ class Endings:
     """Основной функционал концовок"""
     
     def __init__(self, screen: pygame.surface.Surface) -> None:
-        self.__screen = screen
+        self.__screen: pygame.surface.Surface = screen
     
     def identify_ending(self) -> None:
         """Определение на какую концовку прошёл игрок"""

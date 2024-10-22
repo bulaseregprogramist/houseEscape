@@ -62,7 +62,7 @@ class Pause:
             self.__screen.blit(self.__mm, (340, 440))
             
             pause_cycle, button = self.__functional()
-            if button:
+            if button:  # Если нажать на кнопку выход в главное меню
                 mm = MainMenu()
                 self.save.saving(self.__index, self.__player.x, 
                                 self.__player.y, self.__n)

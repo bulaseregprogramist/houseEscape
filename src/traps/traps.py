@@ -12,7 +12,7 @@ class Traps:
     """Ловушки"""
     
     def __init__(self, screen: pygame.surface.Surface) -> None:
-        self.__screen = screen
+        self.__screen: pygame.surface.Surface = screen
         self.__poison_trap = load("textures/pt.png", (60, 60), "convert_alpha")
         self.__trap = load("textures/trap.png", (60, 60), "convert_alpha")
         self.__ice = load("textures/ice.png", (60, 60), "convert_alpha")

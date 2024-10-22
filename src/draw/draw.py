@@ -64,14 +64,16 @@ class Draw:
             of.bed()
     
     def render_location(self, index: list[int, int], mp: tuple[int, int],
-                    screen: pygame.surface.Surface, player: Player) -> None:
+                    screen: pygame.surface.Surface, player: Player,
+                    num: int) -> None:
         """
         Рендеринг комнаты дома
 
         Args:
             index (list[int, int]): Карта дома,
             mp (tuple[int, int]): Позиция мыши,
-            screen (pygame.surface.Surface): Переменная экрана
+            screen (pygame.surface.Surface): Переменная экрана,
+            num (int): Номер выбранного сохранения
         """
         if index == [0, 2]:
             screen.blit(self.__bg10, (0, 0))
@@ -86,7 +88,7 @@ class Draw:
         elif index == [2, 2]:
             screen.blit(self.__bg6, (0, 0))
             npc = NPC(screen, self.__logger)
-            npc.placing(mp, player, index)
+            npc.placing(mp, player, index, num)
         elif index == [2, 3]:
             screen.blit(self.__bg7, (0, 0))
         elif index == [3, 1]:

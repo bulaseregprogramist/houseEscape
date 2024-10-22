@@ -27,32 +27,34 @@ class NPC(Character):
         self.__npc = load("textures/npc.png", (65, 65), "convert_alpha")
     
     def placing(self, mouse_pos: tuple[int, int], player: Player,
-                index: list[int, int]) -> None:
+                index: list[int, int], num: int) -> None:
         """
         Отрисовка торговца
         
         Args:
             mouse_pos (tuple[int, int]): Позиция мыши,
             player (Player): Объект игрока,
-            index (list[int, int]): Позиция игрока на карте.
+            index (list[int, int]): Позиция игрока на карте,
+            num (int): Номер выбранного сохранения
         """
         self.__screen.blit(self.__npc, (100, 100))
         rect = self.__npc.get_rect(topleft=(100, 100))
         if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            self.__menu(player, index)
+            self.__menu(player, index, num)
         elif rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[2]:
             self.get_stats()
         
-    def __menu(self, player: Player, index: list[int, int]) -> None:
+    def __menu(self, player: Player, index: list[int, int], num: int) -> None:
         """
         Меню торговли
         
         Args:
             player (Player): Объект игрока,
-            index (list[int, int]): Позиция игрока на карте.
+            index (list[int, int]): Позиция игрока на карте,
+            num (int): Номер выбранного сохранения.
         """
         cycle = 1
-        trade_system = TradeSystem(self.__screen)
+        trade_system = TradeSystem(self.__screen, num)
         while cycle:
             text = font3.render(f"ВАШИ ДЕНЬГИ - {MoneySystem.MONEY}",
                             1, (0, 0, 0))
