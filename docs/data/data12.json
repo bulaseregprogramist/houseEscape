@@ -4,7 +4,7 @@
       3
    ],
    "x": 385,
-   "y": 433,
+   "y": 385,
    "blocks": {
       "1": [
          450,
@@ -148,14 +148,8 @@
    "MAX_CAPACITY": 8,
    "SPEED": 1,
    "FOV": 32,
-   "items_id": [
-      8,
-      7,
-      10,
-      11,
-      9
-   ],
-   "MON": 22222222219545,
+   "items_id": [],
+   "MON": 100,
    "money": {
       "1": [
          300,
@@ -172,5 +166,26 @@
          350
       ]
    },
-   "npc_products": {}
+   "npc_products": {
+      "1": [
+         150,
+         "textures/key.png"
+      ],
+      "2": [
+         350,
+         "textures/kusachki.png"
+      ],
+      "3": [
+         1000,
+         "textures/pila.png"
+      ],
+      "4": [
+         580,
+         "textures/shovel.png"
+      ],
+      "5": [
+         475,
+         "textures/ognivo.png"
+      ]
+   }
 }

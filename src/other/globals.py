@@ -48,7 +48,11 @@ some_dict = {  # Эти данные в каждом файле в папке da
         8: [0, 0, 9, 7, 'pygame.image.load(\"textures/kusachki.png\")',
             'textures/kusachki.png'],
         9: [0, 0, 9, 6, "pygame.image.load(\'textures/pila.png\')",
-            'textures/pila.png']
+            'textures/pila.png'],
+        10: [0, 0, 9, 5, "pygame.image.load(\'textures/shovel.png\')",
+            'textures/shovel.png'],
+        11: [0, 0, 9, 5, "pygame.image.load(\'textures/ognivo.png\')",
+            'textures/ognivo.png']
     },
     "pictures": {
         1: [250, 200, 3, 2]
@@ -70,9 +74,11 @@ some_dict = {  # Эти данные в каждом файле в папке da
     "npc_products": {
         1: [150, "textures/key.png"],
         2: [350, "textures/kusachki.png"],
-        3: [1000, "textures/pila.png"]
+        3: [1000, "textures/pila.png"],
+        4: [580, 'textures/shovel.png'],
+        5: (475, 'textures/ognivo.png')
     }
-    }
+}
 
 traps_dict = {
     1: [100, 100, 3, 3, "poison"],

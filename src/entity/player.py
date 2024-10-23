@@ -29,7 +29,7 @@ class Player(Character):
     def __init__(self, logger: HELogger, screen, n: int) -> None:
         logger.info("Начата работа конструктора Player")
         self.__save = Saving()
-        self._use = Use(screen, n, self)
+        self.use = Use(screen, n, self)
         # Изначальное положение игрока по x и y
         self.x = self.__save.load_save(n)["x"]
         self.y = self.__save.load_save(n)["y"]
@@ -79,7 +79,7 @@ class Player(Character):
                                     и игрока.
         """
         screen.blit(self.__inventory, (10, 10))
-        self._use.draw(mp, player)
+        self.use.draw(mp)
         rect = self.__inventory.get_rect(topleft=(10, 10))
         rect2 = self.player.get_rect(topleft=(player.x, player.y))
         if rect.colliderect(rect2):  # Рюкзак прозрачен, если в нём игрок.
@@ -196,5 +196,5 @@ class Player(Character):
         self.open_inventory(logger, index, player, rect, n, mp)
         if add:
             add = 0
-            self._use.to_dict()
+            self.use.to_dict()
         

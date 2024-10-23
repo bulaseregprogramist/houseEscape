@@ -22,9 +22,9 @@ class Use:
         self.__player = player
         self.__visible = 0
         self.__keys: list[str, ...] = self.save.load_save(n)["items_id"]
-        self.__some_list = []
         self.__rects_list = []
         self.__item_visible = 0
+        self.some_list = []
         self.to_dict()
         self.__button = load("textures/act.png", (70, 70), "convert_alpha")
         self.__button2 = load('textures/act2.png', (70, 70), "convert_alpha")
@@ -37,12 +37,13 @@ class Use:
         """Из списка в словарь"""
         self.__from_num_to_texture()
         lst = []
-        for i in self.__some_list:
+        for i in self.some_list:
             try:  # Для того, чтобы предметы не дублировались
                 lst.append({i[1]: i[0]})
             except KeyError:
                 pass
-        self.__some_list = lst
+        self.some_list = lst
+        logging.info("Завершена работа метода to_dict")
 
     def __from_num_to_texture(self) -> None:
         """
@@ -50,14 +51,14 @@ class Use:
         """
         logging.debug("Начало работы метода __from_num_to_texture")
         inv_list2 = []
-        for i in self.__keys:
+        for i in self.__keys:  # Загрузка из строк в текстуры
             pattern = r"pygame\.image\.load\(['\"](.*?)['\"]\)"
 
             match = re.search(pattern, some_dict["items"][int(i)][4])
             inv_list2.append(
                 [load(match.group(1), (60, 60), "convert_alpha"), i])
-        self.__some_list.extend(Inventory.inventory_list)
-        self.__some_list.extend(inv_list2)
+        self.some_list.extend(Inventory.inventory_list)
+        self.some_list.extend(inv_list2)
         logging.debug("Конец работы метода __from_num_to_texture")
         
     def __draw_inventory_slots(self) -> None:
@@ -68,10 +69,10 @@ class Use:
             if i % 8 == 0 and i != 0:
                 y += 21
                 x = 605
-            self.__screen.blit(self.__slot, (x, y))    
+            self.__screen.blit(self.__slot, (x, y))
             try:
                 texture = pygame.transform.scale(
-                    list(self.__some_list[i].values())[0], (20, 20))
+                    list(self.some_list[i].values())[0], (20, 20))
                 self.__screen.blit(texture, (x + 2, y))
                 self.__rects_list.append(
                     [texture.get_rect(topleft=(x + 2, y)), texture])
@@ -80,7 +81,7 @@ class Use:
             x += 21
         self.__after_click()
     
-    def draw(self, pos: tuple[int, int], player: object) -> None:
+    def draw(self, pos: tuple[int, int]) -> None:
         """
         Отрисовка
         

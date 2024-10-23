@@ -4,6 +4,7 @@ from ..gameobjects.gameobjects import GameObjects
 from ..entity.player import Player
 from ..game.saving import Saving
 from ..other.globals import load
+import logging
 import requests  # Для того, чтобы воспользоваться API cataas.
 import pygame
 import io  # Для загрузки картинки с котиками (из байтов в код)
@@ -19,6 +20,7 @@ class Pictures(GameObjects):
     
     def __init__(self) -> None:
         self.__frame = load("textures/frame.png", (125, 125), "convert_alpha")
+        logging.debug("Завершена работа конструктора класса Pictures")
     
     @classmethod
     def __load_picture_from_site(cls) -> None:
@@ -36,6 +38,8 @@ class Pictures(GameObjects):
                 method_cycle = 0
             except pygame.error:
                 pass
+            except requests.exceptions.ConnectionError:
+                logging.error("У пользователя нет интернета!")
 
     def placing(self, he_map: list[int, int], player: Player, n: int,
                 screen: pygame.surface.Surface) -> None:
@@ -48,7 +52,7 @@ class Pictures(GameObjects):
             n (int): Номер выбранного сохранения,
             screen (pygame.surface.Surface): Переменная дисплея.
         """
-        self.__pict: dict[int: list, ...] = self.save.load_save(n)["pictures"]
+        """self.__pict: dict[int: list, ...] = self.save.load_save(n)["pictures"]
         
         if self.load_picture:  # Оптимизация
             self.__load_picture_from_site()
@@ -65,7 +69,7 @@ class Pictures(GameObjects):
                     self.__frame.set_alpha(500)
             super().placing(self.__pict[i][0] + 37, self.__pict[i][1] + 3,
                     [self.__pict[i][2], self.__pict[i][3]],
-                    he_map, self.image, player)
+                    he_map, self.image, player)"""
     
     def functional(self) -> None:
         """Функционал картины"""

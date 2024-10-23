@@ -63,7 +63,6 @@ class Basement(Player):
         Args:
             player (Player): Объект игрока
         """
-        print(self.__index)
         if player.x < 0:
             self.__p.x, self.__pl.y = 385, 385
             self.__index[0] -= 1

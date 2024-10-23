@@ -2,9 +2,9 @@
 
 from ..trade.money_system import MoneySystem
 from ..other.globals import font3, load
+from ..other.use import Use
 from ..entity.inventory import Inventory
 import json
-from os import listdir
 import pygame
 from time import sleep
 from copy import copy
@@ -17,11 +17,13 @@ pygame.init()
 class TradeSystem:
     """Торговая система у торговца"""
     
-    def __init__(self, screen: pygame.surface.Surface, num: int) -> None:
+    def __init__(self, screen: pygame.surface.Surface, num: int,
+                player: object, use: Use) -> None:
         self.__screen = screen
         self.change_dict = 0
+        self.__use = use
         self.__num = num
-        with open(f"data/data{len(listdir("data/"))}.json") as file:
+        with open(f"data/data{num}.json") as file:
             self.__result: dict[int: list] = json.load(file)
         self.__rects_list = []
     
@@ -42,11 +44,12 @@ class TradeSystem:
                                                             y - 20)))
             y += 70
             self.change_dict: int = self.buy_items(i)
-            if self.change_dict:
+            if self.change_dict:  # Если игрок купил предмет
                 break
         if self.change_dict:  # Чтобы избежать ошибки Runtime
             try:
-                self.__result.pop(i)
+                self.__result["npc_products"].pop(i)
+                logging.debug("Ключ из словаря удалён")
             except KeyError:
                 pass
             self.change_keys()
@@ -61,6 +64,7 @@ class TradeSystem:
         res["MON"] = MoneySystem.MONEY
         with open(f"data/data{self.__num}.json", "w") as file:
             json.dump(res, file)
+        logging.debug("Данные сохранены!")
     
     def buy_items(self, j: int) -> int:
         """
@@ -77,12 +81,18 @@ class TradeSystem:
                 logging.info("Предмет был куплен!")
                 sleep(0.3)
                 pygame.mixer.Sound("textures/collect.mp3").play()
-                MoneySystem.change_money(self.__result["npc_products"][j][0])
+                MoneySystem.change_money(
+                    self.__result["npc_products"][str(j)][0])
                 
-                try:
+                try:  # Добавление в инвентарь
                     Inventory.append(
                         load(self.__result["items"][str(int(j) + 6)][5],
                         (60, 60), "convert_alpha"), int(j) + 6)
+                    self.__use.some_list.append([
+                        load(self.__result["items"][str(int(j) + 6)][5],
+                        (60, 60), "convert_alpha"), int(j) + 6])
+                    for i in range(3):
+                        self.__use.to_dict()
                 except IndexError:
                     pass
                 return 1

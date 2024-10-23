@@ -36,7 +36,7 @@ class GameObjects(ABC):
         """
         rect = stexture.get_rect(topleft=(x, y))
         rect2 = player.player.get_rect(topleft=(player.x, player.y))
-        if rect.colliderect(rect2):
+        if rect.colliderect(rect2):  # Прозрачный объект при вхождении в него
             stexture.set_alpha(64)
         else:
             stexture.set_alpha(500)

@@ -19,7 +19,8 @@ class MoneySystem:
         self.__screen = screen
         save = Saving()
         self.change_money(-save.load_save(num)["MON"])
-        self.__money = load("textures/money.png", (60, 60), "convert_alpha")
+        self.__money: pygame.surface.Surface = load("textures/money.png", 
+                                                (60, 60), "convert_alpha")
         with open(f"data/data{num}.json") as file:
             self.__res: dict[int: list[int, ...]] = json.load(file)["money"]
     
@@ -52,15 +53,15 @@ class MoneySystem:
             index (list[int, int]): Позиция игрока на карте,
             mouse_pos (tuple[int, int]): Позиция курсора мыши
         """
-        for i in self.__res:
+        for i in self.__res:  # Список с расположением денег
             try:
-                if (self.__res[i][2] == index[0]
+                if (self.__res[i][2] == index[0]  # Если в комнате с деньгами
                         and self.__res[i][3] == index[1]):
                     self.__screen.blit(self.__money, (self.__res[i][0],
                                                 self.__res[i][1]))
                     rect = self.__money.get_rect(topleft=(self.__res[i][0],
                                                     self.__res[i][1]))
-                    if (rect.collidepoint(mouse_pos)
+                    if (rect.collidepoint(mouse_pos)  # Сбор при нажатии ЛКМ
                             and pygame.mouse.get_pressed()[0]):
                         sleep(0.135789043124)
                         pygame.mixer.Sound("textures/press.mp3").play()

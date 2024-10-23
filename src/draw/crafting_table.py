@@ -56,17 +56,21 @@ class CraftingTable:
         logging.debug("Конец работы метода ntt")
         
     def __get_free_space(self, texture, y: int) -> None:
-        """Сокращение кода"""
+        """
+        Сокращение кода (если предметов для крафта нет)
+        
+        Args:
+            texture (pygame.surface.Surface): Текстура создаваемого предмета,
+            y (int): Позиция создаваемого предмета по y
+        """
         counter = 0
         for i in self.__some_list:
             try:
-                if i[1] == '1':
-                    counter += 1
-                elif i[1] == '2':
+                if i[1] == '1' or i[1] == '2':
                     counter += 1
             except TypeError:
                 pass
-        if counter == 2:
+        if counter == 2:  # Отрисовка предметов инвентаря
             self.__screen.blit(texture, (120, y))
             self.__rects_list.append(
                 [texture.get_rect(topleft=(120, y)), 1])
@@ -128,7 +132,7 @@ class CraftingTable:
                         logging.info("Создана кирка!")
                         sleep(0.41)
                         self.__after_craft("4", "1", "2")
-                    elif i[1] == 2:
+                    elif i[1] == 2:  # Динамит
                         logging.info("Создана взрывчатка!")
                         sleep(0.41)
                         self.__after_craft("6", "3", "5")
@@ -150,8 +154,7 @@ class CraftingTable:
                 try:  # УО нужен для отрисовки хранимых в инвентаре предметов.
                     self.__screen.blit(self.__some_list[i], (x, y))
                 except TypeError:
-                    self.__screen.blit(self.__some_list[i][0], (x, y))
-                    
+                    self.__screen.blit(self.__some_list[i][0], (x, y))         
                 x += 70
                 if (i + 1) % 6 == 0:  # Перенос предметов вниз.
                     x = 170

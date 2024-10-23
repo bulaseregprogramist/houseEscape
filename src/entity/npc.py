@@ -54,7 +54,7 @@ class NPC(Character):
             num (int): Номер выбранного сохранения.
         """
         cycle = 1
-        trade_system = TradeSystem(self.__screen, num)
+        trade_system = TradeSystem(self.__screen, num, player, player.use)
         while cycle:
             text = font3.render(f"ВАШИ ДЕНЬГИ - {MoneySystem.MONEY}",
                             1, (0, 0, 0))
