@@ -7,6 +7,7 @@ from ..entity.player import Player
 from ..game.logging import HELogger
 from ..entity.enemys import Enemy
 from ..draw.basement import Basement
+from ..draw.cherdak import Cherdak
 from ..draw.other_functional import OtherFunctional
 from ..draw.crafting_table import CraftingTable
 
@@ -32,6 +33,12 @@ class Draw:
         self.__bg10 = load("textures/house.png", (770, 770), "convert")
         self.__x = Enemy.enemy_dict['1'][0]
         self.__y = Enemy.enemy_dict['1'][1]
+        
+        self.__x2 = Enemy.enemy_dict['2'][0]
+        self.__y2 = Enemy.enemy_dict['2'][1]
+        
+        self.__x3 = Enemy.enemy_dict['3'][0]
+        self.__y3 = Enemy.enemy_dict['3'][1]
         logger.info("Работа конструктора класса Draw завершена!")
         
     @staticmethod
@@ -62,6 +69,10 @@ class Draw:
             Basement(logger, screen, n)
         elif key == 4:  # Кровать
             of.bed()
+        elif key == 5:  # Чердак (лестница)
+            logger = HELogger("CHERDAK", "INFO")
+            logger.getChild("HE")
+            Cherdak(logger, screen, n)
     
     def render_location(self, index: list[int, int], mp: tuple[int, int],
                     screen: pygame.surface.Surface, player: Player,
@@ -79,8 +90,12 @@ class Draw:
             screen.blit(self.__bg10, (0, 0))
         elif index == [1, 1]:
             screen.blit(self.__bg2, (0, 0))
+            enemy = Enemy(self.__x2, self.__y2, "stalker", screen, player)
+            self.__x2, self.__y2 = enemy.enemy_draw_and_move(player, mp)
         elif index == [1, 2]:
             screen.blit(self.__bg3, (0, 0))
+            enemy = Enemy(self.__x3, self.__y3, "blinder", screen)
+            self.__x3, self.__y3 = enemy.enemy_draw_and_move(player, mp)
         elif index == [1, 3]:
             screen.blit(self.__bg4, (0, 0))
         elif index == [2, 1]:

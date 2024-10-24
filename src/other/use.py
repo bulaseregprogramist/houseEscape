@@ -86,8 +86,7 @@ class Use:
         Отрисовка
         
         Args:
-            pos (tuple[int, int]): Позиция мыши,
-            player (Player): Объект игрока.
+            pos (tuple[int, int]): Позиция мыши
         """
         self.__screen.blit(self.__button, (700, 0))
         rect = self.__button.get_rect(topleft=(700, 0))
@@ -102,7 +101,7 @@ class Use:
                     self.__visible = 1
                 else:
                     self.__visible = 0
-        if rect.colliderect(rect2):
+        if rect.colliderect(rect2):  # Прозрачность кнопки, если в ней игрок
             self.__button.set_alpha(70)
         else:
             self.__button.set_alpha(800)

@@ -3,6 +3,7 @@
 from ..gameobjects.gameobjects import GameObjects
 from ..other.globals import load
 import pygame
+import logging
 
 
 pygame.init()
@@ -31,16 +32,18 @@ class Vehicles(GameObjects):
             x (int): Позиция машины по x,
             y (int): Позиция машины по y,
             texture (pygame.surface.Surface): Текстура машины,
-            i (int):
-            he_map (list[int, int]):
-            index (list[int, int]):
+            i (int): Ключ словаря,
+            he_map (list[int, int]): Позиция игрока,
+            index (list[int, int]): Позиция объекта на карте
         Returns:
-            int:
+            int: Два числа. Первое число - истина на удаление из словаря,
+                            второе за удаляемый ключ
         """
         result: int = super().functional(x, y, texture, "vehicle",
                                         he_map, index, i)
         if result == 3:  # Помещение предмета в инвентарь
             pygame.mixer.Sound("textures/open.mp3").play()
+            logging.debug("Данные возвращены!")
             return 1, i
         return 0, i
     

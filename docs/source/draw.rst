@@ -21,6 +21,11 @@
 .. autoclass:: src.draw.basement.Basement
     :members:
     :private-members:
+Отрисовка чердака
+-------------------------------------
+.. autoclass:: src.draw.cherdak.Cherdak
+    :members:
+    :private-members:
 Отрисовка и функционал верстака
 -------------------------------------
 .. autoclass:: src.draw.crafting_table.CraftingTable

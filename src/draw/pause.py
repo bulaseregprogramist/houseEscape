@@ -20,7 +20,7 @@ class Pause:
     def __init__(self, screen: pygame.surface.Surface, logger: HELogger,
                 index: list[int, int], player: Player, n: int) -> None:
         self.__logger = logger
-        self.__screen = screen
+        self.__screen: pygame.surface.Surface = screen
         self.__index: list[int, int] = index
         self.__player = player
         self.__n: int = n

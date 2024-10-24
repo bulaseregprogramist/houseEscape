@@ -7,6 +7,7 @@ from ..other.globals import font3, some_dict, load
 from ..game.logging import HELogger
 from ..game.saving import Saving
 from ..trade.money_system import MoneySystem
+import logging
 import re  # Регулярные выражения нужны, чтобы сделать из id текстуру.
 
 
@@ -24,6 +25,7 @@ class Inventory:
         self.__inventory = inventory  # Текстура рюкзака.
         self.__inventory2 = inventory2
         self.__screen = screen
+        logging.debug("Завершена работа конструктора класса Inventory")
         
     @classmethod
     def append(cls, texture: pygame.surface.Surface, key: str) -> None:

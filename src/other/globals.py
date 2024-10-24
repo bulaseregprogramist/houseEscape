@@ -26,7 +26,13 @@ some_dict = {  # Эти данные в каждом файле в папке da
         2: [120, 320, 3, 3,
             "pygame.image.load(\"textures/lamp.png\")"],
         3: [320, 470, 3, 2,
-            "pygame.image.load(\"textures/trapdoor.png\")"]
+            "pygame.image.load(\"textures/trapdoor.png\")"],
+        4: [70, 130, 1, 1,
+            'pygame.image.load(\'textures/bed.png\')'],
+        5: [600, 600, 2, 3,
+            'pygame.image.load(\'textures/lest.png\')'],
+        6: [300, 300, 3, 1,
+            'pygame.image.load(\'textures/closet.png\')']
     },
     "items": {  
         1: [150, 150, 3, 3,
@@ -59,8 +65,8 @@ some_dict = {  # Эти данные в каждом файле в папке da
     },
     "enemys": {
         1: [550, 150, 3, 3, 'pygame.image.load(\"textures/watcher.png\")'],
-        2: [20, 320, 3, 2, 'pygame.image.load(\"textures/stalker.png\")'],
-        3: [20, 320, 2, 2, 'pygame.image.load(\"textures/blinder.png\")']
+        2: [120, 320, 1, 1, 'pygame.image.load(\"textures/stalker.png\")'],
+        3: [10, 10, 1, 2, 'pygame.image.load(\"textures/blinder.png\")']
         },
     "MAX_CAPACITY": 8,
     "SPEED": 1,

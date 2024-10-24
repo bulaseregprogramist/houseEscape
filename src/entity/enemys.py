@@ -19,13 +19,14 @@ class Enemy(Character):
     enemy_dict: dict[int: list, ...] = save.load_save(n)["enemys"]
     field_of_view: int = save.load_save(n)["FOV"]  # FOV
     
-    def __init__(self, x: int, y: int, enemy_type: str, screen) -> None:
+    def __init__(self, x: int, y: int, enemy_type: str, 
+            screen: pygame.surface.Surface, player: Player = None) -> None:
         self.__screen = screen
         self.x = x
         self.y = y
         # В enemy_type может быть watcher, blinder, stalker
         self.__enemy_type: str = enemy_type
-        self.__mm = MonsterMove()
+        self.__mm = MonsterMove(self.speed, player)
         
     @classmethod
     def change_fields(cls, logger: HELogger, speed: int, fov: int) -> None:
@@ -124,7 +125,7 @@ class Enemy(Character):
     
     def enemy_draw_and_move(self, player: Player, mp: tuple[int, int]) -> int:
         """
-        Движение и отрисовка врага (AI)
+        Движение (AI) и отрисовка врага
         
         Args:
             player (Player): Объект игрока,

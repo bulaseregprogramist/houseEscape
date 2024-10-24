@@ -3,7 +3,7 @@
 
 class OtherFunctional:
     
-    def identity(self) -> None:
+    def closet(self) -> None:
         """Определение"""
         pass
     

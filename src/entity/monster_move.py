@@ -1,14 +1,19 @@
 """Движение монстра (врага)"""
 
 from random import randint
+from ..entity.player import Player
 
 
 class MonsterMove:
     __direction = 0
     __rand_direction = randint(1, 2)
     
-    def __init__(self) -> None:
-        pass
+    def __init__(self, monster_speed: int, player: Player = None) -> None:
+        self.speed = monster_speed
+        self.__moving_right = 1
+        if player is not None:
+            self.px = player.x
+            self.py = player.y
     
     @classmethod
     def move1(cls, x: int, y: int) -> int:
@@ -51,6 +56,20 @@ class MonsterMove:
         Returns:
             int: Изменённые координаты blinder'a
         """
+        if self.__moving_right:
+            if x < 770:
+                x += self.speed
+            if y < 770:
+                y += self.speed
+            if x >= 770 and y >= 770:
+                self.__moving_right = 0
+        else:
+            if x > 0:
+                x -= self.speed
+            if y > 0:
+                y -= self.speed
+            if x <= 0 and y <= 0:
+                self.__moving_right = 1
         return x, y
     
     def move3(self, x: int, y: int) -> int:
@@ -63,4 +82,12 @@ class MonsterMove:
         Returns:
             int: Изменённые координаты stalker'a
         """
+        if self.px > x:
+            x += self.speed
+        if self.py > y:
+            y += self.speed
+        if self.px < x:
+            x -= self.speed
+        if self.py < y:
+            y -= self.speed
         return x, y

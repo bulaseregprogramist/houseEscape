@@ -128,11 +128,11 @@ class CraftingTable:
                 if (i[0].collidepoint(mouse_pos)
                         and pygame.mouse.get_pressed()[0]):
                     pygame.mixer.Sound("textures/open.mp3").play()
-                    if i[1] == 1:  # Кирка
+                    if i[1] == 1:
                         logging.info("Создана кирка!")
                         sleep(0.41)
                         self.__after_craft("4", "1", "2")
-                    elif i[1] == 2:  # Динамит
+                    elif i[1] == 2:
                         logging.info("Создана взрывчатка!")
                         sleep(0.41)
                         self.__after_craft("6", "3", "5")
