@@ -186,7 +186,7 @@
 <p>Предметы игры</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.gameobjects.item.Item">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gameobjects.item.</span></span><span class="sig-name descname"><span class="pre">Item</span></span><a class="headerlink" href="#src.gameobjects.item.Item" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gameobjects.item.</span></span><span class="sig-name descname"><span class="pre">Item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.gameobjects.item.Item" title="Ссылка на это определение"></a></dt>
 <dd><p>Предметы в доме</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.item.Item.functional">
@@ -239,7 +239,7 @@
 <p>Мебель дома</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.gameobjects.blocks.Block">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gameobjects.blocks.</span></span><span class="sig-name descname"><span class="pre">Block</span></span><a class="headerlink" href="#src.gameobjects.blocks.Block" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gameobjects.blocks.</span></span><span class="sig-name descname"><span class="pre">Block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.gameobjects.blocks.Block" title="Ссылка на это определение"></a></dt>
 <dd><p>Блоки (мебель) в доме</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.blocks.Block.functional">
@@ -296,21 +296,37 @@
 <li><p><strong>x</strong> (<em>int</em>) – Позиция машины по x,</p></li>
 <li><p><strong>y</strong> (<em>int</em>) – Позиция машины по y,</p></li>
 <li><p><strong>texture</strong> (<em>pygame.surface.Surface</em>) – Текстура машины,</p></li>
-<li><p><strong>i</strong> (<em>int</em>)</p></li>
-<li><p><strong>he_map</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>)</p></li>
-<li><p><strong>index</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>)</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – Ключ словаря,</p></li>
+<li><p><strong>he_map</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция игрока,</p></li>
+<li><p><strong>index</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция объекта на карте</p></li>
 </ul>
 </dd>
-<dt class="field-even">Тип результата<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Два числа. Первое число - истина на удаление из словаря,</dt><dd><p>второе за удаляемый ключ</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.vehicles.Vehicles.placing">
-<span class="sig-name descname"><span class="pre">placing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.vehicles.Vehicles.placing" title="Ссылка на это определение"></a></dt>
+<span class="sig-name descname"><span class="pre">placing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">he_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.vehicles.Vehicles.placing" title="Ссылка на это определение"></a></dt>
 <dd><p>Размещение транспорта на карте</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>he_map</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция игрока,</p></li>
+<li><p><strong>player</strong> (<a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Объект игрока,</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Номер выбранного сохранения.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

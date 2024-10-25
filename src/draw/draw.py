@@ -57,7 +57,7 @@ class Draw:
         """
         text = font.render("СОЗДАНИЕ ПРЕДМЕТА", 1, (0, 0, 0))
         pygame.mixer.Sound("textures/collect.mp3").play()
-        of = OtherFunctional()
+        of = OtherFunctional(n, screen, index, player)
         key = int(key)
         if key == 1:  # Верстак
             CraftingTable(screen, text, n, index, player)
@@ -73,10 +73,12 @@ class Draw:
             logger = HELogger("CHERDAK", "INFO")
             logger.getChild("HE")
             Cherdak(logger, screen, n)
+        elif key == 6:  # Шкаф
+            of.closet()
     
     def render_location(self, index: list[int, int], mp: tuple[int, int],
                     screen: pygame.surface.Surface, player: Player,
-                    num: int) -> None:
+                    num: int, logger: HELogger) -> None:
         """
         Рендеринг комнаты дома
 
@@ -84,25 +86,28 @@ class Draw:
             index (list[int, int]): Карта дома,
             mp (tuple[int, int]): Позиция мыши,
             screen (pygame.surface.Surface): Переменная экрана,
-            num (int): Номер выбранного сохранения
+            player (Player): Объект игрока,
+            num (int): Номер выбранного сохранения,
+            logger (HELogger): Переменная для логов.
         """
         if index == [0, 2]:
             screen.blit(self.__bg10, (0, 0))
         elif index == [1, 1]:
             screen.blit(self.__bg2, (0, 0))
-            enemy = Enemy(self.__x2, self.__y2, "stalker", screen, player)
-            self.__x2, self.__y2 = enemy.enemy_draw_and_move(player, mp)
+            enemy = Enemy(self.__x2, self.__y2, "stalker", logger, 
+                        screen, player)
+            self.__x2, self.__y2 = enemy.enemy_draw_and_move(player, mp, num)
         elif index == [1, 2]:
             screen.blit(self.__bg3, (0, 0))
-            enemy = Enemy(self.__x3, self.__y3, "blinder", screen)
-            self.__x3, self.__y3 = enemy.enemy_draw_and_move(player, mp)
+            enemy = Enemy(self.__x3, self.__y3, "blinder", logger, screen)
+            self.__x3, self.__y3 = enemy.enemy_draw_and_move(player, mp, num)
         elif index == [1, 3]:
             screen.blit(self.__bg4, (0, 0))
         elif index == [2, 1]:
             screen.blit(self.__bg5, (0, 0))
         elif index == [2, 2]:
             screen.blit(self.__bg6, (0, 0))
-            npc = NPC(screen, self.__logger)
+            npc = NPC(screen, self.__logger, index, num)
             npc.placing(mp, player, index, num)
         elif index == [2, 3]:
             screen.blit(self.__bg7, (0, 0))
@@ -112,6 +117,6 @@ class Draw:
             screen.blit(self.__bg9, (0, 0))
         elif index == [3, 3]:  # Окрестности дома
             screen.blit(self.__bg1, (0, 0))
-            enemy = Enemy(self.__x, self.__y, "watcher", screen)
-            self.__x, self.__y = enemy.enemy_draw_and_move(player, mp)
+            enemy = Enemy(self.__x, self.__y, "watcher", logger, screen)
+            self.__x, self.__y = enemy.enemy_draw_and_move(player, mp, num)
         

@@ -4,6 +4,7 @@ from .gameobjects import GameObjects
 from ..draw.draw import Draw
 from ..game.saving import Saving
 from ..entity.player import Player
+from ..game.logging import HELogger
 import pygame
 
 
@@ -14,6 +15,9 @@ class Block(GameObjects):
     """Блоки (мебель) в доме"""
     save = Saving()
     screen: pygame.surface.Surface
+    
+    def __init__(self, logger: HELogger) -> None:
+        self.__logger = logger
     
     def placing(self, he_map: list[int, int], player: Player, n: int) -> None:
         """
@@ -57,4 +61,6 @@ class Block(GameObjects):
         if result == 2:  # Открытие меню мебели
             Draw.show_interfaces(i, self.screen, n, he_map, player)
             pygame.mixer.Sound("textures/press2.mp3").play()
+            self.__logger.debug(
+                "Завершена работа УО метода functional класса Block")
     

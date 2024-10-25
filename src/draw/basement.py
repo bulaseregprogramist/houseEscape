@@ -92,7 +92,7 @@ class Basement(Player):
             self.__move(self.__pl)
             # Информация об игроке
             if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-                self.get_stats(self.__logger)
+                self.get_stats(self.__logger, self.__index, self.__n)
             pygame.display.flip()
             if is_pressed("esc"):
                 pause = Pause(self._screen, self.__logger, self.__index,

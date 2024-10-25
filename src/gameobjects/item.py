@@ -4,6 +4,7 @@ from src.gameobjects.gameobjects import GameObjects
 import pygame
 from ..entity.player import Player, change
 from ..game.saving import Saving
+from ..game.logging import HELogger
 import json
 
 
@@ -14,6 +15,9 @@ class Item(GameObjects):
     """Предметы в доме"""
     save = Saving()
     some_num = 1
+    
+    def __init__(self, logger: HELogger) -> None:
+        self.__logger = logger
     
     def placing(self, he_map: list[int, int], player: Player, n: int) -> None:
         """
@@ -45,9 +49,8 @@ class Item(GameObjects):
             self.__save_item(n)
             self.some_num = 0  # Для предотвращения повторного срабатывания УО
     
-    def functional(self, x: int, y: int, 
-                texture: pygame.surface.Surface, i: int,
-                he_map: list[int, int], index: list[int, int]) -> int:
+    def functional(self, x: int, y: int, texture: pygame.surface.Surface, 
+                i: int, he_map: list[int, int], index: list[int, int]) -> int:
         """
         Функционал предметов
         
@@ -67,6 +70,7 @@ class Item(GameObjects):
         if result == 1:  # Помещение предмета в инвентарь
             change()
             pygame.mixer.Sound("textures/press.mp3").play()
+            self.__logger.debug("Данные успешно возвращены!")
             return 1, i
         return 0, i
     

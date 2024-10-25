@@ -23,8 +23,8 @@ class Inventory:
     def __init__(self, inventory: pygame.surface.Surface, inventory2,
                 screen: pygame.surface.Surface) -> None:
         self.__inventory = inventory  # Текстура рюкзака.
-        self.__inventory2 = inventory2
-        self.__screen = screen
+        self.__inventory2: pygame.surface.Surface = inventory2
+        self.__screen: pygame.surface.Surface = screen
         logging.debug("Завершена работа конструктора класса Inventory")
         
     @classmethod
@@ -90,7 +90,7 @@ class Inventory:
 
             match = re.search(pattern, some_dict["items"][int(i)][4])
             inv_list2.append(load(match.group(1), (60, 60), "convert_alpha"))
-        cls.inventory_list2 = inv_list2
+        cls.inventory_list2 = inv_list2  # Список с сохранёнными предметами
             
     def open(self, index: list[int, int], player: Self, n: int,
             logger: HELogger, mouse_pos: tuple[int, int]) -> None:

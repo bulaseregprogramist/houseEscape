@@ -4,7 +4,7 @@ import pygame
 import sys
 import webbrowser
 from ..game.logging import HELogger
-from ..other.globals import load
+from ..other.globals import load, font
 from ..game.savemenu import SaveMenu
 from ..api.api import HEAPI
 from time import sleep
@@ -17,6 +17,14 @@ pygame.init()
 class MainMenu:
     """Главное меню (в нём Boosty, DonationAlerts, кнопку запуска)"""
     
+    def __init__(self, screen: pygame.surface.Surface,
+                logger: HELogger) -> None:
+        self.__screen = screen
+        self.__logger = logger
+        self.__yes = load("textures/yes.png", (30, 30), "convert")
+        self.__no = load("textures/no.png", (30, 30), "convert")
+        self.__em = load("textures/em.png", (220, 140), "convert")
+    
     def to_menu(self) -> int:
         """
         Возвращение в главное меню
@@ -27,21 +35,48 @@ class MainMenu:
         logging.info("Игрок возвращён в главное меню")
         return 0
     
+    def exit_menu(self, mp: tuple[int, int]) -> None:
+        """Меню выхода из игры"""
+        cycle = 1
+        text = font.render("ВЫЙТИ?", 1, (0, 0, 0))
+        while cycle:
+            self.__screen.blit(self.__em, (270, 300))
+            self.__screen.blit(text, (300, 310))
+            self.__screen.blit(self.__yes, (325, 370))
+            self.__screen.blit(self.__no, (405, 370))
+            
+            pygame.display.flip()
+            rect1 = self.__yes.get_rect(topleft=(325, 370))
+            rect2 = self.__no.get_rect(topleft=(405, 370))
+            if rect1.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
+                self.__logger.info("Выход из игры...")
+                sys.exit()
+            elif rect2.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
+                cycle = 0
+            
+            for i in pygame.event.get():
+                if i.type == pygame.QUIT:
+                    self.__logger.info("Выход из игры...")
+                    sys.exit()
+                elif i.type == pygame.KEYDOWN and i.key == pygame.K_ESCAPE:
+                    cycle = 0
+    
     @classmethod
-    def act(cls, mouse_pos: tuple[int, int], screen, logger, play2, rect1,
-            rect2, rect3, rect4, mmc: int) -> int | SaveMenu | None:
+    def act(cls, mouse_pos: tuple[int, int], screen: pygame.surface.Surface,
+            logger: HELogger, play2, rect1, rect2, rect3, rect4,
+            mmc: int) -> int | SaveMenu | None:
         """
         Действия в главном меню
         
         Args:
-            mouse_pos (tuple[int, int]):
-            screen (pygame.surface.Surface):
-            logger (HELogger):
-            play2 (pygame.surface.Surface):
-            rect1 (pygame.rect.Rect):
-            rect2 (pygame.rect.Rect):
-            rect3 (pygame.rect.Rect):
-            rect4 (pygame.rect.Rect):
+            mouse_pos (tuple[int, int]): Позиция курсора мыши,
+            screen (pygame.surface.Surface): Переменная экрана,
+            logger (HELogger): Переменная для логов,
+            play2 (pygame.surface.Surface): Кнопка запуска (подсвеченная),
+            rect1 (pygame.rect.Rect): 'Квадрат' кнопки запуска,
+            rect2 (pygame.rect.Rect): 'Квадрат' кнопки Boosty,
+            rect3 (pygame.rect.Rect): 'Квадрат' кнопки DonationAlerts,
+            rect4 (pygame.rect.Rect): 'Квадрат' кнопки гайда по API,
             mmc (int): mainmenu_cycle (цикл главного меню)
         Returns:
             int: Выключение mainmenu_cycle или оставляет всё как есть,
@@ -144,6 +179,9 @@ class MainMenu:
                 if event.type == pygame.QUIT:
                     logger.info("Выход из игры...")
                     sys.exit()
+                elif event.type == pygame.KEYDOWN and pygame.K_ESCAPE:
+                    mm = MainMenu(screen, logger)
+                    mm.exit_menu(mouse_pos)
             pygame.display.flip()
         return save.number
         

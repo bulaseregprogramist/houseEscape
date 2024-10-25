@@ -167,7 +167,7 @@ class CraftingTable:
                     self.save.saving(self.__index, self.__player.x,
                                     self.__player.y, self.__n, True)
                     sys.exit()
-                elif (event.type == pygame.KEYDOWN
-                        and event.key == pygame.K_ESCAPE):
-                    sleep(0.15)
-                    crafting_table_cycle = 0
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        sleep(0.15)
+                        crafting_table_cycle = 0

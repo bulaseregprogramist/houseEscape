@@ -77,6 +77,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#id5">Меню сохранений</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#src.game.savemenu.SaveMenu"><code class="docutils literal notranslate"><span class="pre">SaveMenu</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#src.game.savemenu.SaveMenu.create_save"><code class="docutils literal notranslate"><span class="pre">SaveMenu.create_save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.game.savemenu.SaveMenu.delete_save"><code class="docutils literal notranslate"><span class="pre">SaveMenu.delete_save()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#src.game.savemenu.SaveMenu.draw"><code class="docutils literal notranslate"><span class="pre">SaveMenu.draw()</span></code></a></li>
 </ul>
 </li>
@@ -292,18 +293,24 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="src.game.savemenu.SaveMenu.delete_save">
+<span class="sig-name descname"><span class="pre">delete_save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.savemenu.SaveMenu.delete_save" title="Ссылка на это определение"></a></dt>
+<dd><p>Удаление сохранений</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="src.game.savemenu.SaveMenu.draw">
 <span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rects_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saves_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#src.game.savemenu.SaveMenu.draw" title="Ссылка на это определение"></a></dt>
 <dd><p>Отрисовка меню сохранений</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>rects_list</strong> (<em>list</em>) – Список с „квадратами“,</p></li>
+<li><p><strong>rects_list</strong> (<em>list</em><em>[</em><em>pygame.rect.Rect</em><em>, </em><em>...</em><em>]</em>) – Список с „квадратами“,</p></li>
 <li><p><strong>saves_list</strong> (<em>list</em><em>[</em><em>str</em><em>, </em><em>...</em><em>]</em>) – Список с сохранениями.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>„Квадрат“ плюса,
+<dd class="field-even"><p>„Квадрат“ плюса и креста,
 tuple[int, int]: Позиция мыши.</p>
 </dd>
 <dt class="field-odd">Тип результата<span class="colon">:</span></dt>

@@ -59,6 +59,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#src.draw.mainmenu.MainMenu"><code class="docutils literal notranslate"><span class="pre">MainMenu</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#src.draw.mainmenu.MainMenu.__init_textures"><code class="docutils literal notranslate"><span class="pre">MainMenu.__init_textures()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#src.draw.mainmenu.MainMenu.act"><code class="docutils literal notranslate"><span class="pre">MainMenu.act()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.mainmenu.MainMenu.exit_menu"><code class="docutils literal notranslate"><span class="pre">MainMenu.exit_menu()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#src.draw.mainmenu.MainMenu.open"><code class="docutils literal notranslate"><span class="pre">MainMenu.open()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#src.draw.mainmenu.MainMenu.render"><code class="docutils literal notranslate"><span class="pre">MainMenu.render()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#src.draw.mainmenu.MainMenu.to_menu"><code class="docutils literal notranslate"><span class="pre">MainMenu.to_menu()</span></code></a></li>
@@ -84,7 +85,17 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">Отрисовка и функционал верстака</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id6">Отрисовка чердака</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.draw.cherdak.Cherdak"><code class="docutils literal notranslate"><span class="pre">Cherdak</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.cherdak.Cherdak.__move"><code class="docutils literal notranslate"><span class="pre">Cherdak.__move()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.cherdak.Cherdak.__run"><code class="docutils literal notranslate"><span class="pre">Cherdak.__run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.cherdak.Cherdak.draw"><code class="docutils literal notranslate"><span class="pre">Cherdak.draw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.cherdak.Cherdak.exit"><code class="docutils literal notranslate"><span class="pre">Cherdak.exit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">Отрисовка и функционал верстака</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#src.draw.crafting_table.CraftingTable"><code class="docutils literal notranslate"><span class="pre">CraftingTable</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#src.draw.crafting_table.CraftingTable.__after_craft"><code class="docutils literal notranslate"><span class="pre">CraftingTable.__after_craft()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#src.draw.crafting_table.CraftingTable.__crafting"><code class="docutils literal notranslate"><span class="pre">CraftingTable.__crafting()</span></code></a></li>
@@ -96,10 +107,10 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">Функционал остальной мебели и техники</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id8">Функционал остальной мебели и техники</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#src.draw.other_functional.OtherFunctional"><code class="docutils literal notranslate"><span class="pre">OtherFunctional</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#src.draw.other_functional.OtherFunctional.bed"><code class="docutils literal notranslate"><span class="pre">OtherFunctional.bed()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#src.draw.other_functional.OtherFunctional.identity"><code class="docutils literal notranslate"><span class="pre">OtherFunctional.identity()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.draw.other_functional.OtherFunctional.closet"><code class="docutils literal notranslate"><span class="pre">OtherFunctional.closet()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#src.draw.other_functional.OtherFunctional.lamp"><code class="docutils literal notranslate"><span class="pre">OtherFunctional.lamp()</span></code></a></li>
 </ul>
 </li>
@@ -150,7 +161,7 @@
 <dd><p>Этот класс отвечает за отрисовку локаций и другого</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.draw.draw.Draw.render_location">
-<span class="sig-name descname"><span class="pre">render_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.draw.Draw.render_location" title="Ссылка на это определение"></a></dt>
+<span class="sig-name descname"><span class="pre">render_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.draw.Draw.render_location" title="Ссылка на это определение"></a></dt>
 <dd><p>Рендеринг комнаты дома</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
@@ -158,7 +169,9 @@
 <li><p><strong>index</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Карта дома,</p></li>
 <li><p><strong>mp</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция мыши,</p></li>
 <li><p><strong>screen</strong> (<em>pygame.surface.Surface</em>) – Переменная экрана,</p></li>
-<li><p><strong>num</strong> (<em>int</em>) – Номер выбранного сохранения</p></li>
+<li><p><strong>player</strong> (<a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Объект игрока,</p></li>
+<li><p><strong>num</strong> (<em>int</em>) – Номер выбранного сохранения,</p></li>
+<li><p><strong>logger</strong> (<a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><em>HELogger</em></a>) – Переменная для логов.</p></li>
 </ul>
 </dd>
 </dl>
@@ -188,7 +201,7 @@
 <h2>Отрисовка главного меню<a class="headerlink" href="#id3" title="Ссылка на этот заголовок"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.draw.mainmenu.MainMenu">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.draw.mainmenu.</span></span><span class="sig-name descname"><span class="pre">MainMenu</span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.draw.mainmenu.</span></span><span class="sig-name descname"><span class="pre">MainMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.draw.mainmenu.MainMenu" title="Ссылка на это определение"></a></dt>
 <dd><p>Главное меню (в нём Boosty, DonationAlerts, кнопку запуска)</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.draw.mainmenu.MainMenu.__init_textures">
@@ -209,19 +222,19 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.draw.mainmenu.MainMenu.act">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">act</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mouse_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">play2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rect1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rect2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rect3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rect4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mmc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="game.html#src.game.savemenu.SaveMenu" title="src.game.savemenu.SaveMenu"><span class="pre">SaveMenu</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu.act" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">act</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mouse_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">play2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rect1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rect2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rect3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rect4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mmc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="game.html#src.game.savemenu.SaveMenu" title="src.game.savemenu.SaveMenu"><span class="pre">SaveMenu</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu.act" title="Ссылка на это определение"></a></dt>
 <dd><p>Действия в главном меню</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mouse_pos</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>)</p></li>
-<li><p><strong>screen</strong> (<em>pygame.surface.Surface</em>)</p></li>
-<li><p><strong>logger</strong> (<a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><em>HELogger</em></a>)</p></li>
-<li><p><strong>play2</strong> (<em>pygame.surface.Surface</em>)</p></li>
-<li><p><strong>rect1</strong> (<em>pygame.rect.Rect</em>)</p></li>
-<li><p><strong>rect2</strong> (<em>pygame.rect.Rect</em>)</p></li>
-<li><p><strong>rect3</strong> (<em>pygame.rect.Rect</em>)</p></li>
-<li><p><strong>rect4</strong> (<em>pygame.rect.Rect</em>)</p></li>
+<li><p><strong>mouse_pos</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция курсора мыши,</p></li>
+<li><p><strong>screen</strong> (<em>pygame.surface.Surface</em>) – Переменная экрана,</p></li>
+<li><p><strong>logger</strong> (<a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><em>HELogger</em></a>) – Переменная для логов,</p></li>
+<li><p><strong>play2</strong> (<em>pygame.surface.Surface</em>) – Кнопка запуска (подсвеченная),</p></li>
+<li><p><strong>rect1</strong> (<em>pygame.rect.Rect</em>) – „Квадрат“ кнопки запуска,</p></li>
+<li><p><strong>rect2</strong> (<em>pygame.rect.Rect</em>) – „Квадрат“ кнопки Boosty,</p></li>
+<li><p><strong>rect3</strong> (<em>pygame.rect.Rect</em>) – „Квадрат“ кнопки DonationAlerts,</p></li>
+<li><p><strong>rect4</strong> (<em>pygame.rect.Rect</em>) – „Квадрат“ кнопки гайда по API,</p></li>
 <li><p><strong>mmc</strong> (<em>int</em>) – mainmenu_cycle (цикл главного меню)</p></li>
 </ul>
 </dd>
@@ -234,6 +247,12 @@ None: Вместо SaveMenu, если игрок ничего не сделал.
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.mainmenu.MainMenu.exit_menu">
+<span class="sig-name descname"><span class="pre">exit_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu.exit_menu" title="Ссылка на это определение"></a></dt>
+<dd><p>Меню выхода из игры</p>
 </dd></dl>
 
 <dl class="py method">
@@ -374,7 +393,56 @@ None: Вместо SaveMenu, если игрок ничего не сделал.
 
 </section>
 <section id="id6">
-<h2>Отрисовка и функционал верстака<a class="headerlink" href="#id6" title="Ссылка на этот заголовок"></a></h2>
+<h2>Отрисовка чердака<a class="headerlink" href="#id6" title="Ссылка на этот заголовок"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.draw.cherdak.Cherdak">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.draw.cherdak.</span></span><span class="sig-name descname"><span class="pre">Cherdak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.draw.cherdak.Cherdak" title="Ссылка на это определение"></a></dt>
+<dd><p>Подвал дома</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.cherdak.Cherdak.__move">
+<span class="sig-name descname"><span class="pre">__move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.cherdak.Cherdak.__move" title="Ссылка на это определение"></a></dt>
+<dd><p>Проверка на выход за границу карты дома (вторая часть)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>player</strong> (<a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Объект игрока</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.cherdak.Cherdak.__run">
+<span class="sig-name descname"><span class="pre">__run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.cherdak.Cherdak.__run" title="Ссылка на это определение"></a></dt>
+<dd><p>Основной метод класса.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.cherdak.Cherdak.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mouse_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#src.draw.cherdak.Cherdak.draw" title="Ссылка на это определение"></a></dt>
+<dd><p>Отрисовка локаций и кнопки выхода</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mouse_pos</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция курсора мыши</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Оставит цикл включённым или выключит его</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.draw.cherdak.Cherdak.exit">
+<span class="sig-name descname"><span class="pre">exit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.cherdak.Cherdak.exit" title="Ссылка на это определение"></a></dt>
+<dd><p>Выход из чердака</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id7">
+<h2>Отрисовка и функционал верстака<a class="headerlink" href="#id7" title="Ссылка на этот заголовок"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.draw.crafting_table.CraftingTable">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.draw.crafting_table.</span></span><span class="sig-name descname"><span class="pre">CraftingTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.draw.crafting_table.CraftingTable" title="Ссылка на это определение"></a></dt>
@@ -438,11 +506,11 @@ None: Вместо SaveMenu, если игрок ничего не сделал.
 </dd></dl>
 
 </section>
-<section id="id7">
-<h2>Функционал остальной мебели и техники<a class="headerlink" href="#id7" title="Ссылка на этот заголовок"></a></h2>
+<section id="id8">
+<h2>Функционал остальной мебели и техники<a class="headerlink" href="#id8" title="Ссылка на этот заголовок"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.draw.other_functional.OtherFunctional">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.draw.other_functional.</span></span><span class="sig-name descname"><span class="pre">OtherFunctional</span></span><a class="headerlink" href="#src.draw.other_functional.OtherFunctional" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.draw.other_functional.</span></span><span class="sig-name descname"><span class="pre">OtherFunctional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="character.html#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.draw.other_functional.OtherFunctional" title="Ссылка на это определение"></a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="src.draw.other_functional.OtherFunctional.bed">
 <span class="sig-name descname"><span class="pre">bed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.other_functional.OtherFunctional.bed" title="Ссылка на это определение"></a></dt>
@@ -450,9 +518,9 @@ None: Вместо SaveMenu, если игрок ничего не сделал.
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.draw.other_functional.OtherFunctional.identity">
-<span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.other_functional.OtherFunctional.identity" title="Ссылка на это определение"></a></dt>
-<dd><p>Определение</p>
+<dt class="sig sig-object py" id="src.draw.other_functional.OtherFunctional.closet">
+<span class="sig-name descname"><span class="pre">closet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.other_functional.OtherFunctional.closet" title="Ссылка на это определение"></a></dt>
+<dd><p>Шкаф</p>
 </dd></dl>
 
 <dl class="py method">

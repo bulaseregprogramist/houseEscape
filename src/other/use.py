@@ -1,6 +1,7 @@
 """Использование предметов"""
 
 from ..other.globals import load, some_dict
+from ..other.after_use import AfterUse
 from ..game.saving import Saving
 import pygame
 import logging
@@ -18,7 +19,7 @@ class Use:
 
     def __init__(self, screen: pygame.surface.Surface, n: int,
                 player: object) -> None:
-        self.__screen = screen
+        self.__screen: pygame.surface.Surface = screen
         self.__player = player
         self.__visible = 0
         self.__keys: list[str, ...] = self.save.load_save(n)["items_id"]
@@ -35,7 +36,7 @@ class Use:
         
     def to_dict(self) -> None:
         """Из списка в словарь"""
-        self.__from_num_to_texture()
+        self.__from_num_to_texture()  # Для удаления повторов в списке
         lst = []
         for i in self.some_list:
             try:  # Для того, чтобы предметы не дублировались
@@ -66,7 +67,7 @@ class Use:
         x, y = 605, 75
         self.__rects_list.clear()
         for i in range(self.__player.MAX_CAPACITY):
-            if i % 8 == 0 and i != 0:
+            if i % 8 == 0 and i != 0:  # Перенос на новую строку
                 y += 21
                 x = 605
             self.__screen.blit(self.__slot, (x, y))
@@ -75,7 +76,8 @@ class Use:
                     list(self.some_list[i].values())[0], (20, 20))
                 self.__screen.blit(texture, (x + 2, y))
                 self.__rects_list.append(
-                    [texture.get_rect(topleft=(x + 2, y)), texture])
+                    [texture.get_rect(topleft=(x + 2, y)), texture,
+                    list(self.some_list[i].keys())[0]])
             except IndexError:
                 pass
             x += 21
@@ -123,6 +125,7 @@ class Use:
     
     def __after_click(self) -> None:
         """Функционал"""
+        texture_id = ''
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         for i in self.__rects_list:
             if i[0].collidepoint(mouse_pos):
@@ -134,7 +137,11 @@ class Use:
                     else:
                         self.__item_visible = 0
                     self.res = i[1]
+                    texture_id = i[2]
         if self.__item_visible:  # Предмет на курсоре мыши
             self.item(mouse_pos, self.res)
+        if pygame.mouse.get_pressed()[0]:  # Использование предмета
+            ae = AfterUse(texture_id)
+            ae.functional()
     
     

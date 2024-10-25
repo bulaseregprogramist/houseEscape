@@ -27,7 +27,7 @@ class HEAPI:
         Args:
             logger (HELogger): Переменная для логов
         """
-        logging.basicConfig(level=logging.INFO, 
+        logging.basicConfig(level=logging.INFO,
                         format="[%(name)s] - [%(levelname)s] - %(message)s",
                         encoding="utf-8")
         logger.info("Загрузка модов...")

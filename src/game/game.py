@@ -17,7 +17,6 @@ from src.traps.traps import Traps
 from src.trade.money_system import MoneySystem
 from src.api.api import HEAPI
 from src.draw.pause import Pause
-from keyboard import is_pressed
 from ..entity.inventory import Inventory
 
 
@@ -32,7 +31,7 @@ class Game:
     def __init__(self, logger: HELogger) -> None:
         logging.basicConfig(level=logging.DEBUG,
             format="[%(name)s] - [%(levelname)s] [%(asctime)s] - %(message)s",
-            encoding="utf-8")
+            encoding="utf8")
         # Цвета для логов (их можно включить указав BETTER в консоли)
         # Или изменение уровня логов.
         HELogger.better_info(logger)
@@ -74,9 +73,10 @@ class Game:
         logger.debug("Получен список index")
         Block.screen = self.__screen
         logger.debug("Переменной screen класса Block присвоено значение")
-        self.__blocks = Block()  # Это не блоки, а мебель
+        self.__blocks = Block(logger)  # Это не блоки, а мебель
         logger.debug("Создание объекта класса Block")
-        self.__items = Item()  # Предметы (их можно подбирать и использовать)
+        self.__items = Item(
+            logger)  # Предметы (их можно подбирать и использовать)
         logger.debug("Создание объекта класса Item")
         GameObjects.screen = self.__screen
         logger.debug("Статичному полю GameObjects screen присвоено значение")
@@ -110,7 +110,7 @@ class Game:
                 self.__screen.fill((0, 0, 0))
                 mp: tuple[int, int] = pygame.mouse.get_pos()
                 self.__draw_location.render_location(self.__index, mp,
-                                    self.__screen, self.__player, self.__numb)
+                            self.__screen, self.__player, self.__numb, logger)
                 result: pygame.surface.Surface = self.__player.blit(mp)
                 rect, rect2 = self.__player.player_interfaces(
                     self.__screen, self.__player, mp)
@@ -133,11 +133,12 @@ class Game:
                 # Информация об игроке
                 if result.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
                     self.__player.get_stats(logger, self.__index, self.__numb)
-                if is_pressed("esc"):
+                for i in pygame.event.get():
+                    if i.type == pygame.KEYDOWN and i.key == pygame.K_ESCAPE:
                     # При нажатии на ESCAPE игра поставится на паузу
-                    pause = Pause(self.__screen, logger, self.__index,
+                        pause = Pause(self.__screen, logger, self.__index,
                             self.__player, self.__numb)
-                    cycle: int = pause.run()
+                        cycle: int = pause.run()
             cycle = 1
             self.__numb: int = MainMenu.render(self.__screen, logger)
             

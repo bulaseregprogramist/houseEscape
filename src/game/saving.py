@@ -59,7 +59,7 @@ class Saving:
         Returns:
             dict: Словарь с данными игры.
         """
-        with open(f"data/data{numb}.json") as file:
+        with open(f"data/data{numb}.json", encoding='utf-8') as file:
             result: dict[str: list | int | dict] = json.load(file)
         if logger is not None:
             logger.debug("Текстуры получены!")

@@ -11,7 +11,7 @@ class MonsterMove:
     def __init__(self, monster_speed: int, player: Player = None) -> None:
         self.speed = monster_speed
         self.__moving_right = 1
-        if player is not None:
+        if player is not None:  # stalker требует координат игрока
             self.px = player.x
             self.py = player.y
     

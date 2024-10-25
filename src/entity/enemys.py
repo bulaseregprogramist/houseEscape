@@ -19,11 +19,12 @@ class Enemy(Character):
     enemy_dict: dict[int: list, ...] = save.load_save(n)["enemys"]
     field_of_view: int = save.load_save(n)["FOV"]  # FOV
     
-    def __init__(self, x: int, y: int, enemy_type: str, 
+    def __init__(self, x: int, y: int, enemy_type: str, logger: HELogger,
             screen: pygame.surface.Surface, player: Player = None) -> None:
         self.__screen = screen
         self.x = x
         self.y = y
+        self.__logger = logger
         # В enemy_type может быть watcher, blinder, stalker
         self.__enemy_type: str = enemy_type
         self.__mm = MonsterMove(self.speed, player)
@@ -43,17 +44,19 @@ class Enemy(Character):
         cls.field_of_view: int = fov
         logger.debug("Поля класса изменены!")
         
-    def get_stats(self, logger: HELogger) -> None:
+    def get_stats(self, index: list[int, int], n: int) -> None:
         """
         Получение информации о враге
         
         Args:
-            logger (HELogger): Переменная для логов.
+            index (list[int, int]): Позиция врага на карте,
+            n (int): Номер выбранного сохранения.
         """
-        logger.info("Получение информации об враге")
-        result: dict = Character.filter_data()
-        super().get_stats(self.__screen, [self.x, self.y], result)
-        logger.info("Информация о враге получена!")
+        self.__logger.info("Получение информации об враге")
+        result: dict = Character.filter_data(self)
+        super().get_stats(self.__screen, index, n, [self.x, self.y],
+                        self.__logger, result)
+        self.__logger.info("Информация о враге получена!")
         
     def __to_texture(self, command: str) -> pygame.surface.Surface:
         """
@@ -122,14 +125,35 @@ class Enemy(Character):
                 mp[1] - (self.y + 35)) ** 2
         return (distance_squared <= (self.field_of_view + 30) ** 2
                 and pygame.mouse.get_pressed()[0])
+        
+    def rect_and_open(self, texture: pygame.surface.Surface, x: int, y: int,
+                    mouse_pos: tuple[int, int], key: str, num: int) -> None:
+        """
+        Получение квадрата и открытие меню статистики
+        
+        Args:
+            texture (pygame.surface.Surface): Текстура врага,
+            x (int): Координата врага по x,
+            y (int): Координата врага по y,
+            mouse_pos (tuple[int, int]): Позиция курсора мыши,
+            key (str): Ключ словаря enemy_dict,
+            num (int): Номер выбранного сохранения.
+        """
+        rect = texture.get_rect(topleft=(x, y))
+        if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[2]:
+            pygame.mixer.Sound("textures/collect.mp3").play()
+            self.get_stats([self.enemy_dict[key][2], self.enemy_dict[key][3]],
+                        num)
     
-    def enemy_draw_and_move(self, player: Player, mp: tuple[int, int]) -> int:
+    def enemy_draw_and_move(self, player: Player, mp: tuple[int, int],
+                            num: int) -> int:
         """
         Движение (AI) и отрисовка врага
         
         Args:
             player (Player): Объект игрока,
-            mp (tuple[int, int]): Позиция мыши.
+            mp (tuple[int, int]): Позиция мыши,
+            num (int): Номер выбранного сохранения.
         Returns:
             int: x и y врага.
         """
@@ -138,13 +162,19 @@ class Enemy(Character):
             self.__screen.blit(self.__to_texture(self.enemy_dict['1'][4]),
                             (self.x, self.y))
             self.x, self.y = self.__mm.move1(self.x, self.y)
+            self.rect_and_open(self.__to_texture(self.enemy_dict['1'][4]),
+                            self.x, self.y, mp, '1', num)
         elif self.__enemy_type == "blinder":
             self.__screen.blit(self.__to_texture(self.enemy_dict['3'][4]),
                             (self.x, self.y))
             self.x, self.y =  self.__mm.move2(self.x, self.y)
+            self.rect_and_open(self.__to_texture(self.enemy_dict['3'][4]),
+                            self.x, self.y, mp, '3', num)
         elif self.__enemy_type == "stalker":
             self.__screen.blit(self.__to_texture(self.enemy_dict['2'][4]),
                             (self.x, self.y))
             self.x, self.y = self.__mm.move3(self.x, self.y)
+            self.rect_and_open(self.__to_texture(self.enemy_dict['2'][4]),
+                            self.x, self.y, mp, '2', num)
         return self.x, self.y
     

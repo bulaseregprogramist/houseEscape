@@ -3,7 +3,7 @@
 from abc import abstractmethod, ABC
 import sys
 import pygame
-from ..other.globals import load, font4, n
+from ..other.globals import load, font2, n
 from ..game.logging import HELogger
 from ..game.saving import Saving
 from time import sleep
@@ -30,14 +30,14 @@ class Character(ABC):
         cls.speed = speed
         
     @abstractmethod
-    def get_stats(self, screen: pygame.surface.Surface, index: list, n: int,
-                  ch: list[int, int], logger: HELogger, *args) -> None:
+    def get_stats(self, screen: pygame.surface.Surface, index: list[int, int],
+                n: int, ch: list[int, int], logger: HELogger, *args) -> None:
         """
         Получение информации об персонаже
         
         Args:
             screen (pygame.surface.Surface): Переменная экрана,
-            index (list[int, int]): Позиция игрока на карте,
+            index (list[int, int]): Позиция персонажа на карте,
             n (int): Номер выбранного сохранения,
             ch (list[int, int]): Координаты персонажа,
             logger (HELogger): Переменная для логов.
@@ -46,12 +46,12 @@ class Character(ABC):
         data_menu_cycle, y = 1, ch[1] - 30
         y2 = copy(y)
         menu = load("textures/menu.png", (152, 150), "convert")
-        texts_list = [font4.render(str(i), 1,
+        texts_list = [font2.render(str(i), 1,
                                 (255, 255, 255)) for i in args[0].values()]
         while data_menu_cycle:
             screen.blit(menu, (ch[0] - 30, ch[1] - 30))
             
-            for j in texts_list:
+            for j in texts_list:  # Вывод характеристик персонажа
                 screen.blit(j, (ch[0] - 30, y))
                 y += 25
             y = copy(y2)

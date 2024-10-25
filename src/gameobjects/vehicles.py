@@ -2,6 +2,8 @@
 
 from ..gameobjects.gameobjects import GameObjects
 from ..other.globals import load
+from ..game.saving import Saving
+from ..entity.player import Player
 import pygame
 import logging
 
@@ -11,6 +13,7 @@ pygame.init()
 
 class Vehicles(GameObjects):
     """Транспортные средства. Наследник абстрактного класса GameObjects."""
+    save = Saving()
     
     def __init__(self, vehicle_type: str) -> None:
         if vehicle_type == "1":
@@ -18,9 +21,21 @@ class Vehicles(GameObjects):
         else:
             self.vehicle = load("textures/boat.png", (80, 60), "convert_alpha")
     
-    def placing(self) -> None:
-        """Размещение транспорта на карте"""
-        pass
+    def placing(self, he_map: list[int, int], player: Player, n: int) -> None:
+        """
+        Размещение транспорта на карте
+        
+        Args:
+            he_map (list[int, int]): Позиция игрока,
+            player (Player): Объект игрока,
+            n (int): Номер выбранного сохранения.
+        """
+        self.__vehicles = self.save.load_save(n)["vehicles"]
+        for i in self.__vehicles:
+            super().placing(self.__vehicles[i][0], self.__vehicles[i][1],
+                        [self.__vehicles[i][2], self.__vehicles[i][3]],
+                        he_map,
+                        self.__vehicles[i][4], player)
     
     def functional(self, x: int, y: int, 
                 texture: pygame.surface.Surface, i: int,

@@ -3,6 +3,7 @@
 import pygame
 from ..other.globals import load
 from ..entity.player import Player
+from ..traps.aftermath import AfterMath
 
 
 pygame.init()
@@ -16,6 +17,7 @@ class Traps:
         self.__poison_trap = load("textures/pt.png", (60, 60), "convert_alpha")
         self.__trap = load("textures/trap.png", (60, 60), "convert_alpha")
         self.__ice = load("textures/ice.png", (60, 60), "convert_alpha")
+        self.__aftermath = AfterMath()
         
     def draw_trap(self, x: int, y: int, trap_type: str) -> pygame.rect.Rect:
         """
@@ -49,8 +51,11 @@ class Traps:
             trap_type (str): Тип ловушки,
             player_rect (pygame.rect.Rect): 'Квадрат' игрока.
         """
-        if rect.colliderect(player_rect):
-            if trap_type == "poison" or trap_type == "trap":
-                Player.die(self.__screen)
+        if rect.colliderect(player_rect):  # Попадание в ловушку
+            if trap_type == "poison":
+                self.__aftermath.poison_aftermath()
+            elif trap_type == "trap":
+                self.__aftermath.common_aftermath()
             elif trap_type == "ice":
-                Player.die(self.__screen)
+                self.__aftermath.ice_aftermath()
+            Player.die(self.__screen)

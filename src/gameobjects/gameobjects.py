@@ -38,7 +38,7 @@ class GameObjects(ABC):
         rect2 = player.player.get_rect(topleft=(player.x, player.y))
         if rect.colliderect(rect2):  # Прозрачный объект при вхождении в него
             stexture.set_alpha(64)
-        else:
+        else:  # Непрозрачный объект
             stexture.set_alpha(500)
         if index == he_map:  # Если игрок находится в одной комнате с объектом
             self.screen.blit(stexture, (x, y))

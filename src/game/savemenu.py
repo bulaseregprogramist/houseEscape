@@ -49,6 +49,7 @@ class SaveMenu:
         
         try:
             remove(f"data/data{len(saves)}.json")
+            self.__logger.info("Сохранение удалено!")
         except FileNotFoundError:
             self.__logger.error("Ошибка. Сохранений у игрока нет!")
         self.__logger.debug("Метод delete_save успешно завершил работу!")

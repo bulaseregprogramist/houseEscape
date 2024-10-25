@@ -194,7 +194,7 @@ class Player(Character):
         self.x, self.y = Move.player_move(player, index, self.x, self.y,
                                         self.speed)
         self.open_inventory(logger, index, player, rect, n, mp)
-        if add:
+        if add:  # Удаление повторов в списке
             add = 0
             self.use.to_dict()
         

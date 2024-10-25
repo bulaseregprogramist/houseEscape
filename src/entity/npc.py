@@ -20,10 +20,12 @@ class NPC(Character):
     """Торговцы"""
     save = Saving()
     
-    def __init__(self, screen: pygame.surface.Surface,
-                logger: HELogger) -> None:
-        self.__screen = screen
+    def __init__(self, screen: pygame.surface.Surface, logger: HELogger,
+                index: list[int, int], num: int) -> None:
+        self.__screen: pygame.surface.Surface = screen
         self.__logger = logger
+        self.__index: list[int, int] = index
+        self.__num = num
         self.__npc = load("textures/npc.png", (65, 65), "convert_alpha")
     
     def placing(self, mouse_pos: tuple[int, int], player: Player,
@@ -81,7 +83,8 @@ class NPC(Character):
     
     def get_stats(self) -> None:
         """Получение информации об нпс"""
-        super().get_stats(self.__screen, [100, 100], self.__logger, {1: 2})
+        super().get_stats(self.__screen, self.__index, self.__num,
+                        [100, 100], self.__logger, {1: 2})
         self.__logger.info("Выход из меню...")
     
     @staticmethod

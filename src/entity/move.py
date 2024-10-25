@@ -24,9 +24,9 @@ class Move:
         Args:
             player (Player): Объект игрока,
             index (list[int, int]): Карта дома,
-            x (int):
-            y (int):
-            speed (int):
+            x (int): Позиция игрока по x
+            y (int): Позиция игрока по y
+            speed (int): Скорость игрока
         Returns:
             int: Позиция игрока по x и y.
         """
