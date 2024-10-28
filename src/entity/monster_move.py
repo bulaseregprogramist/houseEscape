@@ -6,11 +6,11 @@ from ..entity.player import Player
 
 class MonsterMove:
     __direction = 0
-    __rand_direction = randint(1, 2)
+    __rand_direction = randint(1, 2)  # Для watcher'a
     
     def __init__(self, monster_speed: int, player: Player = None) -> None:
         self.speed = monster_speed
-        self.__moving_right = 1
+        self.__moving_right = 1  # Для blinder'a
         if player is not None:  # stalker требует координат игрока
             self.px = player.x
             self.py = player.y
@@ -74,7 +74,7 @@ class MonsterMove:
     
     def move3(self, x: int, y: int) -> int:
         """
-        Движение stalker'a
+        Движение stalker'a (двигается за игроком)
         
         Args:
             x (int): Позиция stalker'a по x,

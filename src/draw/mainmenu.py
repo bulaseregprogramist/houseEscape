@@ -19,7 +19,7 @@ class MainMenu:
     
     def __init__(self, screen: pygame.surface.Surface,
                 logger: HELogger) -> None:
-        self.__screen = screen
+        self.__screen: pygame.surface.Surface = screen
         self.__logger = logger
         self.__yes = load("textures/yes.png", (30, 30), "convert")
         self.__no = load("textures/no.png", (30, 30), "convert")

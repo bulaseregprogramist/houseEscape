@@ -31,7 +31,7 @@ class Pause:
         
     def __functional(self) -> int:
         """
-        Функционал главного меню
+        Функционал главного меню.
         
         Returns:
             int: Выключает цикл или оставляет его включённым. (второй случай)
@@ -42,10 +42,10 @@ class Pause:
         rect2 = self.__mm.get_rect(topleft=(340, 440))
         # Остановка цикла меню паузы
         if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            return 0, 0
+            return 0, 0  # Выход из меню паузы
         elif rect2.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            return 0, 1
-        return 1, 0
+            return 0, 1  # Выход в главное меню
+        return 1, 0  # Без изменени
     
     def run(self) -> int:
         """

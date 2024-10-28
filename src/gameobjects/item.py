@@ -18,6 +18,7 @@ class Item(GameObjects):
     
     def __init__(self, logger: HELogger) -> None:
         self.__logger = logger
+        self.__logger.debug("Завершена работа конструктора класса Item")
     
     def placing(self, he_map: list[int, int], player: Player, n: int) -> None:
         """
@@ -84,5 +85,5 @@ class Item(GameObjects):
         some_dict: dict[str: int | dict | list] = self.save.load_save(n)
         some_dict["items"] = self.__items
         with open(f"data/data{n}.json", "w") as file:
-            json.dump(some_dict, file, indent=3)
+            json.dump(some_dict, file, indent=2)
     

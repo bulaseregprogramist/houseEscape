@@ -85,8 +85,8 @@ class Basement(Player):
             
             cycle: int = self.draw(mouse_pos)
             rect = self.blit(mouse_pos)
-            rect2, rect3 = self.player_interfaces(
-                self._screen, self.__pl, mouse_pos)
+            rect2, rect3 = self.player_interfaces(self._screen, self.__pl,
+                                        mouse_pos, self.__index)
             self.in_game(self.__pl, self.__index, self.__logger,
                         rect2, self.__n, mouse_pos)
             self.__move(self.__pl)

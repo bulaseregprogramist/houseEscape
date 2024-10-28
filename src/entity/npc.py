@@ -23,7 +23,7 @@ class NPC(Character):
     def __init__(self, screen: pygame.surface.Surface, logger: HELogger,
                 index: list[int, int], num: int) -> None:
         self.__screen: pygame.surface.Surface = screen
-        self.__logger = logger
+        self.__logger: HELogger = logger
         self.__index: list[int, int] = index
         self.__num = num
         self.__npc = load("textures/npc.png", (65, 65), "convert_alpha")

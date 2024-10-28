@@ -61,7 +61,7 @@ class Game:
             logger (HELogger): Переменная для логов.
         """
         logger.info("Начата инициализация перед работой в цикле")
-        self.__draw_location = Draw(logger)
+        self.__draw_location = Draw(self.__screen, logger)
         logger.debug("Создание объекта класса Draw")
         Saving.inventory = Inventory
         logger.debug("Статичному полю Saving inventory присвоено значение")
@@ -112,8 +112,8 @@ class Game:
                 self.__draw_location.render_location(self.__index, mp,
                             self.__screen, self.__player, self.__numb, logger)
                 result: pygame.surface.Surface = self.__player.blit(mp)
-                rect, rect2 = self.__player.player_interfaces(
-                    self.__screen, self.__player, mp)
+                rect, rect2 = self.__player.player_interfaces(self.__screen,
+                            self.__player, mp, self.__index)
                 self.__blocks.placing(self.__index, self.__player,self.__numb)
                 self.__items.placing(self.__index, self.__player, self.__numb)
                 self.__pictures.placing(self.__index, self.__player,

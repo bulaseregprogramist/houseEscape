@@ -18,7 +18,7 @@ class SaveMenu:
     
     def __init__(self, screen: pygame.surface.Surface,
                 logger: HELogger) -> None:
-        self.__logger = logger
+        self.__logger: HELogger = logger
         self.__bg = load("textures/sm.png", (220, 770), "convert")
         self.__st = font4.render("СОХРАНЕНИЕ", 1, (255, 255, 255))
         self.__st2 = font4.render("СОХРАНЕНИЕ", 1, (229, 255, 0))
@@ -52,7 +52,7 @@ class SaveMenu:
             self.__logger.info("Сохранение удалено!")
         except FileNotFoundError:
             self.__logger.error("Ошибка. Сохранений у игрока нет!")
-        self.__logger.debug("Метод delete_save успешно завершил работу!")
+        self.__logger.debug("Метод delete_save завершил работу!")
 
     def draw(self, rects_list: list, saves_list: list[str, ...]) -> Any:
         """
@@ -94,17 +94,17 @@ class SaveMenu:
             saves_list: list[str, ...] = listdir("data/")
             rect, rect2, mouse_pos = self.draw(rects_list, saves_list)
             
-            for j in range(len(rects_list)):  # Запуск сохранения
-                if rects_list[j].collidepoint(mouse_pos):
+            for j in range(len(rects_list)):  # Запуск (перечисление)
+                if rects_list[j].collidepoint(mouse_pos):  # Свечение
                     self.__screen.blit(self.__st2, (310, rects_list[j][1]))
-                    if pygame.mouse.get_pressed()[0]:
+                    if pygame.mouse.get_pressed()[0]:  # Запуск
                         return j + 1  # Номер сохранения
-            if rect.collidepoint(mouse_pos):
+            if rect.collidepoint(mouse_pos):  # Создание сохранения
                 self.__screen.blit(self.__plus2, (550, 1))
                 if pygame.mouse.get_pressed()[0]:
                     self.__logger.info("Идёт создание сохранения")
                     self.create_save()
-            elif rect2.collidepoint(mouse_pos):
+            elif rect2.collidepoint(mouse_pos):  # Удаление сохранения
                 self.__screen.blit(self.__delete2, (600, 1))
                 if pygame.mouse.get_pressed()[0]:
                     self.__logger.info("Идёт удаление сохранения")

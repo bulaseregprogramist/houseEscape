@@ -7,7 +7,7 @@ from ..game.logging import HELogger
 from ..game.saving import Saving
 from ..other.globals import n, load
 import pygame
-import re
+import re  # Для загрузки текстур в код из словаря enemy_dict.
 
 
 pygame.init()
@@ -24,7 +24,7 @@ class Enemy(Character):
         self.__screen = screen
         self.x = x
         self.y = y
-        self.__logger = logger
+        self.__logger: HELogger = logger
         # В enemy_type может быть watcher, blinder, stalker
         self.__enemy_type: str = enemy_type
         self.__mm = MonsterMove(self.speed, player)

@@ -17,7 +17,8 @@ class Block(GameObjects):
     screen: pygame.surface.Surface
     
     def __init__(self, logger: HELogger) -> None:
-        self.__logger = logger
+        self.__logger: HELogger = logger
+        self.__logger.debug("Завершена работа конструктора класса Block")
     
     def placing(self, he_map: list[int, int], player: Player, n: int) -> None:
         """

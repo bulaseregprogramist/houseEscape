@@ -21,18 +21,13 @@ some_dict = {  # Эти данные в каждом файле в папке da
     "x": 385, 
     "y": 385, 
     "blocks": { 
-        1: [450, 150, 3, 3,
-            "pygame.image.load(\"textures/table.png\")"],
-        2: [120, 320, 3, 3,
-            "pygame.image.load(\"textures/lamp.png\")"],
-        3: [320, 470, 3, 2,
-            "pygame.image.load(\"textures/trapdoor.png\")"],
-        4: [70, 130, 1, 1,
-            'pygame.image.load(\'textures/bed.png\')'],
-        5: [600, 600, 2, 3,
-            'pygame.image.load(\'textures/lest.png\')'],
-        6: [300, 300, 3, 1,
-            'pygame.image.load(\'textures/closet.png\')']
+        1: [450, 150, 3, 3, "pygame.image.load(\"textures/table.png\")"],
+        2: [120, 320, 3, 3, "pygame.image.load(\"textures/lamp.png\")"],
+        3: [320, 470, 3, 2, "pygame.image.load(\"textures/trapdoor.png\")"],
+        4: [70, 130, 1, 1, 'pygame.image.load(\'textures/bed.png\')'],
+        5: [600, 600, 2, 3, 'pygame.image.load(\'textures/lest.png\')'],
+        6: [300, 300, 3, 1, 'pygame.image.load(\'textures/closet.png\')'],
+        7: [110, 1, 3, 1, 'pygame.image.load(\'textures/exit2.png\')']
     },
     "items": {  
         1: [150, 150, 3, 3,

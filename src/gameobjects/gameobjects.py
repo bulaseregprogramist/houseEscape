@@ -117,7 +117,9 @@ class GameObjects(ABC):
                     return 1
                 elif go_type == "block":
                     return 2
-                elif go_type == "vehicle":
+                elif go_type == "picture":
                     return 3
+                elif go_type == "vehicle":
+                    return 4
         return 0
     

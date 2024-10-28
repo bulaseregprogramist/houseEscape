@@ -16,7 +16,7 @@ class MoneySystem:
     def __init__(self, num: int, screen: pygame.surface.Surface) -> None:
         self.__num = num
         self.__change_dict = 0
-        self.__screen = screen
+        self.__screen: pygame.surface.Surface = screen
         save = Saving()
         self.change_money(-save.load_save(num)["MON"])
         self.__money: pygame.surface.Surface = load("textures/money.png", 
@@ -33,14 +33,14 @@ class MoneySystem:
             money (int): Потраченные деньги
         """
         if cls.MONEY - money > 0:  # Если хватает денег
-            cls.MONEY -= money
+            cls.MONEY -= money  # Минус используется и так: -(-50) = +50
             
     def save_moneys(self) -> None:
         """Сохранение денег"""
         with open(f"data/data{self.__num}.json") as file:
             res2: dict[int: list[int, ...]] = json.load(file)
         res2["money"] = self.__res  # Расположение денег в комнатах
-        res2["MON"] = self.MONEY
+        res2["MON"] = self.MONEY  # Игровая валюта
         with open(f"data/data{self.__num}.json", "w") as file:
             json.dump(res2, file, indent=3)
             

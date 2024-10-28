@@ -4,7 +4,7 @@ from logging import Logger, basicConfig, INFO, ERROR, CRITICAL, getLogger
 from logging import WARNING, DEBUG
 from typing import Any, Self
 import coloredlogs  # Для выделения особым цветом разных логов
-import sys
+import sys  # Не для sys.exit(), а для argv
 
 
 class HELogger(Logger):

@@ -1,7 +1,7 @@
 """Персонаж"""
 
 from abc import abstractmethod, ABC
-import sys
+import sys  # Только для sys.exit()
 import pygame
 from ..other.globals import load, font2, n
 from ..game.logging import HELogger
@@ -14,7 +14,7 @@ pygame.init()
 
 
 class Character(ABC):
-    """Персонаж (игрок, монстр, нпс)"""
+    """Персонаж (игрок, монстр, нпс (торговец))"""
     save = Saving()
     speed = save.load_save(n)["SPEED"]
     
@@ -44,7 +44,7 @@ class Character(ABC):
             *args (Any): Статичные поля класса.
         """
         data_menu_cycle, y = 1, ch[1] - 30
-        y2 = copy(y)
+        y2: int = copy(y)
         menu = load("textures/menu.png", (152, 150), "convert")
         texts_list = [font2.render(str(i), 1,
                                 (255, 255, 255)) for i in args[0].values()]

@@ -8,6 +8,7 @@ from ..game.logging import HELogger
 from ..entity.enemys import Enemy
 from ..draw.basement import Basement
 from ..draw.cherdak import Cherdak
+from ..entity.endings import Endings
 from ..draw.other_functional import OtherFunctional
 from ..draw.crafting_table import CraftingTable
 
@@ -18,7 +19,7 @@ pygame.init()
 class Draw:
     """Этот класс отвечает за отрисовку локаций и другого"""
     
-    def __init__(self, logger: HELogger) -> None:
+    def __init__(self, screen, logger: HELogger) -> None:
         self.__logger = logger
         logger.info("Работа конструктора класса Draw начата!")
         self.__bg1 = load("textures/1.png", (770, 770), "convert")
@@ -75,6 +76,9 @@ class Draw:
             Cherdak(logger, screen, n)
         elif key == 6:  # Шкаф
             of.closet()
+        elif key == 7:
+            endings = Endings(screen)
+            endings.pre_ending("Концовка Решётки")
     
     def render_location(self, index: list[int, int], mp: tuple[int, int],
                     screen: pygame.surface.Surface, player: Player,

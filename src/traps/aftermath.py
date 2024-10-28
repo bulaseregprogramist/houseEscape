@@ -2,7 +2,7 @@
 
 
 class AfterMath:
-    """Последствия"""
+    """Последствия ловушек"""
     
     def poison_aftermath(self) -> None:
         """Последствия ловушки яда"""

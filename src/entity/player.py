@@ -66,20 +66,22 @@ class Player(Character):
         logger.info("Закрытие инвентаря")
         
     def player_interfaces(self, screen: pygame.surface.Surface, player: Self,
-                        mp: tuple[int, int]) -> pygame.surface.Surface:
+            mp: tuple[int, int], 
+            index: list[int, int]) -> pygame.surface.Surface:
         """
         Интерфейсы игрока (инвентарь, кнопка использования)
         
         Args:
             screen (pygame.surface.Surface): Переменная экрана,
             player (Player): Объект класса Player,
-            mp (tuple[int, int]): Позиция мыши.
+            mp (tuple[int, int]): Позиция мыши,
+            index (list[int, int]): Позиция игрока на карте
         Returns:
             pygame.surface.Surface: 'Квадрат' текстуры рюкзака (инвентаря)
                                     и игрока.
         """
         screen.blit(self.__inventory, (10, 10))
-        self.use.draw(mp)
+        self.use.draw(mp, index)
         rect = self.__inventory.get_rect(topleft=(10, 10))
         rect2 = self.player.get_rect(topleft=(player.x, player.y))
         if rect.colliderect(rect2):  # Рюкзак прозрачен, если в нём игрок.

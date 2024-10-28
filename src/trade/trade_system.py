@@ -19,12 +19,12 @@ class TradeSystem:
     
     def __init__(self, screen: pygame.surface.Surface, num: int,
                 player: object, use: Use) -> None:
-        self.__screen = screen
+        self.__screen: pygame.surface.Surface = screen
         self.change_dict = 0
-        self.__use = use
+        self.__use: Use = use
         self.__num = num
         with open(f"data/data{num}.json") as file:
-            self.__result: dict[int: list] = json.load(file)
+            self.__result: dict[int: list | dict | int] = json.load(file)
         self.__rects_list = []
     
     def draw_items(self) -> None:
@@ -56,14 +56,14 @@ class TradeSystem:
             
     def change_keys(self) -> None:
         """
-        Измение ключей, если предмет был куплен.
+        Изменение ключей, если предмет был куплен.
         """
         with open(f"data/data{self.__num}.json") as file:
-            res: dict = json.load(file)
+            res: dict[str: dict | list | int] = json.load(file)
         res["npc_products"] = copy(self.__result["npc_products"])
         res["MON"] = MoneySystem.MONEY
         with open(f"data/data{self.__num}.json", "w") as file:
-            json.dump(res, file)
+            json.dump(res, file, indent=2)
         logging.debug("Данные сохранены!")
     
     def buy_items(self, j: int) -> int:
@@ -91,10 +91,10 @@ class TradeSystem:
                     self.__use.some_list.append([
                         load(self.__result["items"][str(int(j) + 6)][5],
                         (60, 60), "convert_alpha"), int(j) + 6])
-                    for i in range(3):
+                    for i in range(3):  # Удаление повторов в инвентаре
                         self.__use.to_dict()
                 except IndexError:
                     pass
-                return 1
-        return 0
+                return 1  # Ключ словаря будет удалён
+        return 0  # Ключ словаря не будет удалён
                 

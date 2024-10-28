@@ -36,6 +36,9 @@ class Vehicles(GameObjects):
                         [self.__vehicles[i][2], self.__vehicles[i][3]],
                         he_map,
                         self.__vehicles[i][4], player)
+            self.functional(self.__vehicles[i][0], self.__vehicles[i][1],
+                            self.__vehicles[i][4], i, he_map,
+                            [self.__vehicles[i][0], self.__vehicles[i][1]])
     
     def functional(self, x: int, y: int, 
                 texture: pygame.surface.Surface, i: int,
@@ -56,7 +59,7 @@ class Vehicles(GameObjects):
         """
         result: int = super().functional(x, y, texture, "vehicle",
                                         he_map, index, i)
-        if result == 3:  # Помещение предмета в инвентарь
+        if result == 4:  # Помещение предмета в инвентарь
             pygame.mixer.Sound("textures/open.mp3").play()
             logging.debug("Данные возвращены!")
             return 1, i

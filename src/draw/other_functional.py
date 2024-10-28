@@ -2,7 +2,7 @@
 
 import json
 import pygame
-import sys
+import sys  # Только для sys.exit()
 import logging
 from ..game.saving import Saving
 from ..other.globals import font
@@ -19,7 +19,7 @@ class OtherFunctional:
         self.__num = num
         self.__screen: pygame.surface.Surface = screen
         self.__index: list[int, int] = index
-        self.__player = player
+        self.__player: Player = player
         self.__text = font.render("Шкаф", 1, (0, 0, 0))
         self.__save = Saving()
     
@@ -37,8 +37,8 @@ class OtherFunctional:
             
             for i in items:  # Отрисовка предметов шкафа
                 pass
-            pygame.display.flip()
             
+            pygame.display.flip()   
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     logging.info("Выход из игры...")
