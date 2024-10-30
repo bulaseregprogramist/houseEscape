@@ -55,7 +55,8 @@ class CraftingTable:
         self.__some_list.extend(inv_list2)
         logging.debug("Конец работы метода ntt")
         
-    def __get_free_space(self, texture, y: int) -> None:
+    def __get_free_space(self, texture: pygame.surface.Surface,
+                        y: int) -> None:
         """
         Сокращение кода (если предметов для крафта нет)
         

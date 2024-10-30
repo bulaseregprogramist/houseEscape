@@ -22,7 +22,7 @@ class Basement(Player):
     def __init__(self, logger: HELogger,
                 screen: pygame.surface.Surface, n: int) -> None:
         super().__init__(logger, screen, n)
-        self.__logger = logger
+        self.__logger: HELogger = logger
         self.__n: int = n
         self.__index = [3, 2]
         self.__pl = Player(logger, screen, n)

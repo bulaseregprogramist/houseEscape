@@ -95,6 +95,7 @@ class Enemy(Character):
         pygame.draw.circle(self.__screen, (255, 0, 0),
                         (self.x + 25, self.y + 35), self.field_of_view, 4)
         if self.check_collision(player) or self.check_collision2(mp):
+            self.__logger.info("Игрок умер!")
             Player.die(self.__screen)
         
     def check_collision(self, player: Player) -> bool:
@@ -157,7 +158,7 @@ class Enemy(Character):
         Returns:
             int: x и y врага.
         """
-        self.draw_fov(player, mp)
+        self.draw_fov(player, mp)  # Красный круг возле врага
         if self.__enemy_type == "watcher":
             self.__screen.blit(self.__to_texture(self.enemy_dict['1'][4]),
                             (self.x, self.y))

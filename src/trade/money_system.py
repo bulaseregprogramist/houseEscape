@@ -1,7 +1,7 @@
 """Денежная система"""
 
 import json
-from ..other.globals import load
+from ..other.globals import load  # Загрузка текстур
 from ..game.saving import Saving
 from time import sleep
 import pygame
@@ -42,7 +42,7 @@ class MoneySystem:
         res2["money"] = self.__res  # Расположение денег в комнатах
         res2["MON"] = self.MONEY  # Игровая валюта
         with open(f"data/data{self.__num}.json", "w") as file:
-            json.dump(res2, file, indent=3)
+            json.dump(res2, file, indent=2)
             
     def placing_money(self, index: list[int, int], 
                     mouse_pos: tuple[int, int]) -> None:
@@ -72,6 +72,6 @@ class MoneySystem:
                 pass
         if self.__change_dict:  # Удаление, если деньги получены
             self.__change_dict = 0
-            self.__res.pop(i)
+            self.__res.pop(i)  # Удаление денег в том месте
             self.save_moneys()
                     

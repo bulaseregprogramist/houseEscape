@@ -44,7 +44,7 @@ class TradeSystem:
                                                             y - 20)))
             y += 70
             self.change_dict: int = self.buy_items(i)
-            if self.change_dict:  # Если игрок купил предмет
+            if self.change_dict:  # Если игрок купил предмет.
                 break
         if self.change_dict:  # Чтобы избежать ошибки Runtime
             try:

@@ -11,6 +11,7 @@ import re
 
 pygame.init()
 
+
 class Use:
     """Кнопка использования"""
     save = Saving()
@@ -18,7 +19,7 @@ class Use:
     def __init__(self, screen: pygame.surface.Surface, n: int,
                 player: object) -> None:
         self.__screen: pygame.surface.Surface = screen
-        self.__player = player
+        self.__player: object = player
         self.__visible = 0
         self.__keys: list[str, ...] = self.save.load_save(n)["items_id"]
         self.__rects_list = []
@@ -53,6 +54,7 @@ class Use:
         """
         logging.debug("Начало работы метода __from_num_to_texture")
         inv_list2 = []
+        print(self.__keys)
         for i in self.__keys:  # Загрузка из строк в текстуры
             pattern = r"pygame\.image\.load\(['\"](.*?)['\"]\)"
 
@@ -65,7 +67,12 @@ class Use:
         
     def __draw_inventory_slots(self, index: list[int, int],
                             pos: tuple[int, int]) -> None:
-        """Отрисовка инвентаря"""
+        """
+        Отрисовка инвентаря
+        
+        Args:
+            index (list[int, int]): Позиция игрока на карте
+        """
         x, y = 605, 75
         self.__rects_list.clear()
         for i in range(self.__player.MAX_CAPACITY):

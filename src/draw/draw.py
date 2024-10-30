@@ -6,10 +6,11 @@ from ..entity.npc import NPC
 from ..entity.player import Player
 from ..game.logging import HELogger
 from ..entity.enemys import Enemy
+from ..game.saving import Saving
 from ..draw.basement import Basement
 from ..draw.cherdak import Cherdak
 from ..entity.endings import Endings
-from ..draw.other_functional import OtherFunctional
+from .other_functional.other_functional import OtherFunctional
 from ..draw.crafting_table import CraftingTable
 
 
@@ -60,6 +61,9 @@ class Draw:
         pygame.mixer.Sound("textures/collect.mp3").play()
         of = OtherFunctional(n, screen, index, player)
         key = int(key)
+        save = Saving()
+        result: dict[int: list] = save.load_save(n)["blocks"]
+        
         if key == 1:  # Верстак
             CraftingTable(screen, text, n, index, player)
         elif key == 2:  # Лампа
@@ -76,7 +80,7 @@ class Draw:
             Cherdak(logger, screen, n)
         elif key == 6:  # Шкаф
             of.closet()
-        elif key == 7:
+        elif key == 7 and "exit3.png" in result['7'][4]:
             endings = Endings(screen)
             endings.pre_ending("Концовка Решётки")
     

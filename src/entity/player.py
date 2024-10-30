@@ -65,8 +65,8 @@ class Player(Character):
         inventory.open(index, player, n, logger, mouse_pos)
         logger.info("Закрытие инвентаря")
         
-    def player_interfaces(self, screen: pygame.surface.Surface, player: Self,
-            mp: tuple[int, int], 
+    def player_interfaces(self, screen: pygame.surface.Surface,
+            player: Self, mp: tuple[int, int], 
             index: list[int, int]) -> pygame.surface.Surface:
         """
         Интерфейсы игрока (инвентарь, кнопка использования)
@@ -101,9 +101,9 @@ class Player(Character):
         """
         self._screen.blit(self.player, (self.x, self.y))
         rect = self.player.get_rect(topleft=(self.x, self.y))
-        if rect.collidepoint(mp):
+        if rect.collidepoint(mp):  # Свечение игрока
             self._screen.blit(self.player2, (self.x, self.y))
-        return rect
+        return rect  # Для того, чтобы получить информацию об игроке.
         
     def get_stats(self, logger: HELogger, indx: list[int, int],
                 n: int) -> None:

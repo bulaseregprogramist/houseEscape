@@ -148,14 +148,6 @@
       4,
       "pygame.image.load('textures/sword.png')",
       "textures/sword.png"
-    ],
-    "13": [
-      0,
-      0,
-      9,
-      3,
-      "pygame.image.load('textures/axe.png')",
-      "textures/axe.png"
     ]
   },
   "pictures": {
@@ -242,7 +234,6 @@
     ]
   },
   "closet_items": [
-    "12",
-    "13"
+    "12"
   ]
 }

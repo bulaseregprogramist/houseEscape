@@ -72,8 +72,8 @@ class Item(GameObjects):
             change()
             pygame.mixer.Sound("textures/press.mp3").play()
             self.__logger.debug("Данные успешно возвращены!")
-            return 1, i
-        return 0, i
+            return 1, i  # Ключ будет удалён
+        return 0, i  # Ключ не будет удалён
     
     def __save_item(self, n: int) -> None:
         """
@@ -84,6 +84,7 @@ class Item(GameObjects):
         """
         some_dict: dict[str: int | dict | list] = self.save.load_save(n)
         some_dict["items"] = self.__items
+        self.__logger.info("Предметы сохранены!")
         with open(f"data/data{n}.json", "w") as file:
             json.dump(some_dict, file, indent=2)
     

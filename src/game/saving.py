@@ -4,6 +4,7 @@ import json
 import pygame
 from ..other.globals import some_dict
 from .logging import HELogger
+import logging
 
 
 pygame.init()
@@ -95,4 +96,13 @@ class Saving:
             result["items_id"] = items_id
         with open(f"data/data{n}.json", "w") as file:
             json.dump(result, file, indent=2)
+            
+    def save_closet_items(self, items: list[str, ...], num: int, 
+                        some_dict: dict) -> None:
+        """Сохраняет предметы шкафа"""
+        logging.debug("Идёт сохранение предметов")
+        some_dict["closet_items"] = items
+        with open(f"data/data{num}.json", "w") as file:
+            json.dump(some_dict, file, indent=2)
+        logging.debug("Предметы шкафа сохранены!")
         

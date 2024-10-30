@@ -1,7 +1,7 @@
 """Концовки игры HouseEscape"""
 
 import pygame
-import sys
+import sys  # Для sys.exit()
 from ..other.globals import font
 import logging
 

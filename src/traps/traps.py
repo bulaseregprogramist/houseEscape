@@ -21,7 +21,7 @@ class Traps:
         
     def draw_trap(self, x: int, y: int, trap_type: str) -> pygame.rect.Rect:
         """
-        Отрисовка ловушек
+        Отрисовка ловушек.
         
         Args:
             x (int): Позиция ловушки по x,
@@ -44,7 +44,7 @@ class Traps:
     def after(self, rect: pygame.rect.Rect, trap_type: str,
             player_rect: pygame.rect.Rect) -> None:
         """
-        Последствия попадания в ловушку
+        Последствия попадания в ловушку.
         
         Args:
             rect (pygame.rect.Rect): 'Квадрат' ловушки,

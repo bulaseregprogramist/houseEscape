@@ -20,7 +20,7 @@ class MainMenu:
     def __init__(self, screen: pygame.surface.Surface,
                 logger: HELogger) -> None:
         self.__screen: pygame.surface.Surface = screen
-        self.__logger = logger
+        self.__logger: HELogger = logger
         self.__yes = load("textures/yes.png", (30, 30), "convert")
         self.__no = load("textures/no.png", (30, 30), "convert")
         self.__em = load("textures/em.png", (220, 140), "convert")
@@ -90,6 +90,8 @@ class MainMenu:
                 logger.info("Выход из главного меню")
                 mmc = 0
                 save = SaveMenu(screen, logger)
+                if save.number == "to_menu":
+                    mmc = 1
         elif (rect2.collidepoint(mouse_pos)  # Boosty
                 and pygame.mouse.get_pressed()[0]):
             MainMenu.open("https://boosty.to/sergey_pelmen", logger)

@@ -55,7 +55,9 @@ some_dict = {  # Эти данные в каждом файле в папке da
         11: [0, 0, 9, 5, "pygame.image.load(\'textures/ognivo.png\')",
             'textures/ognivo.png'],
         12: [0, 0, 9, 4, 'pygame.image.load(\'textures/sword.png\')',
-            'textures/sword.png']
+            'textures/sword.png'],
+        13: [0, 0, 9, 3, 'pygame.image.load(\'textures/axe.png\')',
+            'textures/axe.png']
     },
     "pictures": {
         1: [50, 50, 3, 2]
@@ -84,7 +86,7 @@ some_dict = {  # Эти данные в каждом файле в папке da
     "vehicles": {
         1: [30, 30, 1, 1, 'texture/boat.png']
     },
-    "closet_items": ["12"]
+    "closet_items": ["12", "13"]
 }
 
 traps_dict = {

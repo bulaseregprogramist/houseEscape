@@ -18,7 +18,7 @@ class MonsterMove:
     @classmethod
     def move1(cls, x: int, y: int) -> int:
         """
-        Движение watcher'a
+        Движение watcher'a (влево-вправо или вверх-вниз)
         
         Args:
             x (int): Позиция watcher'a по x,
@@ -26,14 +26,14 @@ class MonsterMove:
         Returns:
             int: Изменённые координаты watcher'a
         """
-        if cls.__rand_direction == 1:
+        if cls.__rand_direction == 1:  # Влево-вправо
             if x > 100 and not cls.__direction:
                 x -= 4.3
                 if 101 <= x <= 107:
                     cls.__direction = 1
             if x < 680 and cls.__direction:
                 x += 4.3
-            if x > 680:
+            if x > 680:  # Идёт налево
                 cls.__direction = 0
         else:  # Сверху вниз и снизу вверх
             if y > 100 and not cls.__direction:
@@ -42,13 +42,13 @@ class MonsterMove:
                     cls.__direction = 1
             if y < 680 and cls.__direction:
                 y += 4.3
-            if y > 680:
+            if y > 680:  # Идёт вверх
                 cls.__direction = 0
         return x, y
     
     def move2(self, x: int, y: int) -> int:
         """
-        Движение blinder'a
+        Движение blinder'a (от левого угла к правому)
         
         Args:
             x (int): Позиция blinder'a по x,

@@ -39,7 +39,7 @@ class Cherdak(Player):
         Args:
             mouse_pos (tuple[int, int]): Позиция курсора мыши
         Returns:
-            int: Оставит цикл включённым или выключит его
+            int: Оставит цикл включённым или выключит его.
         """
         self._screen.blit(self.__room, (0, 0))
         self._screen.blit(self.__arrow, (370, 0))

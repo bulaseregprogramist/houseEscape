@@ -98,7 +98,7 @@ class Move:
         elif index == [1, 1]:
             return True
         elif index == [0, 2]:
-            if y > 120:
+            if y > 120:  # Ниже крыши можно ходить.
                 return True
         return False
     

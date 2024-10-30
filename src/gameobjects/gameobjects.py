@@ -100,9 +100,6 @@ class GameObjects(ABC):
             int: 0 - ничего не произошло, 1 - воспроизведение звука #1,
                 2 - звук #2, 3 - звук #3.
         """
-        
-        if isinstance(texture, str):
-            return 0
         rect = texture.get_rect(topleft=(x, y))
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         

@@ -9,6 +9,7 @@
 У игры несколько концовок.
 Версия игры - 1.0.0.
 Поддержать меня (Boosty) - https://boosty.to/sergey_pelmen
-Или так (DonationAlerts): https://www.donationalerts.com/r/sergeyprojects                     
+Или так (DonationAlerts): https://www.donationalerts.com/r/sergeyprojects
+Для запуска игры нажми на файл main.py.
 
 

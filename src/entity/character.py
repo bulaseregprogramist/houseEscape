@@ -3,7 +3,7 @@
 from abc import abstractmethod, ABC
 import sys  # Только для sys.exit()
 import pygame
-from ..other.globals import load, font2, n
+from ..other.globals import load, font2, n  # load - загрузка текстур.
 from ..game.logging import HELogger
 from ..game.saving import Saving
 from time import sleep
@@ -33,7 +33,7 @@ class Character(ABC):
     def get_stats(self, screen: pygame.surface.Surface, index: list[int, int],
                 n: int, ch: list[int, int], logger: HELogger, *args) -> None:
         """
-        Получение информации об персонаже
+        Получение информации об персонаже.
         
         Args:
             screen (pygame.surface.Surface): Переменная экрана,

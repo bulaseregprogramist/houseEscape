@@ -33,7 +33,7 @@
     :private-members:
 Функционал остальной мебели и техники
 -------------------------------------
-.. autoclass:: src.draw.other_functional.OtherFunctional
+.. autoclass:: src.draw.other_functional.other_functional.OtherFunctional
     :members:
     :private-members:
     

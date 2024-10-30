@@ -13,7 +13,7 @@ class HELogger(Logger):
     def __init__(self, name='', level=''):
         if name != '' and level != '':  # Для второго запуска конструктора.
             super().__init__(name, level)
-        print("[INFO] Logger activated!")
+            print("[INFO] Logger activated!")
         
     def change_name(self, logger: Self) -> Any:
         """

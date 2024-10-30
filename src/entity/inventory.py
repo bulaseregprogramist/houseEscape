@@ -2,7 +2,6 @@
 
 import pygame
 import sys
-from typing import Self
 from ..other.globals import font3, some_dict, load
 from ..game.logging import HELogger
 from ..game.saving import Saving
@@ -58,6 +57,7 @@ class Inventory:
                             (255, 255, 255))
         x, y = 100, 100
         screen.blit(text, (150, 30))
+        print(len(cls.inventory_list))
         if len(cls.inventory_list) > 0:  # Сохранённые предметы
             for i in range(len(cls.inventory_list)):  # Отрисовка предметов
                 if i % 8 == 0 and i != 0:  # Перенос на новую строку
@@ -93,7 +93,7 @@ class Inventory:
             inv_list2.append(load(match.group(1), (60, 60), "convert_alpha"))
         cls.inventory_list2 = inv_list2  # Список с сохранёнными предметами
             
-    def open(self, index: list[int, int], player: Self, n: int,
+    def open(self, index: list[int, int], player: object, n: int,
             logger: HELogger, mouse_pos: tuple[int, int]) -> None:
         """
         Открытие инвентаря
