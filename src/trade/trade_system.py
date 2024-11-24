@@ -76,8 +76,12 @@ class TradeSystem:
             int: Удаление ключа из слоавря предметов магазина
         """
         mp: tuple[int, int] = pygame.mouse.get_pos()
+        cost = self.__result["npc_products"][str(j)][0]
+        
         for i in self.__rects_list:  # 'Квадраты' предметов
-            if i.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
+            if (i.collidepoint(mp)
+                    and pygame.mouse.get_pressed()[0] 
+                    and MoneySystem.MONEY > cost):
                 logging.info("Предмет был куплен!")
                 sleep(0.3)
                 pygame.mixer.Sound("textures/collect.mp3").play()

@@ -11,7 +11,7 @@ pygame.init()
 
 
 class MoneySystem:
-    MONEY = 0
+    MONEY = 0  # На самом деле в начале игры у игрока 100 монет.
     
     def __init__(self, num: int, screen: pygame.surface.Surface) -> None:
         self.__num = num

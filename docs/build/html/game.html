@@ -69,6 +69,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#src.game.saving.Saving"><code class="docutils literal notranslate"><span class="pre">Saving</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#src.game.saving.Saving.load_save"><code class="docutils literal notranslate"><span class="pre">Saving.load_save()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#src.game.saving.Saving.load_textures"><code class="docutils literal notranslate"><span class="pre">Saving.load_textures()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.game.saving.Saving.save_closet_items"><code class="docutils literal notranslate"><span class="pre">Saving.save_closet_items()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#src.game.saving.Saving.saving"><code class="docutils literal notranslate"><span class="pre">Saving.saving()</span></code></a></li>
 </ul>
 </li>
@@ -261,6 +262,12 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="src.game.saving.Saving.save_closet_items">
+<span class="sig-name descname"><span class="pre">save_closet_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">some_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.saving.Saving.save_closet_items" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет предметы шкафа</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="src.game.saving.Saving.saving">
 <span class="sig-name descname"><span class="pre">saving</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inventory_saving</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.saving.Saving.saving" title="Ссылка на это определение"></a></dt>
 <dd><p>Сохранение игры</p>
@@ -310,7 +317,7 @@
 </ul>
 </dd>
 <dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>„Квадрат“ плюса и креста,
+<dd class="field-even"><p>„Квадрат“ плюса, креста, выхода из меню,
 tuple[int, int]: Позиция мыши.</p>
 </dd>
 <dt class="field-odd">Тип результата<span class="colon">:</span></dt>

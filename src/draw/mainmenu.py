@@ -6,6 +6,7 @@ import webbrowser
 from ..game.logging import HELogger
 from ..other.globals import load, font
 from ..game.savemenu import SaveMenu
+from ..game.experimental import Experimental
 from ..api.api import HEAPI
 from time import sleep
 import logging
@@ -63,7 +64,7 @@ class MainMenu:
     
     @classmethod
     def act(cls, mouse_pos: tuple[int, int], screen: pygame.surface.Surface,
-            logger: HELogger, play2, rect1, rect2, rect3, rect4,
+            logger: HELogger, play2, rect1, rect2, rect3, rect4, rect5,
             mmc: int) -> int | SaveMenu | None:
         """
         Действия в главном меню
@@ -77,6 +78,7 @@ class MainMenu:
             rect2 (pygame.rect.Rect): 'Квадрат' кнопки Boosty,
             rect3 (pygame.rect.Rect): 'Квадрат' кнопки DonationAlerts,
             rect4 (pygame.rect.Rect): 'Квадрат' кнопки гайда по API,
+            rect5 (pygame.rect.Rect): 'Квадрат' кнопки экспериментов
             mmc (int): mainmenu_cycle (цикл главного меню)
         Returns:
             int: Выключение mainmenu_cycle или оставляет всё как есть,
@@ -101,7 +103,11 @@ class MainMenu:
                         logger)
         elif (rect4.collidepoint(mouse_pos)  # Гайд по API
                 and pygame.mouse.get_pressed()[0]):
-            HEAPI.guide()
+            HEAPI.guide(screen)
+        elif (rect5.collidepoint(mouse_pos)
+                and pygame.mouse.get_pressed()[0]):
+            exp = Experimental(screen)
+            exp.run()
         return mmc, save
     
     @staticmethod
@@ -139,9 +145,10 @@ class MainMenu:
         da = load("textures/da.jpg", (80, 80), "convert")
         logo = load("textures/logo.png", (210, 210), "convert")
         notepad = load("textures/notepad.png", (105, 105), "convert_alpha")
+        flask = load("textures/flask.png", (105, 105), "convert_alpha")
         logger.debug(
             "Завершена инициализация текстур для статического метода render")
-        return bg, play, boosty, da, logo, notepad, play2
+        return bg, play, boosty, da, logo, notepad, play2, flask
     
     @staticmethod
     def render(screen: pygame.surface.Surface, logger: HELogger) -> int:
@@ -157,7 +164,7 @@ class MainMenu:
         logger.info("Главное меню открыто!")
         mainmenu_cycle = 1
         logger.debug("Переменной cycle присвоен 1")
-        bg, play, boosty, da, logo, notepad, play2 = MainMenu.__init_textures(
+        bg, play, boosty, da, logo, notepad, play2, flask = MainMenu.__init_textures(
             logger)
         
         while mainmenu_cycle:
@@ -168,15 +175,17 @@ class MainMenu:
             screen.blit(da, (660, 30))
             screen.blit(logo, (280, 30))
             screen.blit(notepad, (660, 660))
+            screen.blit(flask, (-10, 660))
             
             mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
             rect1 = play.get_rect(topleft=(317, 300))
             rect2 = boosty.get_rect(topleft=(30, 30))
             rect3 = da.get_rect(topleft=(660, 30))  # 'Квадрат' DonationAlerts
             rect4 = notepad.get_rect(topleft=(660, 660))
+            rect5 = flask.get_rect(topleft=(-10, 660))
             
-            mainmenu_cycle, save = MainMenu.act(mouse_pos, screen,
-                    logger, play2, rect1, rect2, rect3, rect4, mainmenu_cycle)
+            mainmenu_cycle, save = MainMenu.act(mouse_pos, screen, logger,
+                    play2, rect1, rect2, rect3, rect4, rect5, mainmenu_cycle)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     logger.info("Выход из игры...")

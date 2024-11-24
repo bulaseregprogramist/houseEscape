@@ -5,7 +5,7 @@ from src.game.logging import HELogger
 
 
 def main() -> None:
-    """Функция запуска игры."""
+    """Этот метод запускает игру"""
     logger =  HELogger()
     Game(logger.change_name(logger))
 

@@ -57,7 +57,6 @@ class Inventory:
                             (255, 255, 255))
         x, y = 100, 100
         screen.blit(text, (150, 30))
-        print(len(cls.inventory_list))
         if len(cls.inventory_list) > 0:  # Сохранённые предметы
             for i in range(len(cls.inventory_list)):  # Отрисовка предметов
                 if i % 8 == 0 and i != 0:  # Перенос на новую строку

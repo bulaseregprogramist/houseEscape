@@ -21,6 +21,8 @@ class Closet:
         self.__num = num
         self.__text = font.render("Шкаф", 1, (0, 0, 0))
         self.__text2 = font.render("Инвентарь:", 1, (0, 0, 0))
+        self.__sword2 = load("textures/sword2.png", (60, 60), "convert_alpha")
+        self.__axe2 = load("textures/axe2.png", (60, 60), "convert_alpha")
         self.__save = save
         self.__x, self.__y = 230, 230
         self.__player = player
@@ -52,7 +54,7 @@ class Closet:
         """
         lst = copy(Inventory.inventory_list)
         lst.extend(Inventory.inventory_list2)
-        pygame.draw.rect(self.__screen, (255, 255, 255),
+        pygame.draw.rect(self.__screen, (235, 255, 245),
                             (150, 150, 470, 470))
         self.__screen.blit(self.__text, (330, 170))
             
@@ -62,8 +64,9 @@ class Closet:
             texture = self.to_texture(i)
             self.__screen.blit(texture, 
                             (self.__x, self.__y))
-            self.__items_rects_list.append(
-                texture.get_rect(topleft=(self.__x, self.__y)))
+            self.__items_rects_list.append([
+                texture.get_rect(topleft=(self.__x, self.__y)),
+                i])
             self.__x += 60
         self.__x, self.__y = 180, 490
         self.__screen.blit(self.__text2, (255, 450))
@@ -88,11 +91,19 @@ class Closet:
             mouse_position: tuple[int, int] = pygame.mouse.get_pos()
             
             for j in range(len(self.__items_rects_list)):  # Взятие предмета
-                if (self.__items_rects_list[j].collidepoint(mouse_position) 
-                        and pygame.mouse.get_pressed()[0]):
-                    Inventory.append(self.to_texture(items[j]), j + 12)
-                    items.pop(j)
-                    self.__save.save_closet_items(items, self.__num, result)
+                if ((self.__items_rects_list[j][0].collidepoint(
+                        mouse_position))):
+                    if self.__items_rects_list[j][1] == "12":  # Меч
+                        self.__screen.blit(self.__sword2, (230, 230))
+                    elif self.__items_rects_list[j][1] == "13":  # Топор
+                        self.__screen.blit(self.__axe2, (290, 230))
+                    
+                    if pygame.mouse.get_pressed()[0]:
+                        Inventory.append(self.to_texture(items[int(j)]),
+                                        str(int(j) + 12))
+                        items.pop(j)
+                        self.__save.save_closet_items(items, self.__num,
+                                                    result)
             
             pygame.display.flip()   
             for event in pygame.event.get():

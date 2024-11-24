@@ -78,7 +78,7 @@ class Game:
         self.__items = Item(
             logger)  # Предметы (их можно подбирать и использовать)
         logger.debug("Создание объекта класса Item")
-        GameObjects.screen = self.__screen
+        GameObjects.screen: pygame.surface.Surface = self.__screen
         logger.debug("Статичному полю GameObjects screen присвоено значение")
         GameObjects.logger = logger
         logger.debug("Статичному полю GameObjects logger присвоено значение")

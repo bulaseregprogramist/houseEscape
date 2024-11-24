@@ -54,7 +54,6 @@ class Use:
         """
         logging.debug("Начало работы метода __from_num_to_texture")
         inv_list2 = []
-        print(self.__keys)
         for i in self.__keys:  # Загрузка из строк в текстуры
             pattern = r"pygame\.image\.load\(['\"](.*?)['\"]\)"
 
@@ -124,7 +123,7 @@ class Use:
     def item(self, mp: tuple[int, int],
             texture: pygame.surface.Surface) -> None:
         """
-        Отрисовка применяемого предмета
+        Отрисовка применяемого предмета.
         
         Args:
             mp (tuple[int, int]): Позиция курсора мыши,

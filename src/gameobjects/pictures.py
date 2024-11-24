@@ -52,7 +52,7 @@ class Pictures(GameObjects):
             n (int): Номер выбранного сохранения,
             screen (pygame.surface.Surface): Переменная дисплея.
         """
-        self.__pict: dict[int: list, ...] = self.save.load_save(n)["pictures"]
+        """self.__pict: dict[int: list, ...] = self.save.load_save(n)["pictures"]
         
         if self.load_picture:  # Оптимизация
             self.__load_picture_from_site()
@@ -70,7 +70,7 @@ class Pictures(GameObjects):
             super().placing(self.__pict[i][0] + 37, self.__pict[i][1] + 3,
                     [self.__pict[i][2], self.__pict[i][3]],
                     he_map, self.image, player)
-            self.functional()
+            self.functional()"""
     
     def functional(self) -> None:
         """Функционал картины"""
