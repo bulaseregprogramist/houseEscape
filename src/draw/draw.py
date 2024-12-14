@@ -46,7 +46,7 @@ class Draw:
     @staticmethod
     def show_interfaces(key: int, screen: pygame.surface.Surface, 
                         n: int, index: list[int, int],
-                        player: Player) -> None:
+                        player: Player, logger) -> None:
         """
         Интерфейсы для мебели
         
@@ -55,11 +55,12 @@ class Draw:
             screen (pygame.surface.Surface): Переменная для экрана,
             n (int): Номер выбранного сохранения,
             index (list[int, int]): Позиция игрока на карте,
-            player (Player): Объект игрока.
+            player (Player): Объект игрока,
+            logger (HELogger): Переменная для логов.
         """
         text = font.render("СОЗДАНИЕ ПРЕДМЕТА", 1, (0, 0, 0))
         pygame.mixer.Sound("textures/collect.mp3").play()
-        of = OtherFunctional(n, screen, index, player)
+        of = OtherFunctional(n, screen, index, player, logger)
         key = int(key)
         save = Saving()
         result: dict[int: list] = save.load_save(n)["blocks"]

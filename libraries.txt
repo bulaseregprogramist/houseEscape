@@ -1,4 +1,0 @@
-Установите библиотеки:
-pygame
-coloredlogs
-keyboard

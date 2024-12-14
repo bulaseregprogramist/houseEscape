@@ -15,6 +15,7 @@ from src.other.globals import traps_dict
 from src.game.saving import Saving
 from src.traps.traps import Traps
 from src.trade.money_system import MoneySystem
+from ..draw.other_functional.other_functional import OtherFunctional
 from src.api.api import HEAPI
 from src.draw.pause import Pause
 from ..entity.inventory import Inventory
@@ -85,6 +86,9 @@ class Game:
         CraftingTable.logger = logger
         logger.debug("Статичному полю CraftingTable logger присвоено значение")
         self.__traps = Traps(self.__screen)
+        OtherFunctional.block = Block
+        OtherFunctional.item = Item
+        logger.debug("Полям класса OtherFunctional присвоены значения")
         logger.debug("Создание объекта класса Traps")
         self.__pictures = Pictures()  # Картины с котами
         logger.debug("Создание объекта класса Pictures")
@@ -118,7 +122,9 @@ class Game:
                 self.__items.placing(self.__index, self.__player, self.__numb)
                 self.__pictures.placing(self.__index, self.__player,
                                         self.__numb, self.__screen)
-                self.__money.placing_money(self.__index, mp)
+                visible: list[int] = self.__money.placing_money(self.__index, mp)
+                if visible[0]:  # Зелёный текст после взятия денег
+                    visible = self.__money.visible_add(visible)
             
                 for j in traps_dict:  # Отрисовка ловушек
                     if (traps_dict[j][2] == self.__index[0]

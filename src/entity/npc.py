@@ -31,7 +31,7 @@ class NPC(Character):
     def placing(self, mouse_pos: tuple[int, int], player: Player,
                 index: list[int, int], num: int) -> None:
         """
-        Отрисовка торговца.
+        Отрисовка торговца и взаимодействие с ним.
         
         Args:
             mouse_pos (tuple[int, int]): Позиция мыши,
@@ -82,7 +82,7 @@ class NPC(Character):
         super().change_fields(2)
     
     def get_stats(self) -> None:
-        """Получение информации об нпс."""
+        """Получение информации об NPC."""
         super().get_stats(self.__screen, self.__index, self.__num,
                         [100, 100], self.__logger, {1: 2})
         self.__logger.info("Выход из меню...")

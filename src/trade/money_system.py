@@ -1,7 +1,7 @@
 """Денежная система"""
 
 import json
-from ..other.globals import load  # Загрузка текстур
+from ..other.globals import load, font3  # Загрузка текстур и шрифт
 from ..game.saving import Saving
 from time import sleep
 import pygame
@@ -16,6 +16,7 @@ class MoneySystem:
     def __init__(self, num: int, screen: pygame.surface.Surface) -> None:
         self.__num = num
         self.__change_dict = 0
+        self.__visible: list[int] = [0, 0, 0]
         self.__screen: pygame.surface.Surface = screen
         save = Saving()
         self.change_money(-save.load_save(num)["MON"])
@@ -44,6 +45,22 @@ class MoneySystem:
         with open(f"data/data{self.__num}.json", "w") as file:
             json.dump(res2, file, indent=2)
             
+    def visible_add(self, visible: list[int]) -> None:
+        """
+        Показывает, сколько добавилось денег.
+        
+        Args:
+            visible (int): Список для того, чтобы деньги отображались.
+        Returns:
+            list[int]: Тот же список
+        """
+        text = font3.render(f"+{-visible[1]}", 1, (0, 234, 0))
+        self.__screen.blit(text, (640, visible[2]))
+        visible[2] -= 4
+        if visible[2] < -10:
+            visible[0] = 0
+        return visible
+            
     def placing_money(self, index: list[int, int], 
                     mouse_pos: tuple[int, int]) -> None:
         """
@@ -67,6 +84,8 @@ class MoneySystem:
                         pygame.mixer.Sound("textures/press.mp3").play()
                         self.change_money(-self.__res[i][4])
                         self.__change_dict = 1
+                        self.__visible: list[int] = [1, -self.__res[i][4],
+                                                    350]
                         break
             except KeyError:
                 pass
@@ -74,4 +93,5 @@ class MoneySystem:
             self.__change_dict = 0
             self.__res.pop(i)  # Удаление денег в том месте
             self.save_moneys()
+        return self.__visible
                     

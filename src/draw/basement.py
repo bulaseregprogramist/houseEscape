@@ -90,7 +90,7 @@ class Basement(Player):
             self.in_game(self.__pl, self.__index, self.__logger,
                         rect2, self.__n, mouse_pos)
             self.__move(self.__pl)
-            # Информация об игроке
+            # Получение информации об игроке
             if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
                 self.get_stats(self.__logger, self.__index, self.__n)
             pygame.display.flip()

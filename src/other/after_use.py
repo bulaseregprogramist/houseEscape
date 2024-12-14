@@ -21,7 +21,12 @@ class AfterUse:
         self.__texture_id = str(texture_id)
         
     def change_exit(self) -> None:
-        """Изменение внешнего вида решётки (сохранение)"""
+        """
+        Изменяет внешний вид решётки (сохранение).
+
+        Выводит информацию о том, что внешний вид выхода изменён.
+        Сохраняет данные в файл.
+        """
         logging.info("Внешний вид выхода изменён!")
         with open(f"data/data{self.__n}.json", "w") as file:
             json.dump(self.__some_dict, file, indent=2)
@@ -45,3 +50,5 @@ class AfterUse:
                     4] = 'pygame.image.load(\'textures/exit3.png\')'
                 self.__some_dict["blocks"] = self.__blocks
                 self.change_exit()
+                
+                

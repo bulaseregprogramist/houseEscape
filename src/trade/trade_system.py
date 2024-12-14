@@ -76,7 +76,7 @@ class TradeSystem:
             int: Удаление ключа из слоавря предметов магазина
         """
         mp: tuple[int, int] = pygame.mouse.get_pos()
-        cost = self.__result["npc_products"][str(j)][0]
+        cost: int = self.__result["npc_products"][str(j)][0]
         
         for i in self.__rects_list:  # 'Квадраты' предметов
             if (i.collidepoint(mp)

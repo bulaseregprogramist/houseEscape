@@ -20,7 +20,8 @@ class Item(GameObjects):
         self.__logger = logger
         self.__logger.debug("Завершена работа конструктора класса Item")
     
-    def placing(self, he_map: list[int, int], player: Player, n: int) -> None:
+    def placing(self, he_map: list[int, int], player: Player, n: int,
+                have_functional=1) -> None:
         """
         Размещение предмета
         
@@ -40,7 +41,8 @@ class Item(GameObjects):
                             [self.__items[i][2], self.__items[i][3]],
                             he_map,
                             texture, player)
-            delete, key = self.functional(self.__items[i][0],
+            if have_functional:
+                delete, key = self.functional(self.__items[i][0],
                             self.__items[i][1], texture, i, he_map,
                             [self.__items[i][2], self.__items[i][3]])
             if delete:  # Чтобы не было бага
