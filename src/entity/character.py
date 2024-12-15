@@ -30,44 +30,41 @@ class Character(ABC):
         cls.speed = speed
         
     @abstractmethod
-    def get_stats(self, screen: pygame.surface.Surface, index: list[int, int],
-                n: int, ch: list[int, int], logger: HELogger, *args) -> None:
+    def get_stats(self, config, *args) -> None:
         """
         Получение информации об персонаже.
         
         Args:
-            screen (pygame.surface.Surface): Переменная экрана,
-            index (list[int, int]): Позиция персонажа на карте,
-            n (int): Номер выбранного сохранения,
-            ch (list[int, int]): Координаты персонажа,
-            logger (HELogger): Переменная для логов.
-            *args (Any): Статичные поля класса.
+            config (StatsConfig): Информация о персонаже,
+            *args (dict): Статичные поля класса.
         """
-        data_menu_cycle, y = 1, ch[1] - 30
+        data_menu_cycle, y = 1, config.ch[1] - 30
         y2: int = copy(y)
         menu = load("textures/menu.png", (152, 150), "convert")
         texts_list = [font2.render(str(i), 1,
                                 (255, 255, 255)) for i in args[0].values()]
         while data_menu_cycle:
-            screen.blit(menu, (ch[0] - 30, ch[1] - 30))
+            config.screen.blit(menu, (config.ch[0] - 30, config.ch[1] - 30))
+            config.screen.blit(config.player.player,
+                        (config.player.x, config.player.y))
             
             for j in texts_list:  # Вывод характеристик персонажа
-                screen.blit(j, (ch[0] - 30, y))
+                config.screen.blit(j, (config.ch[0] - 30, y))
                 y += 25
             y = copy(y2)
             pygame.display.flip()
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    logger.info("Выход из игры...")
-                    self.save.saving(index, ch[0],
-                                    ch[1], n, True)
+                    config.logger.info("Выход из игры...")
+                    self.save.saving(config.index, config.ch[0],
+                                    config.ch[1], config.n, True)
                     sys.exit()
                 elif (event.type == pygame.KEYDOWN
                         and event.key == pygame.K_ESCAPE):
                     sleep(0.15)
                     data_menu_cycle = 0
-    
+
     @staticmethod
     def filter_data(dct: dict) -> dict:
         """

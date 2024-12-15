@@ -26,6 +26,8 @@ class Experimental:
         self.__text2 = font3.render("Гайд по API", 1, (0, 0, 0))
         self.__text3 = font3.render("Новые виды противников", 1, (0, 0, 0))
         self.__text4 = font3.render("Система здоровья", 1, (0, 0, 0))
+        self.__text5 = font3.render("Внимание! Могут быть баги!", 1,
+                                    (255, 0, 0))
         
     def load_settings(self) -> None:
         """Загрузка экспериментальных настроек"""
@@ -59,6 +61,7 @@ class Experimental:
         self.__screen.blit(self.__text2, (190, 120))
         self.__screen.blit(self.__text3, (190, 220))
         self.__screen.blit(self.__text4, (190, 320))
+        self.__screen.blit(self.__text5, (150, 420))
             
         self.__rects_list.append(
             self.__checkmark1.get_rect(topleft=(100, 100)))
@@ -66,6 +69,38 @@ class Experimental:
             self.__checkmark1.get_rect(topleft=(100, 200)))
         self.__rects_list.append(
             self.__checkmark1.get_rect(topleft=(100, 300)))
+        
+    def off_on(self, mouse_pos: tuple[int, int]) -> None:
+        """
+        Взаимодействие с кнопками
+        
+        Args:
+            mouse_pos (tuple[int, int]): Позиция курсора мыши.
+        """
+        for i in range(len(self.__rects_list)):
+            if (self.__rects_list[i].collidepoint(mouse_pos)
+                    and pygame.mouse.get_pressed()[0]):
+                key1, key2, key3 = '1', '2', '3'
+                if i == 1 and not self.__result[self.dict_name][key1]:
+                    sleep(0.4)
+                    self.__result[self.dict_name][key1] = 1
+                elif i == 1 and self.__result[self.dict_name][key1]:
+                    sleep(0.4)
+                    self.__result[self.dict_name][key1] = 0
+                        
+                if i == 2 and not self.__result[self.dict_name][key2]:
+                    sleep(0.4)
+                    self.__result[self.dict_name][key2] = 1
+                elif i == 2 and self.__result[self.dict_name][key2]:
+                    sleep(0.4)
+                    self.__result[self.dict_name][key2] = 0
+                        
+                if i == 3 and not self.__result[self.dict_name][key3]:
+                    sleep(0.4)
+                    self.__result[self.dict_name][key3] = 1
+                elif i == 3 and self.__result[self.dict_name][key3]:
+                    sleep(0.4)
+                    self.__result[self.dict_name][key3] = 0
     
     def run(self) -> None:
         """Основной метод класса"""
@@ -74,31 +109,7 @@ class Experimental:
         while cycle:
             mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
             self.draw_experimental()
-            
-            for i in range(len(self.__rects_list)):
-                if (self.__rects_list[i].collidepoint(mouse_pos)
-                        and pygame.mouse.get_pressed()[0]):
-                    key1, key2, key3 = '1', '2', '3'
-                    if i == 1 and not self.__result[self.dict_name][key1]:
-                        sleep(0.4)
-                        self.__result[self.dict_name][key1] = 1
-                    elif i == 1 and self.__result[self.dict_name][key1]:
-                        sleep(0.4)
-                        self.__result[self.dict_name][key1] = 0
-                        
-                    if i == 2 and not self.__result[self.dict_name][key2]:
-                        sleep(0.4)
-                        self.__result[self.dict_name][key2] = 1
-                    elif i == 2 and self.__result[self.dict_name][key2]:
-                        sleep(0.4)
-                        self.__result[self.dict_name][key2] = 0
-                        
-                    if i == 3 and not self.__result[self.dict_name][key3]:
-                        sleep(0.4)
-                        self.__result[self.dict_name][key3] = 1
-                    elif i == 3 and self.__result[self.dict_name][key3]:
-                        sleep(0.4)
-                        self.__result[self.dict_name][key3] = 0
+            self.off_on(mouse_pos)
             
             pygame.display.flip()
             

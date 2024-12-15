@@ -31,6 +31,8 @@ class Move:
         Returns:
             int: Позиция игрока по x и y.
         """
+        if is_pressed("shift"):
+            speed *= 1.5
         if (is_pressed("w") and Move.move_in_location(player.x, 
                 player.y, index) and y < 753):
             y -= 3 * speed

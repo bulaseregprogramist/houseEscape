@@ -62,7 +62,7 @@ class Game:
             logger (HELogger): Переменная для логов.
         """
         logger.info("Начата инициализация перед работой в цикле")
-        self.__draw_location = Draw(self.__screen, logger)
+        self.__draw_location = Draw(logger)
         logger.debug("Создание объекта класса Draw")
         Saving.inventory = Inventory
         logger.debug("Статичному полю Saving inventory присвоено значение")
@@ -140,7 +140,8 @@ class Game:
                 pygame.display.flip()
                 # Информация об игроке
                 if result.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
-                    self.__player.get_stats(logger, self.__index, self.__numb)
+                    self.__player.get_stats(logger, self.__index, self.__numb,
+                                            self.__player)
                 for i in pygame.event.get():
                     if i.type == pygame.KEYDOWN and i.key == pygame.K_ESCAPE:
                     # При нажатии на ESCAPE игра поставится на паузу

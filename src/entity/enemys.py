@@ -1,5 +1,6 @@
 """Враги в игре"""
 
+from ..other.configs import StatsConfig
 from ..entity.character import Character
 from ..entity.player import Player
 from ..entity.monster_move import MonsterMove
@@ -25,6 +26,7 @@ class Enemy(Character):
         self.x = x
         self.y = y
         self.__logger: HELogger = logger
+        self.__player = player
         # В enemy_type может быть watcher, blinder, stalker
         self.__enemy_type: str = enemy_type
         self.__mm = MonsterMove(self.speed, player)
@@ -44,18 +46,16 @@ class Enemy(Character):
         cls.field_of_view: int = fov
         logger.debug("Поля класса изменены!")
         
-    def get_stats(self, index: list[int, int], n: int) -> None:
+    def get_stats(self, config) -> None:
         """
         Получение информации о враге
         
         Args:
-            index (list[int, int]): Позиция врага на карте,
-            n (int): Номер выбранного сохранения.
+            config (StatsConfig): Параметры для работы.
         """
         self.__logger.info("Получение информации об враге")
         result: dict = Character.filter_data(self)
-        super().get_stats(self.__screen, index, n, [self.x, self.y],
-                        self.__logger, result)
+        super().get_stats(config, result)
         self.__logger.info("Информация о враге получена!")
         
     def __to_texture(self, command: str) -> pygame.surface.Surface:
@@ -143,8 +143,9 @@ class Enemy(Character):
         rect = texture.get_rect(topleft=(x, y))
         if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[2]:
             pygame.mixer.Sound("textures/collect.mp3").play()
-            self.get_stats([self.enemy_dict[key][2], self.enemy_dict[key][3]],
-                        num)
+            self.get_stats(StatsConfig(self.__screen,
+                [self.enemy_dict[key][2], self.enemy_dict[key][3]],
+                self.__logger, [x, y], num, self.__player))
     
     def enemy_draw_and_move(self, player: Player, mp: tuple[int, int],
                             num: int) -> int:

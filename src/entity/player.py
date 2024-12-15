@@ -10,7 +10,7 @@ from ..other.globals import font, load, n
 from ..other.use import Use
 from .character import Character
 from .inventory import Inventory
-from ..other.configs import Config
+from ..other.configs import Config, StatsConfig
 
 
 pygame.init()
@@ -98,7 +98,7 @@ class Player(Character):
         return rect  # Для того, чтобы получить информацию об игроке.
         
     def get_stats(self, logger: HELogger, indx: list[int, int],
-                n: int) -> None:
+                n: int, player) -> None:
         """
         Получение информации об игроке
         
@@ -109,8 +109,8 @@ class Player(Character):
         """
         logger.info("Получение информации об игроке")
         result: dict = Character.filter_data(self)
-        super().get_stats(self._screen, indx, n,
-                        [self.x, self.y], logger, result)
+        super().get_stats(StatsConfig(self._screen, indx, n,
+                        [self.x, self.y], logger, player), result)
         logger.info("Информация об игроке получена!")
     
     @staticmethod

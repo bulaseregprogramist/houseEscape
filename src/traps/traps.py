@@ -1,7 +1,7 @@
 """Ловушки в доме"""
 
 import pygame
-from ..other.globals import load
+from ..other.globals import load  # Загрузка текстур
 from ..entity.player import Player
 from ..traps.aftermath import AfterMath
 

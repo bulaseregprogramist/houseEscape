@@ -14,6 +14,7 @@ pygame.init()
 
 
 class OtherFunctional:
+    # Эти переменные хранят одноимённые классы
     block = None
     item = None
     traps = None

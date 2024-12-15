@@ -12,8 +12,8 @@ class MonsterMove:
         self.speed = monster_speed
         self.__moving_right = 1  # Для blinder'a
         if player is not None:  # stalker требует координат игрока
-            self.px = player.x
-            self.py = player.y
+            self.px: int = player.x
+            self.py: int = player.y
     
     @classmethod
     def move1(cls, x: int, y: int) -> int:

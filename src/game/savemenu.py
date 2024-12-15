@@ -139,6 +139,9 @@ class SaveMenu:
                 if event.type == pygame.QUIT:
                     self.__logger.info("Выход из игры...")
                     sys.exit()
+                elif (event.type == pygame.KEYDOWN
+                        and event.key == pygame.K_ESCAPE):
+                    save_menu_cycle = 0
             pygame.display.flip()
         return 'to_menu'
     

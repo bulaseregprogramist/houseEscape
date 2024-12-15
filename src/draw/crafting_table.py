@@ -21,11 +21,12 @@ class CraftingTable:
     save = Saving()
     logger: HELogger
     
-    def __init__(self, screen, text, n: int, index: list[int, int],
+    def __init__(self, screen: pygame.surface.Surface,
+                text, n: int, index: list[int, int],
                 player: Player) -> None:
         self.__index: list[int, int] = index
-        self.__player = player
-        self.__screen = screen
+        self.__player: Player = player
+        self.__screen: pygame.surface.Surface = screen
         self.__text = text
         self.__n: int = n
         self.__pickaxe = load("textures/pickaxe.png", (60, 60),

@@ -20,7 +20,7 @@ pygame.init()
 class Draw:
     """Этот класс отвечает за отрисовку локаций и другого"""
     
-    def __init__(self, screen, logger: HELogger) -> None:
+    def __init__(self, logger: HELogger) -> None:
         self.__logger = logger
         logger.info("Работа конструктора класса Draw начата!")
         self.__bg1 = load("textures/1.png", (770, 770), "convert")
@@ -101,7 +101,8 @@ class Draw:
             self.__x2, self.__y2 = enemy.enemy_draw_and_move(player, mp, num)
         elif index == [1, 2]:
             screen.blit(self.__bg3, (0, 0))
-            enemy = Enemy(self.__x3, self.__y3, "blinder", logger, screen)
+            enemy = Enemy(self.__x3, self.__y3, "blinder", logger, screen,
+                        player)
             self.__x3, self.__y3 = enemy.enemy_draw_and_move(player, mp, num)
         elif index == [1, 3]:
             screen.blit(self.__bg4, (0, 0))
@@ -119,6 +120,7 @@ class Draw:
             screen.blit(self.__bg9, (0, 0))
         elif index == [3, 3]:  # Окрестности дома
             screen.blit(self.__bg1, (0, 0))
-            enemy = Enemy(self.__x, self.__y, "watcher", logger, screen)
+            enemy = Enemy(self.__x, self.__y, "watcher", logger, screen,
+                        player)
             self.__x, self.__y = enemy.enemy_draw_and_move(player, mp, num)
         

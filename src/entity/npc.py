@@ -1,5 +1,6 @@
 """Неигровые персонажи (НПС)"""
 
+from ..other.configs import StatsConfig
 from ..entity.character import Character
 from ..other.globals import load, font3
 from ..game.logging import HELogger
@@ -27,6 +28,7 @@ class NPC(Character):
         self.__index: list[int, int] = index
         self.__num = num
         self.__npc = load("textures/npc.png", (65, 65), "convert_alpha")
+        self.__npc2 = load("textures/npc2.png", (65, 65), "convert_alpha")
     
     def placing(self, mouse_pos: tuple[int, int], player: Player,
                 index: list[int, int], num: int) -> None:
@@ -41,10 +43,13 @@ class NPC(Character):
         """
         self.__screen.blit(self.__npc, (100, 100))
         rect = self.__npc.get_rect(topleft=(100, 100))
-        if rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            self.__menu(player, index, num)
+
+        if rect.collidepoint(mouse_pos) and not pygame.mouse.get_pressed()[2]:
+            self.__screen.blit(self.__npc2, (100, 100))
+            if pygame.mouse.get_pressed()[0]:
+                self.__menu(player, index, num)
         elif rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[2]:
-            self.get_stats()
+            self.get_stats(player)
         
     def __menu(self, player: Player, index: list[int, int], num: int) -> None:
         """
@@ -81,10 +86,10 @@ class NPC(Character):
         """Смена статических полей."""
         super().change_fields(2)
     
-    def get_stats(self) -> None:
+    def get_stats(self, player: Player) -> None:
         """Получение информации об NPC."""
-        super().get_stats(self.__screen, self.__index, self.__num,
-                        [100, 100], self.__logger, {1: 2})
+        super().get_stats(StatsConfig(self.__screen, self.__index, self.__num,
+                        [100, 100], self.__logger, player), {1: 2})
         self.__logger.info("Выход из меню...")
     
     @staticmethod

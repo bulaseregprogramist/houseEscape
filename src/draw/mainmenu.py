@@ -93,17 +93,23 @@ class MainMenu:
         elif (rects[1].collidepoint(mouse_pos)  # Boosty
                 and pygame.mouse.get_pressed()[0]):
             MainMenu.open("https://boosty.to/sergey_pelmen", logger)
-        elif (rects[2].collidepoint(mouse_pos)   # DonationAlerts
-                and pygame.mouse.get_pressed()[0]):
-            MainMenu.open("https://www.donationalerts.com/r/sergeyprojects",
+        elif (rects[2].collidepoint(mouse_pos)):   # DonationAlerts
+            if pygame.mouse.get_pressed()[0]:
+                MainMenu.open(
+                    "https://www.donationalerts.com/r/sergeyprojects",
                         logger)
-        elif (rects[3].collidepoint(mouse_pos)  # Гайд по API
-                and pygame.mouse.get_pressed()[0]):
-            HEAPI.guide(screen)
-        elif (rects[4].collidepoint(mouse_pos)
-                and pygame.mouse.get_pressed()[0]):
-            exp = Experimental(screen)
-            exp.run()
+        elif (rects[3].collidepoint(mouse_pos)):  # Гайд по API
+            notepad2 = load('textures/notepad2.png', (105, 105),
+                            "convert_alpha")
+            screen.blit(notepad2, (660, 660))
+            if pygame.mouse.get_pressed()[0]:
+                HEAPI.guide(screen)
+        elif (rects[4].collidepoint(mouse_pos)):  # Эксперименты
+            flask2 = load('textures/flask2.png', (105, 105), "convert_alpha")
+            screen.blit(flask2, (-10, 660))
+            if pygame.mouse.get_pressed()[0]:
+                exp = Experimental(screen)
+                exp.run()
         return mmc, save
     
     @staticmethod
