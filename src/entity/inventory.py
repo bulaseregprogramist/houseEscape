@@ -92,21 +92,17 @@ class Inventory:
             inv_list2.append(load(match.group(1), (60, 60), "convert_alpha"))
         cls.inventory_list2 = inv_list2  # Список с сохранёнными предметами
             
-    def open(self, index: list[int, int], player: object, n: int,
-            logger: HELogger, mouse_pos: tuple[int, int]) -> None:
+    def open(self, *args) -> None:
         """
         Открытие инвентаря
         
         Args:
-            index (list[int, int]): Позиция игрока на карте дома,
-            player (Player): Переменная игрока,
-            n (int): Номер выбранного сохранения,
-            logger (HELogger): Переменная для логов,
-            mouse_pos (tuple[int, int]): Позиция курсора мыши.
+            *args (tuple): Параметры игрока (местоположение,
+            номер выбранного сохранения, логгер, объект игрока, курсор мыши)
         """
         inv_cycle = 1
         save = Saving()
-        inventory_list2: list[str, ...] = save.load_save(n)["items_id"]
+        inventory_list2: list[str, ...] = save.load_save(args[2])["items_id"]
         self.__num_to_texture(inventory_list2)
         text = font3.render(f"Деньги - {MoneySystem.MONEY}", 1,
                             (0, 0, 0))
@@ -117,15 +113,15 @@ class Inventory:
             Inventory.draw_inventory(self.__screen)
             rect = self.__inventory.get_rect(topleft=(10, 10))
             
-            if rect.collidepoint(mouse_pos):  # Свечение при наводке
+            if rect.collidepoint(args[4]):  # Свечение при наводке
                 self.__screen.blit(self.__inventory2, (10, 10))
             pygame.display.flip()
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     save = Saving()
-                    save.saving(index, player.x, player.y, n, True)
-                    logger.info("Выход из игры...")
+                    save.saving(args[0], args[1].x, args[1].y, args[2], True)
+                    args[3].info("Выход из игры...")
                     sys.exit()
                 elif (event.type == pygame.KEYDOWN  # Выход из инвентаря
                         and event.key == pygame.K_RETURN):

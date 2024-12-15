@@ -61,7 +61,7 @@ class Block(GameObjects):
             player (Player): Объект игрока
         """
         result: int = super().functional(x, y, texture, "block", he_map, 
-                                        some_list)
+                                        some_list, None)
         if result == 2:  # Открытие меню мебели
             Draw.show_interfaces(i, self.screen, n, he_map, player, self.__logger)
             pygame.mixer.Sound("textures/press2.mp3").play()

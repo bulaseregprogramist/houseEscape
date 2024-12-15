@@ -7,6 +7,7 @@
 from ..game.logging import HELogger
 import pygame
 from keyboard import is_pressed
+from ..other.configs import Config
 
 
 pygame.init()
@@ -65,7 +66,7 @@ class Move:
             logger.error(
                 "Нажата клавиша, которая не может быть обработана через chr")
         if event.key == pygame.K_e:
-            cls.to_inventory(logger, index, player, n, mouse_pos)
+            cls.to_inventory(Config(logger, index, player, n, mouse_pos))
     
     @staticmethod
     def move_in_location(x: int, y: int, index: list[int, int]) -> bool:

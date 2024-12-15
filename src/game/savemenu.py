@@ -88,29 +88,27 @@ class SaveMenu:
             y += 40
         return rect, rect2, rect3, mouse_pos
     
-    def __act(self, rect, rect2, rect3, mouse_pos: tuple[int, int]) -> int:
+    def __act(self, *args, rect, rect2, rect3, mouse_pos: tuple[int, int]) -> int:
         """
         Действия в меню сохранений
         
         Args:
-            rect (pygame.rect.Rect): 'Квадрат' кнопки плюс,
-            rect2 (pygame.rect.Rect): 'Квадрат' кнопки минус,
-            rect3 (pygame.rect.Rect): 'Квадрат' кнопки выхода в главное меню.
-            mouse_pos (tuple[int, int]): Позиция курсора мыши.
+            *args (tuple[pygame.rect.Rect, tuple[int, int]]): Список
+            с 'квадратами'(0-2) и позицией мыши(3)
         Returns:
             int: Выключение цикла, если нажата кнопку выхода в главное меню.
         """
-        if rect.collidepoint(mouse_pos):  # Создание сохранения
+        if args[0].collidepoint(args[3]):  # Создание сохранения
             self.__screen.blit(self.__plus2, (550, 1))
             if pygame.mouse.get_pressed()[0]:
                 self.__logger.info("Идёт создание сохранения")
                 self.create_save()
-        elif rect2.collidepoint(mouse_pos):  # Удаление сохранения
+        elif args[1].collidepoint(args[3]):  # Удаление сохранения
             self.__screen.blit(self.__delete2, (600, 1))
             if pygame.mouse.get_pressed()[0]:
                 self.__logger.info("Идёт удаление сохранения")
                 self.delete_save()
-        elif rect3.collidepoint(mouse_pos):  # Выход в главное меню
+        elif args[2].collidepoint(args[3]):  # Выход в главное меню
             self.__screen.blit(self.__to_menu2, (5, 5))
             if pygame.mouse.get_pressed()[0]:
                 self.__logger.info("Выход из меню сохранений")

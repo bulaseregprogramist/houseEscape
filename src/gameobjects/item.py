@@ -28,7 +28,8 @@ class Item(GameObjects):
         Args:
             he_map (list[int, int]): Позиция игрока,
             player (Player): Игрок,
-            n (int): Номер выбранного сохранения.
+            n (int): Номер выбранного сохранения,
+            have_functional (int): Выключается для анимаций
         """
         if self.some_num:  # Позиции предметов и их текстуры
             self.__items: dict[int: list,
@@ -52,30 +53,24 @@ class Item(GameObjects):
             self.__save_item(n)
             self.some_num = 0  # Для предотвращения повторного срабатывания УО
     
-    def functional(self, x: int, y: int, texture: pygame.surface.Surface, 
-                i: int, he_map: list[int, int], index: list[int, int]) -> int:
+    def functional(self, *args: tuple) -> int:
         """
         Функционал предметов
         
         Args:
-            x (int): Позиция предмета по x,
-            y (int): Позиция предмета по y,
-            texture (pygame.surface.Surface): Текстура предмета,
-            i (int): Индекс предмета,
-            he_map (list[int, int]): Позиция игрока,
-            index (list[int, int]): Позиция предмета.
+            *args (tuple): Параметры для предмета
         Returns:
             int: Два числа. Первое число отвечает за удаление из словаря,
                             второе за удаляемый ключ
         """
-        result: int = super().functional(x, y, texture, "item", he_map, index,
-                                        i)
+        result: int = super().functional(args[0], args[1], args[2], "item", args[4], args[5],
+                                        args[3])
         if result == 1:  # Помещение предмета в инвентарь
             change()
             pygame.mixer.Sound("textures/press.mp3").play()
             self.__logger.debug("Данные успешно возвращены!")
-            return 1, i  # Ключ будет удалён
-        return 0, i  # Ключ не будет удалён
+            return 1, args[3]  # Ключ будет удалён
+        return 0, args[3]  # Ключ не будет удалён
     
     def __save_item(self, n: int) -> None:
         """

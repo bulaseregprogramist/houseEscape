@@ -164,11 +164,10 @@ class Game:
         elif self.__player.y > 770:  # При выходе вниз
             self.__check2(logger, self.__index[0] + 1, self.__index[1], 0, -1)
                 
-    def __check2(self, logger: HELogger, n1: int, n2: int,
-                index: int, n: int) -> None:
+    def __check2(self, *args: tuple) -> None:
         """Проверка на выход за границу карты дома (вторая часть)"""
-        if self.__lst[n1][n2] != "0":
-            logger.info("Игрок вышел в другую комнату")
+        if self.__lst[args[1]][args[2]] != "0":
+            args[0].info("Игрок вышел в другую комнату")
             self.__player.x, self.__player.y = 385, 385
-            logger.debug("Переменным x и y присвоены стандартные значения")
-            self.__index[index] -= n
+            args[0].debug("Переменным x и y присвоены стандартные значения")
+            self.__index[args[3]] -= args[4]
