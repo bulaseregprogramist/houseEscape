@@ -88,7 +88,7 @@ class SaveMenu:
             y += 40
         return rect, rect2, rect3, mouse_pos
     
-    def __act(self, *args, rect, rect2, rect3, mouse_pos: tuple[int, int]) -> int:
+    def __act(self, *args) -> int:
         """
         Действия в меню сохранений
         

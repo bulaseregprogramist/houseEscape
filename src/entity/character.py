@@ -16,7 +16,7 @@ pygame.init()
 class Character(ABC):
     """Персонаж (игрок, монстр, нпс (торговец))"""
     save = Saving()
-    speed = save.load_save(n)["SPEED"]
+    speed: int = save.load_save(n)["SPEED"]
     
     @classmethod
     @abstractmethod

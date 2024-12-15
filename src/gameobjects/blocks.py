@@ -20,7 +20,7 @@ class Block(GameObjects):
         self.__logger: HELogger = logger
         self.__logger.debug("Завершена работа конструктора класса Block")
     
-    def placing(self, he_map: list[int, int], player: Player, n: int,
+    def placing(self, he_map: list[int, int], player: Player, n: int, use,
                 have_functional=1) -> None:
         """
         Размещение мебели
@@ -29,6 +29,7 @@ class Block(GameObjects):
             he_map (list[int, int]): Позиция игрока,
             player (Player): Объект игрока,
             n (int): Номер выбранного сохранения,
+            use (Use): Объект класса Use,
             have_functional (int): Выключается для анимации.
         """
         # Позиции мебели и их текстуры
@@ -42,28 +43,21 @@ class Block(GameObjects):
                 int(self.__blocks[i][1]), some_list, he_map, texture, player)
             if have_functional:
                 self.functional(self.__blocks[i][0], self.__blocks[i][1], texture,
-                            he_map, some_list, i, n, player)
+                            he_map, some_list, i, n, player, use)
     
-    def functional(self, x: int, y: int, texture: pygame.surface.Surface,
-                he_map: list[int, int], some_list: list[int, int],
-                i: int, n: int, player: Player) -> None:
+    def functional(self, *args) -> None:
         """
         Функционал мебели
         
         Args:
-            x (int): Позиция мебели по x,
-            y (int): Позиция мебели по y,
-            texture (pygame.surface.Surface): Текстура мебели,
-            he_map (list[int, int]): Позиция игрока на карте,
-            some_list (list[int, int]): Позиция мебели на карте,
-            i (int): Ключи мебели,
-            n (int): Номер выбранного сохранения,
-            player (Player): Объект игрока
+            *args (tuple[int, int, pygame.surface.Surface, Player, Use]):
+            Ключ словаря, текстура, объекты игрока и Use, ...
         """
-        result: int = super().functional(x, y, texture, "block", he_map, 
-                                        some_list, None)
+        result: int = super().functional(args[0], args[1], args[2], "block",
+                                        args[3], args[4], None)
         if result == 2:  # Открытие меню мебели
-            Draw.show_interfaces(i, self.screen, n, he_map, player, self.__logger)
+            Draw.show_interfaces(args[5], self.screen, args[6], args[3],
+                                args[7], self.__logger, args[8])
             pygame.mixer.Sound("textures/press2.mp3").play()
             self.__logger.debug(
                 "Завершена работа УО метода functional класса Block")

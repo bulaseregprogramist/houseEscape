@@ -93,8 +93,8 @@ class GameObjects(ABC):
             self.__show_menu(args[3])
             if pygame.mouse.get_pressed()[0]:
                 sleep(0.2)
-                if args[3] == "item":
-                    Inventory.append(args[2], args[0])
+                if args[3] == "item":  # args[6] - ключ словаря
+                    Inventory.append(args[2], args[6])
                     return 1
                 elif args[3] == "block":
                     return 2

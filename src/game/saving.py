@@ -2,7 +2,7 @@
 
 import json
 import pygame
-from ..other.globals import some_dict
+from ..other.globals import some_dict  # Данные игры
 from .logging import HELogger
 import logging
 

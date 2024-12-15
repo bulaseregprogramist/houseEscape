@@ -17,7 +17,7 @@ class Item(GameObjects):
     some_num = 1
     
     def __init__(self, logger: HELogger) -> None:
-        self.__logger = logger
+        self.__logger: HELogger = logger
         self.__logger.debug("Завершена работа конструктора класса Item")
     
     def placing(self, he_map: list[int, int], player: Player, n: int,
@@ -63,8 +63,8 @@ class Item(GameObjects):
             int: Два числа. Первое число отвечает за удаление из словаря,
                             второе за удаляемый ключ
         """
-        result: int = super().functional(args[0], args[1], args[2], "item", args[4], args[5],
-                                        args[3])
+        result: int = super().functional(args[0], args[1], args[2], "item",
+                                        args[4], args[5], args[3])
         if result == 1:  # Помещение предмета в инвентарь
             change()
             pygame.mixer.Sound("textures/press.mp3").play()

@@ -5,6 +5,7 @@ from ...game.saving import Saving
 from ...entity.player import Player
 from .closet import Closet
 from .bed import Bed
+from ...other.globals import traps_dict
 from .lamp import Lamp
 import sys  # Для sys.exit()
 
@@ -15,6 +16,7 @@ pygame.init()
 class OtherFunctional:
     block = None
     item = None
+    traps = None
     
     def __init__(self, num: int, screen: pygame.surface.Surface,
                 index: list[int, int], player: Player, logger) -> None:
@@ -30,8 +32,9 @@ class OtherFunctional:
         self.__blocks = self.block(logger)  # Это не блоки, а мебель
         self.__items = self.item(
             logger)  # Предметы (их можно подбирать и использовать)
+        self.__traps = self.traps(self.__screen)
         
-    def __general(self) -> None:
+    def __general(self, use) -> None:
         """
         Общий метод для остальных методов класса
         (анимация)
@@ -39,8 +42,14 @@ class OtherFunctional:
         counter, general_cycle = 0, 1
         width = 0
         while general_cycle:
-            self.__blocks.placing(self.__index, self.__player,self.__num, 0)
+            self.__blocks.placing(self.__index, self.__player, 
+                                self.__num, use, 0)
             self.__items.placing(self.__index, self.__player, self.__num, 0)
+            for j in traps_dict:  # Отрисовка ловушек
+                    if (traps_dict[j][2] == self.__index[0]
+                            and traps_dict[j][3] == self.__index[1]):
+                        self.__traps.draw_trap(traps_dict[j][0],
+                                    traps_dict[j][1], traps_dict[j][4])
             
             self.__clock.tick(144)
             pygame.draw.circle(self.__screen, (255, 0, 0), (375, 375), width)
@@ -59,21 +68,21 @@ class OtherFunctional:
                                     self.__player.y, self.__num, True)
                     sys.exit()
     
-    def closet(self) -> None:
+    def closet(self, use) -> None:
         """Шкаф"""
-        self.__general()
+        self.__general(use)
         closet = Closet(self.__screen, self.__save, self.__num,
                         self.__player, self.__index)
-        closet.run()
+        closet.run(use)
     
-    def lamp(self) -> None:
+    def lamp(self, use) -> None:
         """Лампа в доме"""
-        self.__general()
+        self.__general(use)
         lamp = Lamp()
         lamp.run()
     
-    def bed(self) -> None:
+    def bed(self, use) -> None:
         """Кровать в доме"""
-        self.__general()
+        self.__general(use)
         bed = Bed()
         bed.run()

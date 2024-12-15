@@ -7,6 +7,7 @@ from ...entity.inventory import Inventory
 from ...other.globals import font, some_dict, load
 from copy import copy
 import re
+from ...other.use import Use
 import sys  # Только для sys.exit()
 
 
@@ -28,7 +29,7 @@ class Closet:
         self.__player = player
         self.__index: list[int, int] = index
         self.__items_rects_list = []
-        self.__screen = screen
+        self.__screen: pygame.surface.Surface = screen
         
     def to_texture(self, i: str) -> pygame.surface.Surface:
         """
@@ -59,7 +60,7 @@ class Closet:
         self.__screen.blit(self.__text, (330, 170))
             
         self.__items_rects_list.clear()
-            
+
         for i in items:  # Отрисовка предметов шкафа
             texture = self.to_texture(i)
             self.__screen.blit(texture, 
@@ -79,7 +80,7 @@ class Closet:
             self.__x += 60
         self.__x, self.__y = 230, 230
     
-    def run(self) -> None:
+    def run(self, use) -> None:
         """Основной метод класса"""
         with open(f"data/data{self.__num}.json") as file:
             result: dict[str: list | dict | int] = json.load(file)
@@ -99,8 +100,12 @@ class Closet:
                         self.__screen.blit(self.__axe2, (290, 230))
                     
                     if pygame.mouse.get_pressed()[0]:
+                        
                         Inventory.append(self.to_texture(items[int(j)]),
                                         str(int(j) + 12))
+                        dict_id: str = str(int(j) + 12)
+                        sl = [{dict_id: self.to_texture(items[int(j)])}]
+                        use.append(sl)
                         items.pop(j)
                         self.__save.save_closet_items(items, self.__num,
                                                     result)

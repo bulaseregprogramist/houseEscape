@@ -88,6 +88,7 @@ class Game:
         self.__traps = Traps(self.__screen)
         OtherFunctional.block = Block
         OtherFunctional.item = Item
+        OtherFunctional.traps = Traps
         logger.debug("Полям класса OtherFunctional присвоены значения")
         logger.debug("Создание объекта класса Traps")
         self.__pictures = Pictures()  # Картины с котами
@@ -118,7 +119,8 @@ class Game:
                 result: pygame.surface.Surface = self.__player.blit(mp)
                 rect, rect2 = self.__player.player_interfaces(self.__screen,
                             self.__player, mp, self.__index)
-                self.__blocks.placing(self.__index, self.__player,self.__numb)
+                self.__blocks.placing(self.__index, self.__player,self.__numb,
+                                    self.__player.use)
                 self.__items.placing(self.__index, self.__player, self.__numb)
                 self.__pictures.placing(self.__index, self.__player,
                                         self.__numb, self.__screen)

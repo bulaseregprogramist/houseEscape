@@ -24,9 +24,9 @@ class Use:
         self.__keys: list[str, ...] = self.save.load_save(n)["items_id"]
         self.__rects_list = []
         self.__item_visible = 0
+        self.some_list = []
         self.__n: int = n
         self.__texture_id = ''
-        self.some_list = []
         self.to_dict()
         self.__button = load("textures/act.png", (70, 70), "convert_alpha")
         self.__button2 = load('textures/act2.png', (70, 70), "convert_alpha")
@@ -36,6 +36,9 @@ class Use:
         self.__slot.set_alpha(96)
         self.__mouse_was_pressed = False
         
+    def append(self, sl: dict) -> None:
+        self.some_list.append(sl)
+                    
     def to_dict(self) -> None:
         """Из списка в словарь"""
         self.__from_num_to_texture()  # Для удаления повторов в списке
@@ -45,6 +48,8 @@ class Use:
                 lst.append({i[1]: i[0]})
             except KeyError:
                 pass
+            except IndexError:
+                lst.append({list(i[0].keys())[0]: list(i[0].values())[0]})
         self.some_list = lst
         logging.info("Завершена работа метода to_dict")
 
@@ -64,8 +69,7 @@ class Use:
         self.some_list.extend(inv_list2)
         logging.debug("Конец работы метода __from_num_to_texture")
         
-    def __draw_inventory_slots(self, index: list[int, int],
-                            pos: tuple[int, int]) -> None:
+    def __draw_inventory_slots(self, index: list[int, int]) -> None:
         """
         Отрисовка инвентаря
         
@@ -74,6 +78,7 @@ class Use:
         """
         x, y = 605, 75
         self.__rects_list.clear()
+                
         for i in range(self.__player.MAX_CAPACITY):
             if i % 8 == 0 and i != 0:  # Перенос на новую строку
                 y += 21
@@ -86,6 +91,13 @@ class Use:
                 self.__rects_list.append(
                     [texture.get_rect(topleft=(x + 2, y)), texture,
                     list(self.some_list[i].keys())[0]])
+            except AttributeError:
+                texture = pygame.transform.scale(
+                    list(self.some_list[i][0].values())[0], (20, 20))
+                self.__screen.blit(texture, (x + 2, y))
+                self.__rects_list.append(
+                    [texture.get_rect(topleft=(x + 2, y)), texture,
+                    list(self.some_list[i][0].keys())[0]])
             except IndexError:
                 pass
             x += 21
@@ -118,9 +130,9 @@ class Use:
             self.__button.set_alpha(800)
             
         if self.__visible:  # Для открытия/сворачивания
-            self.__draw_inventory_slots(index, pos)
+            self.__draw_inventory_slots(index)
             
-    def item(self, mp: tuple[int, int],
+    def item_draw(self, mp: tuple[int, int],
             texture: pygame.surface.Surface) -> None:
         """
         Отрисовка применяемого предмета.
@@ -150,10 +162,9 @@ class Use:
             pygame.event.get())
     
         if self.__item_visible:  # Предмет на курсоре мыши
-            self.item(mouse_pos, self.res)
+            self.item_draw(mouse_pos, self.res)
             if mouse_pressed and not self.__mouse_was_pressed:
-                ae = AfterUse(self.__texture_id, index, 
-                        self.__screen, self.__n)
+                ae = AfterUse(self.__texture_id, index, self.__n)
                 ae.functional(mouse_pos)
 
     def handle_events(self, events: list[pygame.event.Event]) -> bool:

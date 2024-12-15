@@ -64,8 +64,8 @@ class MainMenu:
     
     @classmethod
     def act(cls, mouse_pos: tuple[int, int], screen: pygame.surface.Surface,
-            logger: HELogger, play2, rect1, rect2, rect3, rect4, rect5,
-            mmc: int) -> int | SaveMenu | None:
+            logger: HELogger, play2, mmc: int,
+            *rects) -> int | SaveMenu | None:
         """
         Действия в главном меню
         
@@ -74,19 +74,15 @@ class MainMenu:
             screen (pygame.surface.Surface): Переменная экрана,
             logger (HELogger): Переменная для логов,
             play2 (pygame.surface.Surface): Кнопка запуска (подсвеченная),
-            rect1 (pygame.rect.Rect): 'Квадрат' кнопки запуска,
-            rect2 (pygame.rect.Rect): 'Квадрат' кнопки Boosty,
-            rect3 (pygame.rect.Rect): 'Квадрат' кнопки DonationAlerts,
-            rect4 (pygame.rect.Rect): 'Квадрат' кнопки гайда по API,
-            rect5 (pygame.rect.Rect): 'Квадрат' кнопки экспериментов
-            mmc (int): mainmenu_cycle (цикл главного меню)
+            mmc (int): mainmenu_cycle (цикл главного меню),
+            *rects (tuple): 'Квадраты' кнопок
         Returns:
             int: Выключение mainmenu_cycle или оставляет всё как есть,
             SaveMenu: Для получения номера сохранения,
             None: Вместо SaveMenu, если игрок ничего не сделал.
         """
         save = None
-        if rect1.collidepoint(mouse_pos):  # Кнопка запуска игры
+        if rects[0].collidepoint(mouse_pos):  # Кнопка запуска игры
             screen.blit(play2, (317, 300))  # Свечение
             if pygame.mouse.get_pressed()[0]:
                 logger.info("Выход из главного меню")
@@ -94,17 +90,17 @@ class MainMenu:
                 save = SaveMenu(screen, logger)
                 if save.number == "to_menu":
                     mmc = 1
-        elif (rect2.collidepoint(mouse_pos)  # Boosty
+        elif (rects[1].collidepoint(mouse_pos)  # Boosty
                 and pygame.mouse.get_pressed()[0]):
             MainMenu.open("https://boosty.to/sergey_pelmen", logger)
-        elif (rect3.collidepoint(mouse_pos)   # DonationAlerts
+        elif (rects[2].collidepoint(mouse_pos)   # DonationAlerts
                 and pygame.mouse.get_pressed()[0]):
             MainMenu.open("https://www.donationalerts.com/r/sergeyprojects",
                         logger)
-        elif (rect4.collidepoint(mouse_pos)  # Гайд по API
+        elif (rects[3].collidepoint(mouse_pos)  # Гайд по API
                 and pygame.mouse.get_pressed()[0]):
             HEAPI.guide(screen)
-        elif (rect5.collidepoint(mouse_pos)
+        elif (rects[4].collidepoint(mouse_pos)
                 and pygame.mouse.get_pressed()[0]):
             exp = Experimental(screen)
             exp.run()
@@ -185,7 +181,8 @@ class MainMenu:
             rect5 = flask.get_rect(topleft=(-10, 660))
             
             mainmenu_cycle, save = MainMenu.act(mouse_pos, screen, logger,
-                    play2, rect1, rect2, rect3, rect4, rect5, mainmenu_cycle)
+                    play2, mainmenu_cycle,
+                    rect1, rect2, rect3, rect4, rect5)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     logger.info("Выход из игры...")

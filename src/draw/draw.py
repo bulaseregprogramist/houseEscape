@@ -44,45 +44,38 @@ class Draw:
         logger.info("Работа конструктора класса Draw завершена!")
         
     @staticmethod
-    def show_interfaces(key: int, screen: pygame.surface.Surface, 
-                        n: int, index: list[int, int],
-                        player: Player, logger) -> None:
+    def show_interfaces(*args) -> None:
         """
         Интерфейсы для мебели
         
         Args:
-            key (int): id мебели,
-            screen (pygame.surface.Surface): Переменная для экрана,
-            n (int): Номер выбранного сохранения,
-            index (list[int, int]): Позиция игрока на карте,
-            player (Player): Объект игрока,
-            logger (HELogger): Переменная для логов.
+            *args (tuple): Параметры для интерфейса
         """
         text = font.render("СОЗДАНИЕ ПРЕДМЕТА", 1, (0, 0, 0))
         pygame.mixer.Sound("textures/collect.mp3").play()
-        of = OtherFunctional(n, screen, index, player, logger)
-        key = int(key)
+        of = OtherFunctional(args[2], args[1], args[3], args[4], args[5])
+        key = int(args[0])
         save = Saving()
-        result: dict[int: list] = save.load_save(n)["blocks"]
+        result: dict[int: list] = save.load_save(args[2])["blocks"]
         
         if key == 1:  # Верстак
-            CraftingTable(screen, text, n, index, player)
+            CraftingTable(args[1], text, args[2], args[3], args[4])
         elif key == 2:  # Лампа
-            of.lamp()
+            of.lamp(args[6])
         elif key == 3:  # Люк в подвал
             logger = HELogger("BASEMENT", "INFO")
             logger.getChild("HE")
-            Basement(logger, screen, n)
+            Basement(args[5], args[1], args[2])
         elif key == 4:  # Кровать
-            of.bed()
+            of.bed(args[6])
         elif key == 5:  # Чердак (лестница)
             logger = HELogger("CHERDAK", "INFO")
             logger.getChild("HE")
-            Cherdak(logger, screen, n)
+            Cherdak(logger, args[1], args[2])
         elif key == 6:  # Шкаф
-            of.closet()
+            of.closet(args[6])
         elif key == 7 and "exit3.png" in result['7'][4]:
-            endings = Endings(screen)
+            endings = Endings(args[1])
             endings.pre_ending("Концовка Решётки")
     
     def render_location(self, index: list[int, int], mp: tuple[int, int],

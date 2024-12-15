@@ -10,8 +10,7 @@ pygame.init()
 
 class AfterUse:
     
-    def __init__(self, texture_id: int, index: list[int, int],
-                screen: pygame.surface.Surface, n: int) -> None:
+    def __init__(self, texture_id: int, index: list[int, int], n: int) -> None:
         self.__index: list[int, int] = index
         self.save = Saving()
         self.__n: int = n
