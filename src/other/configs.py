@@ -33,3 +33,16 @@ class StatsConfig:
         self.player = player
         
         
+class MainMenuConfig:
+        """Класс с конфигом для главном меню"""
+        
+        def __init__(self, mouse_pos: tuple[int, int], 
+                screen: pygame.surface.Surface, textures: tuple,
+                logger, mmc: int):
+            self.screen = screen
+            self.mouse_pos: tuple[int, int] = mouse_pos
+            self.textures: tuple = textures     
+            self.logger = logger
+            self.mmc: int = mmc
+        
+        

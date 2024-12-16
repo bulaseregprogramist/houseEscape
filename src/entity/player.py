@@ -122,6 +122,7 @@ class Player(Character):
             screen (pygame.surface.Surface): Переменная экрана.
         """
         super(Player, Player).die()
+        pygame.mixer.music.stop()
         cycle = 1
         text = font.render("ВЫ УМЕРЛИ!", 1, (255, 0, 0))
         while cycle:

@@ -3,13 +3,15 @@
 import pygame
 import sys
 import webbrowser
+import logging
+from time import sleep
+from ..other.configs import MainMenuConfig
+from ..game.settings import Settings
 from ..game.logging import HELogger
 from ..other.globals import load, font
 from ..game.savemenu import SaveMenu
 from ..game.experimental import Experimental
 from ..api.api import HEAPI
-from time import sleep
-import logging
 
 
 pygame.init()
@@ -17,15 +19,17 @@ pygame.init()
 
 class MainMenu:
     """Главное меню (в нём Boosty, DonationAlerts, кнопку запуска)"""
-    
+
     def __init__(self, screen: pygame.surface.Surface,
                 logger: HELogger) -> None:
-        self.__screen: pygame.surface.Surface = screen
-        self.__logger: HELogger = logger
-        self.__yes = load("textures/yes.png", (30, 30), "convert")
-        self.__no = load("textures/no.png", (30, 30), "convert")
-        self.__em = load("textures/em.png", (220, 140), "convert")
-    
+        self.__screen = screen
+        self.__logger = logger
+        self.__textures = {
+            "yes": load("textures/yes.png", (30, 30), "convert"),
+            "no": load("textures/no.png", (30, 30), "convert"),
+            "em": load("textures/em.png", (220, 140), "convert")
+        }
+
     def to_menu(self) -> int:
         """
         Возвращение в главное меню
@@ -35,46 +39,44 @@ class MainMenu:
         """
         logging.info("Игрок возвращён в главное меню")
         return 0
-    
-    def exit_menu(self, mp: tuple[int, int]) -> None:
+
+    def exit_menu(self, mouse_pos: tuple[int, int]) -> None:
         """Меню выхода из игры"""
         cycle = 1
         text = font.render("ВЫЙТИ?", 1, (0, 0, 0))
         while cycle:
-            self.__screen.blit(self.__em, (270, 300))
+            self.__screen.blit(self.__textures["em"], (270, 300))
             self.__screen.blit(text, (300, 310))
-            self.__screen.blit(self.__yes, (325, 370))
-            self.__screen.blit(self.__no, (405, 370))
-            
+            self.__screen.blit(self.__textures["yes"], (325, 370))
+            self.__screen.blit(self.__textures["no"], (405, 370))
+
             pygame.display.flip()
-            rect1 = self.__yes.get_rect(topleft=(325, 370))
-            rect2 = self.__no.get_rect(topleft=(405, 370))
-            if rect1.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
+            rect_yes = self.__textures["yes"].get_rect(topleft=(325, 370))
+            rect_no = self.__textures["no"].get_rect(topleft=(405, 370))
+
+            if (rect_yes.collidepoint(mouse_pos)
+                    and pygame.mouse.get_pressed()[0]):
                 self.__logger.info("Выход из игры...")
                 sys.exit()
-            elif rect2.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
+            elif (rect_no.collidepoint(mouse_pos) 
+                    and pygame.mouse.get_pressed()[0]):
                 cycle = 0
-            
-            for i in pygame.event.get():
-                if i.type == pygame.QUIT:
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
                     self.__logger.info("Выход из игры...")
                     sys.exit()
-                elif i.type == pygame.KEYDOWN and i.key == pygame.K_ESCAPE:
+                elif (event.type == pygame.KEYDOWN 
+                        and event.key == pygame.K_ESCAPE):
                     cycle = 0
-    
+
     @classmethod
-    def act(cls, mouse_pos: tuple[int, int], screen: pygame.surface.Surface,
-            logger: HELogger, play2, mmc: int,
-            *rects) -> int | SaveMenu | None:
+    def act(cls, config: MainMenuConfig, *rects) -> int | SaveMenu | None:
         """
         Действия в главном меню
         
         Args:
-            mouse_pos (tuple[int, int]): Позиция курсора мыши,
-            screen (pygame.surface.Surface): Переменная экрана,
-            logger (HELogger): Переменная для логов,
-            play2 (pygame.surface.Surface): Кнопка запуска (подсвеченная),
-            mmc (int): mainmenu_cycle (цикл главного меню),
+            config (MainMenuConfig): Конфиг (позиция мыши, экран, ...)
             *rects (tuple): 'Квадраты' кнопок
         Returns:
             int: Выключение mainmenu_cycle или оставляет всё как есть,
@@ -82,36 +84,39 @@ class MainMenu:
             None: Вместо SaveMenu, если игрок ничего не сделал.
         """
         save = None
-        if rects[0].collidepoint(mouse_pos):  # Кнопка запуска игры
-            screen.blit(play2, (317, 300))  # Свечение
+        if rects[0].collidepoint(config.mouse_pos):  # Кнопка запуска игры
+            config.screen.blit(config.textures[2], (317, 300))  # Свечение
             if pygame.mouse.get_pressed()[0]:
-                logger.info("Выход из главного меню")
-                mmc = 0
-                save = SaveMenu(screen, logger)
+                config.logger.info("Выход из главного меню")
+                config.mmc = 0
+                save = SaveMenu(config.screen, config.logger)
                 if save.number == "to_menu":
-                    mmc = 1
-        elif (rects[1].collidepoint(mouse_pos)  # Boosty
-                and pygame.mouse.get_pressed()[0]):
-            MainMenu.open("https://boosty.to/sergey_pelmen", logger)
-        elif (rects[2].collidepoint(mouse_pos)):   # DonationAlerts
-            if pygame.mouse.get_pressed()[0]:
-                MainMenu.open(
-                    "https://www.donationalerts.com/r/sergeyprojects",
-                        logger)
-        elif (rects[3].collidepoint(mouse_pos)):  # Гайд по API
+                    config.mmc = 1
+        elif (rects[1].collidepoint(config.mouse_pos) 
+                and pygame.mouse.get_pressed()[0]):  # Boosty
+            cls.open("https://boosty.to/sergey_pelmen", config.logger)
+        elif (rects[2].collidepoint(config.mouse_pos)
+                and pygame.mouse.get_pressed()[0]):  # DonationAlerts
+            cls.open("https://www.donationalerts.com/r/sergeyprojects",
+                    config.logger)
+        elif rects[3].collidepoint(config.mouse_pos):  # Гайд по API
             notepad2 = load('textures/notepad2.png', (105, 105),
                             "convert_alpha")
-            screen.blit(notepad2, (660, 660))
+            config.screen.blit(notepad2, (660, 660))
             if pygame.mouse.get_pressed()[0]:
-                HEAPI.guide(screen)
-        elif (rects[4].collidepoint(mouse_pos)):  # Эксперименты
+                HEAPI.guide(config.screen)
+        elif rects[4].collidepoint(config.mouse_pos):  # Эксперименты
             flask2 = load('textures/flask2.png', (105, 105), "convert_alpha")
-            screen.blit(flask2, (-10, 660))
+            config.screen.blit(flask2, (-10, 660))
             if pygame.mouse.get_pressed()[0]:
-                exp = Experimental(screen)
+                exp = Experimental(config.screen)
                 exp.run()
-        return mmc, save
-    
+        elif rects[5].collidepoint(config.mouse_pos):  # Настройки
+            config.screen.blit(config.textures[9], (330, 680))
+            if pygame.mouse.get_pressed()[0]:
+                Settings()
+        return config.mmc, save
+
     @staticmethod
     def open(site: str, logger: HELogger) -> None:
         """
@@ -122,80 +127,77 @@ class MainMenu:
             logger (HELogger): Переменная для логов
         """
         webbrowser.open(site)
-        # Если игрок нажимает, срабатывает несколько раз,
-        # sleep для того, чтобы это предотвратить.
-        sleep(0.176)
+        sleep(0.176)  # Чтобы предотвратить многократное срабатывание
         logger.info(f"Открытие сайта - {site}")
         pygame.mixer.Sound("textures/press.mp3").play()
-        
+
     @staticmethod
-    def __init_textures(logger: HELogger) -> pygame.surface.Surface:
+    def __init_textures(logger: HELogger) -> tuple[pygame.surface.Surface]:
         """
         Инициализация текстур
         
         Args:
             logger (HELogger): Переменная для логов
         Returns:
-            pygame.surface.Surface: Загруженные текстуры
+            tuple[pygame.surface.Surface]: Загруженные текстуры
         """
         logger.debug(
             "Начало инициализации текстур для статического метода render")
-        bg = load("textures/bg.png", (770, 770), "convert")
-        play = load("textures/play.png", (130, 130), "convert_alpha")
-        play2 = load("textures/play2.png", (130, 130), "convert_alpha")
-        boosty = load("textures/boosty.png", (80, 80), "convert")
-        da = load("textures/da.jpg", (80, 80), "convert")
-        logo = load("textures/logo.png", (210, 210), "convert")
-        notepad = load("textures/notepad.png", (105, 105), "convert_alpha")
-        flask = load("textures/flask.png", (105, 105), "convert_alpha")
+        textures = (
+            load("textures/bg.png", (770, 770), "convert"),
+            load("textures/play.png", (130, 130), "convert_alpha"),
+            load("textures/play2.png", (130, 130), "convert_alpha"),
+            load("textures/boosty.png", (80, 80), "convert"),
+            load("textures/da.jpg", (80, 80), "convert"),
+            load("textures/logo.png", (210, 210), "convert"),
+            load("textures/notepad.png", (105, 105), "convert_alpha"),
+            load("textures/flask.png", (105, 105), "convert_alpha"),
+            load('textures/settings.png', (80, 80), 'convert_alpha'),
+            load('textures/settings2.png', (80, 80), 'convert_alpha')
+        )
         logger.debug(
             "Завершена инициализация текстур для статического метода render")
-        return bg, play, boosty, da, logo, notepad, play2, flask
-    
+        return textures
+
     @staticmethod
-    def render(screen: pygame.surface.Surface, logger: HELogger) -> int:
+    def render(screen: pygame.surface.Surface, logger: HELogger, Draw) -> int:
         """
         Рендеринг главного меню
 
         Args:
             screen (pygame.surface.Surface): Переменная экрана,
-            logger (HELogger): Переменная для логов
+            logger (HELogger): Переменная для логов,
+            Draw (Draw): Класс, для отрисовки.
         Returns:
             int: Номер выбранного сохранения.
         """
         logger.info("Главное меню открыто!")
         mainmenu_cycle = 1
-        logger.debug("Переменной cycle присвоен 1")
-        bg, play, boosty, da, logo, notepad, play2, flask = MainMenu.__init_textures(
-            logger)
-        
+        textures: tuple = MainMenu.__init_textures(logger)
+
         while mainmenu_cycle:
-            screen.blit(bg, (0, 0))
-            screen.blit(play, (317, 300))
-            
-            screen.blit(boosty, (30, 30))
-            screen.blit(da, (660, 30))
-            screen.blit(logo, (280, 30))
-            screen.blit(notepad, (660, 660))
-            screen.blit(flask, (-10, 660))
-            
+            Draw.draw_mainmenu(screen, textures)
+
             mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
-            rect1 = play.get_rect(topleft=(317, 300))
-            rect2 = boosty.get_rect(topleft=(30, 30))
-            rect3 = da.get_rect(topleft=(660, 30))  # 'Квадрат' DonationAlerts
-            rect4 = notepad.get_rect(topleft=(660, 660))
-            rect5 = flask.get_rect(topleft=(-10, 660))
-            
-            mainmenu_cycle, save = MainMenu.act(mouse_pos, screen, logger,
-                    play2, mainmenu_cycle,
-                    rect1, rect2, rect3, rect4, rect5)
+            rects = (textures[1].get_rect(topleft=(317, 300)),
+                textures[2].get_rect(topleft=(30, 30)),
+                textures[3].get_rect(topleft=(660, 30)),
+                textures[5].get_rect(topleft=(660, 660)),
+                textures[7].get_rect(topleft=(-10, 660)),
+                textures[8].get_rect(topleft=(330, 680))
+                )
+            mainmenu_cycle, save = MainMenu.act(MainMenuConfig(mouse_pos,
+                         screen, textures, logger, mainmenu_cycle), *rects)
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     logger.info("Выход из игры...")
                     sys.exit()
-                elif event.type == pygame.KEYDOWN and pygame.K_ESCAPE:
+                elif (event.type == pygame.KEYDOWN 
+                        and event.key == pygame.K_ESCAPE):
                     mm = MainMenu(screen, logger)
                     mm.exit_menu(mouse_pos)
+
             pygame.display.flip()
-        return save.number
-        
+
+        return save.number if save else 0

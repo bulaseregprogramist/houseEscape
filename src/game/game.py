@@ -1,6 +1,7 @@
 """Этот файл включает в себя основной функционал игры"""
 
 import pygame
+from src.game.soundtrack import SoundTrack
 from src.entity.player import Player
 from src.draw.draw import Draw
 from src.draw.mainmenu import MainMenu
@@ -48,7 +49,7 @@ class Game:
         logger.info("Начата инициализация модов")
         HEAPI.load(logger)
         logger.info("Завершена инициализация модов")
-        self.__numb: int = MainMenu.render(self.__screen, logger)
+        self.__numb: int = MainMenu.render(self.__screen, logger, Draw)
         logger.info("Главное меню закрыто!")
         self.__player = Player(logger, self.__screen, self.__numb)
         logger.debug("Создание объекта класса Player")
@@ -108,6 +109,8 @@ class Game:
         self.__load(logger)
         cycle = 1
         logger.debug("Переменной cycle присвоен 1")
+        soundtrack = SoundTrack()
+        soundtrack.play()
         
         while 1:  # Если игрок вышел в главное меню через кнопку в меню паузы
             while cycle:  # Основной игровой цикл

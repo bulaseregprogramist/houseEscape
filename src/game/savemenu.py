@@ -32,7 +32,7 @@ class SaveMenu:
                             (45, 45), "convert_alpha")
         self.__to_menu2 = load("textures/to_menu2.png",
                             (45, 45), "convert_alpha")
-        self.number = self.__start()  # Количество сохранений в папке data
+        self.number: int = self.__start()  # Кол-во сохранений в папке data
         
     def create_save(self) -> None:
         """Создание сохранения"""

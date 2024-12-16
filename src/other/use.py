@@ -23,7 +23,7 @@ class Use:
         self.__visible = 0
         self.__keys: list[str, ...] = self.save.load_save(n)["items_id"]
         self.__rects_list = []
-        self.__item_visible = 0
+        self.__item_visible = 0  # Отображение предмета при нажатии ЛКМ
         self.some_list = []
         self.__n: int = n
         self.__texture_id = ''

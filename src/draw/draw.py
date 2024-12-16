@@ -44,6 +44,19 @@ class Draw:
         logger.info("Работа конструктора класса Draw завершена!")
         
     @staticmethod
+    def draw_mainmenu(screen: pygame.surface.Surface,
+                    textures: tuple[pygame.surface.Surface]) -> None:
+        """Отрисовка кнопочек главного меню"""
+        screen.blit(textures[0], (0, 0))
+        screen.blit(textures[1], (317, 300))
+        screen.blit(textures[4], (30, 30))
+        screen.blit(textures[3], (660, 30))
+        screen.blit(textures[5], (280, 30))
+        screen.blit(textures[6], (660, 660))
+        screen.blit(textures[7], (-10, 660))
+        screen.blit(textures[8], (330, 680))
+        
+    @staticmethod
     def show_interfaces(*args) -> None:
         """
         Интерфейсы для мебели

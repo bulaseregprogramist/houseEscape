@@ -45,15 +45,15 @@ class Experimental:
         self.__screen.fill((255, 255, 255))
         self.__screen.blit(self.__text1, (150, 50))
 
-        if self.__result[self.dict_name]['1']:
+        if not self.__result[self.dict_name]['1']:
             self.__screen.blit(self.__checkmark1, (100, 100))
         else:
             self.__screen.blit(self.__checkmark2, (100, 100))
-        if self.__result[self.dict_name]['2']:
+        if not self.__result[self.dict_name]['2']:
             self.__screen.blit(self.__checkmark1, (100, 200))
         else:
             self.__screen.blit(self.__checkmark2, (100, 200))
-        if self.__result[self.dict_name]['3']:
+        if not self.__result[self.dict_name]['3']:
             self.__screen.blit(self.__checkmark1, (100, 300))
         else:
             self.__screen.blit(self.__checkmark2, (100, 300))
@@ -77,30 +77,33 @@ class Experimental:
         Args:
             mouse_pos (tuple[int, int]): Позиция курсора мыши.
         """
-        for i in range(len(self.__rects_list)):
-            if (self.__rects_list[i].collidepoint(mouse_pos)
-                    and pygame.mouse.get_pressed()[0]):
-                key1, key2, key3 = '1', '2', '3'
-                if i == 1 and not self.__result[self.dict_name][key1]:
-                    sleep(0.4)
-                    self.__result[self.dict_name][key1] = 1
-                elif i == 1 and self.__result[self.dict_name][key1]:
-                    sleep(0.4)
-                    self.__result[self.dict_name][key1] = 0
+        key1, key2, key3 = '1', '2', '3'
+        if (self.__rects_list[0].collidepoint(mouse_pos)
+                and pygame.mouse.get_pressed()[0]):
+            if not self.__result[self.dict_name][key1]:
+                sleep(0.4)
+                self.__result[self.dict_name][key1] = 1
+            elif self.__result[self.dict_name][key1]:
+                sleep(0.4)
+                self.__result[self.dict_name][key1] = 0
                         
-                if i == 2 and not self.__result[self.dict_name][key2]:
-                    sleep(0.4)
-                    self.__result[self.dict_name][key2] = 1
-                elif i == 2 and self.__result[self.dict_name][key2]:
-                    sleep(0.4)
-                    self.__result[self.dict_name][key2] = 0
+        elif (self.__rects_list[1].collidepoint(mouse_pos)
+                and pygame.mouse.get_pressed()[0]):
+            if not self.__result[self.dict_name][key2]:
+                sleep(0.4)
+                self.__result[self.dict_name][key2] = 1
+            elif self.__result[self.dict_name][key2]:
+                sleep(0.4)
+                self.__result[self.dict_name][key2] = 0
                         
-                if i == 3 and not self.__result[self.dict_name][key3]:
-                    sleep(0.4)
-                    self.__result[self.dict_name][key3] = 1
-                elif i == 3 and self.__result[self.dict_name][key3]:
-                    sleep(0.4)
-                    self.__result[self.dict_name][key3] = 0
+        elif (self.__rects_list[2].collidepoint(mouse_pos)
+                and pygame.mouse.get_pressed()[0]):
+            if not self.__result[self.dict_name][key3]:
+                sleep(0.4)
+                self.__result[self.dict_name][key3] = 1
+            elif self.__result[self.dict_name][key3]:
+                sleep(0.4)
+                self.__result[self.dict_name][key3] = 0
     
     def run(self) -> None:
         """Основной метод класса"""
