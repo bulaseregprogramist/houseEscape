@@ -1,5 +1,7 @@
 """Предметы игры"""
 
+from ..other.configs import GameObjectsConfig, GameObjectsConfig2
+from ..other.configs import GameObjectsConfig3
 from src.gameobjects.gameobjects import GameObjects
 import pygame
 from ..entity.player import Player, change
@@ -38,14 +40,14 @@ class Item(GameObjects):
         for i in self.__items:
             texture = pygame.transform.scale(self._num_to_texture(
                 self.__items[i][4]), (50, 50))
-            super().placing(self.__items[i][0], self.__items[i][1],
-                            [self.__items[i][2], self.__items[i][3]],
-                            he_map,
-                            texture, player)
+            super().placing(GameObjectsConfig3(self.__items[i][0],
+                            self.__items[i][1], [self.__items[i][2], 
+                            self.__items[i][3]], he_map, texture, player))
             if have_functional:
-                delete, key = self.functional(self.__items[i][0],
-                            self.__items[i][1], texture, i, he_map,
-                            [self.__items[i][2], self.__items[i][3]])
+                delete, key = self.functional(GameObjectsConfig(
+                    self.__items[i][0], self.__items[i][1],
+                    texture, i, he_map, [self.__items[i][2],
+                                        self.__items[i][3]]))
             if delete:  # Чтобы не было бага
                 break
         if delete:  # Помещение предмета в инвентарь
@@ -53,24 +55,25 @@ class Item(GameObjects):
             self.__save_item(n)
             self.some_num = 0  # Для предотвращения повторного срабатывания УО
     
-    def functional(self, *args: tuple) -> int:
+    def functional(self, config: tuple) -> int:
         """
         Функционал предметов
         
         Args:
-            *args (tuple): Параметры для предмета
+            config (tuple): Параметры (конфиг) для предмета
         Returns:
             int: Два числа. Первое число отвечает за удаление из словаря,
                             второе за удаляемый ключ
         """
-        result: int = super().functional(args[0], args[1], args[2], "item",
-                                        args[4], args[5], args[3])
+        result: int = super().functional(GameObjectsConfig2(
+            config.x, config.y, config.texture, "item", config.he_map,
+            config.location, config.i))
         if result == 1:  # Помещение предмета в инвентарь
             change()
             pygame.mixer.Sound("textures/press.mp3").play()
             self.__logger.debug("Данные успешно возвращены!")
-            return 1, args[3]  # Ключ будет удалён
-        return 0, args[3]  # Ключ не будет удалён
+            return 1, config.i  # Ключ будет удалён
+        return 0, config.i  # Ключ не будет удалён
     
     def __save_item(self, n: int) -> None:
         """

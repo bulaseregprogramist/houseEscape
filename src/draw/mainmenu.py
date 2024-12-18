@@ -114,7 +114,7 @@ class MainMenu:
         elif rects[5].collidepoint(config.mouse_pos):  # Настройки
             config.screen.blit(config.textures[9], (330, 680))
             if pygame.mouse.get_pressed()[0]:
-                Settings()
+                Settings(config.screen)
         return config.mmc, save
 
     @staticmethod

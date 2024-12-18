@@ -57,7 +57,6 @@ class Pause:
         self.__logger.info("Игра поставлена на паузу")
         pause_cycle = 1
         while pause_cycle:
-            print(111)
             self.__screen.blit(self.__pause_menu, (240, 0))
             self.__screen.blit(self.__text1, (315, 45))
             self.__screen.blit(self.__mm, (340, 440))

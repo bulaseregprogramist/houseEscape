@@ -106,3 +106,12 @@ class Saving:
             json.dump(some_dict, file, indent=2)
         logging.debug("Предметы шкафа сохранены!")
         
+    @staticmethod
+    def save_music(music: int) -> None:
+        with open('game_settings/settings.json') as file:
+            result: dict[str: int | dict] = json.load(file)
+        result["MUSIC"] = music
+        
+        with open('game_settings/settings.json', 'w') as file:
+            json.dump(result, file, indent=2)
+        

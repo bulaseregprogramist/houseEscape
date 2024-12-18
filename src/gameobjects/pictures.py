@@ -1,5 +1,6 @@
 """Картины"""
 
+from ..other.configs import GameObjectsConfig3
 from ..gameobjects.gameobjects import GameObjects
 from ..entity.player import Player
 from ..game.saving import Saving
@@ -67,9 +68,10 @@ class Pictures(GameObjects):
                     self.__frame.set_alpha(64)
                 else:  # Не прозрачность
                     self.__frame.set_alpha(500)
-            super().placing(self.__pict[i][0] + 37, self.__pict[i][1] + 3,
+            super().placing(GameObjectsConfig3(self.__pict[i][0] + 37,
+                    self.__pict[i][1] + 3,
                     [self.__pict[i][2], self.__pict[i][3]],
-                    he_map, self.image, player)
+                    he_map, self.image, player))
             self.functional()
     
     def functional(self) -> None:

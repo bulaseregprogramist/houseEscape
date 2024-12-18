@@ -1,6 +1,8 @@
 """Размещение и функционал предметов/мебели"""
 
 from abc import ABC, abstractmethod
+
+from ..other.configs import GameObjectsConfig3
 from ..entity.inventory import Inventory
 from ..game.logging import HELogger
 from ..other.globals import font2, load
@@ -19,21 +21,24 @@ class GameObjects(ABC):
     __text1 = font2.render("ЛКМ для взаимодействия", 1, (255, 255, 255))
     
     @abstractmethod
-    def placing(self, *args: tuple) -> None:
+    def placing(self, config: GameObjectsConfig3) -> None:
         """
         Размещение предмета на карте
         
         Args:
-            *args (tuple): Список с данными (квадрат, объект игрока, текстура).
+            config (GameObjectsConfig3): Объект
+            с данными (квадрат, объект игрока, текстура).
         """
-        rect = args[4].get_rect(topleft=(args[0], args[1]))
-        rect2 = args[5].player.get_rect(topleft=(args[5].x, args[5].y))
+        rect = config.texture.get_rect(topleft=(config.x, config.y))
+        rect2 = config.player.player.get_rect(topleft=(config.player.x,
+                                                    config.player.y))
         if rect.colliderect(rect2):  # Прозрачный объект при вхождении в него
-            args[4].set_alpha(64)
+            config.texture.set_alpha(64)
         else:  # Непрозрачный объект
-            args[4].set_alpha(500)
-        if args[2] == args[3]:  # Если игрок находится в одной комнате с объектом
-            self.screen.blit(args[4], (args[0], args[1]))
+            config.texture.set_alpha(500)
+        # Если игрок находится в одной комнате с объектом
+        if config.he_map == config.some_list:
+            self.screen.blit(config.texture, (config.x, config.y))
             
     @staticmethod
     def _num_to_texture(command: str) -> pygame.surface.Surface:
@@ -74,33 +79,33 @@ class GameObjects(ABC):
             self.screen.blit(text2, (40, 740))
     
     @abstractmethod
-    def functional(self, *args: tuple) -> int:
+    def functional(self, config: tuple) -> int:
         """
         Функционал игрового объекта
         
         Args:
-            *args (tuple): Параметры игрового объекта.
+            config (tuple): Параметры игрового объекта.
         Returns:
             int: 0 - ничего не произошло, 1 - воспроизведение звука #1,
                 2 - звук #2, 3 - звук #3.
         """
-        rect = args[2].get_rect(topleft=(args[0], args[1]))
+        rect = config.texture.get_rect(topleft=(config.x, config.y))
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         
         # Небольшое чёрное окошко
         if (rect.collidepoint(mouse_pos)
-                and args[4] == args[5]):
-            self.__show_menu(args[3])
+                and config.he_map == config.location):
+            self.__show_menu(config.name)
             if pygame.mouse.get_pressed()[0]:
                 sleep(0.2)
-                if args[3] == "item":  # args[6] - ключ словаря
-                    Inventory.append(args[2], args[6])
+                if config.name == "item":
+                    Inventory.append(config.texture, config.i)
                     return 1
-                elif args[3] == "block":
+                elif config.name == "block":
                     return 2
-                elif args[3] == "picture":
+                elif config.name == "picture":
                     return 3
-                elif args[3] == "vehicle":
+                elif config.name == "vehicle":
                     return 4
         return 0
     

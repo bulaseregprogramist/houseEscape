@@ -57,38 +57,40 @@ class Draw:
         screen.blit(textures[8], (330, 680))
         
     @staticmethod
-    def show_interfaces(*args) -> None:
+    def show_interfaces(config) -> None:
         """
         Интерфейсы для мебели
         
         Args:
-            *args (tuple): Параметры для интерфейса
+            config (GameObjectsConfig): Параметры для интерфейса
         """
         text = font.render("СОЗДАНИЕ ПРЕДМЕТА", 1, (0, 0, 0))
         pygame.mixer.Sound("textures/collect.mp3").play()
-        of = OtherFunctional(args[2], args[1], args[3], args[4], args[5])
-        key = int(args[0])
+        of = OtherFunctional(config.n, config.screen, config.he_map,
+                            config.player, config.logger)
+        key = int(config.i)
         save = Saving()
-        result: dict[int: list] = save.load_save(args[2])["blocks"]
+        result: dict[int: list] = save.load_save(config.n)["blocks"]
         
         if key == 1:  # Верстак
-            CraftingTable(args[1], text, args[2], args[3], args[4])
+            CraftingTable(config.screen, text, config.n, config.screen,
+                        config.player)
         elif key == 2:  # Лампа
-            of.lamp(args[6])
+            of.lamp(config.use)
         elif key == 3:  # Люк в подвал
             logger = HELogger("BASEMENT", "INFO")
             logger.getChild("HE")
-            Basement(args[5], args[1], args[2])
+            Basement(config.logger, config.screen, config.n)
         elif key == 4:  # Кровать
-            of.bed(args[6])
+            of.bed(config.use)
         elif key == 5:  # Чердак (лестница)
             logger = HELogger("CHERDAK", "INFO")
             logger.getChild("HE")
-            Cherdak(logger, args[1], args[2])
+            Cherdak(logger, config.screen, config.n)
         elif key == 6:  # Шкаф
-            of.closet(args[6])
+            of.closet(config.use)
         elif key == 7 and "exit3.png" in result['7'][4]:
-            endings = Endings(args[1])
+            endings = Endings(config.screen)
             endings.pre_ending("Концовка Решётки")
     
     def render_location(self, index: list[int, int], mp: tuple[int, int],

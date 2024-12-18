@@ -1,5 +1,7 @@
 """Мебель дома"""
 
+from ..other.configs import GameObjectsConfig4, GameObjectsConfig2
+from ..other.configs import GameObjectsConfig3, GameObjectsConfig5
 from .gameobjects import GameObjects
 from ..draw.draw import Draw
 from ..game.saving import Saving
@@ -39,13 +41,14 @@ class Block(GameObjects):
                 self._num_to_texture(self.__blocks[i][4]), (50, 50))
             some_list: list[int, int] = [self.__blocks[i][2],
                                         self.__blocks[i][3]]
-            super().placing(int(self.__blocks[i][0]),
-                int(self.__blocks[i][1]), some_list, he_map, texture, player)
+            super().placing(GameObjectsConfig3(int(self.__blocks[i][0]),
+                int(self.__blocks[i][1]), some_list, he_map, texture, player))
             if have_functional:
-                self.functional(self.__blocks[i][0], self.__blocks[i][1], texture,
-                            he_map, some_list, i, n, player, use)
+                self.functional(GameObjectsConfig5(self.__blocks[i][0],
+                            self.__blocks[i][1], texture, he_map,
+                            some_list, i, n, player, use))
     
-    def functional(self, *args) -> None:
+    def functional(self, config) -> None:
         """
         Функционал мебели
         
@@ -53,11 +56,13 @@ class Block(GameObjects):
             *args (tuple[int, int, pygame.surface.Surface, Player, Use]):
             Ключ словаря, текстура, объекты игрока и Use, ...
         """
-        result: int = super().functional(args[0], args[1], args[2], "block",
-                                        args[3], args[4], None)
+        result: int = super().functional(GameObjectsConfig2(config.x,
+                                    config.y, config.texture, "block",
+                                    config.he_map, config.some_list, None))
         if result == 2:  # Открытие меню мебели
-            Draw.show_interfaces(args[5], self.screen, args[6], args[3],
-                                args[7], self.__logger, args[8])
+            Draw.show_interfaces(GameObjectsConfig4(config.i,
+                self.screen, config.n, config.he_map, config.player,
+                self.__logger, config.use))
             pygame.mixer.Sound("textures/press2.mp3").play()
             self.__logger.debug(
                 "Завершена работа УО метода functional класса Block")
