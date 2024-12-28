@@ -14,6 +14,7 @@ class SoundTrack:
         pygame.mixer.music.set_volume(0.41)
         
     def play(self) -> None:
+        """Воспроизведение музыки"""
         pygame.mixer.music.play(-1)
         
         

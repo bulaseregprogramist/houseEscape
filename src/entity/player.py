@@ -32,8 +32,8 @@ class Player(Character):
         self.__save = Saving()
         self.use = Use(screen, n, self)
         # Изначальное положение игрока по x и y
-        self.x = self.__save.load_save(n)["x"]
-        self.y = self.__save.load_save(n)["y"]
+        self.x: int = self.__save.load_save(n)["x"]
+        self.y: int = self.__save.load_save(n)["y"]
         self.player = load("textures/player.png", (60, 60), "convert_alpha")
         self.player2 = load("textures/player2.png", (60, 60), "convert_alpha")
         self.__inventory = load("textures/backpack.png", 

@@ -22,6 +22,9 @@ class Settings:
                                 'convert')
         self.__checkmark2 = load('textures/checkmark2.png', (50, 50),
                                 'convert')
+        sound = pygame.mixer.Sound("textures/collect.mp3")
+        sound.set_volume(0.4)
+        sound.play()
         
         self.__music: int = self.check_music_activated()
         self.__run()

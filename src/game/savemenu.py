@@ -22,7 +22,9 @@ class SaveMenu:
         self.__bg = load("textures/sm.png", (220, 770), "convert")
         self.__st = font4.render("СОХРАНЕНИЕ", 1, (255, 255, 255))
         self.__st2 = font4.render("СОХРАНЕНИЕ", 1, (229, 255, 0))
+        self.__limit = font4.render("Максимум - 5 уровней", 1, (235, 0, 0))
         self.__screen: pygame.surface.Surface = screen
+        self.__act_sound = pygame.mixer.Sound("textures/collect.mp3")
         self.__plus = load("textures/plus.png", (40, 40), "convert_alpha")
         self.__plus2 = load("textures/plus2.png", (40, 40), "convert_alpha")
         self.__delete = load("textures/delete.png", (40, 40), "convert_alpha")
@@ -37,6 +39,7 @@ class SaveMenu:
     def create_save(self) -> None:
         """Создание сохранения"""
         sleep(0.5)
+        self.__act_sound.play()
         sl: list[str, ...] = listdir("data/")  # Получение кол-ва сохранений
         if len(sl) < 5:  # Если кол-во сохранений меньше 5.
             with open(f"data/data{len(sl) + 1}.json", "w",
@@ -49,6 +52,7 @@ class SaveMenu:
     def delete_save(self) -> None:
         """Удаление сохранений"""
         sleep(0.5)
+        self.__act_sound.play()
         saves: list[str, ...] = listdir("data/")
         
         try:
@@ -74,6 +78,7 @@ class SaveMenu:
         self.__screen.blit(self.__plus, (550, 1))
         self.__screen.blit(self.__delete, (600, 1))
         self.__screen.blit(self.__to_menu, (5, 5))
+        self.__screen.blit(self.__limit, (10, 720))
         
         rects_list.clear()
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()

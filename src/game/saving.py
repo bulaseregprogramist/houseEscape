@@ -108,6 +108,7 @@ class Saving:
         
     @staticmethod
     def save_music(music: int) -> None:
+        """Сохранение настройки музыки"""
         with open('game_settings/settings.json') as file:
             result: dict[str: int | dict] = json.load(file)
         result["MUSIC"] = music

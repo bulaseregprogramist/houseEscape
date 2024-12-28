@@ -4,7 +4,6 @@ from abc import abstractmethod, ABC
 import sys  # Только для sys.exit()
 import pygame
 from ..other.globals import load, font2, n  # load - загрузка текстур.
-from ..game.logging import HELogger
 from ..game.saving import Saving
 from time import sleep
 from copy import copy

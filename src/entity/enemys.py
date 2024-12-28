@@ -22,11 +22,11 @@ class Enemy(Character):
     
     def __init__(self, x: int, y: int, enemy_type: str, logger: HELogger,
             screen: pygame.surface.Surface, player: Player = None) -> None:
-        self.__screen = screen
+        self.__screen: pygame.surface.Surface = screen
         self.x = x
         self.y = y
         self.__logger: HELogger = logger
-        self.__player = player
+        self.__player: Player = player
         # В enemy_type может быть watcher, blinder, stalker
         self.__enemy_type: str = enemy_type
         self.__mm = MonsterMove(self.speed, player)

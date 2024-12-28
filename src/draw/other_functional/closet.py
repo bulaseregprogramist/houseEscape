@@ -7,7 +7,6 @@ from ...entity.inventory import Inventory
 from ...other.globals import font, some_dict, load
 from copy import copy
 import re
-from ...other.use import Use
 import sys  # Только для sys.exit()
 
 

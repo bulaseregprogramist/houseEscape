@@ -21,7 +21,7 @@ class Draw:
     """Этот класс отвечает за отрисовку локаций и другого"""
     
     def __init__(self, logger: HELogger) -> None:
-        self.__logger = logger
+        self.__logger: HELogger = logger
         logger.info("Работа конструктора класса Draw начата!")
         self.__bg1 = load("textures/1.png", (770, 770), "convert")
         self.__bg2 = load("textures/2.png", (770, 770), "convert")
@@ -107,7 +107,7 @@ class Draw:
             num (int): Номер выбранного сохранения,
             logger (HELogger): Переменная для логов.
         """
-        if index == [0, 2]:
+        if index == [0, 2]:  # Окрестности дома
             screen.blit(self.__bg10, (0, 0))
         elif index == [1, 1]:
             screen.blit(self.__bg2, (0, 0))
@@ -133,7 +133,7 @@ class Draw:
             screen.blit(self.__bg8, (0, 0))
         elif index == [3, 2]:
             screen.blit(self.__bg9, (0, 0))
-        elif index == [3, 3]:  # Окрестности дома
+        elif index == [3, 3]:  # Начальная комната
             screen.blit(self.__bg1, (0, 0))
             enemy = Enemy(self.__x, self.__y, "watcher", logger, screen,
                         player)

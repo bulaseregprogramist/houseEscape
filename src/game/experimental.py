@@ -15,9 +15,12 @@ class Experimental:
     def __init__(self, screen: pygame.surface.Surface) -> None:
         self.__screen: pygame.surface.Surface = screen
         self.__sound1 = pygame.mixer.Sound("textures/collect.mp3")
-        self.__text1 = font3.render("Экспериментальные возможности", 1, (0, 0, 0))
-        self.__checkmark1 = load("textures/checkmark1.png", (55, 55), "convert")
-        self.__checkmark2 = load("textures/checkmark2.png", (55, 55), "convert")
+        self.__text1 = font3.render("Экспериментальные возможности", 1,
+                                    (0, 0, 0))
+        self.__checkmark1 = load("textures/checkmark1.png", (55, 55),
+                                "convert")
+        self.__checkmark2 = load("textures/checkmark2.png", (55, 55),
+                                "convert")
         self.__rects_list = []
         self.__sound1.set_volume(0.41)
         self.dict_name = 'EXPERIMENTS'
@@ -32,7 +35,7 @@ class Experimental:
     def load_settings(self) -> None:
         """Загрузка экспериментальных настроек"""
         with open('game_settings/settings.json') as file:
-            self.__result = json.load(file)
+            self.__result: dict[str: dict[str: int] | int] = json.load(file)
             
     def save_settings(self) -> None:
         """Сохранение экспериментальных настроек"""
