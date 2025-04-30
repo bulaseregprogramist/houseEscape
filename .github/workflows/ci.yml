@@ -1,1 +1,30 @@
+name: CI for Pygame
 
+on: [push, pull_request]  # Запуск при любом push или PR
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Используем Ubuntu для сборки
+
+    steps:
+      # 1. Клонируем репозиторий
+      - uses: actions/checkout@v4
+
+      # 2. Устанавливаем Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      # 3. Устанавливаем зависимости
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # 4. Проверяем код с flake8
+      - name: Run linter (flake8)
+        run: flake8 . --count --show-source --statistics
+
+      # 5. Запускаем тесты (если они есть)
+      - name: Run tests
+        run: pytest
