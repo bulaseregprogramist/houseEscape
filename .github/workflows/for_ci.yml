@@ -18,6 +18,10 @@ jobs:
           python-version: "3.13"
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Install linters
+        run: pip install flake8 black isort
+  
       - name: Run flake8 (проверка синтаксиса)
         run: flake8 . --count --show-source --statistics
 
