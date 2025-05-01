@@ -18,3 +18,11 @@ jobs:
           python-version: "3.13"
       - name: Install dependencies
         run: pip install -r requirements.txt
+      - name: Run flake8 (проверка синтаксиса)
+        run: flake8 . --count --show-source --statistics
+
+      - name: Run black (проверка форматирования)
+        run: black --check .
+
+      - name: Run isort (сортировка импортов)
+        run: isort --check .
