@@ -11,19 +11,19 @@ pygame.init()
 
 class Endings:
     """Основной функционал концовок"""
-    
+
     def __init__(self, screen: pygame.surface.Surface) -> None:
         self.__screen: pygame.surface.Surface = screen
-    
+
     def pre_ending(self, name: str) -> None:
         """Перед концовкой"""
         logging.info("Игрок прошёл игру!")
         self.draw_ending(name)
-    
+
     def draw_ending(self, name: str) -> None:
         """
         Отрисовка концовки
-        
+
         Args:
             name (str): Название концовки.
         """
@@ -36,7 +36,7 @@ class Endings:
             self.__screen.blit(text, (240, 330))
             self.__screen.blit(text2, (70, 380))
             self.__screen.blit(text3, (70, 460))
-            
+
             pygame.display.flip()
-            
+
             {sys.exit() for i in pygame.event.get() if i.type == pygame.QUIT}

@@ -12,11 +12,11 @@ pygame.init()
 
 class Saving:
     inventory: object  # Хранит класс Inventory
-    
+
     def load_save(self, numb: int, logger: HELogger = None) -> dict:
         """
         Загрузка сохранений
-        
+
         Args:
             numb (int): Номер выбранного игроком сохранения,
             logger (HELogger | None): Параметр по умолчанию, для логов.
@@ -28,20 +28,19 @@ class Saving:
             if logger is not None:
                 logger.debug("Идёт загрузка данных")
             with open(f"data/data{numb}.json") as file:
-                some_dict: dict[str: list | int | dict] = json.load(file)
-            some_dict: dict[str: list | int | dict] = self.load_textures(numb)
+                some_dict: dict[str : list | int | dict] = json.load(file)
+            some_dict: dict[str : list | int | dict] = self.load_textures(numb)
         except FileNotFoundError:
             if logger is not None:
                 logger.error("Ошибка. Файл data.json не найден")
             self.__not_found(numb, logger)
-            some_dict: dict[str: list | int | dict] = self.load_textures(numb,
-                                                                    logger)
+            some_dict: dict[str : list | int | dict] = self.load_textures(numb, logger)
         return some_dict
-    
+
     def __not_found(self, numb: int, logger: HELogger = None) -> None:
         """
         Если файл data.json не найден
-        
+
         Args:
             numb (int): Номер выбранного сохранения
             logger (HELogger | None): Параметр по умолчанию, для логов.
@@ -52,28 +51,34 @@ class Saving:
             logger.debug("Ошибка исправлена!")
         with open(f"data/data{numb}.json", "w") as file:
             json.dump(some_dict, file, indent=2)
-            
+
     def load_textures(self, numb: int, logger: HELogger = None) -> dict:
         """
         Загрузка текстур в словари
-        
+
         Args:
             numb (int): Номер выбранного сохранения,
             logger (HELogger): Переменная для логов, по умолчанию None.
         Returns:
             dict: Словарь с данными игры.
         """
-        with open(f"data/data{numb}.json", encoding='utf-8') as file:
-            result: dict[str: list | int | dict] = json.load(file)
+        with open(f"data/data{numb}.json", encoding="utf-8") as file:
+            result: dict[str : list | int | dict] = json.load(file)
         if logger is not None:
             logger.debug("Текстуры получены!")
         return result
-    
-    def saving(self, index: list[int, int], x: int, y: int, n: int, 
-            inventory_saving: bool = False) -> None:
+
+    def saving(
+        self,
+        index: list[int, int],
+        x: int,
+        y: int,
+        n: int,
+        inventory_saving: bool = False,
+    ) -> None:
         """
         Сохранение игры
-        
+
         Args:
             index (list[int, int]): Позиция игрока на карте,
             x (int): Позиция игрока по x,
@@ -82,7 +87,7 @@ class Saving:
             inventory_saving (bool): По умолчанию, сохранять ли инвентарь.
         """
         # Получение словаря из data.json
-        result: dict[str: list | int | dict] = self.load_save(n)
+        result: dict[str : list | int | dict] = self.load_save(n)
         result["index"] = index  # Позиция игрока на карте.
         result["x"] = x
         result["y"] = y
@@ -96,23 +101,23 @@ class Saving:
             result["items_id"] = items_id
         with open(f"data/data{n}.json", "w") as file:
             json.dump(result, file, indent=2)
-            
-    def save_closet_items(self, items: list[str, ...], num: int, 
-                        some_dict: dict) -> None:
+
+    def save_closet_items(
+        self, items: list[str, ...], num: int, some_dict: dict
+    ) -> None:
         """Сохраняет предметы шкафа"""
         logging.debug("Идёт сохранение предметов")
         some_dict["closet_items"] = items
         with open(f"data/data{num}.json", "w") as file:
             json.dump(some_dict, file, indent=2)
         logging.debug("Предметы шкафа сохранены!")
-        
+
     @staticmethod
     def save_music(music: int) -> None:
         """Сохранение настройки музыки"""
-        with open('game_settings/settings.json') as file:
-            result: dict[str: int | dict] = json.load(file)
+        with open("game_settings/settings.json") as file:
+            result: dict[str : int | dict] = json.load(file)
         result["MUSIC"] = music
-        
-        with open('game_settings/settings.json', 'w') as file:
+
+        with open("game_settings/settings.json", "w") as file:
             json.dump(result, file, indent=2)
-        

@@ -19,22 +19,33 @@ pygame.init()
 
 class NPC(Character):
     """Торговцы"""
+
     save = Saving()
-    
-    def __init__(self, screen: pygame.surface.Surface, logger: HELogger,
-                index: list[int, int], num: int) -> None:
+
+    def __init__(
+        self,
+        screen: pygame.surface.Surface,
+        logger: HELogger,
+        index: list[int, int],
+        num: int,
+    ) -> None:
         self.__screen: pygame.surface.Surface = screen
         self.__logger: HELogger = logger
         self.__index: list[int, int] = index
         self.__num = num
         self.__npc = load("textures/npc.png", (65, 65), "convert_alpha")
         self.__npc2 = load("textures/npc2.png", (65, 65), "convert_alpha")
-    
-    def placing(self, mouse_pos: tuple[int, int], player: Player,
-                index: list[int, int], num: int) -> None:
+
+    def placing(
+        self,
+        mouse_pos: tuple[int, int],
+        player: Player,
+        index: list[int, int],
+        num: int,
+    ) -> None:
         """
         Отрисовка торговца и взаимодействие с ним.
-        
+
         Args:
             mouse_pos (tuple[int, int]): Позиция мыши,
             player (Player): Объект игрока,
@@ -50,11 +61,11 @@ class NPC(Character):
                 self.__menu(player, index, num)
         elif rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[2]:
             self.get_stats(player)
-        
+
     def __menu(self, player: Player, index: list[int, int], num: int) -> None:
         """
         Меню торговли.
-        
+
         Args:
             player (Player): Объект игрока,
             index (list[int, int]): Позиция игрока на карте,
@@ -63,35 +74,43 @@ class NPC(Character):
         cycle = 1
         trade_system = TradeSystem(self.__screen, num, player, player.use)
         while cycle:
-            text = font3.render(f"ВАШИ ДЕНЬГИ - {MoneySystem.MONEY}",
-                            1, (0, 0, 0))
-            pygame.draw.rect(self.__screen, 
-                            (255, 255, 255), (100, 100, 570, 570))
+            text = font3.render(f"ВАШИ ДЕНЬГИ - {MoneySystem.MONEY}", 1, (0, 0, 0))
+            pygame.draw.rect(self.__screen, (255, 255, 255), (100, 100, 570, 570))
             self.__screen.blit(text, (240, 150))
             trade_system.draw_items()
             pygame.display.flip()
-            
+
             for i in pygame.event.get():
                 if i.type == pygame.QUIT:
                     self.__logger.info("Выход из игры...")
-                    self.save.saving(index, player.x, player.y,
-                                    len(listdir("data/")), True)
+                    self.save.saving(
+                        index, player.x, player.y, len(listdir("data/")), True
+                    )
                     sys.exit()
                 elif i.type == pygame.KEYDOWN and i.key == pygame.K_ESCAPE:
                     sleep(0.3)
                     cycle = 0
-    
+
     @classmethod
     def change_fields(self) -> None:
         """Смена статических полей."""
         super().change_fields(2)
-    
+
     def get_stats(self, player: Player) -> None:
         """Получение информации об NPC."""
-        super().get_stats(StatsConfig(self.__screen, self.__index, self.__num,
-                        [100, 100], self.__logger, player), {1: 2})
+        super().get_stats(
+            StatsConfig(
+                self.__screen,
+                self.__index,
+                self.__num,
+                [100, 100],
+                self.__logger,
+                player,
+            ),
+            {1: 2},
+        )
         self.__logger.info("Выход из меню...")
-    
+
     @staticmethod
     def die(self) -> None:
         """Смерть нпс (торговца)."""

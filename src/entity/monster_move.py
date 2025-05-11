@@ -7,19 +7,19 @@ from ..entity.player import Player
 class MonsterMove:
     __direction = 0
     __rand_direction = randint(1, 2)  # Для watcher'a
-    
+
     def __init__(self, monster_speed: int, player: Player = None) -> None:
         self.speed = monster_speed
         self.__moving_right = 1  # Для blinder'a
         if player is not None:  # stalker требует координат игрока
             self.px: int = player.x
             self.py: int = player.y
-    
+
     @classmethod
     def move1(cls, x: int, y: int) -> int:
         """
         Движение watcher'a (влево-вправо или вверх-вниз)
-        
+
         Args:
             x (int): Позиция watcher'a по x,
             y (int): Позиция watcher'a по y
@@ -45,11 +45,11 @@ class MonsterMove:
             if y > 680:  # Идёт вверх
                 cls.__direction = 0
         return x, y
-    
+
     def move2(self, x: int, y: int) -> int:
         """
         Движение blinder'a (от левого угла к правому)
-        
+
         Args:
             x (int): Позиция blinder'a по x,
             y (int): Позиция blinder'a по y
@@ -71,11 +71,11 @@ class MonsterMove:
             if x <= 0 and y <= 0:
                 self.__moving_right = 1
         return x, y
-    
+
     def move3(self, x: int, y: int) -> int:
         """
         Движение stalker'a (двигается за игроком)
-        
+
         Args:
             x (int): Позиция stalker'a по x,
             y (int): Позиция stalker'a по y

@@ -15,10 +15,17 @@ pygame.init()
 
 class Pause:
     """Пауза во время игры (в главном меню не работает)"""
+
     save = Saving()
-    
-    def __init__(self, screen: pygame.surface.Surface, logger: HELogger,
-                index: list[int, int], player: Player, n: int) -> None:
+
+    def __init__(
+        self,
+        screen: pygame.surface.Surface,
+        logger: HELogger,
+        index: list[int, int],
+        player: Player,
+        n: int,
+    ) -> None:
         self.__logger: HELogger = logger
         self.__screen: pygame.surface.Surface = screen
         self.__index: list[int, int] = index
@@ -28,11 +35,11 @@ class Pause:
         self.__pause_menu = load("textures/pm.png", (300, 770), "convert")
         self.__crest = load("textures/crest.png", (90, 90), "convert")
         self.__mm = load("textures/mm.png", (100, 100), "convert")
-        
+
     def __functional(self) -> int:
         """
         Функционал главного меню.
-        
+
         Returns:
             int: Выключает цикл или оставляет его включённым. (второй случай)
         """
@@ -46,11 +53,11 @@ class Pause:
         elif rect2.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
             return 0, 1  # Выход в главное меню
         return 1, 0  # Без изменени
-    
+
     def run(self) -> int:
         """
         Основной метод класса
-        
+
         Returns:
             int: Выключение цикла или он останется неизменным.
         """
@@ -60,21 +67,23 @@ class Pause:
             self.__screen.blit(self.__pause_menu, (240, 0))
             self.__screen.blit(self.__text1, (315, 45))
             self.__screen.blit(self.__mm, (340, 440))
-            
+
             pause_cycle, button = self.__functional()
             if button:  # Если нажать на кнопку выход в главное меню
                 mm = MainMenu(self.__screen, self.__logger)
-                self.save.saving(self.__index, self.__player.x, 
-                                self.__player.y, self.__n)
+                self.save.saving(
+                    self.__index, self.__player.x, self.__player.y, self.__n
+                )
                 return mm.to_menu()
-                
+
             pygame.display.flip()
-            
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.__logger.info("Выход из программы...")
-                    self.save.saving(self.__index, self.__player.x,
-                                self.__player.y, self.__n)
+                    self.save.saving(
+                        self.__index, self.__player.x, self.__player.y, self.__n
+                    )
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
@@ -82,4 +91,3 @@ class Pause:
                         pause_cycle = 0
                         sleep(0.412)
         return 1
-    

@@ -12,7 +12,7 @@ font = pygame.font.Font("textures/font.otf", 43)
 font2 = pygame.font.Font("textures/font.otf", 10)
 font3 = pygame.font.Font("textures/font.otf", 25)
 font4 = pygame.font.Font("textures/font.otf", 20)
-font5 = pygame.font.Font('textures/font.otf', 37)
+font5 = pygame.font.Font("textures/font.otf", 37)
 
 n = len(listdir("data/"))
 if n == 0:

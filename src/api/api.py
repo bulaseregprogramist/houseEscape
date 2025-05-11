@@ -13,7 +13,7 @@ pygame.init()
 
 class HEAPI:
     """API игры HouseEscape"""
-    
+
     @staticmethod
     def guide(screen: pygame.surface.Surface) -> None:
         """Руководство по примению API"""
@@ -21,32 +21,33 @@ class HEAPI:
         sound.set_volume(0.4)
         sound.play()
         text = font.render("Гайд по API", 1, (0, 0, 0))
-        
+
         cycle = 1
         while cycle:
             screen.fill((255, 255, 255))
             screen.blit(text, (230, 50))
-            
+
             pygame.display.flip()
-            
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-                elif (event.type == pygame.KEYDOWN
-                        and event.key == pygame.K_ESCAPE):
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     cycle = 0
-    
+
     @staticmethod
     def load(logger: HELogger) -> None:
         """
         Загрузка модов в игру
-        
+
         Args:
             logger (HELogger): Переменная для логов
         """
-        logging.basicConfig(level=logging.INFO,
-                        format="[%(name)s] - [%(levelname)s] - %(message)s",
-                        encoding="utf-8")
+        logging.basicConfig(
+            level=logging.INFO,
+            format="[%(name)s] - [%(levelname)s] - %(message)s",
+            encoding="utf-8",
+        )
         logger.info("Загрузка модов...")
         if len(listdir("mods/")) > 0:
             logger.info("Моды обнаружены!")
@@ -55,7 +56,7 @@ class HEAPI:
         else:
             logger.warning("Модов не обнаружено!")
         logger.info("Загрузка модов завершена!")
-        
+
     @staticmethod
     def __initialize_mods() -> None:
         """Инициализация модов"""
@@ -64,5 +65,3 @@ class HEAPI:
             if i.endswith(".json"):
                 with open(f"mods/{i}") as file:
                     pass
-    
-    

@@ -1,7 +1,7 @@
 """Движение игрока"""
 
 # Есть места в комнате, в которых не должен быть игрок
-# Но они видимы. 
+# Но они видимы.
 # Например: кровать в спальне.
 
 from ..game.logging import HELogger
@@ -15,13 +15,14 @@ pygame.init()
 
 class Move:
     """Движение игрока"""
-    
+
     @staticmethod
-    def player_move(player: object, index: list[int, int], x: int, y: int,
-                    speed: int) -> None:
+    def player_move(
+        player: object, index: list[int, int], x: int, y: int, speed: int
+    ) -> None:
         """
         Движение игрока
-        
+
         Args:
             player (Player): Объект игрока,
             index (list[int, int]): Карта дома,
@@ -33,26 +34,45 @@ class Move:
         """
         if is_pressed("shift"):
             speed *= 1.5
-        if (is_pressed("w") and Move.move_in_location(player.x, 
-                player.y, index) and y < 753):
+        if (
+            is_pressed("w")
+            and Move.move_in_location(player.x, player.y, index)
+            and y < 753
+        ):
             y -= 3 * speed
-        elif (is_pressed("a") and Move.move_in_location(player.x,
-                player.y, index) and x > -23):
+        elif (
+            is_pressed("a")
+            and Move.move_in_location(player.x, player.y, index)
+            and x > -23
+        ):
             x -= 3 * speed
-        elif (is_pressed("s") and Move.move_in_location(player.x,
-                player.y, index) and y > -23):
+        elif (
+            is_pressed("s")
+            and Move.move_in_location(player.x, player.y, index)
+            and y > -23
+        ):
             y += 3 * speed
-        elif (is_pressed("d") and Move.move_in_location(player.x, 
-                player.y, index) and x < 753):
-            x += 3  * speed
+        elif (
+            is_pressed("d")
+            and Move.move_in_location(player.x, player.y, index)
+            and x < 753
+        ):
+            x += 3 * speed
         return x, y
-    
+
     @staticmethod
-    def press_keydown(logger: HELogger, event, cls, index: list[int, int],
-                player: object, n: int, mouse_pos: tuple[int, int]) -> None:
+    def press_keydown(
+        logger: HELogger,
+        event,
+        cls,
+        index: list[int, int],
+        player: object,
+        n: int,
+        mouse_pos: tuple[int, int],
+    ) -> None:
         """
         Нажатие на клавишу
-        
+
         Args:
             logger (HELogger): Переменная для логов,
             event (Any): Событие в pygame,
@@ -65,11 +85,10 @@ class Move:
         try:
             logger.info(f"Нажата клавиша - {chr(event.key)}")
         except ValueError:
-            logger.error(
-                "Нажата клавиша, которая не может быть обработана через chr")
+            logger.error("Нажата клавиша, которая не может быть обработана через chr")
         if event.key == pygame.K_e:
             cls.to_inventory(Config(logger, index, player, n, mouse_pos))
-    
+
     @staticmethod
     def move_in_location(x: int, y: int, index: list[int, int]) -> bool:
         """
@@ -104,4 +123,3 @@ class Move:
             if y > 120:  # Ниже крыши можно ходить.
                 return True
         return False
-    

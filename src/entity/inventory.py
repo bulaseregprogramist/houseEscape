@@ -18,20 +18,24 @@ class Inventory:
     logger: HELogger
     Player = None
     inventory_list2 = []  # Сохранённые предметы
-    
-    def __init__(self, inventory: pygame.surface.Surface, inventory2,
-                screen: pygame.surface.Surface) -> None:
+
+    def __init__(
+        self,
+        inventory: pygame.surface.Surface,
+        inventory2,
+        screen: pygame.surface.Surface,
+    ) -> None:
         logging.debug("Начата работа конструктора класса Inventory")
         self.__inventory = inventory  # Текстура рюкзака.
         self.__inventory2: pygame.surface.Surface = inventory2
         self.__screen: pygame.surface.Surface = screen
         logging.debug("Завершена работа конструктора класса Inventory")
-        
+
     @classmethod
     def append(cls, texture: pygame.surface.Surface, key: str) -> None:
         """
         Добавление в инвентарь предметов
-        
+
         Args:
             texture (pygame.surface.Surface): Текстура предмета,
             key (str): Ключ словаря предмета.
@@ -45,16 +49,15 @@ class Inventory:
         except AttributeError:
             cls.logger.critical("Инвентарь не инициализирован!!")
 
-    @classmethod   
+    @classmethod
     def draw_inventory(cls, screen: pygame.surface.Surface) -> None:
         """
         Отрисовка инвентаря
-        
+
         Args:
             screen (pygame.surface.Surface): Переменная экрана
         """
-        text = font3.render("Enter для выхода из инвентаря", 1, 
-                            (255, 255, 255))
+        text = font3.render("Enter для выхода из инвентаря", 1, (255, 255, 255))
         x, y = 100, 100
         screen.blit(text, (150, 30))
         if len(cls.inventory_list) > 0:  # Сохранённые предметы
@@ -62,7 +65,7 @@ class Inventory:
                 if i % 8 == 0 and i != 0:  # Перенос на новую строку
                     x = 100
                     y += 60
-                    
+
                 try:
                     screen.blit(cls.inventory_list[i], (x, y))
                 except TypeError:
@@ -76,11 +79,11 @@ class Inventory:
                 screen.blit(cls.inventory_list2[j], (x, y))
                 x += 60
 
-    @classmethod  
+    @classmethod
     def __num_to_texture(cls, inv_list: list[str, ...]) -> None:
         """
         От id к текстуре
-        
+
         Args:
             inv_list (list[str, ...]): Список с id.
         """
@@ -91,11 +94,11 @@ class Inventory:
             match = re.search(pattern, some_dict["items"][int(i)][4])
             inv_list2.append(load(match.group(1), (60, 60), "convert_alpha"))
         cls.inventory_list2 = inv_list2  # Список с сохранёнными предметами
-            
+
     def open(self, *args) -> None:
         """
         Открытие инвентаря
-        
+
         Args:
             *args (tuple): Параметры игрока (местоположение,
             номер выбранного сохранения, логгер, объект игрока, курсор мыши)
@@ -104,25 +107,26 @@ class Inventory:
         save = Saving()
         inventory_list2: list[str, ...] = save.load_save(args[2])["items_id"]
         self.__num_to_texture(inventory_list2)
-        text = font3.render(f"Деньги - {MoneySystem.MONEY}", 1,
-                            (0, 0, 0))
+        text = font3.render(f"Деньги - {MoneySystem.MONEY}", 1, (0, 0, 0))
         while inv_cycle:
             self.__screen.fill((70, 70, 70))
             self.__screen.blit(self.__inventory, (10, 10))
             self.__screen.blit(text, (110, 7))
             Inventory.draw_inventory(self.__screen)
             rect = self.__inventory.get_rect(topleft=(10, 10))
-            
+
             if rect.collidepoint(args[4]):  # Свечение при наводке
                 self.__screen.blit(self.__inventory2, (10, 10))
             pygame.display.flip()
-            
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     save = Saving()
                     save.saving(args[0], args[1].x, args[1].y, args[2], True)
                     args[3].info("Выход из игры...")
                     sys.exit()
-                elif (event.type == pygame.KEYDOWN  # Выход из инвентаря
-                        and event.key == pygame.K_RETURN):
+                elif (
+                    event.type == pygame.KEYDOWN  # Выход из инвентаря
+                    and event.key == pygame.K_RETURN
+                ):
                     inv_cycle = 0

@@ -20,20 +20,19 @@ pygame.init()
 class MainMenu:
     """Главное меню (в нём Boosty, DonationAlerts, кнопку запуска)"""
 
-    def __init__(self, screen: pygame.surface.Surface,
-                logger: HELogger) -> None:
+    def __init__(self, screen: pygame.surface.Surface, logger: HELogger) -> None:
         self.__screen = screen
         self.__logger = logger
         self.__textures = {
             "yes": load("textures/yes.png", (30, 30), "convert"),
             "no": load("textures/no.png", (30, 30), "convert"),
-            "em": load("textures/em.png", (220, 140), "convert")
+            "em": load("textures/em.png", (220, 140), "convert"),
         }
 
     def to_menu(self) -> int:
         """
         Возвращение в главное меню
-        
+
         Returns:
             int: Переменным, с которыми работает цикл, присвоено 0.
         """
@@ -54,27 +53,24 @@ class MainMenu:
             rect_yes = self.__textures["yes"].get_rect(topleft=(325, 370))
             rect_no = self.__textures["no"].get_rect(topleft=(405, 370))
 
-            if (rect_yes.collidepoint(mouse_pos)
-                    and pygame.mouse.get_pressed()[0]):
+            if rect_yes.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
                 self.__logger.info("Выход из игры...")
                 sys.exit()
-            elif (rect_no.collidepoint(mouse_pos) 
-                    and pygame.mouse.get_pressed()[0]):
+            elif rect_no.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
                 cycle = 0
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.__logger.info("Выход из игры...")
                     sys.exit()
-                elif (event.type == pygame.KEYDOWN 
-                        and event.key == pygame.K_ESCAPE):
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     cycle = 0
 
     @classmethod
     def act(cls, config: MainMenuConfig, *rects) -> int | SaveMenu | None:
         """
         Действия в главном меню
-        
+
         Args:
             config (MainMenuConfig): Конфиг (позиция мыши, экран, ...)
             *rects (tuple): 'Квадраты' кнопок
@@ -92,21 +88,21 @@ class MainMenu:
                 save = SaveMenu(config.screen, config.logger)
                 if save.number == "to_menu":
                     config.mmc = 1
-        elif (rects[1].collidepoint(config.mouse_pos) 
-                and pygame.mouse.get_pressed()[0]):  # Boosty
+        elif (
+            rects[1].collidepoint(config.mouse_pos) and pygame.mouse.get_pressed()[0]
+        ):  # Boosty
             cls.open("https://boosty.to/sergey_pelmen", config.logger)
-        elif (rects[2].collidepoint(config.mouse_pos)
-                and pygame.mouse.get_pressed()[0]):  # DonationAlerts
-            cls.open("https://www.donationalerts.com/r/sergeyprojects",
-                    config.logger)
+        elif (
+            rects[2].collidepoint(config.mouse_pos) and pygame.mouse.get_pressed()[0]
+        ):  # DonationAlerts
+            cls.open("https://www.donationalerts.com/r/sergeyprojects", config.logger)
         elif rects[3].collidepoint(config.mouse_pos):  # Гайд по API
-            notepad2 = load('textures/notepad2.png', (105, 105),
-                            "convert_alpha")
+            notepad2 = load("textures/notepad2.png", (105, 105), "convert_alpha")
             config.screen.blit(notepad2, (660, 660))
             if pygame.mouse.get_pressed()[0]:
                 HEAPI.guide(config.screen)
         elif rects[4].collidepoint(config.mouse_pos):  # Эксперименты
-            flask2 = load('textures/flask2.png', (105, 105), "convert_alpha")
+            flask2 = load("textures/flask2.png", (105, 105), "convert_alpha")
             config.screen.blit(flask2, (-10, 660))
             if pygame.mouse.get_pressed()[0]:
                 exp = Experimental(config.screen)
@@ -135,14 +131,13 @@ class MainMenu:
     def __init_textures(logger: HELogger) -> tuple[pygame.surface.Surface]:
         """
         Инициализация текстур
-        
+
         Args:
             logger (HELogger): Переменная для логов
         Returns:
             tuple[pygame.surface.Surface]: Загруженные текстуры
         """
-        logger.debug(
-            "Начало инициализации текстур для статического метода render")
+        logger.debug("Начало инициализации текстур для статического метода render")
         textures = (
             load("textures/bg.png", (770, 770), "convert"),
             load("textures/play.png", (130, 130), "convert_alpha"),
@@ -152,11 +147,10 @@ class MainMenu:
             load("textures/logo.png", (210, 210), "convert"),
             load("textures/notepad.png", (105, 105), "convert_alpha"),
             load("textures/flask.png", (105, 105), "convert_alpha"),
-            load('textures/settings.png', (80, 80), 'convert_alpha'),
-            load('textures/settings2.png', (80, 80), 'convert_alpha')
+            load("textures/settings.png", (80, 80), "convert_alpha"),
+            load("textures/settings2.png", (80, 80), "convert_alpha"),
         )
-        logger.debug(
-            "Завершена инициализация текстур для статического метода render")
+        logger.debug("Завершена инициализация текстур для статического метода render")
         return textures
 
     @staticmethod
@@ -179,22 +173,24 @@ class MainMenu:
             Draw.draw_mainmenu(screen, textures)
 
             mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
-            rects = (textures[1].get_rect(topleft=(317, 300)),
+            rects = (
+                textures[1].get_rect(topleft=(317, 300)),
                 textures[2].get_rect(topleft=(30, 30)),
                 textures[3].get_rect(topleft=(660, 30)),
                 textures[5].get_rect(topleft=(660, 660)),
                 textures[7].get_rect(topleft=(-10, 660)),
-                textures[8].get_rect(topleft=(330, 680))
-                )
-            mainmenu_cycle, save = MainMenu.act(MainMenuConfig(mouse_pos,
-                         screen, textures, logger, mainmenu_cycle), *rects)
+                textures[8].get_rect(topleft=(330, 680)),
+            )
+            mainmenu_cycle, save = MainMenu.act(
+                MainMenuConfig(mouse_pos, screen, textures, logger, mainmenu_cycle),
+                *rects,
+            )
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     logger.info("Выход из игры...")
                     sys.exit()
-                elif (event.type == pygame.KEYDOWN 
-                        and event.key == pygame.K_ESCAPE):
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     mm = MainMenu(screen, logger)
                     mm.exit_menu(mouse_pos)
 

@@ -27,13 +27,16 @@ pygame.init()
 
 class Game:
     """Основной игровой класс"""
+
     # Карта дома (1 - комнаты, 0 - комнаты, в которые нельзя попасть)
-    __lst = ["00100", "01110","01110", "01110", "00000"]
-    
+    __lst = ["00100", "01110", "01110", "01110", "00000"]
+
     def __init__(self, logger: HELogger) -> None:
-        logging.basicConfig(level=logging.DEBUG,
+        logging.basicConfig(
+            level=logging.DEBUG,
             format="[%(name)s] - [%(levelname)s] [%(asctime)s] - %(message)s",
-            encoding="utf8")
+            encoding="utf8",
+        )
         # Цвета для логов (их можно включить указав BETTER в консоли)
         # Или изменение уровня логов.
         HELogger.better_info(logger)
@@ -54,11 +57,11 @@ class Game:
         self.__player = Player(logger, self.__screen, self.__numb)
         logger.debug("Создание объекта класса Player")
         self.__start(logger)
-        
+
     def __load(self, logger: HELogger) -> None:
         """
         Инициализация переменных
-        
+
         Args:
             logger (HELogger): Переменная для логов.
         """
@@ -70,15 +73,13 @@ class Game:
         save = Saving()
         logger.debug("Создание объекта класса Saving")
         # Положение игрока на карте. 1 - по y, 2 - по x.
-        self.__index: list[int, int] = save.load_save(
-            self.__numb, logger)["index"]
+        self.__index: list[int, int] = save.load_save(self.__numb, logger)["index"]
         logger.debug("Получен список index")
         Block.screen = self.__screen
         logger.debug("Переменной screen класса Block присвоено значение")
         self.__blocks = Block(logger)  # Это не блоки, а мебель
         logger.debug("Создание объекта класса Block")
-        self.__items = Item(
-            logger)  # Предметы (их можно подбирать и использовать)
+        self.__items = Item(logger)  # Предметы (их можно подбирать и использовать)
         logger.debug("Создание объекта класса Item")
         GameObjects.screen: pygame.surface.Surface = self.__screen
         logger.debug("Статичному полю GameObjects screen присвоено значение")
@@ -98,11 +99,11 @@ class Game:
         logger.debug("Создание объекта класса MoneySystem")
         Inventory.logger = logger
         logger.info("Закончена инициализация перед работой в цикле")
-        
+
     def __start(self, logger: HELogger) -> None:
         """
         Запуск игры
-        
+
         Args:
             logger (HELogger): Переменная для логов.
         """
@@ -111,53 +112,72 @@ class Game:
         logger.debug("Переменной cycle присвоен 1")
         soundtrack = SoundTrack()
         soundtrack.play()
-        
+
         while 1:  # Если игрок вышел в главное меню через кнопку в меню паузы
             while cycle:  # Основной игровой цикл
                 self.__clock.tick(60)  # Вертикальная синхронизация
                 self.__screen.fill((0, 0, 0))
                 mp: tuple[int, int] = pygame.mouse.get_pos()
-                self.__draw_location.render_location(self.__index, mp,
-                            self.__screen, self.__player, self.__numb, logger)
+                self.__draw_location.render_location(
+                    self.__index, mp, self.__screen, self.__player, self.__numb, logger
+                )
                 result: pygame.surface.Surface = self.__player.blit(mp)
-                rect, rect2 = self.__player.player_interfaces(self.__screen,
-                            self.__player, mp, self.__index)
-                self.__blocks.placing(self.__index, self.__player,self.__numb,
-                                    self.__player.use)
+                rect, rect2 = self.__player.player_interfaces(
+                    self.__screen, self.__player, mp, self.__index
+                )
+                self.__blocks.placing(
+                    self.__index, self.__player, self.__numb, self.__player.use
+                )
                 self.__items.placing(self.__index, self.__player, self.__numb)
-                self.__pictures.placing(self.__index, self.__player,
-                                        self.__numb, self.__screen)
+                self.__pictures.placing(
+                    self.__index, self.__player, self.__numb, self.__screen
+                )
                 visible: list[int] = self.__money.placing_money(self.__index, mp)
                 if visible[0]:  # Зелёный текст после взятия денег
                     visible = self.__money.visible_add(visible)
-            
+
                 for j in traps_dict:  # Отрисовка ловушек
-                    if (traps_dict[j][2] == self.__index[0]
-                            and traps_dict[j][3] == self.__index[1]):
-                        trap_rect = self.__traps.draw_trap(traps_dict[j][0],
-                                    traps_dict[j][1], traps_dict[j][4])
+                    if (
+                        traps_dict[j][2] == self.__index[0]
+                        and traps_dict[j][3] == self.__index[1]
+                    ):
+                        trap_rect = self.__traps.draw_trap(
+                            traps_dict[j][0], traps_dict[j][1], traps_dict[j][4]
+                        )
                         self.__traps.after(trap_rect, traps_dict[j][4], rect2)
-                self.__player.in_game(self.__player,  # Движение игрока
-                        self.__index, logger, rect, self.__numb, mp)
+                self.__player.in_game(
+                    self.__player,  # Движение игрока
+                    self.__index,
+                    logger,
+                    rect,
+                    self.__numb,
+                    mp,
+                )
                 self.__check(logger)  # Проверка на выход за границу
                 pygame.display.flip()
                 # Информация об игроке
                 if result.collidepoint(mp) and pygame.mouse.get_pressed()[0]:
-                    self.__player.get_stats(logger, self.__index, self.__numb,
-                                            self.__player)
+                    self.__player.get_stats(
+                        logger, self.__index, self.__numb, self.__player
+                    )
                 for i in pygame.event.get():
                     if i.type == pygame.KEYDOWN and i.key == pygame.K_ESCAPE:
-                    # При нажатии на ESCAPE игра поставится на паузу
-                        pause = Pause(self.__screen, logger, self.__index,
-                            self.__player, self.__numb)
+                        # При нажатии на ESCAPE игра поставится на паузу
+                        pause = Pause(
+                            self.__screen,
+                            logger,
+                            self.__index,
+                            self.__player,
+                            self.__numb,
+                        )
                         cycle: int = pause.run()
             cycle = 1
             self.__numb: int = MainMenu.render(self.__screen, logger)
-            
+
     def __check(self, logger: HELogger) -> None:
         """
         Проверка на выход за границу карты дома.
-        
+
         Args:
             logger (HELogger): Переменная для логов.
         """
@@ -169,7 +189,7 @@ class Game:
             self.__check2(logger, self.__index[0], self.__index[1] + 1, 1, -1)
         elif self.__player.y > 770:  # При выходе вниз
             self.__check2(logger, self.__index[0] + 1, self.__index[1], 0, -1)
-                
+
     def __check2(self, *args: tuple) -> None:
         """Проверка на выход за границу карты дома (вторая часть)"""
         if self.__lst[args[1]][args[2]] != "0":

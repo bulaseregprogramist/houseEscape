@@ -9,16 +9,16 @@ import sys  # Не для sys.exit(), а для argv
 
 class HELogger(Logger):
     """Этот класс дополняет класс из стандартной библиотеки Python"""
-    
-    def __init__(self, name='', level=''):
-        if name != '' and level != '':  # Для второго запуска конструктора.
+
+    def __init__(self, name="", level=""):
+        if name != "" and level != "":  # Для второго запуска конструктора.
             super().__init__(name, level)
             print("[INFO] Logger activated!")
-        
+
     def change_name(self, logger: Self) -> Any:
         """
         Смена названия логгера
-        
+
         Args:
             logger (HELogger): Переменная для логов
         Returns:
@@ -34,34 +34,36 @@ class HELogger(Logger):
             pass
         logger = HELogger(name, DEBUG)
         return logger.getChild(logger_name)
-        
+
     @staticmethod
     def set_level(level: int) -> None:
         """
         Установка уровня логирования
-        
+
         Args:
             level (int): Уровень логирования.
         """
         getLogger().handlers = []  # Очистка предыдущего уровня логирования.
-        basicConfig(level=level,
-                    format="[%(name)s] - [%(levelname)s] - %(message)s",
-                    encoding="utf-8")
-                
+        basicConfig(
+            level=level,
+            format="[%(name)s] - [%(levelname)s] - %(message)s",
+            encoding="utf-8",
+        )
+
     @staticmethod
     def better_info(logger: Self) -> None:
         """
         Цвета для логов или изменение их уровня.
-        
+
         Args:
             logger (HELogger): Переменная для логов
         """
         try:
             if sys.argv[1] == "BETTER":
-                coloredlogs.install(level='DEBUG', logger=logger)
+                coloredlogs.install(level="DEBUG", logger=logger)
             elif sys.argv[1] == "CHANGE_TO_INFO":
                 HELogger.set_level(INFO)
-            elif sys.argv[1] == "CHANGE_TO_WARNING":         
+            elif sys.argv[1] == "CHANGE_TO_WARNING":
                 HELogger.set_level(WARNING)
             elif sys.argv[1] == "CHANGE_TO_ERROR":
                 HELogger.set_level(ERROR)
@@ -69,4 +71,3 @@ class HELogger(Logger):
                 HELogger.set_level(CRITICAL)
         except IndexError:
             pass
-    
