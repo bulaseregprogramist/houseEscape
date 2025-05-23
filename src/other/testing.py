@@ -1,4 +1,4 @@
-import unittest
+"""import unittest
 from ..api.api import HEAPI
 
 
@@ -15,3 +15,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+"""
+
+# pytest

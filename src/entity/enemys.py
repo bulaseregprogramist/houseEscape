@@ -176,40 +176,26 @@ class Enemy(Character):
                 )
             )
 
-    def enemy_draw_and_move(self, player: Player, mp: tuple[int, int], num: int) -> int:
-        """
-        Движение (AI) и отрисовка врага
-
-        Args:
-            player (Player): Объект игрока,
-            mp (tuple[int, int]): Позиция мыши,
-            num (int): Номер выбранного сохранения.
-        Returns:
-            int: x и y врага.
-        """
-        self.draw_fov(player, mp)  # Красный круг возле врага
+    def enemy_draw_and_move(self, player: Player, mp: tuple[int, int], num: int) -> tuple[int, int]:
+        """Асинхронная отрисовка и движение врага."""
+        self.draw_fov(player, mp)
+    
         if self.__enemy_type == "watcher":
-            self.__screen.blit(
-                self.__to_texture(self.enemy_dict["1"][4]), (self.x, self.y)
-            )
+            texture = self.__to_texture(self.enemy_dict["1"][4])
+            self.__screen.blit(texture, (self.x, self.y))
             self.x, self.y = self.__mm.move1(self.x, self.y)
-            self.rect_and_open(
-                self.__to_texture(self.enemy_dict["1"][4]), self.x, self.y, mp, "1", num
-            )
+            self.rect_and_open(texture, self.x, self.y, mp, "1", num)
+    
         elif self.__enemy_type == "blinder":
-            self.__screen.blit(
-                self.__to_texture(self.enemy_dict["3"][4]), (self.x, self.y)
-            )
+            texture = self.__to_texture(self.enemy_dict["3"][4])
+            self.__screen.blit(texture, (self.x, self.y))
             self.x, self.y = self.__mm.move2(self.x, self.y)
-            self.rect_and_open(
-                self.__to_texture(self.enemy_dict["3"][4]), self.x, self.y, mp, "3", num
-            )
+            self.rect_and_open(texture, self.x, self.y, mp, "3", num)
+    
         elif self.__enemy_type == "stalker":
-            self.__screen.blit(
-                self.__to_texture(self.enemy_dict["2"][4]), (self.x, self.y)
-            )
+            texture = self.__to_texture(self.enemy_dict["2"][4])
+            self.__screen.blit(texture, (self.x, self.y))
             self.x, self.y = self.__mm.move3(self.x, self.y)
-            self.rect_and_open(
-                self.__to_texture(self.enemy_dict["2"][4]), self.x, self.y, mp, "2", num
-            )
+            self.rect_and_open(texture, self.x, self.y, mp, "2", num)
+    
         return self.x, self.y

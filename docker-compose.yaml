@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  pygame-app:
+    build: .
+    environment:
+      - DISPLAY=host.docker.internal:0.0  # Важно для Windows!
+    volumes:
+      - .:/app  # Монтируем текущую директорию
+    working_dir: /app
+    stdin_open: true  # Для интерактивного ввода
+    tty: true         # Псевдо-TTY (может потребоваться для Pygame)
