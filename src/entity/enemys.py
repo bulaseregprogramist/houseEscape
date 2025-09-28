@@ -35,7 +35,7 @@ class Enemy(Character):
         self.y = y
         self.__logger: HELogger = logger
         self.__player: Player = player
-        # В enemy_type может быть watcher, blinder, stalker
+        # В enemy_type может быть только watcher, blinder, stalker
         self.__enemy_type: str = enemy_type
         self.__mm = MonsterMove(self.speed, player)
 
@@ -176,7 +176,8 @@ class Enemy(Character):
                 )
             )
 
-    def enemy_draw_and_move(self, player: Player, mp: tuple[int, int], num: int) -> tuple[int, int]:
+    def enemy_draw_and_move(self, player: Player,
+                        mp: tuple[int, int], num: int) -> tuple[int, int]:
         """Асинхронная отрисовка и движение врага."""
         self.draw_fov(player, mp)
     

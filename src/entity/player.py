@@ -2,7 +2,6 @@
 
 import pygame
 import sys
-from typing import Self
 from src.entity.move import Move
 from ..game.logging import HELogger
 from ..game.saving import Saving
@@ -17,7 +16,7 @@ pygame.init()
 add = 0
 
 
-def change() -> None:
+def change() -> None:  # Функция нужна для метода in_game
     global add
     add = 1
 

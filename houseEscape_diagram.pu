@@ -1,0 +1,337 @@
+@startuml "UML-Диаграмма для игры HouseEscape"
+
+!if (%not(%variable_exists("$FONTNAME")))
+!$FONTNAME = "Verdana"
+!endif
+
+!if (%not(%variable_exists("$FONTSIZE")))
+!$FONTSIZE = 11
+!endif
+
+skinparam backgroundColor 777
+!$ACCENT = "1a66c2"
+!$ACCENTDARK = "002642"
+skinparam stereotypeCBackgroundColor $ACCENT
+!$PRIMARYFONTCOLOR = "fff"
+!$SECONDARY = "aaa"
+!$ARROWCOLOR = "fff"
+!$ARROWFONTCOLOR = "bbb"
+!$BORDERCOLOR = "1b1b1b"
+!$BOXBG = "2e2e2e"
+!$LIGHTBORDERCOLOR = "767676"
+!$LIGHTBG = "575757"
+skinparam backgroundColor 777
+
+!procedure font_style()
+  fontColor $PRIMARYFONTCOLOR
+  fontName $FONTNAME
+  fontSize $FONTSIZE
+  stereotypeFontColor $SECONDARY
+  stereotypeFontSize $FONTSIZE
+!endprocedure
+
+!procedure basic_style()
+  backgroundColor $BOXBG
+  borderColor $BORDERCOLOR
+!endprocedure
+
+!procedure light_style()
+  backgroundColor $LIGHTBG
+  borderColor $LIGHTBORDERCOLOR
+!endprocedure
+
+!procedure accent_style()
+  backgroundColor $ACCENT
+  borderColor $ACCENTDARK
+!endprocedure
+
+!procedure arrow_style()
+  arrowColor $ARROWCOLOR
+  arrowFontName $FONTNAME
+  arrowFontColor $ARROWFONTCOLOR
+  arrowFontSize $FONTSIZE
+!endprocedure
+
+' Class diagrams
+
+skinparam circledCharacter {
+  radius 8
+  fontSize $FONTSIZE
+  fontName $FONTNAME
+}
+
+skinparam class {
+  basic_style()
+  font_style()
+  arrow_style()
+
+  attributeFontColor $SECONDARY
+  attributeFontSize $FONTSIZE
+  attributeIconSize $FONTSIZE
+}
+
+skinparam actor {
+  accent_style()
+  font_style()
+}
+
+skinparam participant {
+  basic_style()
+  font_style()
+}
+
+skinparam collections {
+  basic_style()
+  font_style()
+}
+
+skinparam SequenceBox{
+  light_style()
+  font_style()
+}
+
+' Component diagrams
+
+skinparam interface {
+  accent_style()
+  font_style()
+}
+
+skinparam component {
+  basic_style()
+  font_style()
+}
+
+skinparam node {
+  basic_style()
+  font_style()
+}
+
+skinparam database {
+  basic_style()
+  font_style()
+}
+
+skinparam queue {
+  basic_style()
+  font_style()
+}
+
+' Use Case diagrams
+
+skinparam usecase {
+  basic_style()
+  font_style()
+  arrow_style()
+}
+
+skinparam activity {
+  basic_style()
+  font_style()
+  arrow_style()
+}
+
+skinparam sequence {
+  font_style()
+  arrow_style()
+
+  lifeLineBorderColor $ACCENT
+  lifeLineBackgroundColor $LIGHTBG
+}
+
+skinparam boundary {
+  accent_style()
+  font_style()
+}
+
+skinparam control {
+  accent_style()
+  font_style()
+}
+
+skinparam entity {
+  accent_style()
+  font_style()
+}
+
+' State diagrams
+
+skinparam state {
+  basic_style()
+  font_style()
+  arrow_style()
+  startColor $ACCENT
+  endColor $ACCENTDARK
+}
+
+' Object diagrams
+
+skinparam object {
+  basic_style()
+  font_style()
+  arrow_style()
+}
+
+' Common
+
+skinparam note {
+  accent_style()
+  font_style()
+}
+
+skinparam cloud {
+  basic_style()
+  font_style()
+  arrow_style()
+}
+
+skinparam rectangle {
+  basic_style()
+  font_style()
+}
+
+skinparam storage {
+  basic_style()
+  font_style()
+}
+
+class Game {
+    - List[str] lst
+
+    - None init__(HELogger logger)
+
+    - None load(HELogger logger)
+
+    - None start(HELogger logger)
+
+    - None check(HELogger logger)
+
+    - None check2(tuple logger)
+}
+class Player {
+    + Saving save 
+    + int MAX_CAPACITY
+}
+class Block {
+    + Saving save 
+    + pygame.surface.Surface screen
+
+    + None functional(object config)
+}
+class Item {
+    + Saving save 
+    + int some_num
+
+     - None save_item(int n)
+}
+abstract GameObjects {
+    + pygame.surface.Surface screen
+    + HELogger logger
+
+    - None show_menu(str go_type)
+    # pygame.surface.Surface num_to_texture(str command)
+}
+class Pictures {
+  + Saving save
+  + int load_picture
+}
+class Inventory {
+  + list inventory_list
+  + HELogger logger
+  + None Player
+  + list inventory_list2
+}
+class CraftingTable {
+  + Saving save
+  + HELogger logger
+}
+class SoundTrack {
+  + None play()
+}
+class MainMenu {
+  + int to_menu()
+  + None exit_menu(tuple[int, int] mouse_pos)
+}
+class HELogger {
+  + Any change_name(Self logger)
+  + None set_level(int level)
+  + None better_info(Self logger)
+}
+class Traps {
+  + pygame.rect.Rect draw_trap(int x, int y, str trap_type)
+  + None after(pygame.rect.Rect, str trap_type, pygame.rect.Rect player_rect)
+}
+class MoneySystem {
+    + int MONEY
+
+    + None save_moneys()
+    + None visible_add(list[int] visible)
+    + None placing_money(list[int, int] index, list[int, int] mouse_pos)
+}
+class OtherFunctional {
+  + None block
+  + None item
+  + None traps
+}
+class HEAPI {
+  + None guide(pygame.surface.Surface screen)
+  + None load(HELogger logger)
+  - None initialize_mods(HELogger logger)
+}
+class Pause {
+    + Saving save
+
+    + int run()
+    - int functional()
+}
+class Vehicles {
+  + Saving save
+}
+
+Game <-- main
+
+Game <|-- Player
+Game <|-- Block
+Game <|-- Item
+Game <|-- GameObjects
+Game <|-- Pictures
+Game <|-- Inventory
+Game <|-- CraftingTable
+Game <|-- SoundTrack
+Game <|-- MainMenu
+Game <|-- HELogger
+Game <|-- Traps
+Game <|-- MoneySystem
+Game <|-- OtherFunctional
+Game <|-- HEAPI
+Game <|-- Pause
+Character --> Player
+
+GameObjects --> Item
+GameObjects --> Pictures
+GameObjects --> Block
+GameObjects --> Vehicles
+
+note top of Game : "Основной класс игры,\nОн связывает все классы"
+note top of main : "Функция, запускающая игру"
+
+note left of Game::lst 
+"Карта дома"
+endNote
+
+note left of Game::load
+"Инициализация переменных"
+endNote
+
+note left of Game::start 
+"Запуск игры"
+endNote
+
+note left of Game::check
+"Проверка на выход за границу карты дома."
+endNote
+
+note left of Game::check2
+"Проверка на выход за границу карты дома (вторая часть)"
+endNote
+@enduml

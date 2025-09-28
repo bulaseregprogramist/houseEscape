@@ -50,6 +50,11 @@ class Settings:
             self.__screen.blit(self.__checkmark1, (170, 180))
         else:
             self.__screen.blit(self.__checkmark2, (170, 180))
+            
+        self.__screen.blit(self.__checkmark1, (170, 250))
+        self.__screen.blit(self.__checkmark1, (170, 320))
+        self.__screen.blit(self.__checkmark1, (170, 390))
+        self.__screen.blit(self.__checkmark1, (170, 460))
         self.main_functional()
 
     def main_functional(self) -> None:

@@ -56,14 +56,14 @@ class TradeSystem:
                 logging.debug("Ключ из словаря удалён")
             except KeyError:
                 pass
-            self.change_keys()
+            self.change_keys()  # Изменяет ключи СЛОВАРЯ
 
     def change_keys(self) -> None:
         """
         Изменение ключей, если предмет был куплен.
         """
         with open(f"data/data{self.__num}.json") as file:
-            res: dict[str : dict | list | int] = json.load(file)
+            res: dict[str | dict | list | int] = json.load(file)
         res["npc_products"] = copy(self.__result["npc_products"])
         res["MON"] = MoneySystem.MONEY
         with open(f"data/data{self.__num}.json", "w") as file:

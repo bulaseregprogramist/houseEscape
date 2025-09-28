@@ -113,8 +113,8 @@ class Experimental:
         cycle = 1
         while cycle:
             mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
-            self.draw_experimental()
-            self.off_on(mouse_pos)
+            self.draw_experimental()  # Отрисовка кнопок
+            self.off_on(mouse_pos)  # Включение и выключение функций
 
             pygame.display.flip()
 
