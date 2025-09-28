@@ -12,5 +12,6 @@
 Поддержать меня (Boosty) - https://boosty.to/sergey_pelmen
 Или так (DonationAlerts): https://www.donationalerts.com/r/sergeyprojects
 Для запуска игры нажми на файл main.py.
+В папке игры есть много других файлов - на них не обращай внимания!
 
 

@@ -7,7 +7,9 @@ from os import listdir
 pygame.init()
 
 
-screen = pygame.display.set_mode((770, 770))
+screen = pygame.display.set_mode((770, 770))  # Иногда это нужно в коде
+
+# Шрифты разных размеров
 font = pygame.font.Font("textures/font.otf", 43)
 font2 = pygame.font.Font("textures/font.otf", 10)
 font3 = pygame.font.Font("textures/font.otf", 25)

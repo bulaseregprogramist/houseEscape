@@ -35,11 +35,13 @@ class Pictures(GameObjects):
                 )
                 cls.image: pygame.surface.Surface = pygame.image.load(
                     io.BytesIO(result.content)
+                    # Преобразование байтов в картинку
                 )
-                cls.image = pygame.transform.scale(cls.image.convert(), (68, 110))
+                cls.image = pygame.transform.scale(cls.image.convert(), 
+                                                (68, 110))
                 cls.load_picture = 0
                 method_cycle = 0
-            except pygame.error:
+            except pygame.error:  #
                 pass
             except requests.exceptions.ConnectionError:
                 logging.error("У пользователя нет интернета!")
@@ -67,14 +69,15 @@ class Pictures(GameObjects):
         for i in self.__pict:  # Отрисовка картин
             if [self.__pict[i][2], self.__pict[i][3]] == he_map:
                 screen.blit(
-                    self.__frame, (self.__pict[i][0] + 5, self.__pict[i][1] - 5)
+                    self.__frame, (self.__pict[i][0] + 5, 
+                                self.__pict[i][1] - 5)
                 )
                 rect = self.__frame.get_rect(
                     topleft=(self.__pict[i][0] + 7, self.__pict[i][1])
                 )
                 if rect.colliderect(
-                    player.player.get_rect(topleft=(player.x, player.y))  # Прозрачность
-                ):
+                    player.player.get_rect(topleft=(player.x, player.y))
+                ):  # Прозрачность или нет
                     self.__frame.set_alpha(64)
                 else:  # Не прозрачность
                     self.__frame.set_alpha(500)

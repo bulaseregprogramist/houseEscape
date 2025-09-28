@@ -27,6 +27,7 @@ class Inventory:
     ) -> None:
         logging.debug("Начата работа конструктора класса Inventory")
         self.__inventory = inventory  # Текстура рюкзака.
+        # __inventory2 - это
         self.__inventory2: pygame.surface.Surface = inventory2
         self.__screen: pygame.surface.Surface = screen
         logging.debug("Завершена работа конструктора класса Inventory")

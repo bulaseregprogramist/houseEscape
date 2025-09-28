@@ -44,7 +44,7 @@ class Character(ABC):
         texts_list = [
             font2.render(str(i), 1, (255, 255, 255)) for i in args[0].values()
         ]
-        while data_menu_cycle:
+        while data_menu_cycle:  # Этот цикл отвечает за отображению меню персонажа
             config.screen.blit(menu, (config.ch[0] - 30, config.ch[1] - 30))
             config.screen.blit(config.player.player, (config.player.x, config.player.y))
 

@@ -11,8 +11,12 @@ from ..draw.pause import Pause
 pygame.init()
 
 
-class Cherdak(Player):
-    """Подвал дома"""
+class Cherdak(Player):  # Отдельная локация
+    """
+    Подвал дома
+    
+    Наследуется от класса Player, так как в нём есть полезные методы
+    """
 
     __map = ["111" "111" "111"]
 
@@ -52,7 +56,7 @@ class Cherdak(Player):
     def exit(self) -> None:
         """Выход из чердака"""
         self.__logger.info("Выход из чердака...")
-        return 0
+        return 0  # Возвращаем 0, чтобы выйти из цикла
 
     def __move(self, player: Player) -> None:
         """

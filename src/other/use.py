@@ -17,7 +17,8 @@ class Use:
 
     save = Saving()
 
-    def __init__(self, screen: pygame.surface.Surface, n: int, player: object) -> None:
+    def __init__(self, screen: pygame.surface.Surface, n: int,
+                player: object) -> None:
         self.__screen: pygame.surface.Surface = screen
         self.__player: object = player
         self.__visible = 0
@@ -63,7 +64,8 @@ class Use:
             pattern = r"pygame\.image\.load\(['\"](.*?)['\"]\)"
 
             match = re.search(pattern, some_dict["items"][int(i)][4])
-            inv_list2.append([load(match.group(1), (60, 60), "convert_alpha"), i])
+            inv_list2.append([load(match.group(1),
+                                (60, 60), "convert_alpha"), i])
         self.some_list.extend(Inventory.inventory_list)
         self.some_list.extend(inv_list2)
         logging.debug("Конец работы метода __from_num_to_texture")
@@ -142,7 +144,8 @@ class Use:
         if self.__visible:  # Для открытия/сворачивания
             self.__draw_inventory_slots(index)
 
-    def item_draw(self, mp: tuple[int, int], texture: pygame.surface.Surface) -> None:
+    def item_draw(self, mp: tuple[int, int],
+                texture: pygame.surface.Surface) -> None:
         """
         Отрисовка применяемого предмета.
 
@@ -167,7 +170,8 @@ class Use:
                     self.res: pygame.surface.Surface = i[1]
                     self.__texture_id: int = i[2]
 
-        self.__mouse_was_pressed: bool = self.handle_events(pygame.event.get())
+        self.__mouse_was_pressed: bool = self.handle_events(
+            pygame.event.get())
 
         if self.__item_visible:  # Предмет на курсоре мыши
             self.item_draw(mouse_pos, self.res)
