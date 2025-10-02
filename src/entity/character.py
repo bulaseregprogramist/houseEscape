@@ -30,7 +30,7 @@ class Character(ABC):
         cls.speed = speed
 
     @abstractmethod
-    def get_stats(self, config, *args) -> None:
+    def get_stats(self, config: object, *args: dict) -> None:
         """
         Получение информации об персонаже.
 
@@ -44,9 +44,10 @@ class Character(ABC):
         texts_list = [
             font2.render(str(i), 1, (255, 255, 255)) for i in args[0].values()
         ]
-        while data_menu_cycle:  # Этот цикл отвечает за отображению меню персонажа
+        while data_menu_cycle:  # Цикл нужен для отображения меню персонажа
             config.screen.blit(menu, (config.ch[0] - 30, config.ch[1] - 30))
-            config.screen.blit(config.player.player, (config.player.x, config.player.y))
+            config.screen.blit(config.player.player, 
+                            (config.player.x, config.player.y))
 
             for j in texts_list:  # Вывод характеристик персонажа
                 config.screen.blit(j, (config.ch[0] - 30, y))
@@ -58,10 +59,12 @@ class Character(ABC):
                 if event.type == pygame.QUIT:
                     config.logger.info("Выход из игры...")
                     self.save.saving(
-                        config.index, config.ch[0], config.ch[1], config.n, True
+                        config.index, config.ch[0], config.ch[1],
+                        config.n, True
                     )
                     sys.exit()
-                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                elif (event.type == pygame.KEYDOWN 
+                        and event.key == pygame.K_ESCAPE):
                     sleep(0.15)
                     data_menu_cycle = 0
 

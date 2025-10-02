@@ -14,7 +14,8 @@ class Traps:
 
     def __init__(self, screen: pygame.surface.Surface) -> None:
         self.__screen: pygame.surface.Surface = screen
-        self.__poison_trap = load("textures/pt.png", (60, 60), "convert_alpha")
+        self.__poison_trap = load("textures/pt.png", (60, 60), 
+                                "convert_alpha")
         self.__trap = load("textures/trap.png", (60, 60), "convert_alpha")
         self.__ice = load("textures/ice.png", (60, 60), "convert_alpha")
         self.__aftermath = AfterMath()
@@ -42,7 +43,8 @@ class Traps:
         return rect
 
     def after(
-        self, rect: pygame.rect.Rect, trap_type: str, player_rect: pygame.rect.Rect
+        self, rect: pygame.rect.Rect, trap_type: str, 
+        player_rect: pygame.rect.Rect
     ) -> None:
         """
         Последствия попадания в ловушку.

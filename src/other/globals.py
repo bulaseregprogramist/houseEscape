@@ -2,6 +2,7 @@
 
 import pygame
 from os import listdir
+import sys
 
 
 pygame.init()
@@ -45,8 +46,10 @@ some_dict = {  # Эти данные в каждом файле в папке da
             "textures/pickaxe.png",
         ],
         5: [300, 300, 1, 1, "pygame.image.load('textures/paper.png')"],
-        6: [0, 0, 9, 9, "pygame.image.load('textures/tnt.png')", "textures/tnt.png"],
-        7: [0, 0, 9, 8, 'pygame.image.load("textures/key.png")', "textures/key.png"],
+        6: [0, 0, 9, 9, "pygame.image.load('textures/tnt.png')",
+            "textures/tnt.png"],
+        7: [0, 0, 9, 8, 'pygame.image.load("textures/key.png")', 
+            "textures/key.png"],
         8: [
             0,
             0,
@@ -55,7 +58,8 @@ some_dict = {  # Эти данные в каждом файле в папке da
             'pygame.image.load("textures/kusachki.png")',
             "textures/kusachki.png",
         ],
-        9: [0, 0, 9, 6, "pygame.image.load('textures/pila.png')", "textures/pila.png"],
+        9: [0, 0, 9, 6, "pygame.image.load('textures/pila.png')",
+            "textures/pila.png"],
         10: [
             0,
             0,
@@ -80,7 +84,8 @@ some_dict = {  # Эти данные в каждом файле в папке da
             "pygame.image.load('textures/sword.png')",
             "textures/sword.png",
         ],
-        13: [0, 0, 9, 3, "pygame.image.load('textures/axe.png')", "textures/axe.png"],
+        13: [0, 0, 9, 3, "pygame.image.load('textures/axe.png')",
+            "textures/axe.png"],
     },
     "pictures": {1: [50, 50, 3, 2]},
     "enemys": {
@@ -112,7 +117,8 @@ traps_dict = {
 }
 
 
-def load(path: str, size: tuple[int, int], convert_type: str) -> pygame.surface.Surface:
+def load(path: str, size: tuple[int, int], 
+        convert_type: str) -> pygame.surface.Surface:
     """
     Загрузка текстур
 
@@ -126,4 +132,16 @@ def load(path: str, size: tuple[int, int], convert_type: str) -> pygame.surface.
     if convert_type == "convert":
         return pygame.transform.scale(pygame.image.load(path).convert(), size)
     elif convert_type == "convert_alpha":
-        return pygame.transform.scale(pygame.image.load(path).convert_alpha(), size)
+        return pygame.transform.scale(pygame.image.load(path).convert_alpha(),
+                                    size)
+        
+        
+def game_exit(logger) -> int:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            logger.info("Выход из игры...")
+            sys.exit()
+        elif (event.type == pygame.KEYDOWN 
+                and event.key == pygame.K_ESCAPE):
+            return 0
+    return 1

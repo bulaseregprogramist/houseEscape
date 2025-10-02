@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Основной модуль игры &mdash; документация HouseEscape 1.0.0</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
@@ -16,7 +16,7 @@
       <script src="_static/documentation_options.js?v=e35015f7"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/translations.js?v=5b699b7f"></script>
+      <script src="_static/translations.js?v=cd1d70c9"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
@@ -127,7 +127,7 @@
 <h2>Основной игровой класс<a class="headerlink" href="#id2" title="Ссылка на этот заголовок"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.game.game.Game">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.game.game.</span></span><span class="sig-name descname"><span class="pre">Game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.game.game.Game" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.game.game.</span></span><span class="sig-name descname"><span class="pre">Game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.game.game.Game" title="Ссылка на это определение"></a></dt>
 <dd><p>Основной игровой класс</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.game.game.Game.__check">
@@ -144,6 +144,11 @@
 <dt class="sig sig-object py" id="src.game.game.Game.__check2">
 <span class="sig-name descname"><span class="pre">__check2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.game.Game.__check2" title="Ссылка на это определение"></a></dt>
 <dd><p>Проверка на выход за границу карты дома (вторая часть)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*args</strong> (<em>tuple</em>)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -176,11 +181,11 @@
 <p>Этот модуль отвечает за логи игры</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.game.logging.HELogger">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.game.logging.</span></span><span class="sig-name descname"><span class="pre">HELogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.game.logging.HELogger" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.game.logging.</span></span><span class="sig-name descname"><span class="pre">HELogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.game.logging.HELogger" title="Ссылка на это определение"></a></dt>
 <dd><p>Этот класс дополняет класс из стандартной библиотеки Python</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.game.logging.HELogger.better_info">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">better_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.logging.HELogger.better_info" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">better_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.logging.HELogger.better_info" title="Ссылка на это определение"></a></dt>
 <dd><p>Цвета для логов или изменение их уровня.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
@@ -205,7 +210,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.game.logging.HELogger.set_level">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.logging.HELogger.set_level" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.logging.HELogger.set_level" title="Ссылка на это определение"></a></dt>
 <dd><p>Установка уровня логирования</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
@@ -221,7 +226,7 @@
 <h2>Сохранения игры<a class="headerlink" href="#id4" title="Ссылка на этот заголовок"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.game.saving.Saving">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.game.saving.</span></span><span class="sig-name descname"><span class="pre">Saving</span></span><a class="headerlink" href="#src.game.saving.Saving" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.game.saving.</span></span><span class="sig-name descname"><span class="pre">Saving</span></span><a class="headerlink" href="#src.game.saving.Saving" title="Ссылка на это определение"></a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="src.game.saving.Saving.load_save">
 <span class="sig-name descname"><span class="pre">load_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#src.game.saving.Saving.load_save" title="Ссылка на это определение"></a></dt>
@@ -270,7 +275,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.game.saving.Saving.save_music">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_music</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.saving.Saving.save_music" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_music</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.game.saving.Saving.save_music" title="Ссылка на это определение"></a></dt>
 <dd><p>Сохранение настройки музыки</p>
 </dd></dl>
 
@@ -298,7 +303,7 @@
 <h2>Меню сохранений<a class="headerlink" href="#id5" title="Ссылка на этот заголовок"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.game.savemenu.SaveMenu">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.game.savemenu.</span></span><span class="sig-name descname"><span class="pre">SaveMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.game.savemenu.SaveMenu" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.game.savemenu.</span></span><span class="sig-name descname"><span class="pre">SaveMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.game.savemenu.SaveMenu" title="Ссылка на это определение"></a></dt>
 <dd><p>Основной класс для меню</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.game.savemenu.SaveMenu.create_save">

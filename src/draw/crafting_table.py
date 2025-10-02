@@ -22,19 +22,17 @@ class CraftingTable:
     logger: HELogger
 
     def __init__(
-        self,
-        screen: pygame.surface.Surface,
-        text,
-        n: int,
-        index: list[int, int],
-        player: Player,
+        self, screen: pygame.surface.Surface,
+        text, n: int,
+        index: list[int, int], player: Player,
     ) -> None:
         self.__index: list[int, int] = index
         self.__player: Player = player
         self.__screen: pygame.surface.Surface = screen
         self.__text = text
         self.__n: int = n
-        self.__pickaxe = load("textures/pickaxe.png", (60, 60), "convert_alpha")
+        self.__pickaxe = load("textures/pickaxe.png", (60, 60),
+                            "convert_alpha")
         self.__keys: list[str, ...] = self.save.load_save(n)["items_id"]
         self.__some_list = copy(Inventory.inventory_list)
         self.__tnt = load("textures/tnt.png", (60, 60), "convert_alpha")
@@ -55,11 +53,13 @@ class CraftingTable:
             pattern = r"pygame\.image\.load\(['\"](.*?)['\"]\)"
 
             match = re.search(pattern, some_dict["items"][int(i)][4])
-            inv_list2.append([load(match.group(1), (60, 60), "convert_alpha"), i])
+            inv_list2.append([load(match.group(1), (60, 60), "convert_alpha"),
+                            i])
         self.__some_list.extend(inv_list2)
         logging.debug("Конец работы метода ntt")
 
-    def __get_free_space(self, texture: pygame.surface.Surface, y: int) -> None:
+    def __get_free_space(self,
+                        texture: pygame.surface.Surface, y: int) -> None:
         """
         Сокращение кода (если предметов для крафта нет)
 
@@ -84,13 +84,15 @@ class CraftingTable:
         y = 180
         if "1" in self.__keys and "2" in self.__keys:
             self.__screen.blit(self.__pickaxe, (120, y))
-            self.__rects_list.append([self.__pickaxe.get_rect(topleft=(120, y)), 1])
+            self.__rects_list.append([
+                self.__pickaxe.get_rect(topleft=(120, y)), 1])
         else:
             self.__get_free_space(self.__pickaxe, y)
         y += 50
         if "3" in self.__keys and "5" in self.__keys:
             self.__screen.blit(self.__tnt, (120, y))
-            self.__rects_list.append([self.__tnt.get_rect(topleft=(120, y)), 2])
+            self.__rects_list.append(
+                [self.__tnt.get_rect(topleft=(120, y)), 2])
         else:
             self.__get_free_space(self.__tnt, y)
         y += 50
@@ -115,7 +117,8 @@ class CraftingTable:
                 pass
         items_id.append(new_item)
         self.__some_list.append(
-            load(some_dict["items"][int(new_item)][5], (60, 60), "convert_alpha")
+            load(some_dict["items"][int(new_item)][5],
+                (60, 60), "convert_alpha")
         )
         result["items_id"] = items_id
         with open(f"data/data{self.__n}.json", "w") as file:
@@ -127,7 +130,8 @@ class CraftingTable:
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         for i in self.__rects_list:
             if type(i[0]) is pygame.rect.Rect:
-                if i[0].collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
+                if (i[0].collidepoint(mouse_pos) 
+                        and pygame.mouse.get_pressed()[0]):
                     pygame.mixer.Sound("textures/open.mp3").play()
                     if i[1] == 1:
                         logging.info("Создана кирка!")
@@ -144,7 +148,8 @@ class CraftingTable:
         """Основной метод класса."""
         crafting_table_cycle = 1
         while crafting_table_cycle:
-            pygame.draw.rect(self.__screen, (255, 255, 255), (100, 100, 570, 570))
+            pygame.draw.rect(self.__screen, (255, 255, 255), 
+                            (100, 100, 570, 570))
             self.__screen.blit(self.__text, (139, 130))
             self.__recipes()
             x, y = 170, 490
@@ -165,7 +170,8 @@ class CraftingTable:
                 if event.type == pygame.QUIT:
                     self.logger.info("Выход из игры...")
                     self.save.saving(
-                        self.__index, self.__player.x, self.__player.y, self.__n, True
+                        self.__index, self.__player.x, 
+                        self.__player.y, self.__n, True
                     )
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:

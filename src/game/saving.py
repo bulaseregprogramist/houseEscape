@@ -34,7 +34,8 @@ class Saving:
             if logger is not None:
                 logger.error("Ошибка. Файл data.json не найден")
             self.__not_found(numb, logger)
-            some_dict: dict[str : list | int | dict] = self.load_textures(numb, logger)
+            some_dict: dict[str : list | int | dict] = self.load_textures(
+                numb, logger)
         return some_dict
 
     def __not_found(self, numb: int, logger: HELogger = None) -> None:
@@ -89,10 +90,10 @@ class Saving:
         # Получение словаря из data.json
         result: dict[str : list | int | dict] = self.load_save(n)
         result["index"] = index  # Позиция игрока на карте.
-        result["x"] = x
-        result["y"] = y
+        result["x"] = x  # Позиция игрока по x
+        result["y"] = y  # Позиция игрока по y
         if inventory_saving:
-            if result["items_id"] == []:
+            if result["items_id"] == []:  # Если предметов нет
                 items_id = []
             else:  # Если предметы есть
                 items_id: list[str, ...] = result["items_id"]
@@ -117,7 +118,7 @@ class Saving:
         """Сохранение настройки музыки"""
         with open("game_settings/settings.json") as file:
             result: dict[str : int | dict] = json.load(file)
-        result["MUSIC"] = music
+        result["MUSIC"] = music  # Сохранение настройки музыки (выкл или вкл)
 
         with open("game_settings/settings.json", "w") as file:
             json.dump(result, file, indent=2)

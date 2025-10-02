@@ -3,6 +3,9 @@
 
 class AfterMath:
     """Последствия ловушек"""
+    
+    def __init__(self):
+        pass
 
     def poison_aftermath(self) -> None:
         """Последствия ловушки яда"""

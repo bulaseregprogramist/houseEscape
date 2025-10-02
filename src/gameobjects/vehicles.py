@@ -37,28 +37,21 @@ class Vehicles(GameObjects):
                 self.__vehicles[i][0],
                 self.__vehicles[i][1],
                 [self.__vehicles[i][2], self.__vehicles[i][3]],
-                he_map,
-                self.__vehicles[i][4],
+                he_map, self.__vehicles[i][4],
                 player,
             )
             self.functional(
                 self.__vehicles[i][0],
                 self.__vehicles[i][1],
                 self.__vehicles[i][4],
-                i,
-                he_map,
+                i, he_map,
                 [self.__vehicles[i][0], self.__vehicles[i][1]],
             )
 
-    def functional(
-        self,
-        x: int,
-        y: int,
-        texture: pygame.surface.Surface,
-        i: int,
-        he_map: list[int, int],
-        index: list[int, int],
-    ) -> int:
+    def functional(self, x: int,
+        y: int, texture: pygame.surface.Surface,
+        i: int, he_map: list[int, int],
+        index: list[int, int]) -> int:
         """
         Функционал транспорта
 
@@ -73,7 +66,8 @@ class Vehicles(GameObjects):
             int: Два числа. Первое число - истина на удаление из словаря,
                             второе за удаляемый ключ
         """
-        result: int = super().functional(x, y, texture, "vehicle", he_map, index, i)
+        result: int = super().functional(x, y, texture, "vehicle", he_map,
+                                        index, i)
         if result == 4:  # Помещение предмета в инвентарь
             pygame.mixer.Sound("textures/open.mp3").play()
             logging.debug("Данные возвращены!")

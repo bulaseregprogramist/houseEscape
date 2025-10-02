@@ -1,7 +1,7 @@
 """Меню сохранений"""
 
 import pygame
-from ..other.globals import load, font4, some_dict
+from ..other.globals import load, font4, some_dict, game_exit
 from ..game.logging import HELogger
 from os import listdir, remove
 from time import sleep
@@ -16,7 +16,8 @@ pygame.init()
 class SaveMenu:
     """Основной класс для меню"""
 
-    def __init__(self, screen: pygame.surface.Surface, logger: HELogger) -> None:
+    def __init__(self, screen: pygame.surface.Surface, 
+                logger: HELogger) -> None:
         self.__logger: HELogger = logger
         self.__bg = load("textures/sm.png", (220, 770), "convert")
         self.__st = font4.render("СОХРАНЕНИЕ", 1, (255, 255, 255))
@@ -27,9 +28,12 @@ class SaveMenu:
         self.__plus = load("textures/plus.png", (40, 40), "convert_alpha")
         self.__plus2 = load("textures/plus2.png", (40, 40), "convert_alpha")
         self.__delete = load("textures/delete.png", (40, 40), "convert_alpha")
-        self.__delete2 = load("textures/delete2.png", (40, 40), "convert_alpha")
-        self.__to_menu = load("textures/to_menu.png", (45, 45), "convert_alpha")
-        self.__to_menu2 = load("textures/to_menu2.png", (45, 45), "convert_alpha")
+        self.__delete2 = load("textures/delete2.png", (40, 40),
+                            "convert_alpha")
+        self.__to_menu = load("textures/to_menu.png", (45, 45),
+                            "convert_alpha")
+        self.__to_menu2 = load("textures/to_menu2.png", (45, 45), 
+                            "convert_alpha")
         self.number: int = self.__start()  # Кол-во сохранений в папке data
 
     def create_save(self) -> None:
@@ -38,7 +42,8 @@ class SaveMenu:
         self.__act_sound.play()
         sl: list[str, ...] = listdir("data/")  # Получение кол-ва сохранений
         if len(sl) < 5:  # Если кол-во сохранений меньше 5.
-            with open(f"data/data{len(sl) + 1}.json", "w", encoding="utf-8") as file:
+            with open(f"data/data{len(sl) + 1}.json", "w", 
+                    encoding="utf-8") as file:
                 json.dump(some_dict, file, indent=2)
             self.__logger.debug("Сохранение успешно создано!")
         else:
@@ -135,11 +140,6 @@ class SaveMenu:
                         return j + 1  # Номер сохранения
 
             save_menu_cycle: int = self.__act(rect, rect2, rect3, mouse_pos)
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.__logger.info("Выход из игры...")
-                    sys.exit()
-                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                    save_menu_cycle = 0
+            save_menu_cycle: int = game_exit(self.__logger)
             pygame.display.flip()
-        return "to_menu"
+        return "to_menu"  # 

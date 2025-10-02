@@ -13,7 +13,7 @@ pygame.init()
 
 
 class Use:
-    """Кнопка использования"""
+    """Кнопка использования (в правом верхнем углу)"""
 
     save = Saving()
 
@@ -23,9 +23,8 @@ class Use:
         self.__player: object = player
         self.__visible = 0
         self.__keys: list[str, ...] = self.save.load_save(n)["items_id"]
-        self.__rects_list = []
+        self.__rects_list, self.some_list = [], []
         self.__item_visible = 0  # Отображение предмета при нажатии ЛКМ
-        self.some_list = []
         self.__n: int = n
         self.__texture_id = ""
         self.to_dict()
@@ -38,6 +37,12 @@ class Use:
         self.__mouse_was_pressed = False
 
     def append(self, sl: dict) -> None:
+        """
+        Добавление предмета в инвентарь
+        
+        Args:
+            sl (dict): Словарь с предметом
+        """
         self.some_list.append(sl)
 
     def to_dict(self) -> None:
@@ -91,10 +96,9 @@ class Use:
                 )
                 self.__screen.blit(texture, (x + 2, y))
                 self.__rects_list.append(
-                    [
-                        texture.get_rect(topleft=(x + 2, y)),
-                        texture,
-                        list(self.some_list[i].keys())[0],
+                    [texture.get_rect(topleft=(x + 2, y)),
+                    texture,
+                    list(self.some_list[i].keys())[0],
                     ]
                 )
             except AttributeError:
@@ -103,10 +107,9 @@ class Use:
                 )
                 self.__screen.blit(texture, (x + 2, y))
                 self.__rects_list.append(
-                    [
-                        texture.get_rect(topleft=(x + 2, y)),
-                        texture,
-                        list(self.some_list[i][0].keys())[0],
+                    [texture.get_rect(topleft=(x + 2, y)),
+                    texture,
+                    list(self.some_list[i][0].keys())[0],
                     ]
                 )
             except IndexError:

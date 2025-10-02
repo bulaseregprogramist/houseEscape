@@ -17,12 +17,9 @@ class Closet:
     """Функционал шкафа"""
 
     def __init__(
-        self,
-        screen: pygame.surface.Surface,
-        save,
-        num: int,
-        player,
-        index: list[int, int],
+        self, screen: pygame.surface.Surface,
+        save, num: int,
+        player, index: list[int, int],
     ) -> None:
         self.__num = num
         self.__text = font.render("Шкаф", 1, (0, 0, 0))
@@ -107,18 +104,22 @@ class Closet:
                             self.to_texture(items[int(j)]), str(int(j) + 12)
                         )
                         dict_id: str = str(int(j) + 12)
+                        # sl - нужен для того, чтобы не было ошибки
                         sl = [{dict_id: self.to_texture(items[int(j)])}]
                         use.append(sl)
                         items.pop(j)
-                        self.__save.save_closet_items(items, self.__num, result)
+                        self.__save.save_closet_items(
+                            items, self.__num, result)
 
             pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     logging.info("Выход из игры...")
                     self.__save.saving(
-                        self.__index, self.__player.x, self.__player.y, self.__num, True
+                        self.__index, self.__player.x,
+                        self.__player.y, self.__num, True
                     )
                     sys.exit()
-                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                elif (event.type == pygame.KEYDOWN 
+                        and event.key == pygame.K_ESCAPE):
                     closet_cycle = 0

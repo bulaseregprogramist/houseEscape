@@ -2,6 +2,7 @@
 
 from logging import Logger, basicConfig, INFO, ERROR, CRITICAL, getLogger
 from logging import WARNING, DEBUG
+# Второй импорт нужен, дабы не нарушать правило в 79 символов в каждой строке.
 from typing import Any, Self
 import coloredlogs  # Для выделения особым цветом разных логов
 import sys  # Не для sys.exit(), а для argv
@@ -22,7 +23,7 @@ class HELogger(Logger):
         Args:
             logger (HELogger): Переменная для логов
         Returns:
-            Запуск логгера.
+            Запуск логгера. (Any)
         """
         name = "HouseEscape"
         logger_name = "Logger"
@@ -44,11 +45,9 @@ class HELogger(Logger):
             level (int): Уровень логирования.
         """
         getLogger().handlers = []  # Очистка предыдущего уровня логирования.
-        basicConfig(
-            level=level,
+        basicConfig(level=level,
             format="[%(name)s] - [%(levelname)s] - %(message)s",
-            encoding="utf-8",
-        )
+            encoding="utf-8")
 
     @staticmethod
     def better_info(logger: Self) -> None:
@@ -69,5 +68,5 @@ class HELogger(Logger):
                 HELogger.set_level(ERROR)
             elif sys.argv[1] == "CHANGE_TO_CRITICAL":
                 HELogger.set_level(CRITICAL)
-        except IndexError:
+        except IndexError:  # Если пользователь не указал argv.
             pass

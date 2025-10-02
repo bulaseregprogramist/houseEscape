@@ -16,7 +16,12 @@ class Endings:
         self.__screen: pygame.surface.Surface = screen
 
     def pre_ending(self, name: str) -> None:
-        """Перед концовкой"""
+        """
+        Перед концовкой
+        
+        Args:
+            name (str): Название концовки.
+        """
         logging.info("Игрок прошёл игру!")
         self.draw_ending(name)
 

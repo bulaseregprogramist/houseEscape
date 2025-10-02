@@ -85,7 +85,8 @@ class Move:
         try:
             logger.info(f"Нажата клавиша - {chr(event.key)}")
         except ValueError:  # Пример: f2, insert, shift
-            logger.error("Нажата клавиша, которая не может быть обработана через chr")
+            logger.error(
+                "Нажата клавиша, которая не может быть обработана через chr")
         if event.key == pygame.K_e:
             cls.to_inventory(Config(logger, index, player, n, mouse_pos))
 

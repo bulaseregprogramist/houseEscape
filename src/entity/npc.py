@@ -22,13 +22,8 @@ class NPC(Character):
 
     save = Saving()
 
-    def __init__(
-        self,
-        screen: pygame.surface.Surface,
-        logger: HELogger,
-        index: list[int, int],
-        num: int,
-    ) -> None:
+    def __init__(self, screen: pygame.surface.Surface,
+            logger: HELogger, index: list[int, int], num: int) -> None:
         self.__screen: pygame.surface.Surface = screen
         self.__logger: HELogger = logger
         self.__index: list[int, int] = index
@@ -37,10 +32,8 @@ class NPC(Character):
         self.__npc2 = load("textures/npc2.png", (65, 65), "convert_alpha")
 
     def placing(
-        self,
-        mouse_pos: tuple[int, int],
-        player: Player,
-        index: list[int, int],
+        self, mouse_pos: tuple[int, int],
+        player: Player, index: list[int, int],
         num: int,
     ) -> None:
         """
@@ -74,8 +67,10 @@ class NPC(Character):
         cycle = 1
         trade_system = TradeSystem(self.__screen, num, player, player.use)
         while cycle:
-            text = font3.render(f"ВАШИ ДЕНЬГИ - {MoneySystem.MONEY}", 1, (0, 0, 0))
-            pygame.draw.rect(self.__screen, (255, 255, 255), (100, 100, 570, 570))
+            text = font3.render(f"ВАШИ ДЕНЬГИ - {MoneySystem.MONEY}",
+                                1, (0, 0, 0))
+            pygame.draw.rect(self.__screen,
+                            (255, 255, 255), (100, 100, 570, 570))
             self.__screen.blit(text, (240, 150))
             trade_system.draw_items()
             pygame.display.flip()
@@ -100,12 +95,9 @@ class NPC(Character):
         """Получение информации об NPC."""
         super().get_stats(
             StatsConfig(
-                self.__screen,
-                self.__index,
-                self.__num,
-                [100, 100],
-                self.__logger,
-                player,
+                self.__screen, self.__index,
+                self.__num, [100, 100],
+                self.__logger, player,
             ),
             {1: 2},
         )

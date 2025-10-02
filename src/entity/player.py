@@ -37,8 +37,10 @@ class Player(Character):
         self.y: int = self.__save.load_save(n)["y"]
         self.player = load("textures/player.png", (60, 60), "convert_alpha")
         self.player2 = load("textures/player2.png", (60, 60), "convert_alpha")
-        self.__inventory = load("textures/backpack.png", (90, 90), "convert_alpha")
-        self.__inventory2 = load("textures/backpack2.png", (90, 90), "convert_alpha")
+        self.__inventory = load("textures/backpack.png", 
+                                (90, 90), "convert_alpha")
+        self.__inventory2 = load("textures/backpack2.png",
+                                (90, 90), "convert_alpha")
         Inventory.Player = self
         logger.debug("Статичному полю Player класса Inventory присвоен self")
         self._screen: pygame.surface.Surface = screen
@@ -55,9 +57,11 @@ class Player(Character):
         sound = pygame.mixer.Sound("textures/open.mp3")
         sound.set_volume(0.4)
         sound.play()
-        inventory = Inventory(self.__inventory, self.__inventory2, self._screen)
+        inventory = Inventory(self.__inventory,
+                            self.__inventory2, self._screen)
         inventory.open(
-            config.index, config.player, config.n, config.logger, config.mouse_pos
+            config.index, config.player, config.n,
+            config.logger, config.mouse_pos
         )
         config.logger.info("Закрытие инвентаря")
 
@@ -96,7 +100,8 @@ class Player(Character):
             self._screen.blit(self.player2, (self.x, self.y))
         return rect  # Для того, чтобы получить информацию об игроке.
 
-    def get_stats(self, logger: HELogger, indx: list[int, int], n: int, player) -> None:
+    def get_stats(self, logger: HELogger, indx: list[int, int],
+                n: int, player) -> None:
         """
         Получение информации об игроке
 
@@ -108,7 +113,8 @@ class Player(Character):
         logger.info("Получение информации об игроке")
         result: dict = Character.filter_data(self)
         super().get_stats(
-            StatsConfig(self._screen, indx, n, [self.x, self.y], logger, player), result
+            StatsConfig(self._screen, indx, n,
+                        [self.x, self.y], logger, player), result
         )
         logger.info("Информация об игроке получена!")
 
@@ -156,7 +162,8 @@ class Player(Character):
         if args[3].collidepoint(args[5]):  # Свечение при наводке
             self._screen.blit(self.__inventory2, (10, 10))
             if pygame.mouse.get_pressed()[0]:
-                self.to_inventory(Config(args[0], args[1], args[2], args[4], args[5]))
+                self.to_inventory(Config(args[0], args[1], args[2], 
+                                        args[4], args[5]))
 
     def in_game(self, *args) -> None:
         """
@@ -172,8 +179,10 @@ class Player(Character):
                 self.__save.saving(args[1], args[0].x, args[0].y, n, True)
                 sys.exit()
             elif event.type == pygame.KEYDOWN:  # Открытие инвентаря
-                Move.press_keydown(args[2], event, self, args[1], args[0], n, args[5])
-        self.x, self.y = Move.player_move(args[0], args[1], self.x, self.y, self.speed)
+                Move.press_keydown(args[2], event, self, args[1], args[0],
+                                n, args[5])
+        self.x, self.y = Move.player_move(args[0], args[1], self.x,
+                                        self.y, self.speed)
         self.open_inventory(args[2], args[1], args[0], args[3], n, args[5])
         if add:  # Удаление повторов в списке
             add = 0

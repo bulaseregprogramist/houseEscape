@@ -19,12 +19,9 @@ class Pause:
     save = Saving()
 
     def __init__(
-        self,
-        screen: pygame.surface.Surface,
-        logger: HELogger,
-        index: list[int, int],
-        player: Player,
-        n: int,
+        self, screen: pygame.surface.Surface,
+        logger: HELogger, index: list[int, int],
+        player: Player, n: int,
     ) -> None:
         self.__logger: HELogger = logger
         self.__screen: pygame.surface.Surface = screen
@@ -82,7 +79,8 @@ class Pause:
                 if event.type == pygame.QUIT:
                     self.__logger.info("Выход из программы...")
                     self.save.saving(
-                        self.__index, self.__player.x, self.__player.y, self.__n
+                        self.__index, self.__player.x, self.__player.y,
+                        self.__n
                     )
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:

@@ -15,7 +15,7 @@ pygame.init()
 
 
 class GameObjects(ABC):
-    """Этот класс является родителем для классов Item и Block"""
+    """Этот класс является родителем для классов Item, Block, ..."""
 
     screen: pygame.surface.Surface
     logger: HELogger

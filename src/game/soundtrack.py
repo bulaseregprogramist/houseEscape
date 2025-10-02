@@ -15,4 +15,8 @@ class SoundTrack:
 
     def play(self) -> None:
         """Воспроизведение музыки"""
-        pygame.mixer.music.play(-1)
+        pygame.mixer.music.play(-1)  # Музыка будет бесконечно идти
+        
+    def f(self) -> None:
+        """Будушая функция"""
+        pass

@@ -20,11 +20,8 @@ class Inventory:
     inventory_list2 = []  # Сохранённые предметы
 
     def __init__(
-        self,
-        inventory: pygame.surface.Surface,
-        inventory2,
-        screen: pygame.surface.Surface,
-    ) -> None:
+        self, inventory: pygame.surface.Surface,
+        inventory2, screen: pygame.surface.Surface) -> None:
         logging.debug("Начата работа конструктора класса Inventory")
         self.__inventory = inventory  # Текстура рюкзака.
         # __inventory2 - это
@@ -51,16 +48,20 @@ class Inventory:
             cls.logger.critical("Инвентарь не инициализирован!!")
 
     @classmethod
-    def draw_inventory(cls, screen: pygame.surface.Surface) -> None:
+    def draw_inventory(cls, screen: pygame.surface.Surface,
+                    money_symbol) -> None:
         """
         Отрисовка инвентаря
 
         Args:
             screen (pygame.surface.Surface): Переменная экрана
         """
-        text = font3.render("Enter для выхода из инвентаря", 1, (255, 255, 255))
+        text = font3.render(
+            "Enter для выхода из инвентаря", 1, (255, 255, 255))
         x, y = 100, 100
-        screen.blit(text, (150, 30))
+        screen.blit(text, (150, 60))
+        screen.blit(money_symbol, (110, 7))
+        
         if len(cls.inventory_list) > 0:  # Сохранённые предметы
             for i in range(len(cls.inventory_list)):  # Отрисовка предметов
                 if i % 8 == 0 and i != 0:  # Перенос на новую строку
@@ -109,11 +110,15 @@ class Inventory:
         inventory_list2: list[str, ...] = save.load_save(args[2])["items_id"]
         self.__num_to_texture(inventory_list2)
         text = font3.render(f"Деньги - {MoneySystem.MONEY}", 1, (0, 0, 0))
+        
+        money_symbol = load('textures/money_symbol.png',
+                            (60, 60), "convert_alpha")
         while inv_cycle:
             self.__screen.fill((70, 70, 70))
             self.__screen.blit(self.__inventory, (10, 10))
-            self.__screen.blit(text, (110, 7))
-            Inventory.draw_inventory(self.__screen)
+            self.__screen.blit(text, (163, 27))
+            
+            Inventory.draw_inventory(self.__screen, money_symbol)
             rect = self.__inventory.get_rect(topleft=(10, 10))
 
             if rect.collidepoint(args[4]):  # Свечение при наводке
@@ -126,8 +131,7 @@ class Inventory:
                     save.saving(args[0], args[1].x, args[1].y, args[2], True)
                     args[3].info("Выход из игры...")
                     sys.exit()
-                elif (
-                    event.type == pygame.KEYDOWN  # Выход из инвентаря
+                elif (event.type == pygame.KEYDOWN  # Выход из инвентаря
                     and event.key == pygame.K_RETURN
                 ):
                     inv_cycle = 0

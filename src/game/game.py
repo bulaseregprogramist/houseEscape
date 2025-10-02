@@ -73,20 +73,22 @@ class Game:
         save = Saving()
         logger.debug("Создание объекта класса Saving")
         # Положение игрока на карте. 1 - по y, 2 - по x.
-        self.__index: list[int, int] = save.load_save(self.__numb, logger)["index"]
+        self.__index: list[int, int] = save.load_save(
+            self.__numb, logger)["index"]
         logger.debug("Получен список index")
         Block.screen = self.__screen
         logger.debug("Переменной screen класса Block присвоено значение")
         self.__blocks = Block(logger)  # Это не блоки, а мебель
         logger.debug("Создание объекта класса Block")
-        self.__items = Item(logger)  # Предметы (их можно подбирать и использовать)
+        # Предметы (их можно подбирать и использовать)
+        self.__items = Item(logger)
         logger.debug("Создание объекта класса Item")
         GameObjects.screen: pygame.surface.Surface = self.__screen
         logger.debug("Статичному полю GameObjects screen присвоено значение")
         GameObjects.logger = logger
         logger.debug("Статичному полю GameObjects logger присвоено значение")
         CraftingTable.logger = logger
-        logger.debug("Статичному полю CraftingTable logger присвоено значение")
+        logger.debug("Статичному полю CraftingTable logger дано значение")
         self.__traps = Traps(self.__screen)
         OtherFunctional.block = Block
         OtherFunctional.item = Item
@@ -119,20 +121,20 @@ class Game:
                 self.__screen.fill((0, 0, 0))
                 mp: tuple[int, int] = pygame.mouse.get_pos()
                 self.__draw_location.render_location(
-                    self.__index, mp, self.__screen, self.__player, self.__numb, logger
-                )
+                    self.__index, mp, self.__screen,
+                    self.__player, self.__numb, logger)
                 result: pygame.surface.Surface = self.__player.blit(mp)
                 rect, rect2 = self.__player.player_interfaces(
-                    self.__screen, self.__player, mp, self.__index
-                )
+                    self.__screen, self.__player, mp, self.__index)
+                
                 self.__blocks.placing(
-                    self.__index, self.__player, self.__numb, self.__player.use
-                )
+                    self.__index, self.__player, self.__numb,
+                    self.__player.use)
                 self.__items.placing(self.__index, self.__player, self.__numb)
                 self.__pictures.placing(
-                    self.__index, self.__player, self.__numb, self.__screen
-                )
-                visible: list[int] = self.__money.placing_money(self.__index, mp)
+                    self.__index, self.__player, self.__numb, self.__screen)
+                visible: list[int] = self.__money.placing_money(self.__index,
+                                                                mp)
                 if visible[0]:  # Зелёный текст после взятия денег
                     visible = self.__money.visible_add(visible)
 
@@ -142,16 +144,14 @@ class Game:
                         and traps_dict[j][3] == self.__index[1]
                     ):
                         trap_rect = self.__traps.draw_trap(
-                            traps_dict[j][0], traps_dict[j][1], traps_dict[j][4]
+                            traps_dict[j][0], traps_dict[j][1],
+                            traps_dict[j][4]
                         )
                         self.__traps.after(trap_rect, traps_dict[j][4], rect2)
                 self.__player.in_game(
                     self.__player,  # Движение игрока
-                    self.__index,
-                    logger,
-                    rect,
-                    self.__numb,
-                    mp,
+                    self.__index, logger,
+                    rect, self.__numb, mp,
                 )
                 self.__check(logger)  # Проверка на выход за границу
                 pygame.display.flip()
@@ -164,11 +164,8 @@ class Game:
                     if i.type == pygame.KEYDOWN and i.key == pygame.K_ESCAPE:
                         # При нажатии на ESCAPE игра поставится на паузу
                         pause = Pause(
-                            self.__screen,
-                            logger,
-                            self.__index,
-                            self.__player,
-                            self.__numb,
+                            self.__screen, logger,
+                            self.__index, self.__player, self.__numb,
                         )
                         cycle: int = pause.run()
             cycle = 1
@@ -191,7 +188,12 @@ class Game:
             self.__check2(logger, self.__index[0] + 1, self.__index[1], 0, -1)
 
     def __check2(self, *args: tuple) -> None:
-        """Проверка на выход за границу карты дома (вторая часть)"""
+        """
+        Проверка на выход за границу карты дома (вторая часть)
+        
+        Args:
+            *args (tuple):
+        """
         if self.__lst[args[1]][args[2]] != "0":
             args[0].info("Игрок вышел в другую комнату")
             self.__player.x, self.__player.y = 385, 385

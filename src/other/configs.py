@@ -14,7 +14,8 @@ class Config:
     """Класс, содержащий все константы"""
 
     def __init__(
-        self, logger, index: list[int, int], player, num: int, mp: tuple[int, int]
+        self, logger, index: list[int, int], player, num: int,
+        mp: tuple[int, int]
     ):
         self.logger = logger
         self.index: list[int, int] = index
@@ -107,7 +108,8 @@ class GameObjectsConfig3:
     """Конфиг для игровых объектов (блоки)"""
 
     def __init__(
-        self, x: int, y: int, some_list: list, he_map: list[int, int], texture, player
+        self, x: int, y: int, some_list: list, he_map: list[int, int],
+        texture, player
     ) -> None:
         self.x = x
         self.y = y
@@ -121,7 +123,8 @@ class GameObjectsConfig4:
     """Конфиг для игровых объектов (блоки, интерфейсы)"""
 
     def __init__(
-        self, i: int, screen, n: int, he_map: list[int, int], player, logger, use
+        self, i: int, screen, n: int, he_map: list[int, int], player,
+        logger, use
     ) -> None:
         self.i: int = i
         self.screen = screen
@@ -136,16 +139,11 @@ class GameObjectsConfig5:
     """Конфиг для игровых объектов"""
 
     def __init__(
-        self,
-        x: int,
-        y: int,
-        texture,
-        he_map: list[int, int],
-        some_list: list,
-        i: int,
-        n: int,
-        player,
-        use,
+        self, x: int,
+        y: int, texture,
+        he_map: list[int, int], some_list: list,
+        i: int, n: int,
+        player, use,
     ) -> None:
         self.x = x
         self.y = y

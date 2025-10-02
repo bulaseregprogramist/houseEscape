@@ -10,11 +10,12 @@ pygame.init()
 
 class AfterUse:
 
-    def __init__(self, texture_id: int, index: list[int, int], n: int) -> None:
+    def __init__(self, texture_id: int, index: list[int, int], 
+                n: int) -> None:
         self.__index: list[int, int] = index
         self.save = Saving()
         self.__n: int = n
-        self.__some_dict: dict[str : list | dict | int] = self.save.load_save(n)
+        self.__some_dict: dict[str: list | dict | int] = self.save.load_save(n)
         self.__blocks: dict[int:list] = self.__some_dict["blocks"]
         self.__texture_id = str(texture_id)
 
@@ -43,8 +44,11 @@ class AfterUse:
                 self.__index == [3, 1]
                 and 50 <= pos[0] <= 230
                 and -41 <= pos[1] <= 101
-                and self.__blocks["7"][4] == "pygame.image.load('textures/exit2.png')"
+                and self.__blocks[
+                    "7"][4] == "pygame.image.load('textures/exit2.png')"
             ):
-                self.__blocks["7"][4] = "pygame.image.load('textures/exit3.png')"
+                self.__blocks[
+                    "7"][4
+                        ] = "pygame.image.load('textures/exit3.png')"
                 self.__some_dict["blocks"] = self.__blocks
                 self.change_exit()

@@ -24,7 +24,8 @@ class Block(GameObjects):
         self.__logger.debug("Завершена работа конструктора класса Block")
 
     def placing(
-        self, he_map: list[int, int], player: Player, n: int, use, have_functional=1
+        self, he_map: list[int, int], player: Player, n: int, use,
+        have_functional=1
     ) -> None:
         """
         Размещение мебели
@@ -42,15 +43,14 @@ class Block(GameObjects):
             texture = pygame.transform.scale(
                 self._num_to_texture(self.__blocks[i][4]), (50, 50)
             )
-            some_list: list[int, int] = [self.__blocks[i][2], self.__blocks[i][3]]
+            some_list: list[int, int] = [self.__blocks[i][2], 
+                                        self.__blocks[i][3]]
             super().placing(
                 GameObjectsConfig3(
                     int(self.__blocks[i][0]),
                     int(self.__blocks[i][1]),
-                    some_list,
-                    he_map,
-                    texture,
-                    player,
+                    some_list, he_map,
+                    texture, player,
                 )
             )
             if have_functional:
@@ -58,13 +58,9 @@ class Block(GameObjects):
                     GameObjectsConfig5(
                         self.__blocks[i][0],
                         self.__blocks[i][1],
-                        texture,
-                        he_map,
-                        some_list,
-                        i,
-                        n,
-                        player,
-                        use,
+                        texture, he_map,
+                        some_list, i,
+                        n, player, use,
                     )
                 )
 
@@ -78,26 +74,21 @@ class Block(GameObjects):
         """
         result: int = super().functional(
             GameObjectsConfig2(
-                config.x,
-                config.y,
-                config.texture,
-                "block",
-                config.he_map,
-                config.some_list,
+                config.x, config.y,
+                config.texture, "block",
+                config.he_map, config.some_list,
                 None,
             )
         )
         if result == 2:  # Открытие меню мебели
             Draw.show_interfaces(
                 GameObjectsConfig4(
-                    config.i,
-                    self.screen,
-                    config.n,
-                    config.he_map,
-                    config.player,
-                    self.__logger,
+                    config.i, self.screen,
+                    config.n, config.he_map,
+                    config.player, self.__logger,
                     config.use,
                 )
             )
             pygame.mixer.Sound("textures/press2.mp3").play()
-            self.__logger.debug("Завершена работа УО метода functional класса Block")
+            self.__logger.debug(
+                "Завершена работа УО метода functional класса Block")

@@ -22,14 +22,10 @@ class Enemy(Character):
     field_of_view: int = save.load_save(n)["FOV"]  # FOV
 
     def __init__(
-        self,
-        x: int,
-        y: int,
-        enemy_type: str,
-        logger: HELogger,
-        screen: pygame.surface.Surface,
-        player: Player = None,
-    ) -> None:
+        self, x: int,
+        y: int, enemy_type: str,
+        logger: HELogger, screen: pygame.surface.Surface,
+        player: Player = None) -> None:
         self.__screen: pygame.surface.Surface = screen
         self.x = x
         self.y = y
@@ -143,12 +139,9 @@ class Enemy(Character):
         )
 
     def rect_and_open(
-        self,
-        texture: pygame.surface.Surface,
-        x: int,
-        y: int,
-        mouse_pos: tuple[int, int],
-        key: str,
+        self, texture: pygame.surface.Surface,
+        x: int, y: int,
+        mouse_pos: tuple[int, int], key: str,
         num: int,
     ) -> None:
         """
@@ -178,7 +171,16 @@ class Enemy(Character):
 
     def enemy_draw_and_move(self, player: Player,
                         mp: tuple[int, int], num: int) -> tuple[int, int]:
-        """Асинхронная отрисовка и движение врага."""
+        """
+        Асинхронная отрисовка и движение врага.
+        
+        Args:
+            player (Player): Объект игрока,
+            mp (tuple[int, int]): Позиция курсора мыши,
+            num (int): Номер выбранного сохранения.
+        Returns:
+            tuple[int, int]: Координаты врага
+        """
         self.draw_fov(player, mp)
     
         if self.__enemy_type == "watcher":
@@ -199,4 +201,4 @@ class Enemy(Character):
             self.x, self.y = self.__mm.move3(self.x, self.y)
             self.rect_and_open(texture, self.x, self.y, mp, "2", num)
     
-        return self.x, self.y
+        return self.x, self.y  # Возвращаем координаты врага

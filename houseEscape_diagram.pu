@@ -272,6 +272,12 @@ class OtherFunctional {
   + None block
   + None item
   + None traps
+
+  - None general(Use use)
+
+  + None closet(Use use)
+  + None lamp(Use use)
+  + None bed(Use use)
 }
 class HEAPI {
   + None guide(pygame.surface.Surface screen)
@@ -286,6 +292,15 @@ class Pause {
 }
 class Vehicles {
   + Saving save
+}
+class Character {
+  + Saving save
+  + int speed
+
+  + None change_fields(int speed)
+  + None get_stats(object config, dict args)
+  + dict filter_data(dict dct)
+  + None die()
 }
 
 Game <-- main

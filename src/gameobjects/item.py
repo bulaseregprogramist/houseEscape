@@ -36,7 +36,8 @@ class Item(GameObjects):
             have_functional (int): Выключается для анимаций
         """
         if self.some_num:  # Позиции предметов и их текстуры
-            self.__items: dict[int:list, ...] = self.save.load_save(n)["items"]
+            self.__items: dict[
+                int: list, ...] = self.save.load_save(n)["items"]
         delete = 0
         for i in self.__items:
             texture = pygame.transform.scale(
@@ -47,9 +48,7 @@ class Item(GameObjects):
                     self.__items[i][0],
                     self.__items[i][1],
                     [self.__items[i][2], self.__items[i][3]],
-                    he_map,
-                    texture,
-                    player,
+                    he_map, texture, player,
                 )
             )
             if have_functional:
@@ -57,9 +56,7 @@ class Item(GameObjects):
                     GameObjectsConfig(
                         self.__items[i][0],
                         self.__items[i][1],
-                        texture,
-                        i,
-                        he_map,
+                        texture, i, he_map,
                         [self.__items[i][2], self.__items[i][3]],
                     )
                 )
@@ -82,12 +79,9 @@ class Item(GameObjects):
         """
         result: int = super().functional(
             GameObjectsConfig2(
-                config.x,
-                config.y,
-                config.texture,
-                "item",
-                config.he_map,
-                config.location,
+                config.x, config.y,
+                config.texture, "item",
+                config.he_map, config.location,
                 config.i,
             )
         )
@@ -105,7 +99,7 @@ class Item(GameObjects):
         Args:
             n (int): Номер выбранного сохранения.
         """
-        some_dict: dict[str : int | dict | list] = self.save.load_save(n)
+        some_dict: dict[str: int | dict | list] = self.save.load_save(n)
         some_dict["items"] = self.__items
         self.__logger.info("Предметы сохранены!")
         with open(f"data/data{n}.json", "w") as file:

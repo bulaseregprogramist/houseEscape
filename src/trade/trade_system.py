@@ -18,7 +18,8 @@ class TradeSystem:
     """Торговая система у торговца"""
 
     def __init__(
-        self, screen: pygame.surface.Surface, num: int, player: object, use: Use
+        self, screen: pygame.surface.Surface, num: int,
+        player: object, use: Use
     ) -> None:
         self.__screen: pygame.surface.Surface = screen
         self.change_dict = 0
@@ -34,7 +35,7 @@ class TradeSystem:
         self.__rects_list.clear()
         i = 0
         for i in self.__result["npc_products"]:
-            text = font3.render(
+            text: pygame.font.Font = font3.render(
                 f"Стоимость - {self.__result[
                 "npc_products"][i][0]}",
                 1,
@@ -45,7 +46,8 @@ class TradeSystem:
                 self.__result["npc_products"][i][1], (60, 60), "convert_alpha"
             )
             self.__screen.blit(texture, (x + 250, y - 20))
-            self.__rects_list.append(texture.get_rect(topleft=(x + 250, y - 20)))
+            self.__rects_list.append(
+                texture.get_rect(topleft=(x + 250, y - 20)))
             y += 70
             self.change_dict: int = self.buy_items(i)
             if self.change_dict:  # Если игрок купил предмет.
@@ -65,7 +67,7 @@ class TradeSystem:
         with open(f"data/data{self.__num}.json") as file:
             res: dict[str | dict | list | int] = json.load(file)
         res["npc_products"] = copy(self.__result["npc_products"])
-        res["MON"] = MoneySystem.MONEY
+        res["MON"] = MoneySystem.MONEY  # Деньги
         with open(f"data/data{self.__num}.json", "w") as file:
             json.dump(res, file, indent=2)
         logging.debug("Данные сохранены!")
@@ -86,12 +88,13 @@ class TradeSystem:
             if (
                 i.collidepoint(mp)
                 and pygame.mouse.get_pressed()[0]
-                and MoneySystem.MONEY > cost
+                and MoneySystem.MONEY > cost  # Если денег достаточно
             ):
                 logging.info("Предмет был куплен!")
                 sleep(0.3)
                 pygame.mixer.Sound("textures/collect.mp3").play()
-                MoneySystem.change_money(self.__result["npc_products"][str(j)][0])
+                MoneySystem.change_money(
+                    self.__result["npc_products"][str(j)][0])
 
                 try:  # Добавление в инвентарь
                     Inventory.append(
@@ -114,7 +117,7 @@ class TradeSystem:
                     )
                     for i in range(3):  # Удаление повторов в инвентаре
                         self.__use.to_dict()
-                except IndexError:
+                except IndexError:  # Если предметов больше нет
                     pass
                 return 1  # Ключ словаря будет удалён
         return 0  # Ключ словаря не будет удалён

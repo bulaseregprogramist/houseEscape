@@ -87,7 +87,8 @@ class Basement(Player):
                 self._screen, self.__pl, mouse_pos, self.__index
             )
             self.in_game(
-                self.__pl, self.__index, self.__logger, rect2, self.__n, mouse_pos
+                self.__pl, self.__index, self.__logger, rect2,
+                self.__n, mouse_pos
             )
             self.__move(self.__pl)
             # Получение информации об игроке
@@ -96,6 +97,7 @@ class Basement(Player):
             pygame.display.flip()
             if is_pressed("esc"):
                 pause = Pause(
-                    self._screen, self.__logger, self.__index, self.__pl, self.__n
+                    self._screen, self.__logger, self.__index,
+                    self.__pl, self.__n
                 )
                 cycle: int = pause.run()

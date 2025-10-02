@@ -10,4 +10,6 @@
 *.doctree
 .venv/
 .docs/
+.data/
+.mods/
 .__pycache__/

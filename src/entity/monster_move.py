@@ -7,12 +7,20 @@ class MonsterMove:
         self.__direction = 0
         self.__rand_direction = randint(1, 2)
         self.__moving_right = True
-        if player is not None:
+        if player is not None:  # Если есть игрок, то запоминаем его позицию.
             self.px: int = player.x
             self.py: int = player.y
 
     def move1(self, x: int, y: int) -> tuple[int, int]:
-        """Асинхронное движение Watcher (влево-вправо или вверх-вниз)."""
+        """
+        Асинхронное движение Watcher (влево-вправо или вверх-вниз).
+        
+        Args:
+            x (int): Позиция монстра по x
+            y (int): Позиция монстра по y
+        Returns:
+            tuple[int, int]: Новая позиция монстра по x и y
+        """
         if self.__rand_direction == 1:  # Горизонтальное движение
             if x > 100 and not self.__direction:
                 x -= 4.3
@@ -34,7 +42,15 @@ class MonsterMove:
         return x, y
 
     def move2(self, x: int, y: int) -> tuple[int, int]:
-        """Асинхронное движение Blinder (диагональное)."""
+        """
+        Асинхронное движение Blinder (диагональное).
+        
+        Args:
+            x (int): Позиция монстра по x
+            y (int): Позиция монстра по y
+        Returns:
+            tuple[int, int]: Новая позиция монстра по x и y
+        """
         if self.__moving_right:
             if x < 770:
                 x += self.speed
@@ -52,7 +68,15 @@ class MonsterMove:
         return x, y
 
     def move3(self, x: int, y: int) -> tuple[int, int]:
-        """Асинхронное движение Stalker (преследование игрока)."""
+        """
+        Асинхронное движение Stalker (преследование игрока).
+        
+        Args:
+            x (int): Позиция монстра по x
+            y (int): Позиция монстра по y
+        Returns:
+            tuple[int, int]: Новая позиция монстра по x и y
+        """
         if self.px > x:
             x += self.speed
         if self.py > y:

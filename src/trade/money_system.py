@@ -16,6 +16,9 @@ class MoneySystem:
     def __init__(self, num: int, screen: pygame.surface.Surface) -> None:
         self.__num = num
         self.__change_dict = 0
+        # 1 - будет ли отображаться зелёный текст после взятия денег
+        # 2 - сколько денег было взято
+        # 3 - позиция текста
         self.__visible: list[int] = [0, 0, 0]
         self.__screen: pygame.surface.Surface = screen
         save = Saving()
@@ -41,6 +44,7 @@ class MoneySystem:
         """Сохранение денег"""
         with open(f"data/data{self.__num}.json") as file:
             res2: dict[int : list[int, ...]] = json.load(file)
+        # Отличие ключа money от MON в том, что money - это игровая валюта,
         res2["money"] = self.__res  # Расположение денег в комнатах
         res2["MON"] = self.MONEY  # Игровая валюта
         with open(f"data/data{self.__num}.json", "w") as file:
@@ -58,11 +62,12 @@ class MoneySystem:
         text = font3.render(f"+{-visible[1]}", 1, (0, 234, 0))
         self.__screen.blit(text, (640, visible[2]))
         visible[2] -= 4
-        if visible[2] < -10:
+        if visible[2] < -10:  # Если текст исчез
             visible[0] = 0
         return visible
 
-    def placing_money(self, index: list[int, int], mouse_pos: tuple[int, int]) -> None:
+    def placing_money(self, index: list[int, int], 
+                    mouse_pos: tuple[int, int]) -> None:
         """
         Отрисовка денег на карте
 
@@ -90,9 +95,10 @@ class MoneySystem:
                         pygame.mixer.Sound("textures/press.mp3").play()
                         self.change_money(-self.__res[i][4])
                         self.__change_dict = 1
-                        self.__visible: list[int] = [1, -self.__res[i][4], 350]
+                        self.__visible: list[int] = [1, -self.__res[i][4],
+                                                    350]
                         break
-            except KeyError:
+            except KeyError:  # Если денег нет
                 pass
         if self.__change_dict:  # Удаление, если деньги получены
             self.__change_dict = 0

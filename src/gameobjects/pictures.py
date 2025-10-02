@@ -47,10 +47,8 @@ class Pictures(GameObjects):
                 logging.error("У пользователя нет интернета!")
 
     def placing(
-        self,
-        he_map: list[int, int],
-        player: Player,
-        n: int,
+        self, he_map: list[int, int],
+        player: Player, n: int,
         screen: pygame.surface.Surface,
     ) -> None:
         """
