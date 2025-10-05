@@ -16,7 +16,12 @@ class HEAPI:
 
     @staticmethod
     def guide(screen: pygame.surface.Surface) -> None:
-        """Руководство по примению API"""
+        """
+        Руководство по примению API
+        
+        Args:
+            screen (pygame.surface.Surface): Переменная экрана.
+        """
         sound = pygame.mixer.Sound("textures/collect.mp3")
         sound.set_volume(0.4)
         sound.play()
