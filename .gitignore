@@ -1,6 +1,4 @@
 *.pyc
-*.html
-*.js
 *.rst
 *.log
 *.exe
