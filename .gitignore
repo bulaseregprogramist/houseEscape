@@ -1,9 +1,5 @@
 *.pyc
 
-*.html
-
-*.js
-
 *.rst
 
 *.log
