@@ -1,7 +1,6 @@
 *.pyc
 *.rst
 *.log
-*.exe
 *.bat
 *.txt
 *.cfg
