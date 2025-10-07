@@ -10,7 +10,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath("../../"))
 project = 'HouseEscape'
-copyright = '2024, SergeyProjects'
+copyright = '2024-2025, SergeyProjects'
 author = 'SergeyProjects'
 release = '1.0.0'
 

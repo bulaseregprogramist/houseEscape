@@ -1,4 +1,4 @@
-"""Модуль, отвечающий за API игры"""
+"""Модуль, отвечающий за API игры (внутренняя реализация)"""
 
 from ..game.logging import HELogger
 from os import listdir
@@ -13,6 +13,10 @@ pygame.init()
 
 class HEAPI:
     """API игры HouseEscape"""
+    
+    @classmethod
+    def get_mods_data(cls) -> dict:
+        """Получение данных о модах"""
 
     @staticmethod
     def guide(screen: pygame.surface.Surface) -> None:
@@ -49,8 +53,7 @@ class HEAPI:
         Args:
             logger (HELogger): Переменная для логов
         """
-        logging.basicConfig(
-            level=logging.INFO,
+        logging.basicConfig(level=logging.INFO,
             format="[%(name)s] - [%(levelname)s] - %(message)s",
             encoding="utf-8",
         )
@@ -70,4 +73,4 @@ class HEAPI:
         for i in list_of_mods:
             if i.endswith(".json"):
                 with open(f"mods/{i}") as file:
-                    pass
+                    result: dict = HEAPI.get_mods_data()

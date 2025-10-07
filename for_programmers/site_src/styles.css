@@ -1,7 +1,8 @@
 #first_style {
     color: dimgray;
+    font: 28px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #second_style {
-    color: red;
+    background-color: lightblue;
 }
