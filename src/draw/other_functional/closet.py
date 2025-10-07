@@ -17,10 +17,8 @@ class Closet:
     """Функционал шкафа"""
 
     def __init__(
-        self, screen: pygame.surface.Surface,
-        save, num: int,
-        player, index: list[int, int],
-    ) -> None:
+        self, screen: pygame.surface.Surface, save, num: int,
+            player, index: list[int, int]) -> None:
         self.__num = num
         self.__text = font.render("Шкаф", 1, (0, 0, 0))
         self.__text2 = font.render("Инвентарь:", 1, (0, 0, 0))
@@ -32,6 +30,7 @@ class Closet:
         self.__index: list[int, int] = index
         self.__items_rects_list = []
         self.__screen: pygame.surface.Surface = screen
+        self.__counter = 0
 
     def to_texture(self, i: str) -> pygame.surface.Surface:
         """
@@ -57,11 +56,11 @@ class Closet:
         """
         lst = copy(Inventory.inventory_list)
         lst.extend(Inventory.inventory_list2)
-        pygame.draw.rect(self.__screen, (235, 255, 245), (150, 150, 470, 470))
+        pygame.draw.rect(self.__screen, (235, 255, 245), (150, 150, 470, 570))
         self.__screen.blit(self.__text, (330, 170))
 
         self.__items_rects_list.clear()
-
+        
         for i in items:  # Отрисовка предметов шкафа
             texture = self.to_texture(i)
             self.__screen.blit(texture, (self.__x, self.__y))
@@ -72,12 +71,20 @@ class Closet:
         self.__x, self.__y = 180, 490
         self.__screen.blit(self.__text2, (255, 450))
         for i in lst:
+            self.__counter += 1
+
             try:
                 self.__screen.blit(i[0], (self.__x, self.__y))
             except TypeError:  # Чтобы убрать баг
                 self.__screen.blit(i, (self.__x, self.__y))
-
-            self.__x += 60
+                
+            if self.__counter < 6:
+                self.__x += 60
+            else:
+                self.__x = 180
+                self.__y += 60
+                self.__counter = 0
+        self.__counter = 0
         self.__x, self.__y = 230, 230
 
     def run(self, use) -> None:
@@ -99,7 +106,6 @@ class Closet:
                         self.__screen.blit(self.__axe2, (290, 230))
 
                     if pygame.mouse.get_pressed()[0]:
-
                         Inventory.append(
                             self.to_texture(items[int(j)]), str(int(j) + 12)
                         )

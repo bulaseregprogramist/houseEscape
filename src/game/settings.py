@@ -18,10 +18,13 @@ class Settings:
         self.__screen: pygame.surface.Surface = screen
         self.__text = font.render("Настройки", True, (255, 255, 255))
         self.__text2 = font5.render("Вкл/Выкл музыку", True, (255, 255, 255))
-        self.__text3 = font5.render("Вкл/Выкл музыку", True, (255, 255, 255))
-        self.__text4 = font5.render("Вкл/Выкл музыку", True, (255, 255, 255))
-        self.__text5 = font5.render("Вкл/Выкл музыку", True, (255, 255, 255))
-        self.__text6 = font5.render("Вкл/Выкл музыку", True, (255, 255, 255))
+        self.__text3 = font5.render("Вкл/Выкл звуки", True, (255, 255, 255))
+        self.__text4 = font5.render("Верт. синхронизация",
+                                    True, (255, 255, 255))
+        self.__text5 = font5.render("Полный экран", True, (255, 255, 255))
+        self.__text6 = font5.render("Моды", True, (255, 255, 255))
+        
+        self.__text7 = font5.render("Управление", True, (255, 255, 255))
         
         self.__checkmark1 = load("textures/checkmark1.png", (50, 50),
                                 "convert")
@@ -57,6 +60,8 @@ class Settings:
         self.__screen.blit(self.__text4, (240, 326))
         self.__screen.blit(self.__text5, (240, 396))
         self.__screen.blit(self.__text6, (240, 466))
+        
+        self.__screen.blit(self.__text7, (270, 556))
 
         if self.__music:  # Музыка включена
             self.__screen.blit(self.__checkmark1, (170, 180))

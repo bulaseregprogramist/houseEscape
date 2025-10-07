@@ -34,26 +34,22 @@ class Move:
         """
         if is_pressed("shift"):
             speed *= 1.5
-        if (
-            is_pressed("w")
+        if (is_pressed("w")
             and Move.move_in_location(player.x, player.y, index)
             and y < 753
         ):
             y -= 3 * speed
-        elif (
-            is_pressed("a")
+        if (is_pressed("a")
             and Move.move_in_location(player.x, player.y, index)
             and x > -23
         ):
             x -= 3 * speed
-        elif (
-            is_pressed("s")
+        if (is_pressed("s")
             and Move.move_in_location(player.x, player.y, index)
             and y > -23
         ):
             y += 3 * speed
-        elif (
-            is_pressed("d")
+        if (is_pressed("d")
             and Move.move_in_location(player.x, player.y, index)
             and x < 753
         ):
@@ -62,14 +58,10 @@ class Move:
 
     @staticmethod
     def press_keydown(
-        logger: HELogger,
-        event,
-        cls,
-        index: list[int, int],
-        player: object,
-        n: int,
-        mouse_pos: tuple[int, int],
-    ) -> None:
+        logger: HELogger, event,
+        cls, index: list[int, int],
+        player: object, n: int,
+        mouse_pos: tuple[int, int]) -> None:
         """
         Нажатие на клавишу
 
