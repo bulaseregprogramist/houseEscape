@@ -19,10 +19,9 @@ class Pause:
     save = Saving()
 
     def __init__(
-        self, screen: pygame.surface.Surface,
-        logger: HELogger, index: list[int, int],
-        player: Player, n: int,
-    ) -> None:
+            self, screen: pygame.surface.Surface,
+            logger: HELogger, index: list[int, int],
+            player: Player, n: int) -> None:
         self.__logger: HELogger = logger
         self.__screen: pygame.surface.Surface = screen
         self.__index: list[int, int] = index

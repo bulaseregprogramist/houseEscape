@@ -140,6 +140,8 @@ class SaveMenu:
                         return j + 1  # Номер сохранения
 
             save_menu_cycle: int = self.__act(rect, rect2, rect3, mouse_pos)
-            save_menu_cycle: int = game_exit(self.__logger)
+            
+            if save_menu_cycle:  # Если игрок вышел через кнопку
+                save_menu_cycle: int = game_exit(self.__logger)
             pygame.display.flip()
         return "to_menu"  # 

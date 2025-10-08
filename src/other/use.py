@@ -110,8 +110,7 @@ class Use:
                     [texture.get_rect(topleft=(x + 2, y)),
                     texture,
                     list(self.some_list[i][0].keys())[0],
-                    ]
-                )
+                    ])
             except IndexError:
                 pass
             x += 21
@@ -128,8 +127,7 @@ class Use:
         self.__screen.blit(self.__button, (700, 0))
         rect = self.__button.get_rect(topleft=(700, 0))
         rect2 = self.__player.player.get_rect(
-            topleft=(self.__player.x, self.__player.y)
-        )
+            topleft=(self.__player.x, self.__player.y))
 
         if rect.collidepoint(pos):  # Кнопка действия
             self.__screen.blit(self.__button2, (700, 0))
@@ -160,7 +158,12 @@ class Use:
         self.__screen.blit(texture, (mp[0] - 15, mp[1] - 15))
 
     def __after_click(self, index: list[int, int]) -> None:
-        """Функционал после клика"""
+        """
+        Функционал после клика
+        
+        Args:
+            index (list[int, int]): Позиция игрока на карте
+        """
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         mouse_pressed: tuple[bool, bool, bool] = pygame.mouse.get_pressed()[0]
 

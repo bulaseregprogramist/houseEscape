@@ -17,6 +17,12 @@ class SoundTrack:
         """Воспроизведение музыки"""
         pygame.mixer.music.play(-1)  # Музыка будет бесконечно идти
         
-    def f(self) -> None:
-        """Будушая функция"""
-        pass
+    def volume_regulator(self, num: float) -> None:
+        """
+        Регулирование громкости музыки
+        
+        Args:
+            num (float): Громкость музыки
+        """
+        pygame.mixer.music.set_volume(num)
+

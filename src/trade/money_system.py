@@ -79,8 +79,7 @@ class MoneySystem:
             try:
                 if (
                     self.__res[i][2] == index[0]  # Если в комнате с деньгами
-                    and self.__res[i][3] == index[1]
-                ):
+                        and self.__res[i][3] == index[1]):
                     self.__screen.blit(
                         self.__money, (self.__res[i][0], self.__res[i][1])
                     )

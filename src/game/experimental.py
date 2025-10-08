@@ -17,6 +17,8 @@ class Experimental:
         self.__sound1 = pygame.mixer.Sound("textures/collect.mp3")
         self.__text1 = font3.render("Экспериментальные возможности", 1,
                                     (0, 0, 0))
+        self.__text_exit = font3.render("Esc - для выхода из меню", 1,
+                                    (0, 0, 0))
         self.__checkmark1 = load("textures/checkmark1.png", (55, 55),
                                 "convert")
         self.__checkmark2 = load("textures/checkmark2.png", (55, 55),
@@ -65,6 +67,8 @@ class Experimental:
         self.__screen.blit(self.__text3, (190, 220))
         self.__screen.blit(self.__text4, (190, 320))
         self.__screen.blit(self.__text5, (150, 420))
+        
+        self.__screen.blit(self.__text_exit, (30, 650))
 
         self.__rects_list.append(
             self.__checkmark1.get_rect(topleft=(100, 100)))
@@ -81,10 +85,8 @@ class Experimental:
             mouse_pos (tuple[int, int]): Позиция курсора мыши.
         """
         key1, key2, key3 = "1", "2", "3"
-        if (
-            self.__rects_list[0].collidepoint(mouse_pos)
-            and pygame.mouse.get_pressed()[0]
-        ):
+        if (self.__rects_list[0].collidepoint(mouse_pos)
+                and pygame.mouse.get_pressed()[0]):
             if not self.__result[self.dict_name][key1]:
                 sleep(0.4)
                 self.__result[self.dict_name][key1] = 1
@@ -92,10 +94,8 @@ class Experimental:
                 sleep(0.4)
                 self.__result[self.dict_name][key1] = 0
 
-        elif (
-            self.__rects_list[1].collidepoint(mouse_pos)
-            and pygame.mouse.get_pressed()[0]
-        ):
+        elif (self.__rects_list[1].collidepoint(mouse_pos)
+                and pygame.mouse.get_pressed()[0]):
             if not self.__result[self.dict_name][key2]:
                 sleep(0.4)
                 self.__result[self.dict_name][key2] = 1
@@ -103,10 +103,8 @@ class Experimental:
                 sleep(0.4)
                 self.__result[self.dict_name][key2] = 0
 
-        elif (
-            self.__rects_list[2].collidepoint(mouse_pos)
-            and pygame.mouse.get_pressed()[0]
-        ):
+        elif (self.__rects_list[2].collidepoint(mouse_pos)
+                and pygame.mouse.get_pressed()[0]):
             if not self.__result[self.dict_name][key3]:
                 sleep(0.4)
                 self.__result[self.dict_name][key3] = 1

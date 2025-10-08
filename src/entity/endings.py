@@ -45,3 +45,10 @@ class Endings:
             pygame.display.flip()
 
             {sys.exit() for i in pygame.event.get() if i.type == pygame.QUIT}
+
+    def ending_aftermath(self) -> None:
+        """
+        Последствия концовки
+        """
+        pass
+

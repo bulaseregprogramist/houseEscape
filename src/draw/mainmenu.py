@@ -6,6 +6,7 @@ import webbrowser
 import logging
 from time import sleep
 from ..other.configs import MainMenuConfig
+from ..other.ai import ArtificalIntelligence
 from ..game.settings import Settings
 from ..game.logging import HELogger
 from ..other.globals import load, font, game_exit, font3
@@ -57,6 +58,7 @@ class MainMenu:
             pygame.display.flip()
             rect_yes = self.__textures["yes"].get_rect(topleft=(325, 370))
             rect_no = self.__textures["no"].get_rect(topleft=(405, 370))
+            mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
 
             if (rect_yes.collidepoint(mouse_pos) 
                     and pygame.mouse.get_pressed()[0]):
@@ -64,7 +66,7 @@ class MainMenu:
                 sys.exit()
             elif (rect_no.collidepoint(mouse_pos) 
                     and pygame.mouse.get_pressed()[0]):
-                cycle = 0
+                break
                 
             cycle: int = game_exit(self.__logger)
 
@@ -116,7 +118,7 @@ class MainMenu:
         elif rects[6].collidepoint(config.mouse_pos):  # AI
             config.screen.blit(config.textures[11], (180, 660))
             if pygame.mouse.get_pressed()[0]:
-                pass
+                ArtificalIntelligence(config.screen, config.logger)
         return config.mmc, save
 
     @staticmethod

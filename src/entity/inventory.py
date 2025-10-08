@@ -20,8 +20,8 @@ class Inventory:
     inventory_list2 = []  # Сохранённые предметы
 
     def __init__(
-        self, inventory: pygame.surface.Surface,
-        inventory2, screen: pygame.surface.Surface) -> None:
+            self, inventory: pygame.surface.Surface,
+            inventory2, screen: pygame.surface.Surface) -> None:
         logging.debug("Начата работа конструктора класса Inventory")
         self.__inventory = inventory  # Текстура рюкзака.
         # __inventory2 - это
@@ -132,6 +132,5 @@ class Inventory:
                     args[3].info("Выход из игры...")
                     sys.exit()
                 elif (event.type == pygame.KEYDOWN  # Выход из инвентаря
-                    and event.key == pygame.K_RETURN
-                ):
+                        and event.key == pygame.K_RETURN):
                     inv_cycle = 0

@@ -13,10 +13,8 @@ pygame.init()
 class Config:
     """Класс, содержащий все константы"""
 
-    def __init__(
-        self, logger, index: list[int, int], player, num: int,
-        mp: tuple[int, int]
-    ):
+    def __init__(self, logger, index: list[int, int], player, num: int,
+            mp: tuple[int, int]):
         self.logger = logger
         self.index: list[int, int] = index
         self.player = player
@@ -28,14 +26,10 @@ class StatsConfig:
     """Класс для информации о персонаже"""
 
     def __init__(
-        self,
-        screen: pygame.surface.Surface,
-        index: list[int, int],
-        logger,
-        ch: list[int, int],
-        n: int,
-        player,
-    ):
+            self, screen: pygame.surface.Surface,
+            index: list[int, int],
+            logger, ch: list[int, int],
+            n: int, player):
         self.screen = screen
         self.index: list[int, int] = index
         self.logger = logger
@@ -48,13 +42,10 @@ class MainMenuConfig:
     """Класс с конфигом для главном меню"""
 
     def __init__(
-        self,
-        mouse_pos: tuple[int, int],
-        screen: pygame.surface.Surface,
-        textures: tuple,
-        logger,
-        mmc: int,
-    ):
+            self,
+            mouse_pos: tuple[int, int],
+            screen: pygame.surface.Surface,
+            textures: tuple, logger, mmc: int):
         self.screen = screen
         self.mouse_pos: tuple[int, int] = mouse_pos
         self.textures: tuple = textures
@@ -66,14 +57,10 @@ class GameObjectsConfig:
     """Конфиг для игровых объектов"""
 
     def __init__(
-        self,
-        x: int,
-        y: int,
-        texture,
-        index: int,
-        he_map: list[int, int],
-        location: list[int, int],
-    ) -> None:
+            self, x: int,
+            y: int, texture,
+            index: int, he_map: list[int, int],
+            location: list[int, int]) -> None:
         self.x = x
         self.y = y
         self.texture = texture
@@ -85,16 +72,12 @@ class GameObjectsConfig:
 class GameObjectsConfig2:
     """Конфиг для игровых объектов"""
 
-    def __init__(
-        self,
-        x: int,
-        y: int,
-        texture,
-        name: str,
-        he_map: list[int, int],
-        location: list[int, int],
-        i: int,
-    ) -> None:
+    def __init__(self, x: int, y: int,
+            texture,
+            name: str,
+            he_map: list[int, int],
+            location: list[int, int],
+            i: int) -> None:
         self.x = x
         self.y = y
         self.texture = texture
@@ -108,9 +91,8 @@ class GameObjectsConfig3:
     """Конфиг для игровых объектов (блоки)"""
 
     def __init__(
-        self, x: int, y: int, some_list: list, he_map: list[int, int],
-        texture, player
-    ) -> None:
+            self, x: int, y: int, some_list: list, he_map: list[int, int],
+            texture, player) -> None:
         self.x = x
         self.y = y
         self.some_list = some_list
@@ -123,9 +105,8 @@ class GameObjectsConfig4:
     """Конфиг для игровых объектов (блоки, интерфейсы)"""
 
     def __init__(
-        self, i: int, screen, n: int, he_map: list[int, int], player,
-        logger, use
-    ) -> None:
+            self, i: int, screen, n: int, he_map: list[int, int], player,
+            logger, use) -> None:
         self.i: int = i
         self.screen = screen
         self.n: int = n
@@ -139,12 +120,11 @@ class GameObjectsConfig5:
     """Конфиг для игровых объектов"""
 
     def __init__(
-        self, x: int,
-        y: int, texture,
-        he_map: list[int, int], some_list: list,
-        i: int, n: int,
-        player, use,
-    ) -> None:
+            self, x: int,
+            y: int, texture,
+            he_map: list[int, int], some_list: list,
+            i: int, n: int,
+            player, use) -> None:
         self.x = x
         self.y = y
         self.texture = texture
@@ -154,3 +134,4 @@ class GameObjectsConfig5:
         self.n: int = n
         self.player = player
         self.use = use
+

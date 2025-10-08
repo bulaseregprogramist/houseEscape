@@ -21,11 +21,13 @@ class HEAPI:
         sound.set_volume(0.4)
         sound.play()
         text = font.render("Гайд по API", 1, (0, 0, 0))
+        text2 = font.render("Esc - для выхода из меню", 1, (0, 0, 0))
 
         cycle = 1
         while cycle:
             screen.fill((255, 255, 255))
             screen.blit(text, (230, 50))
+            screen.blit(text2, (30, 650))
 
             pygame.display.flip()
 

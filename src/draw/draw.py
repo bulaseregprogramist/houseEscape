@@ -111,10 +111,9 @@ class Draw:
             endings.pre_ending("Концовка Решётки")
 
     def render_location(
-        self, index: list[int, int],
-        mp: tuple[int, int], screen: pygame.surface.Surface,
-        player: Player, num: int, logger: HELogger,
-    ) -> None:
+            self, index: list[int, int],
+            mp: tuple[int, int], screen: pygame.surface.Surface,
+            player: Player, num: int, logger: HELogger) -> None:
         """
         Рендеринг комнаты дома
 
