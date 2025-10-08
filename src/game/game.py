@@ -139,10 +139,8 @@ class Game:
                     visible = self.__money.visible_add(visible)
 
                 for j in traps_dict:  # Отрисовка ловушек
-                    if (
-                        traps_dict[j][2] == self.__index[0]
-                        and traps_dict[j][3] == self.__index[1]
-                    ):
+                    if (traps_dict[j][2] == self.__index[0]
+                            and traps_dict[j][3] == self.__index[1]):
                         trap_rect = self.__traps.draw_trap(
                             traps_dict[j][0], traps_dict[j][1],
                             traps_dict[j][4]

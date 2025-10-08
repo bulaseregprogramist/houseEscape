@@ -21,9 +21,9 @@ class OtherFunctional:
 
     def __init__(
         self, num: int,
-        screen: pygame.surface.Surface,
-        index: list[int, int], player: Player,
-        logger) -> None:
+            screen: pygame.surface.Surface,
+            index: list[int, int], player: Player,
+            logger) -> None:
         self.__num = num
         self.__screen: pygame.surface.Surface = screen
         self.__index: list[int, int] = index
@@ -42,6 +42,9 @@ class OtherFunctional:
         """
         Общий метод для остальных методов класса
         (анимация)
+        
+        Args:
+            use (Use): Объект класса Use
         """
         counter, general_cycle = 0, 1
         width = 0
@@ -57,7 +60,7 @@ class OtherFunctional:
                     )
 
             self.__clock.tick(144)
-            pygame.draw.circle(self.__screen, (255, 0, 0), (375, 375), width)
+            pygame.draw.circle(self.__screen, (125, 0, 0), (375, 375), width)
             counter += 2
 
             if counter > 1:
