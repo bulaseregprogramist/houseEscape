@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ловушки в игре &mdash; документация HouseEscape 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e35015f7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=cd1d70c9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Торговля" href="trade.html" />
+    <link rel="prev" title="Персонажи и всё, что с ними связано" href="character.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            HouseEscape
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="game.html">Основной модуль игры</a></li>
+<li class="toctree-l1"><a class="reference internal" href="draw.html">Отрисовка локаций, предметов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
+<li class="toctree-l1"><a class="reference internal" href="character.html">Персонажи и всё, что с ними связано</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ловушки в игре</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Ловушки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.traps.traps.Traps"><code class="docutils literal notranslate"><span class="pre">Traps</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.traps.traps.Traps.after"><code class="docutils literal notranslate"><span class="pre">Traps.after()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.traps.traps.Traps.draw_trap"><code class="docutils literal notranslate"><span class="pre">Traps.draw_trap()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">Последствия ловушек</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.traps.aftermath.AfterMath"><code class="docutils literal notranslate"><span class="pre">AfterMath</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.traps.aftermath.AfterMath.common_aftermath"><code class="docutils literal notranslate"><span class="pre">AfterMath.common_aftermath()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.traps.aftermath.AfterMath.ice_aftermath"><code class="docutils literal notranslate"><span class="pre">AfterMath.ice_aftermath()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.traps.aftermath.AfterMath.poison_aftermath"><code class="docutils literal notranslate"><span class="pre">AfterMath.poison_aftermath()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trade.html">Торговля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Остальное</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HouseEscape</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Ловушки в игре</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/traps.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Ловушки в игре<a class="headerlink" href="#id1" title="Ссылка на этот заголовок"></a></h1>
+<section id="id2">
+<h2>Ловушки<a class="headerlink" href="#id2" title="Ссылка на этот заголовок"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.traps.traps.Traps">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.traps.traps.</span></span><span class="sig-name descname"><span class="pre">Traps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.traps.traps.Traps" title="Ссылка на это определение"></a></dt>
+<dd><p>Ловушки</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.traps.traps.Traps.after">
+<span class="sig-name descname"><span class="pre">after</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rect</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Rect</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trap_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player_rect</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Rect</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.traps.traps.Traps.after" title="Ссылка на это определение"></a></dt>
+<dd><p>Последствия попадания в ловушку.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rect</strong> (<em>pygame.rect.Rect</em>) – „Квадрат“ ловушки,</p></li>
+<li><p><strong>trap_type</strong> (<em>str</em>) – Тип ловушки,</p></li>
+<li><p><strong>player_rect</strong> (<em>pygame.rect.Rect</em>) – „Квадрат“ игрока.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.traps.traps.Traps.draw_trap">
+<span class="sig-name descname"><span class="pre">draw_trap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trap_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Rect</span></span></span><a class="headerlink" href="#src.traps.traps.Traps.draw_trap" title="Ссылка на это определение"></a></dt>
+<dd><p>Отрисовка ловушек.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Позиция ловушки по x,</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Позиция ловушки по y,</p></li>
+<li><p><strong>trap_type</strong> (<em>str</em>) – Тип ловушки.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>„Квадрат“ ловушки.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pygame.rect.Rect</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id3">
+<h2>Последствия ловушек<a class="headerlink" href="#id3" title="Ссылка на этот заголовок"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.traps.aftermath.AfterMath">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.traps.aftermath.</span></span><span class="sig-name descname"><span class="pre">AfterMath</span></span><a class="headerlink" href="#src.traps.aftermath.AfterMath" title="Ссылка на это определение"></a></dt>
+<dd><p>Последствия ловушек</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.traps.aftermath.AfterMath.common_aftermath">
+<span class="sig-name descname"><span class="pre">common_aftermath</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.traps.aftermath.AfterMath.common_aftermath" title="Ссылка на это определение"></a></dt>
+<dd><p>Последствия обычной ловушки.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.traps.aftermath.AfterMath.ice_aftermath">
+<span class="sig-name descname"><span class="pre">ice_aftermath</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.traps.aftermath.AfterMath.ice_aftermath" title="Ссылка на это определение"></a></dt>
+<dd><p>Последствия ледяной ловушки</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.traps.aftermath.AfterMath.poison_aftermath">
+<span class="sig-name descname"><span class="pre">poison_aftermath</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.traps.aftermath.AfterMath.poison_aftermath" title="Ссылка на это определение"></a></dt>
+<dd><p>Последствия ловушки яда</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="character.html" class="btn btn-neutral float-left" title="Персонажи и всё, что с ними связано" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="trade.html" class="btn btn-neutral float-right" title="Торговля" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, SergeyProjects. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

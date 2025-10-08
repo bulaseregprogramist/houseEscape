@@ -208,22 +208,26 @@ class Game {
 
     - None check2(tuple logger)
 }
+
 class Player {
     + Saving save 
     + int MAX_CAPACITY
 }
+
 class Block {
     + Saving save 
     + pygame.surface.Surface screen
 
     + None functional(object config)
 }
+
 class Item {
     + Saving save 
     + int some_num
 
      - None save_item(int n)
 }
+
 abstract GameObjects {
     + pygame.surface.Surface screen
     + HELogger logger
@@ -231,36 +235,44 @@ abstract GameObjects {
     - None show_menu(str go_type)
     # pygame.surface.Surface num_to_texture(str command)
 }
+
 class Pictures {
   + Saving save
   + int load_picture
 }
+
 class Inventory {
   + list inventory_list
   + HELogger logger
   + None Player
   + list inventory_list2
 }
+
 class CraftingTable {
   + Saving save
   + HELogger logger
 }
+
 class SoundTrack {
   + None play()
 }
+
 class MainMenu {
   + int to_menu()
   + None exit_menu(tuple[int, int] mouse_pos)
 }
+
 class HELogger {
   + Any change_name(Self logger)
   + None set_level(int level)
   + None better_info(Self logger)
 }
+
 class Traps {
   + pygame.rect.Rect draw_trap(int x, int y, str trap_type)
   + None after(pygame.rect.Rect, str trap_type, pygame.rect.Rect player_rect)
 }
+
 class MoneySystem {
     + int MONEY
 
@@ -268,6 +280,7 @@ class MoneySystem {
     + None visible_add(list[int] visible)
     + None placing_money(list[int, int] index, list[int, int] mouse_pos)
 }
+
 class OtherFunctional {
   + None block
   + None item
@@ -279,20 +292,24 @@ class OtherFunctional {
   + None lamp(Use use)
   + None bed(Use use)
 }
+
 class HEAPI {
   + None guide(pygame.surface.Surface screen)
   + None load(HELogger logger)
   - None initialize_mods(HELogger logger)
 }
+
 class Pause {
     + Saving save
 
     + int run()
     - int functional()
 }
+
 class Vehicles {
   + Saving save
 }
+
 class Character {
   + Saving save
   + int speed
@@ -301,6 +318,18 @@ class Character {
   + None get_stats(object config, dict args)
   + dict filter_data(dict dct)
   + None die()
+}
+
+class MonsterMove {
+
+}
+
+class AfterMath {
+
+}
+
+class Traps {
+  
 }
 
 Game <-- main
@@ -348,5 +377,10 @@ endNote
 
 note left of Game::check2
 "Проверка на выход за границу карты дома (вторая часть)"
+endNote
+
+
+note right of MoneySystem::MONEY
+"В начале на самом деле 100 монет"
 endNote
 @enduml

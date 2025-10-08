@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Персонажи и всё, что с ними связано &mdash; документация HouseEscape 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e35015f7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=cd1d70c9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Ловушки в игре" href="traps.html" />
+    <link rel="prev" title="Пауза во время игры" href="pause.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            HouseEscape
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="game.html">Основной модуль игры</a></li>
+<li class="toctree-l1"><a class="reference internal" href="draw.html">Отрисовка локаций, предметов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gameobjects.html">Мебель, предметы</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API игры, необходимое для модов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pause.html">Пауза во время игры</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Персонажи и всё, что с ними связано</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Персонаж</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.entity.character.Character"><code class="docutils literal notranslate"><span class="pre">Character</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.character.Character.change_fields"><code class="docutils literal notranslate"><span class="pre">Character.change_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.character.Character.die"><code class="docutils literal notranslate"><span class="pre">Character.die()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.character.Character.filter_data"><code class="docutils literal notranslate"><span class="pre">Character.filter_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.character.Character.get_stats"><code class="docutils literal notranslate"><span class="pre">Character.get_stats()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.entity.move">Движение</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.entity.move.Move"><code class="docutils literal notranslate"><span class="pre">Move</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.move.Move.move_in_location"><code class="docutils literal notranslate"><span class="pre">Move.move_in_location()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.move.Move.player_move"><code class="docutils literal notranslate"><span class="pre">Move.player_move()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.move.Move.press_keydown"><code class="docutils literal notranslate"><span class="pre">Move.press_keydown()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">Движение монстра</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.entity.monster_move.MonsterMove"><code class="docutils literal notranslate"><span class="pre">MonsterMove</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.monster_move.MonsterMove.move1"><code class="docutils literal notranslate"><span class="pre">MonsterMove.move1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.monster_move.MonsterMove.move2"><code class="docutils literal notranslate"><span class="pre">MonsterMove.move2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.monster_move.MonsterMove.move3"><code class="docutils literal notranslate"><span class="pre">MonsterMove.move3()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.entity.player">Игрок</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.entity.player.Player"><code class="docutils literal notranslate"><span class="pre">Player</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.player.Player.blit"><code class="docutils literal notranslate"><span class="pre">Player.blit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.player.Player.change_fields"><code class="docutils literal notranslate"><span class="pre">Player.change_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.player.Player.die"><code class="docutils literal notranslate"><span class="pre">Player.die()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.player.Player.get_stats"><code class="docutils literal notranslate"><span class="pre">Player.get_stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.player.Player.in_game"><code class="docutils literal notranslate"><span class="pre">Player.in_game()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.player.Player.open_inventory"><code class="docutils literal notranslate"><span class="pre">Player.open_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.player.Player.player_interfaces"><code class="docutils literal notranslate"><span class="pre">Player.player_interfaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.player.Player.to_inventory"><code class="docutils literal notranslate"><span class="pre">Player.to_inventory()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">Враги</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.entity.enemys.Enemy"><code class="docutils literal notranslate"><span class="pre">Enemy</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.enemys.Enemy.change_fields"><code class="docutils literal notranslate"><span class="pre">Enemy.change_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.enemys.Enemy.check_collision"><code class="docutils literal notranslate"><span class="pre">Enemy.check_collision()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.enemys.Enemy.check_collision2"><code class="docutils literal notranslate"><span class="pre">Enemy.check_collision2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.enemys.Enemy.die"><code class="docutils literal notranslate"><span class="pre">Enemy.die()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.enemys.Enemy.draw_fov"><code class="docutils literal notranslate"><span class="pre">Enemy.draw_fov()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.enemys.Enemy.enemy_draw_and_move"><code class="docutils literal notranslate"><span class="pre">Enemy.enemy_draw_and_move()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.enemys.Enemy.get_stats"><code class="docutils literal notranslate"><span class="pre">Enemy.get_stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.enemys.Enemy.rect_and_open"><code class="docutils literal notranslate"><span class="pre">Enemy.rect_and_open()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">Инвентарь</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.entity.inventory.Inventory"><code class="docutils literal notranslate"><span class="pre">Inventory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.inventory.Inventory.append"><code class="docutils literal notranslate"><span class="pre">Inventory.append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.inventory.Inventory.draw_inventory"><code class="docutils literal notranslate"><span class="pre">Inventory.draw_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.inventory.Inventory.open"><code class="docutils literal notranslate"><span class="pre">Inventory.open()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">Концовки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.entity.endings.Endings"><code class="docutils literal notranslate"><span class="pre">Endings</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.endings.Endings.draw_ending"><code class="docutils literal notranslate"><span class="pre">Endings.draw_ending()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.entity.endings.Endings.pre_ending"><code class="docutils literal notranslate"><span class="pre">Endings.pre_ending()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="traps.html">Ловушки в игре</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trade.html">Торговля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Остальное</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HouseEscape</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Персонажи и всё, что с ними связано</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/character.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Персонажи и всё, что с ними связано<a class="headerlink" href="#id1" title="Ссылка на этот заголовок"></a></h1>
+<section id="id2">
+<h2>Персонаж<a class="headerlink" href="#id2" title="Ссылка на этот заголовок"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.entity.character.Character">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.entity.character.</span></span><span class="sig-name descname"><span class="pre">Character</span></span><a class="headerlink" href="#src.entity.character.Character" title="Ссылка на это определение"></a></dt>
+<dd><p>Персонаж (игрок, монстр, нпс (торговец))</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.character.Character.change_fields">
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">change_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.character.Character.change_fields" title="Ссылка на это определение"></a></dt>
+<dd><p>Изменяет статичные поля класса</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>speed</strong> (<em>int</em>) – Скорость персонажа</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.character.Character.die">
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">die</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.character.Character.die" title="Ссылка на это определение"></a></dt>
+<dd><p>Смерть персонажа</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.character.Character.filter_data">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#src.entity.character.Character.filter_data" title="Ссылка на это определение"></a></dt>
+<dd><p>Для получения статичных полей</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dct</strong> (<em>dict</em>) – Статичные поля класса.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Отфильтрованные поля класса.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.character.Character.get_stats">
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.character.Character.get_stats" title="Ссылка на это определение"></a></dt>
+<dd><p>Получение информации об персонаже.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>StatsConfig</em>) – Информация о персонаже,</p></li>
+<li><p><strong>*args</strong> (<em>dict</em>) – Статичные поля класса.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.entity.move">
+<span id="id3"></span><h2>Движение<a class="headerlink" href="#module-src.entity.move" title="Ссылка на этот заголовок"></a></h2>
+<p>Движение игрока</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.entity.move.Move">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.entity.move.</span></span><span class="sig-name descname"><span class="pre">Move</span></span><a class="headerlink" href="#src.entity.move.Move" title="Ссылка на это определение"></a></dt>
+<dd><p>Движение игрока</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.move.Move.move_in_location">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">move_in_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.entity.move.Move.move_in_location" title="Ссылка на это определение"></a></dt>
+<dd><p>Даёт доступ только в определённые места</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Позиция игрока по x,</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Позиция игрока по y,</p></li>
+<li><p><strong>index</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Карта дома.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Можно ли идти в этой зоне дома (True или False)</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.move.Move.player_move">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">player_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.move.Move.player_move" title="Ссылка на это определение"></a></dt>
+<dd><p>Движение игрока</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>player</strong> (<a class="reference internal" href="#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Объект игрока,</p></li>
+<li><p><strong>index</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Карта дома,</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Позиция игрока по x</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Позиция игрока по y</p></li>
+<li><p><strong>speed</strong> (<em>int</em>) – Скорость игрока</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Позиция игрока по x и y.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.move.Move.press_keydown">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">press_keydown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mouse_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.move.Move.press_keydown" title="Ссылка на это определение"></a></dt>
+<dd><p>Нажатие на клавишу</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logger</strong> (<a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><em>HELogger</em></a>) – Переменная для логов,</p></li>
+<li><p><strong>event</strong> (<em>Any</em>) – Событие в pygame,</p></li>
+<li><p><strong>cls</strong> (<a class="reference internal" href="#src.entity.inventory.Inventory" title="src.entity.inventory.Inventory"><em>Inventory</em></a>) – Класс инвентаря,</p></li>
+<li><p><strong>index</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция игрока на карте дома,</p></li>
+<li><p><strong>player</strong> (<a class="reference internal" href="#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Класс Player,</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Номер выбранного сохранения,</p></li>
+<li><p><strong>mouse_pos</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция мыши.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id4">
+<h2>Движение монстра<a class="headerlink" href="#id4" title="Ссылка на этот заголовок"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.entity.monster_move.MonsterMove">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.entity.monster_move.</span></span><span class="sig-name descname"><span class="pre">MonsterMove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monster_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entity.monster_move.MonsterMove" title="Ссылка на это определение"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="src.entity.monster_move.MonsterMove.move1">
+<span class="sig-name descname"><span class="pre">move1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.entity.monster_move.MonsterMove.move1" title="Ссылка на это определение"></a></dt>
+<dd><p>Асинхронное движение Watcher (влево-вправо или вверх-вниз).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Позиция монстра по x</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Позиция монстра по y</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Новая позиция монстра по x и y</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[int, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.monster_move.MonsterMove.move2">
+<span class="sig-name descname"><span class="pre">move2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.entity.monster_move.MonsterMove.move2" title="Ссылка на это определение"></a></dt>
+<dd><p>Асинхронное движение Blinder (диагональное).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Позиция монстра по x</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Позиция монстра по y</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Новая позиция монстра по x и y</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[int, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.monster_move.MonsterMove.move3">
+<span class="sig-name descname"><span class="pre">move3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.entity.monster_move.MonsterMove.move3" title="Ссылка на это определение"></a></dt>
+<dd><p>Асинхронное движение Stalker (преследование игрока).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Позиция монстра по x</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Позиция монстра по y</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Новая позиция монстра по x и y</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[int, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.entity.player">
+<span id="id5"></span><h2>Игрок<a class="headerlink" href="#module-src.entity.player" title="Ссылка на этот заголовок"></a></h2>
+<p>Игрок игры House Escape</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.entity.player.Player">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.entity.player.</span></span><span class="sig-name descname"><span class="pre">Player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entity.player.Player" title="Ссылка на это определение"></a></dt>
+<dd><p>Игрок и связанное с ним</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.player.Player.blit">
+<span class="sig-name descname"><span class="pre">blit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Surface</span></span></span><a class="headerlink" href="#src.entity.player.Player.blit" title="Ссылка на это определение"></a></dt>
+<dd><p>Вывод игрока на экран</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mp</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция мыши.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>„Квадрат“ игрока.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pygame.surface.Surface</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.player.Player.change_fields">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">change_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.player.Player.change_fields" title="Ссылка на это определение"></a></dt>
+<dd><p>Изменяет статичные поля класса</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logger</strong> (<a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><em>HELogger</em></a>) – Переменная для логов,</p></li>
+<li><p><strong>mc</strong> (<em>int</em>) – Изменение статичного поля MAX_CAPACITY,</p></li>
+<li><p><strong>speed</strong> (<em>int</em>) – Изменение статичного поля speed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.player.Player.die">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">die</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.player.Player.die" title="Ссылка на это определение"></a></dt>
+<dd><p>Смерть игрока</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>screen</strong> (<em>pygame.surface.Surface</em>) – Переменная экрана.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.player.Player.get_stats">
+<span class="sig-name descname"><span class="pre">get_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.player.Player.get_stats" title="Ссылка на это определение"></a></dt>
+<dd><p>Получение информации об игроке</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logger</strong> (<a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><em>HELogger</em></a>) – Переменная для логов,</p></li>
+<li><p><strong>indx</strong> (<em>list</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция на карте</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Номер выбранного сохранения</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.player.Player.in_game">
+<span class="sig-name descname"><span class="pre">in_game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.player.Player.in_game" title="Ссылка на это определение"></a></dt>
+<dd><p>Поведение игрока в игре</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*args</strong> (<em>tuple</em>) – Параметры игрока (позиция мыши, расположение, …)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.player.Player.open_inventory">
+<span class="sig-name descname"><span class="pre">open_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.player.Player.open_inventory" title="Ссылка на это определение"></a></dt>
+<dd><p>Открытие инвентаря</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*args</strong> (<em>tuple</em>) – Параметры игрока (позиция мыши, расположение, …)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.player.Player.player_interfaces">
+<span class="sig-name descname"><span class="pre">player_interfaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Surface</span></span></span><a class="headerlink" href="#src.entity.player.Player.player_interfaces" title="Ссылка на это определение"></a></dt>
+<dd><p>Интерфейсы игрока (инвентарь, кнопка использования)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*args</strong> (<em>tuple</em>) – Экран игры, позиция мыши, расположение игрока</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>„Квадрат“ текстуры рюкзака (инвентаря)</dt><dd><p>и игрока.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pygame.surface.Surface</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.player.Player.to_inventory">
+<span class="sig-name descname"><span class="pre">to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Config</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.player.Player.to_inventory" title="Ссылка на это определение"></a></dt>
+<dd><p>Инвентарь игрока (открывается на E)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>Config</em>) – Объект класса Config</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id6">
+<h2>Враги<a class="headerlink" href="#id6" title="Ссылка на этот заголовок"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.entity.enemys.Enemy">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.entity.enemys.</span></span><span class="sig-name descname"><span class="pre">Enemy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enemy_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entity.enemys.Enemy" title="Ссылка на это определение"></a></dt>
+<dd><p>Враги игрока</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.enemys.Enemy.change_fields">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">change_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fov</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.enemys.Enemy.change_fields" title="Ссылка на это определение"></a></dt>
+<dd><p>Изменяет статичные поля класса</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logger</strong> (<a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><em>HELogger</em></a>) – Переменная для логов,</p></li>
+<li><p><strong>speed</strong> (<em>int</em>) – Изменение статичного поля speed,</p></li>
+<li><p><strong>fov</strong> (<em>int</em>) – Поле зрения врага.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.enemys.Enemy.check_collision">
+<span class="sig-name descname"><span class="pre">check_collision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.entity.enemys.Enemy.check_collision" title="Ссылка на это определение"></a></dt>
+<dd><p>Проверка на столкновение с игроком</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>player</strong> (<a class="reference internal" href="#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a><em> | </em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Объект игрока.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Проверка на соприкосновение</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.enemys.Enemy.check_collision2">
+<span class="sig-name descname"><span class="pre">check_collision2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.entity.enemys.Enemy.check_collision2" title="Ссылка на это определение"></a></dt>
+<dd><p>Проверка на столкновение с нажатым курсором мыши игрока.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mp</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция мыши</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Проверка на соприкосновение</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.enemys.Enemy.die">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">die</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.enemys.Enemy.die" title="Ссылка на это определение"></a></dt>
+<dd><p>Смерть врага</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>logger</strong> (<a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><em>HELogger</em></a>) – Переменная для логов.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.enemys.Enemy.draw_fov">
+<span class="sig-name descname"><span class="pre">draw_fov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.enemys.Enemy.draw_fov" title="Ссылка на это определение"></a></dt>
+<dd><p>Отрисовка поля зрения врага и вычисление
+соприкосновения с игроком</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>player</strong> (<a class="reference internal" href="#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Объект игрока,</p></li>
+<li><p><strong>mp</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция курсора мыши</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.enemys.Enemy.enemy_draw_and_move">
+<span class="sig-name descname"><span class="pre">enemy_draw_and_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.entity.player.Player" title="src.entity.player.Player"><span class="pre">Player</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.entity.enemys.Enemy.enemy_draw_and_move" title="Ссылка на это определение"></a></dt>
+<dd><p>Асинхронная отрисовка и движение врага.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>player</strong> (<a class="reference internal" href="#src.entity.player.Player" title="src.entity.player.Player"><em>Player</em></a>) – Объект игрока,</p></li>
+<li><p><strong>mp</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция курсора мыши,</p></li>
+<li><p><strong>num</strong> (<em>int</em>) – Номер выбранного сохранения.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Координаты врага</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[int, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.enemys.Enemy.get_stats">
+<span class="sig-name descname"><span class="pre">get_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.enemys.Enemy.get_stats" title="Ссылка на это определение"></a></dt>
+<dd><p>Получение информации о враге</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>StatsConfig</em>) – Параметры для работы.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.enemys.Enemy.rect_and_open">
+<span class="sig-name descname"><span class="pre">rect_and_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texture</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mouse_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.enemys.Enemy.rect_and_open" title="Ссылка на это определение"></a></dt>
+<dd><p>Получение квадрата и открытие меню статистики</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>texture</strong> (<em>pygame.surface.Surface</em>) – Текстура врага,</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Координата врага по x,</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Координата врага по y,</p></li>
+<li><p><strong>mouse_pos</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция курсора мыши,</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – Ключ словаря enemy_dict,</p></li>
+<li><p><strong>num</strong> (<em>int</em>) – Номер выбранного сохранения.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id7">
+<h2>Инвентарь<a class="headerlink" href="#id7" title="Ссылка на этот заголовок"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.entity.inventory.Inventory">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.entity.inventory.</span></span><span class="sig-name descname"><span class="pre">Inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inventory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inventory2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entity.inventory.Inventory" title="Ссылка на это определение"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="src.entity.inventory.Inventory.append">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texture</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.inventory.Inventory.append" title="Ссылка на это определение"></a></dt>
+<dd><p>Добавление в инвентарь предметов</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>texture</strong> (<em>pygame.surface.Surface</em>) – Текстура предмета,</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – Ключ словаря предмета.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.inventory.Inventory.draw_inventory">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">draw_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.inventory.Inventory.draw_inventory" title="Ссылка на это определение"></a></dt>
+<dd><p>Отрисовка инвентаря</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>screen</strong> (<em>pygame.surface.Surface</em>) – Переменная экрана</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.inventory.Inventory.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.inventory.Inventory.open" title="Ссылка на это определение"></a></dt>
+<dd><p>Открытие инвентаря</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*args</strong> (<em>tuple</em>) – Параметры игрока (местоположение,</p></li>
+<li><p><strong>сохранения</strong> (<em>номер выбранного</em>)</p></li>
+<li><p><strong>логгер</strong></p></li>
+<li><p><strong>игрока</strong> (<em>объект</em>)</p></li>
+<li><p><strong>мыши</strong><strong>)</strong> (<em>курсор</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id8">
+<h2>Концовки<a class="headerlink" href="#id8" title="Ссылка на этот заголовок"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.entity.endings.Endings">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.entity.endings.</span></span><span class="sig-name descname"><span class="pre">Endings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entity.endings.Endings" title="Ссылка на это определение"></a></dt>
+<dd><p>Основной функционал концовок</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.endings.Endings.draw_ending">
+<span class="sig-name descname"><span class="pre">draw_ending</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.endings.Endings.draw_ending" title="Ссылка на это определение"></a></dt>
+<dd><p>Отрисовка концовки</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Название концовки.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.entity.endings.Endings.pre_ending">
+<span class="sig-name descname"><span class="pre">pre_ending</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entity.endings.Endings.pre_ending" title="Ссылка на это определение"></a></dt>
+<dd><p>Перед концовкой</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Название концовки.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="pause.html" class="btn btn-neutral float-left" title="Пауза во время игры" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="traps.html" class="btn btn-neutral float-right" title="Ловушки в игре" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, SergeyProjects. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
