@@ -163,12 +163,15 @@
 <dd><p>Этот класс отвечает за отрисовку локаций и другого</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.draw.draw.Draw.draw_mainmenu">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">draw_mainmenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textures</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Surface</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.draw.Draw.draw_mainmenu" title="Ссылка на это определение"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">draw_mainmenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">author_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boosty_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">da_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textures</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Surface</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.draw.Draw.draw_mainmenu" title="Ссылка на это определение"></a></dt>
 <dd><p>Отрисовка кнопочек главного меню</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>screen</strong> (<em>pygame.surface.Surface</em>) – Переменная экрана</p></li>
+<li><p><strong>(</strong><strong>)</strong> (<em>da_name</em>) – Имя автора (текст)</p></li>
+<li><p><strong>(</strong><strong>)</strong> – Текст для кнопки Boosty</p></li>
+<li><p><strong>(</strong><strong>)</strong> – Текст для кнопки DonationAlerts</p></li>
 <li><p><strong>textures</strong> (<em>tuple</em><em>[</em><em>pygame.surface.Surface</em><em>]</em>) – Текстуры кнопок</p></li>
 </ul>
 </dd>
@@ -256,6 +259,11 @@ None: Вместо SaveMenu, если игрок ничего не сделал.
 <dt class="sig sig-object py" id="src.draw.mainmenu.MainMenu.exit_menu">
 <span class="sig-name descname"><span class="pre">exit_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mouse_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.mainmenu.MainMenu.exit_menu" title="Ссылка на это определение"></a></dt>
 <dd><p>Меню выхода из игры</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mouse_pos</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Позиция мыши</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -521,11 +529,16 @@ None: Вместо SaveMenu, если игрок ничего не сделал.
 <span class="sig-name descname"><span class="pre">__general</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.other_functional.other_functional.OtherFunctional.__general" title="Ссылка на это определение"></a></dt>
 <dd><p>Общий метод для остальных методов класса
 (анимация)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>use</strong> (<a class="reference internal" href="other.html#src.other.use.Use" title="src.other.use.Use"><em>Use</em></a>) – Объект класса Use</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.draw.other_functional.other_functional.OtherFunctional.bed">
-<span class="sig-name descname"><span class="pre">bed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.other_functional.other_functional.OtherFunctional.bed" title="Ссылка на это определение"></a></dt>
+<span class="sig-name descname"><span class="pre">bed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.other_functional.other_functional.OtherFunctional.bed" title="Ссылка на это определение"></a></dt>
 <dd><p>Кровать в доме</p>
 </dd></dl>
 
@@ -537,7 +550,7 @@ None: Вместо SaveMenu, если игрок ничего не сделал.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.draw.other_functional.other_functional.OtherFunctional.lamp">
-<span class="sig-name descname"><span class="pre">lamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.other_functional.other_functional.OtherFunctional.lamp" title="Ссылка на это определение"></a></dt>
+<span class="sig-name descname"><span class="pre">lamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.draw.other_functional.other_functional.OtherFunctional.lamp" title="Ссылка на это определение"></a></dt>
 <dd><p>Лампа в доме</p>
 </dd></dl>
 
@@ -557,7 +570,7 @@ None: Вместо SaveMenu, если игрок ничего не сделал.
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Авторские права 2024, SergeyProjects. </p>
+    <p>&#169; Авторские права 2024-2025, SergeyProjects. </p>
   </div>
 
   Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием

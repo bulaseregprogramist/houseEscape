@@ -23,3 +23,5 @@
 .mods/
 
 .__pycache__/
+
+data[1-5].json
