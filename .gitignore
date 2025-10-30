@@ -22,6 +22,8 @@ venv/
 
 env/
 
+*.exe
+
 .docs/
 
 .data/
