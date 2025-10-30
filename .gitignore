@@ -24,7 +24,7 @@ env/
 
 *.exe
 
-.game_alt/
+.for_user/game_alt/
 
 .docs/
 
