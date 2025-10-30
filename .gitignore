@@ -16,6 +16,12 @@
 
 .venv/
 
+/.venv/
+
+venv/
+
+env/
+
 .docs/
 
 .data/
