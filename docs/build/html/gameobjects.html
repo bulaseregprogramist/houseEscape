@@ -14,8 +14,8 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=e35015f7"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/translations.js?v=cd1d70c9"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
@@ -129,11 +129,11 @@
 <p>Размещение и функционал предметов/мебели</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.gameobjects.gameobjects.GameObjects">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gameobjects.gameobjects.</span></span><span class="sig-name descname"><span class="pre">GameObjects</span></span><a class="headerlink" href="#src.gameobjects.gameobjects.GameObjects" title="Ссылка на это определение"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.gameobjects.gameobjects.</span></span><span class="sig-name descname"><span class="pre">GameObjects</span></span><a class="headerlink" href="#src.gameobjects.gameobjects.GameObjects" title="Ссылка на это определение"></a></dt>
 <dd><p>Этот класс является родителем для классов Item, Block, …</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.gameobjects.GameObjects.functional">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">functional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#src.gameobjects.gameobjects.GameObjects.functional" title="Ссылка на это определение"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">functional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#src.gameobjects.gameobjects.GameObjects.functional" title="Ссылка на это определение"></a></dt>
 <dd><p>Функционал игрового объекта</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
@@ -154,7 +154,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.gameobjects.GameObjects.placing">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">placing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GameObjectsConfig3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.gameobjects.GameObjects.placing" title="Ссылка на это определение"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">placing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GameObjectsConfig3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.gameobjects.gameobjects.GameObjects.placing" title="Ссылка на это определение"></a></dt>
 <dd><p>Размещение предмета на карте</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
@@ -174,7 +174,7 @@
 <p>Предметы игры</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.gameobjects.item.Item">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gameobjects.item.</span></span><span class="sig-name descname"><span class="pre">Item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.gameobjects.item.Item" title="Ссылка на это определение"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.gameobjects.item.</span></span><span class="sig-name descname"><span class="pre">Item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.gameobjects.item.Item" title="Ссылка на это определение"></a></dt>
 <dd><p>Предметы в доме</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.item.Item.functional">
@@ -221,7 +221,7 @@
 <p>Мебель дома</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.gameobjects.blocks.Block">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gameobjects.blocks.</span></span><span class="sig-name descname"><span class="pre">Block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.gameobjects.blocks.Block" title="Ссылка на это определение"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.gameobjects.blocks.</span></span><span class="sig-name descname"><span class="pre">Block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="game.html#src.game.logging.HELogger" title="src.game.logging.HELogger"><span class="pre">HELogger</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.gameobjects.blocks.Block" title="Ссылка на это определение"></a></dt>
 <dd><p>Блоки (мебель) в доме</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.blocks.Block.functional">
@@ -265,7 +265,7 @@
 <p>Транспорт игры HouseEscape</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.gameobjects.vehicles.Vehicles">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gameobjects.vehicles.</span></span><span class="sig-name descname"><span class="pre">Vehicles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vehicle_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.gameobjects.vehicles.Vehicles" title="Ссылка на это определение"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.gameobjects.vehicles.</span></span><span class="sig-name descname"><span class="pre">Vehicles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vehicle_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.gameobjects.vehicles.Vehicles" title="Ссылка на это определение"></a></dt>
 <dd><p>Транспортные средства. Наследник абстрактного класса GameObjects.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.vehicles.Vehicles.functional">
@@ -318,7 +318,7 @@
 <p>Картины</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.gameobjects.pictures.Pictures">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gameobjects.pictures.</span></span><span class="sig-name descname"><span class="pre">Pictures</span></span><a class="headerlink" href="#src.gameobjects.pictures.Pictures" title="Ссылка на это определение"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.gameobjects.pictures.</span></span><span class="sig-name descname"><span class="pre">Pictures</span></span><a class="headerlink" href="#src.gameobjects.pictures.Pictures" title="Ссылка на это определение"></a></dt>
 <dd><p>Картины с котиками</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.gameobjects.pictures.Pictures.functional">

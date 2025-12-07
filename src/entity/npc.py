@@ -32,10 +32,9 @@ class NPC(Character):
         self.__npc2 = load("textures/npc2.png", (65, 65), "convert_alpha")
 
     def placing(
-        self, mouse_pos: tuple[int, int],
-        player: Player, index: list[int, int],
-        num: int,
-    ) -> None:
+            self, mouse_pos: tuple[int, int],
+            player: Player, index: list[int, int],
+            num: int) -> None:
         """
         Отрисовка торговца и взаимодействие с ним.
 
@@ -107,3 +106,4 @@ class NPC(Character):
     def die(self) -> None:
         """Смерть нпс (торговца)."""
         super().die()
+

@@ -129,3 +129,4 @@ class Closet:
                 elif (event.type == pygame.KEYDOWN 
                         and event.key == pygame.K_ESCAPE):
                     closet_cycle = 0
+

@@ -18,9 +18,8 @@ class TradeSystem:
     """Торговая система у торговца"""
 
     def __init__(
-        self, screen: pygame.surface.Surface, num: int,
-        player: object, use: Use
-    ) -> None:
+            self, screen: pygame.surface.Surface, num: int,
+            player: object, use: Use) -> None:
         self.__screen: pygame.surface.Surface = screen
         self.change_dict = 0
         self.__use: Use = use
@@ -102,22 +101,21 @@ class TradeSystem:
                             self.__result["items"][str(int(j) + 6)][5],
                             (60, 60),
                             "convert_alpha",
-                        ),
-                        int(j) + 6,
+                        ), int(j) + 6,
                     )
                     self.__use.some_list.append(
-                        [
-                            load(
-                                self.__result["items"][str(int(j) + 6)][5],
-                                (60, 60),
-                                "convert_alpha",
-                            ),
-                            int(j) + 6,
-                        ]
-                    )
+                        [load(
+                            self.__result["items"][str(int(j) + 6)][5],
+                            (60, 60),
+                            "convert_alpha",
+                        ),
+                        int(j) + 6,
+                    ]
+                )
                     for i in range(3):  # Удаление повторов в инвентаре
                         self.__use.to_dict()
                 except IndexError:  # Если предметов больше нет
                     pass
                 return 1  # Ключ словаря будет удалён
         return 0  # Ключ словаря не будет удалён
+

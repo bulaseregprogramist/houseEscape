@@ -52,7 +52,9 @@ class Game:
         logger.info("Начата инициализация модов")
         HEAPI.load(logger)
         logger.info("Завершена инициализация модов")
-        self.__numb: int = MainMenu.render(self.__screen, logger, Draw)
+        self.__save_menu_object = MainMenu.render(self.__screen, logger, Draw)
+        self.__numb: int = self.__save_menu_object.number
+        
         logger.info("Главное меню закрыто!")
         self.__player = Player(logger, self.__screen, self.__numb)
         logger.debug("Создание объекта класса Player")
@@ -146,7 +148,7 @@ class Game:
                             traps_dict[j][4]
                         )
                         self.__traps.after(trap_rect, traps_dict[j][4], rect2)
-                self.__player.in_game(
+                self.__player.in_game(self.__save_menu_object,
                     self.__player,  # Движение игрока
                     self.__index, logger,
                     rect, self.__numb, mp,
@@ -197,3 +199,4 @@ class Game:
             self.__player.x, self.__player.y = 385, 385
             args[0].debug("Переменным x и y присвоены стандартные значения")
             self.__index[args[3]] -= args[4]
+

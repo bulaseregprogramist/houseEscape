@@ -17,8 +17,8 @@ class Basement(Player):
     __map = ["111" "111" "111"]
 
     def __init__(
-        self, logger: HELogger, screen: pygame.surface.Surface, n: int
-    ) -> None:
+            self, logger: HELogger, screen: pygame.surface.Surface,
+            n: int) -> None:
         super().__init__(logger, screen, n)
         self.__logger: HELogger = logger
         self.__n: int = n

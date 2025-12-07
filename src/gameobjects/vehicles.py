@@ -49,9 +49,9 @@ class Vehicles(GameObjects):
             )
 
     def functional(self, x: int,
-        y: int, texture: pygame.surface.Surface,
-        i: int, he_map: list[int, int],
-        index: list[int, int]) -> int:
+            y: int, texture: pygame.surface.Surface,
+            i: int, he_map: list[int, int],
+            index: list[int, int]) -> int:
         """
         Функционал транспорта
 
@@ -73,3 +73,4 @@ class Vehicles(GameObjects):
             logging.debug("Данные возвращены!")
             return 1, i
         return 0, i
+

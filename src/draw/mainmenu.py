@@ -209,4 +209,5 @@ class MainMenu:
                     mm.exit_menu(mouse_pos)
 
             pygame.display.flip()
-        return save.number if save else 0
+        return save if save else 0
+

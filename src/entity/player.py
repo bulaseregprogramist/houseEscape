@@ -41,6 +41,10 @@ class Player(Character):
                                 (90, 90), "convert_alpha")
         self.__inventory2 = load("textures/backpack2.png",
                                 (90, 90), "convert_alpha")
+        self.__exit_to_menu = load('textures/exit.png',
+                                (90, 90), 'convert_alpha')
+        self.__exit_to_menu2 = load('textures/exit4.png',
+                                (90, 90), 'convert_alpha')
         Inventory.Player = self
         logger.debug("Статичному полю Player класса Inventory присвоен self")
         self._screen: pygame.surface.Surface = screen
@@ -75,14 +79,20 @@ class Player(Character):
             pygame.surface.Surface: 'Квадрат' текстуры рюкзака (инвентаря)
                                     и игрока.
         """
-        args[0].blit(self.__inventory, (10, 10))
+        args[0].blit(self.__inventory, (10, 10))  # args[0] = self.__screen
+        args[0].blit(self.__exit_to_menu, (3, 675))
         self.use.draw(args[2], args[3])
+        
         rect = self.__inventory.get_rect(topleft=(10, 10))
         rect2 = self.player.get_rect(topleft=(args[1].x, args[1].y))
+        rect3 = self.__exit_to_menu.get_rect(topleft=(3, 700))
         if rect.colliderect(rect2):  # Рюкзак прозрачен, если в нём игрок.
             self.__inventory.set_alpha(95)
         else:
             self.__inventory.set_alpha(300)
+            
+        if rect3.collidepoint(args[2]):
+            args[0].blit(self.__exit_to_menu2, (3, 675))
         return rect, rect2
 
     def blit(self, mp: tuple[int, int]) -> pygame.surface.Surface:
@@ -98,6 +108,7 @@ class Player(Character):
         rect = self.player.get_rect(topleft=(self.x, self.y))
         if rect.collidepoint(mp):  # Свечение игрока
             self._screen.blit(self.player2, (self.x, self.y))
+        
         return rect  # Для того, чтобы получить информацию об игроке.
 
     def get_stats(self, logger: HELogger, indx: list[int, int],
@@ -165,18 +176,22 @@ class Player(Character):
                 self.to_inventory(Config(args[0], args[1], args[2], 
                                         args[4], args[5]))
 
-    def in_game(self, *args) -> None:
+    def in_game(self, save_menu_object, *args) -> None:
         """
         Поведение игрока в игре
 
         Args:
+            save_menu_object (SaveMenu): Объект класса SaveMenu,
             *args(tuple): Параметры игрока (позиция мыши, расположение, ...)
         """
         global add
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 args[2].info("Закрытие программы")
-                self.__save.saving(args[1], args[0].x, args[0].y, n, True)
+                self.__save.saving(args[1], args[0].x, args[0].y,
+                                save_menu_object.save_number_for_save, 
+                                True)
                 sys.exit()
             elif event.type == pygame.KEYDOWN:  # Открытие инвентаря
                 Move.press_keydown(args[2], event, self, args[1], args[0],
@@ -187,3 +202,4 @@ class Player(Character):
         if add:  # Удаление повторов в списке
             add = 0
             self.use.to_dict()
+

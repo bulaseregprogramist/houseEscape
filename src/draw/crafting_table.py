@@ -22,10 +22,9 @@ class CraftingTable:
     logger: HELogger
 
     def __init__(
-        self, screen: pygame.surface.Surface,
-        text, n: int,
-        index: list[int, int], player: Player,
-    ) -> None:
+            self, screen: pygame.surface.Surface,
+            text, n: int,
+            index: list[int, int], player: Player) -> None:
         self.__index: list[int, int] = index
         self.__player: Player = player
         self.__screen: pygame.surface.Surface = screen
@@ -58,8 +57,8 @@ class CraftingTable:
         self.__some_list.extend(inv_list2)
         logging.debug("Конец работы метода ntt")
 
-    def __get_free_space(self,
-                        texture: pygame.surface.Surface, y: int) -> None:
+    def __get_free_space(self, texture: pygame.surface.Surface,
+                        y: int) -> None:
         """
         Сокращение кода (если предметов для крафта нет)
 
@@ -178,3 +177,4 @@ class CraftingTable:
                     if event.key == pygame.K_ESCAPE:
                         sleep(0.15)
                         crafting_table_cycle = 0
+

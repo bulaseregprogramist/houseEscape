@@ -6,6 +6,7 @@ from ..game.logging import HELogger
 from os import listdir, remove
 from time import sleep
 from typing import Any
+from copy import copy
 import json
 import sys
 
@@ -20,8 +21,6 @@ class SaveMenu:
                 logger: HELogger) -> None:
         self.__logger: HELogger = logger
         self.__bg = load("textures/sm.png", (220, 770), "convert")
-        self.__st = font4.render("СОХРАНЕНИЕ", 1, (255, 255, 255))
-        self.__st2 = font4.render("СОХРАНЕНИЕ", 1, (229, 255, 0))
         self.__limit = font4.render("Максимум - 5 уровней", 1, (235, 0, 0))
         self.__screen: pygame.surface.Surface = screen
         self.__act_sound = pygame.mixer.Sound("textures/collect.mp3")
@@ -34,7 +33,9 @@ class SaveMenu:
                             "convert_alpha")
         self.__to_menu2 = load("textures/to_menu2.png", (45, 45), 
                             "convert_alpha")
+        self.__glow_text = []
         self.number: int = self.__start()  # Кол-во сохранений в папке data
+        self.save_number_for_save = copy(self.number)
 
     def create_save(self) -> None:
         """Создание сохранения"""
@@ -78,7 +79,7 @@ class SaveMenu:
         self.__screen.blit(self.__plus, (550, 1))
         self.__screen.blit(self.__delete, (600, 1))
         self.__screen.blit(self.__to_menu, (5, 5))
-        self.__screen.blit(self.__limit, (10, 720))
+        self.__screen.blit(self.__limit, (5, 720))
 
         rects_list.clear()
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
@@ -87,9 +88,16 @@ class SaveMenu:
         rect3 = self.__to_menu.get_rect(topleft=(5, 5))
 
         y = 60
-        for _ in saves_list:  # Отрисовка сохранений
-            self.__screen.blit(self.__st, (310, y))
-            rects_list.append(self.__st.get_rect(topleft=(310, y)))
+        self.__glow_text.clear()
+        for save_nomer in range(len(saves_list)):  # Отрисовка сохранений
+            self.__st = font4.render(f"СОХРАНЕНИЕ #{save_nomer + 1}",
+                                    1, (255, 255, 255))
+            self.__st2 = font4.render(f"СОХРАНЕНИЕ #{save_nomer + 1}", 
+                                    1, (229, 255, 0))
+            self.__glow_text.append(self.__st2)
+            
+            self.__screen.blit(self.__st, (290, y))
+            rects_list.append(self.__st.get_rect(topleft=(290, y)))
             y += 40
         return rect, rect2, rect3, mouse_pos
 
@@ -133,9 +141,11 @@ class SaveMenu:
             saves_list: list[str, ...] = listdir("data/")
             rect, rect2, rect3, mouse_pos = self.draw(rects_list, saves_list)
 
-            for j in range(len(rects_list)):  # Запуск (перечисление)
+            for j in range(len(rects_list) - 1, 
+                        -1, -1):  # Запуск (перечисление)
                 if rects_list[j].collidepoint(mouse_pos):  # Свечение
-                    self.__screen.blit(self.__st2, (310, rects_list[j][1]))
+                    self.__screen.blit(self.__glow_text[j],
+                                    (290, rects_list[j][1]))
                     if pygame.mouse.get_pressed()[0]:  # Запуск
                         return j + 1  # Номер сохранения
 
@@ -145,3 +155,4 @@ class SaveMenu:
                 save_menu_cycle: int = game_exit(self.__logger)
             pygame.display.flip()
         return "to_menu"  # 
+

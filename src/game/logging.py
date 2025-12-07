@@ -70,3 +70,4 @@ class HELogger(Logger):
                 HELogger.set_level(CRITICAL)
         except IndexError:  # Если пользователь не указал argv.
             pass
+

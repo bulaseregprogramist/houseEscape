@@ -18,8 +18,8 @@ class Move:
 
     @staticmethod
     def player_move(
-        player: object, index: list[int, int], x: int, y: int, speed: int
-    ) -> None:
+            player: object, index: list[int, int], x: int, y: int, 
+            speed: int) -> None:
         """
         Движение игрока
 
@@ -58,10 +58,10 @@ class Move:
 
     @staticmethod
     def press_keydown(
-        logger: HELogger, event,
-        cls, index: list[int, int],
-        player: object, n: int,
-        mouse_pos: tuple[int, int]) -> None:
+            logger: HELogger, event,
+            cls, index: list[int, int],
+            player: object, n: int,
+            mouse_pos: tuple[int, int]) -> None:
         """
         Нажатие на клавишу
 
@@ -116,3 +116,4 @@ class Move:
             if y > 120:  # Ниже крыши можно ходить.
                 return True
         return False  # 
+

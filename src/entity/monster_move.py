@@ -1,5 +1,8 @@
+"""Передвижение монстров"""
+
 from random import randint
 from ..entity.player import Player
+
 
 class MonsterMove:
     def __init__(self, monster_speed: int, player: Player = None) -> None:
@@ -86,3 +89,4 @@ class MonsterMove:
         if self.py < y:
             y -= self.speed
         return x, y
+

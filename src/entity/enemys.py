@@ -22,10 +22,10 @@ class Enemy(Character):
     field_of_view: int = save.load_save(n)["FOV"]  # FOV
 
     def __init__(
-        self, x: int,
-        y: int, enemy_type: str,
-        logger: HELogger, screen: pygame.surface.Surface,
-        player: Player = None) -> None:
+            self, x: int,
+            y: int, enemy_type: str,
+            logger: HELogger, screen: pygame.surface.Surface,
+            player: Player = None) -> None:
         self.__screen: pygame.surface.Surface = screen
         self.x = x
         self.y = y

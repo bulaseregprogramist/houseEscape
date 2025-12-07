@@ -21,8 +21,8 @@ class Cherdak(Player):  # Отдельная локация
     __map = ["111" "111" "111"]
 
     def __init__(
-        self, logger: HELogger, screen: pygame.surface.Surface, n: int
-    ) -> None:
+            self, logger: HELogger,
+            screen: pygame.surface.Surface, n: int) -> None:
         super().__init__(logger, screen, n)
         self.__logger = logger
         self.__n: int = n

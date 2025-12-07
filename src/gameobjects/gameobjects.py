@@ -110,3 +110,4 @@ class GameObjects(ABC):
                 elif config.name == "vehicle":
                     return 4
         return 0
+

@@ -90,11 +90,11 @@ class OtherFunctional:
     def lamp(self, use: object) -> None:
         """Лампа в доме"""
         self.__general(use)
-        lamp = Lamp()
+        lamp = Lamp(self.__screen)
         lamp.run()
 
     def bed(self, use: object) -> None:
         """Кровать в доме"""
         self.__general(use)
-        bed = Bed()
+        bed = Bed(self.__screen)
         bed.run()

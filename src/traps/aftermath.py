@@ -18,3 +18,4 @@ class AfterMath:
     def ice_aftermath(self) -> None:
         """Последствия ледяной ловушки"""
         pass
+

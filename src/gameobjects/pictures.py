@@ -5,6 +5,7 @@ from ..gameobjects.gameobjects import GameObjects
 from ..entity.player import Player
 from ..game.saving import Saving
 from ..other.globals import load
+from ..game.load_menu import LoadMenu
 import logging
 import requests  # Для того, чтобы воспользоваться API cataas.
 import pygame
@@ -23,11 +24,17 @@ class Pictures(GameObjects):
     def __init__(self) -> None:
         self.__frame = load("textures/frame.png", (125, 125), "convert_alpha")
         logging.debug("Завершена работа конструктора класса Pictures")
-
+    
     @classmethod
-    def __load_picture_from_site(cls) -> None:
-        """Загрузка картинки"""
+    def __load_picture_from_site(cls, screen) -> None:
+        """
+        Загрузка картинки с котиками с сайта cataas.com
+        
+        Args:
+            screen (pygame.surface.Surface): Переменная экрана для pygame игры
+        """
         method_cycle = 1
+        LoadMenu(screen)
         while method_cycle:
             try:
                 result: requests.models.Response = requests.get(
@@ -47,10 +54,9 @@ class Pictures(GameObjects):
                 logging.error("У пользователя нет интернета!")
 
     def placing(
-        self, he_map: list[int, int],
-        player: Player, n: int,
-        screen: pygame.surface.Surface,
-    ) -> None:
+            self, he_map: list[int, int],
+            player: Player, n: int,
+            screen: pygame.surface.Surface) -> None:
         """
         Размещение картин.
 
@@ -60,10 +66,11 @@ class Pictures(GameObjects):
             n (int): Номер выбранного сохранения,
             screen (pygame.surface.Surface): Переменная дисплея.
         """
-        self.__pict: dict[int:list, ...] = self.save.load_save(n)["pictures"]
+        
+        self.__pict: dict[int : list, ...] = self.save.load_save(n)["pictures"]
 
         if self.load_picture:  # Оптимизация
-            self.__load_picture_from_site()
+            self.__load_picture_from_site(screen)
         for i in self.__pict:  # Отрисовка картин
             if [self.__pict[i][2], self.__pict[i][3]] == he_map:
                 screen.blit(
@@ -94,3 +101,4 @@ class Pictures(GameObjects):
     def functional(self) -> None:
         """Функционал картины"""
         pass
+

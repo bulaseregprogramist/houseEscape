@@ -42,10 +42,8 @@ class Traps:
             rect = self.__ice.get_rect(topleft=(x, y))
         return rect
 
-    def after(
-        self, rect: pygame.rect.Rect, trap_type: str, 
-        player_rect: pygame.rect.Rect
-    ) -> None:
+    def after(self, rect: pygame.rect.Rect, trap_type: str, 
+            player_rect: pygame.rect.Rect) -> None:
         """
         Последствия попадания в ловушку.
 
@@ -62,3 +60,4 @@ class Traps:
             elif trap_type == "ice":
                 self.__aftermath.ice_aftermath()
             Player.die(self.__screen)
+

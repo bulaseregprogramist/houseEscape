@@ -16,7 +16,12 @@ class HEAPI:
     
     @classmethod
     def get_mods_data(cls) -> dict:
-        """Получение данных о модах"""
+        """
+        Получение данных о модах
+        
+        Returns:
+            dict: Данные о модах.
+        """
 
     @staticmethod
     def guide(screen: pygame.surface.Surface) -> None:
@@ -76,3 +81,4 @@ class HEAPI:
             if i.endswith(".json"):
                 with open(f"mods/{i}") as file:
                     result: dict = HEAPI.get_mods_data()
+

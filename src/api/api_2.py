@@ -3,7 +3,7 @@
 
 class HouseEscapeAPI_External:
     """
-    
+    Класс внешней реализации API игры.
     """
     
     def __init__(self):

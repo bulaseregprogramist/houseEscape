@@ -332,6 +332,10 @@ class Traps {
   
 }
 
+class LoadMenu {
+
+}
+
 Game <-- main
 
 Game <|-- Player
@@ -355,6 +359,8 @@ GameObjects --> Item
 GameObjects --> Pictures
 GameObjects --> Block
 GameObjects --> Vehicles
+
+LoadMenu --> Pictures
 
 note top of Game : "Основной класс игры,\nОн связывает все классы"
 note top of main : "Функция, запускающая игру"

@@ -52,3 +52,4 @@ class AfterUse:
                         ] = "pygame.image.load('textures/exit3.png')"
                 self.__some_dict["blocks"] = self.__blocks
                 self.change_exit()
+

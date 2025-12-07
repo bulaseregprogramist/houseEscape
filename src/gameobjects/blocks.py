@@ -92,3 +92,4 @@ class Block(GameObjects):
             pygame.mixer.Sound("textures/press2.mp3").play()
             self.__logger.debug(
                 "Завершена работа УО метода functional класса Block")
+

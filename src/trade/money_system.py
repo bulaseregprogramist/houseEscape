@@ -50,7 +50,7 @@ class MoneySystem:
         with open(f"data/data{self.__num}.json", "w") as file:
             json.dump(res2, file, indent=2)
 
-    def visible_add(self, visible: list[int]) -> None:
+    def visible_add(self, visible: list[int]) -> list[int]:
         """
         Показывает, сколько добавилось денег.
 
@@ -86,10 +86,8 @@ class MoneySystem:
                     rect = self.__money.get_rect(
                         topleft=(self.__res[i][0], self.__res[i][1])
                     )
-                    if (
-                        rect.collidepoint(mouse_pos)  # Сбор при нажатии ЛКМ
-                        and pygame.mouse.get_pressed()[0]
-                    ):
+                    if (rect.collidepoint(mouse_pos)  # Сбор при нажатии ЛКМ
+                            and pygame.mouse.get_pressed()[0]):
                         sleep(0.135789043124)
                         pygame.mixer.Sound("textures/press.mp3").play()
                         self.change_money(-self.__res[i][4])
@@ -104,3 +102,4 @@ class MoneySystem:
             self.__res.pop(i)  # Удаление денег в том месте
             self.save_moneys()
         return self.__visible
+

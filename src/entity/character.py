@@ -97,3 +97,4 @@ class Character(ABC):
         sound = pygame.mixer.Sound("textures/die.mp3")
         sound.set_volume(0.4)
         sound.play()
+

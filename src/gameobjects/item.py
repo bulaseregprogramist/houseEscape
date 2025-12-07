@@ -23,9 +23,9 @@ class Item(GameObjects):
         self.__logger: HELogger = logger
         self.__logger.debug("Завершена работа конструктора класса Item")
 
-    def placing(
-        self, he_map: list[int, int], player: Player, n: int, have_functional=1
-    ) -> None:
+    def placing(self,
+                he_map: list[int, int], player: Player,
+                n: int, have_functional=1) -> None:
         """
         Размещение предмета
 

@@ -70,13 +70,9 @@ class Saving:
         return result
 
     def saving(
-        self,
-        index: list[int, int],
-        x: int,
-        y: int,
-        n: int,
-        inventory_saving: bool = False,
-    ) -> None:
+            self, index: list[int, int],
+            x: int, y: int, n: int,
+            inventory_saving: bool = False) -> None:
         """
         Сохранение игры
 
@@ -87,11 +83,12 @@ class Saving:
             n (int): Выбранное игроком сохранение,
             inventory_saving (bool): По умолчанию, сохранять ли инвентарь.
         """
-        # Получение словаря из data.json
+        # Получение словаря из data(число).json
         result: dict[str : list | int | dict] = self.load_save(n)
         result["index"] = index  # Позиция игрока на карте.
         result["x"] = x  # Позиция игрока по x
         result["y"] = y  # Позиция игрока по y
+
         if inventory_saving:
             if result["items_id"] == []:  # Если предметов нет
                 items_id = []
@@ -102,10 +99,11 @@ class Saving:
             result["items_id"] = items_id
         with open(f"data/data{n}.json", "w") as file:
             json.dump(result, file, indent=2)
+        print(n)
 
     def save_closet_items(
-        self, items: list[str, ...], num: int, some_dict: dict
-    ) -> None:
+            self, items: list[str, ...],
+            num: int, some_dict: dict) -> None:
         """Сохраняет предметы шкафа"""
         logging.debug("Идёт сохранение предметов")
         some_dict["closet_items"] = items
@@ -122,3 +120,4 @@ class Saving:
 
         with open("game_settings/settings.json", "w") as file:
             json.dump(result, file, indent=2)
+
